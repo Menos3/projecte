@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-    <?php require_once __DIR__ . "/../vendor/autoload.php"; ?>
+    <?php require_once __DIR__ . "/../../vendor/autoload.php"; ?>
 
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,17 +11,15 @@
 <body>
    <header>
        <h1><a href= "<?= My\Helpers::url("/") ?>">Projecte J-Suite</a></h1>
+
+
    </header>
-   <h2>Homepage</h2>
-   <p>My first PHP web app works!</p>
-   <ul>
-       <li>Operative system: <?= PHP_OS ?></li>
-       <li>Web server: <?= $_SERVER['SERVER_SOFTWARE'] ?></li>
-       <li>PHP version: <?= phpversion() ?></li>
-       <li>IP address: <?= getHostByName(getHostName()) ?></li>
-   </ul>
+   <h2>Sign up</h2>
+   <p>Create an account.</p>
    <footer>
        <p>Curs 2021-22 de 2DAW</p>
    </footer>
 </body>
 </html>
+
+
