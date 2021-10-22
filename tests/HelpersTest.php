@@ -11,16 +11,20 @@ final class HelpersTest extends TestCase
    }
    public function testUrl():void {
     //nos hemos quedado aqui!!!!!!!!
+    $path = "localhost/projecte/web/user";
     //comença per “http://” quan l’argument $ssl és FALS (o no es passa l’argument)
-    $url = Helpers::url("localhost/projecte/web/", true);
+    $url = Helpers::url($path, true);
     $this->assertStringStartsWith("https",$url);
+    $this->assertStringEndsWith($path, $url);
     //okey bad
-    $url = Helpers::url("localhost/projecte/web/",false);
+    $url = Helpers::url($path,false);
     $this->assertStringStartsWith("http",$url);
+    $this->assertStringEndsWith($path, $url);
     //comença per “https://” quan l’argument $ssl és CERT
     //sempre inclou la ruta relativa al final
-    $url = Helpers::url("localhost/projecte/web/");
+    $url = Helpers::url($path);
     $this->assertStringStartsWith("http",$url);
+    $this->assertStringEndsWith($path, $url);
 
 
 

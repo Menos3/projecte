@@ -1,27 +1,11 @@
+<?php require_once __DIR__ . "/../vendor/autoload.php"; ?>
 <!DOCTYPE html>
 <html lang="ca">
-<head>
-    <?php require_once __DIR__ . "/../vendor/autoload.php"; ?>
-
-   <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Projecte J-Suite</title>
-</head>
+<?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Home"]) ?>
 <body>
-   <header>
-       <h1><a href= "<?= My\Helpers::url("/") ?>">Projecte J-Suite</a></h1>
-   </header>
-   <h2>Homepage</h2>
-   <p>My first PHP web app works!</p>
-   <ul>
-       <li>Operative system: <?= PHP_OS ?></li>
-       <li>Web server: <?= $_SERVER['SERVER_SOFTWARE'] ?></li>
-       <li>PHP version: <?= phpversion() ?></li>
-       <li>IP address: <?= getHostByName(getHostName()) ?></li>
-   </ul>
-   <footer>
-       <p>Curs 2021-22 de 2DAW</p>
-   </footer>
+   <?= My\Helpers::render("/_commons/header.php") ?>
+   <h2>Sign in</h2>
+   <p>Welcome back!</p>
+   <?= My\Helpers::render("/_commons/footer.php") ?>
 </body>
 </html>
