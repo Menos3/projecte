@@ -4,7 +4,7 @@
 <?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Register Sing up"]) ?>
 <body>
    <?= My\Helpers::render("/_commons/header.php") ?>
-   <h2>Sign in</h2>
+   <h2>Register</h2>
    <p>Welcome back!</p>
    <?= My\Helpers::render("/_commons/footer.php") ?>
 </body>
