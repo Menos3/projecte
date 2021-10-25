@@ -8,6 +8,8 @@
    <p>Welcome back!</p>
    <?= My\Helpers::render("/_commons/footer.php") ?>
 </body>
+
+
 </html>
 
 
