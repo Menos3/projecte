@@ -51,7 +51,4 @@ public static function url(string $path, bool $ssl = false): string
        }
    }
 
-
-
-
 }
