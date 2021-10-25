@@ -2,10 +2,9 @@
  
 return [
    "driver"    => "mysql",
-   "host"      => "127.0.0.1",
-   "port"      => 3306,
-   "database"  => "testdb",
-   "user"      => "dbuser",
-   "password"  => "dbpass"   
+   "host"      => "alumnes.insjoaquimmir.cat",
+   "port"      => 3307,
+   "database"  => "demo",
+   "user"      => "demo",
+   "password"  => "VGz739ghGmQU"   
 ];
-s
