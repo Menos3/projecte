@@ -1,4 +1,7 @@
-<?php
+<?php declare(strict_types=1);
+use PHPUnit\Framework\TestCase;
+use My\Database;
+
 final class DatabaseTest extends TestCase
 {
    public function testConnection(): Database
@@ -11,8 +14,10 @@ final class DatabaseTest extends TestCase
    /**
     * @depends testConnection
     */
+    //para conectarnos
    public function testStatements(Database $db): void
-   {
-           // ...
+   {    
+    
+        $db = testConnection();
    }
 }

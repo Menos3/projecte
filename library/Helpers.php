@@ -50,5 +50,20 @@ public static function url(string $path, bool $ssl = false): string
            }
        }
    }
+   public static function flash(string $msg = "") : array
+   {
+       session_start();
+       $list = $_SESSION['flash'] ?? [];
+       if (empty($msg)) {
+           // Getter expires messages
+           unset($_SESSION['flash']);   
+       } else {
+           // Setter adds new messages
+           $list[] = $msg;
+           $_SESSION['flash'] = $list;
+       }
+       return $list;
+   }
+
 
 }
