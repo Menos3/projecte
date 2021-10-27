@@ -1,12 +1,15 @@
 <?php
+ 
 namespace My;
+ 
 class Database {
    // Config
    private $_dsn;
    private $_user;
    private $_password;
+   private $_options;
    // PDO
-   private $_connection;
+   private $_pdo;
  
    /**
     * Constructs custom PDO
@@ -21,6 +24,7 @@ class Database {
        ]);
        $this->_user = $cnf["user"];
        $this->_password = $cnf["password"];
+       $this->_options = $cnf["options"] ?? [];
        $this->open();
    }
  
@@ -29,12 +33,10 @@ class Database {
     */
    public function open() : void
    {
-       if (is_null($this->_connection)) {
+       if (is_null($this->_pdo)) {
            try {
-               $this->_connection = new \PDO(
-                   $this->_dsn,
-                   $this->_user,
-                   $this->_password
+               $this->_pdo = new \PDO(
+                   $this->_dsn, $this->_user, $this->_password, $this->_options
                );
            } catch (\PDOException $e) {
                throw new \Exception("DB connection error: " . $e->getMessage());
@@ -47,11 +49,15 @@ class Database {
     */
    public function close() : void
    {
-       $this->_connection = null;
+       $this->_pdo = null;
    }
+ 
+   /**
+    * Proxy pattern using magic overloading methods
+    * https://www.php.net/manual/en/language.oop5.overloading.php#object.call
+    */
    public function __call($name, $arguments) : mixed
    {
-       call_user_func_array([$this->_connection, $name], $arguments);
+       call_user_func_array([$this->_pdo, $name], $arguments);
    }
-
 }
