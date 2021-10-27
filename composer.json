@@ -25,7 +25,8 @@
         "php": "^8.0.10",
         "alrik11es/cowsayphp": "^1.2",
         "monolog/monolog": "^2.x-dev",
-        "phpunit/phpunit": "^10.0.x-dev"
+        "phpunit/phpunit": "^10.0.x-dev",
+        "phpmailer/phpmailer": "dev-master"
     },
     "scripts": {
         "hello": [
