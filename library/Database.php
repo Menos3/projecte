@@ -56,8 +56,13 @@ class Database {
     * Proxy pattern using magic overloading methods
     * https://www.php.net/manual/en/language.oop5.overloading.php#object.call
     */
-   public function __call($name, $arguments) : mixed
-   {
-       call_user_func_array([$this->_pdo, $name], $arguments);
-   }
+    public function __call($name, $arguments)
+    {
+        if (is_null($this->_pdo)) {
+            throw new \Exception("DB closed");
+        }
+        return $this->_pdo->{$name}(...$arguments);
+    }
 }
+ 
+

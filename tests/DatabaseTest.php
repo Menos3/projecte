@@ -17,7 +17,20 @@ final class DatabaseTest extends TestCase
     //para conectarnos
    public function testStatements(Database $db): void
    {    
-    
-        $db = testConnection();
-   }
+        $db->open();
+        $query = $db->prepare("SELECT email, role_id FROM users WHERE username= 'admin'");
+        $query->execute();
+        $resultado = $query->fetchAll();
+        $contador =count($resultado);
+        print ($contador);
+        $this->assertEquals($contador,1);
+        
+        
+
+
+    //    $db->open();
+    //    $query= "SELECT email, role_id FROM users WHERE username= 'admin'";
+       
+    }
+   
 }
