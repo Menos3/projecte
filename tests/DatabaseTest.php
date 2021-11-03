@@ -24,6 +24,13 @@ final class DatabaseTest extends TestCase
         $contador =count($resultado);
         print ($contador);
         $this->assertEquals($contador,1);
+        $db->close();
+        $query = $db->prepare("SELECT email, role_id FROM users WHERE username= 'admin'");
+        $query->execute();
+        $resultado = $query->fetchAll();
+        $contador =count($resultado);
+        $this->assertEquals($contador,0);
+
         
         
 

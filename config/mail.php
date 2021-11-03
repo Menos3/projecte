@@ -5,8 +5,8 @@ return [
        "security"  => "tls",
        "host"      => "smtp.gmail.com",
        "port"      => 587,
-       "username"  => "your-email@gmail.com",
-       "password"  => "your-gmail-password",
+       "username"  => "2daw.equip02@fp.insjoaquimmir.cat",
+       "password"  => "Secrxavi",
        "debug"     => 1
    ],
    "from" => [
