@@ -1,75 +1,87 @@
-header {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 10vw;
-}
-
-header button,
-img {
-    width: 10%;
-    height: 60px;
-    margin: 0 auto;
-}
-
-button {
-    background-color: darkturquoise;
-}
-
-aside {
-    border: 1px solid black;
-    width: 15%;
-    /* height: 35vw; */
-    margin-right: 1%;
-    display: flex;
-    flex-direction: column;
-    float: left;
-    padding-top: auto;
-}
-
-
-/* aside * {
+    * {
+        margin: 0%;
+        padding: 0%;
+    }
+    
+    header {
+        display: flex;
+        flex-direction: row;
+        width: 78%;
+        height: 10vw;
+        margin: 0px;
+    }
+    
+    .imagen {
+        float: left;
+        width: 150px;
+        height: 150px;
+        left: 0%;
+        /* margin: 0 auto; */
+    }
+    
+    .perfil {
+        position: absolute;
+        height: 75px;
+        right: 0%;
+        top: 0%;
+    }
+    
+    button {
+        background-color: darkturquoise;
+    }
+    
+    aside {
+        border: 1px solid black;
+        width: 15%;
+        /* height: 35vw; */
+        margin-right: 1%;
+        display: flex;
+        flex-direction: column;
+        float: left;
+        padding-top: auto;
+    }
+    /* aside * {
     text-align: center;
 } */
-
-section {
-    border: 1px solid black;
-    width: 68%;
-    height: 35vw;
-    margin: 0%;
-    display: flex;
-    float: left;
-}
-
-.floatDerecha {
-    float: right;
-    display: inline;
-}
-
-.contorno {
-    width: 80%;
-    border: 1px solid black;
-    margin: 0 auto;
-    margin-top: 5%;
-    margin-bottom: 2%;
-}
-
-#calendario {
-    height: 8vw;
-}
-
-#tareas {
-    height: 16vw;
-}
-
-#chat {
-    height: 4vw;
-}
-
-footer {
-    width: 100%;
-    height: 5vw;
-    /* margin-top: 1%; */
-    /* float: left; */
-    clear: both;
-}
+    
+    section {
+        border: 1px solid black;
+        width: 68%;
+        height: 35vw;
+        margin: 0%;
+        display: flex;
+        float: left;
+    }
+    
+    .floatDerecha {
+        float: right;
+        display: inline;
+    }
+    
+    .contorno {
+        width: 80%;
+        border: 1px solid black;
+        margin: 0 auto;
+        margin-top: 5%;
+        margin-bottom: 2%;
+    }
+    
+    #calendario {
+        height: 8vw;
+    }
+    
+    #tareas {
+        height: 16vw;
+    }
+    
+    #chat {
+        height: 4vw;
+    }
+    
+    footer {
+        width: 100%;
+        height: 5vw;
+        /* margin-top: 1%; */
+        /* float: left; */
+        clear: both;
+    }
