@@ -29,6 +29,15 @@ final class HelpersTest extends TestCase
 
 
    }
+   public function testLog(): void
+   {
+       $logger = Helpers::log();
+       $this->assertIsObject($logger);
+       // Calling methods using object or directly works...
+       $logger->info("PHPUnit test");
+       Helpers::log()->debug("PHPUnit test");
+   }
 
    
 }
+

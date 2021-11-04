@@ -1,4 +1,9 @@
 <?php require_once __DIR__ . "/../vendor/autoload.php"; ?>
+<?php
+   My\Helpers::log()->info("Entro a la pàgina d'inici");
+   My\Helpers::log()->debug("Entro a una pàgina", ["page" => basename(__FILE__)]);
+?>
+
 <!DOCTYPE html>
 <html lang="ca">
 <?= My\Helpers::render("/_commons/head.php", ["subtitle" => "Home"]) ?>

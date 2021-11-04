@@ -6,3 +6,4 @@ composer.lock
 ../library/Database.php
 ../tests/DatabaseTest.php
 ../config/mail.php
+logs/app.log
