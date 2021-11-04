@@ -1,19 +1,20 @@
-*{
+* {
     margin: 0;
     padding: 0;
-  }
+}
 
-  header{
+header {
     font-family: Helvetica;
-    width: 510px;
+    width: 80%;
     margin: 0 auto;
-  }
+    justify-content: center;
+}
 
-  ul{
+ul {
     list-style: none;
-  }
+}
 
-  .menu li>a{
+.menu li>a {
     background-color: #58a4b0;
     color: black;
     padding: 10px;
@@ -22,96 +23,94 @@
     min-width: 100px;
     border-radius: 5px;
     margin-left: 3px;
-  }
-  
-  .menu li>a:hover{
+}
+
+.menu li>a:hover {
     background-color: #a9bcd0;
-  }
+}
 
-  .menu>li{
+.menu>li {
     float: left;
-    text-align:center
-  }
+    text-align: center
+}
 
-  .menu>li>ul{
+.menu>li>ul {
     display: none;
-  }
+}
 
-  .menu>li:hover>ul {
-    display:block;
-  }
+.menu>li:hover>ul {
+    display: block;
+}
 
-  h1 {
+h1 {
     font-family: Cardara, sans-serif;
     font-size: 38px;
     font-weight: bold;
     color: black;
-  }
+}
 
-  h2 {
-
+h2 {
     font-family: Cardara, sans-serif;
     font-size: 30px;
     font-weight: bold;
     color: black;
-  }
+}
 
-  p {
+p {
     color: black;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 24px;
     font-weight: bold;
-  }
+}
 
-  .button {
+.button {
     font-size: 18px;
     line-height: 20px;
     text-align: center;
     width: 80px;
     height: 40px;
     border-radius: 15px;
-  }
+}
 
-  .button--aceptar {
+.button--aceptar {
     background-color: #193063;
     color: white;
-    
-  }
+}
 
-  .button--cancelar {
+.button--cancelar {
     background-color: #a9bcd0;
-  }
+}
 
-  .button--registrar {
-    background-color:#193063;
+.button--registrar {
+    background-color: #193063;
     color: white;
-  }
+}
 
-  .button--login {
-    background-color:rgb(51, 177, 58);
+.button--login {
+    background-color: rgb(51, 177, 58);
     color: white;
-  }
+}
 
-  .iconbutton {
+.iconbutton {
     width: 50px;
     height: 50px;
-    background-color:#a9bcd0;
+    background-color: #a9bcd0;
     border-radius: 12px;
-  }
+}
 
-  .iconbutton--editar {
+.iconbutton--editar {
     background-image: url("../img/editar.png");
     background-size: contain;
     background-repeat: no-repeat;
-  }
+}
 
-  a {
+a {
     background-color: #58a4b0;
     color: black;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
-  }
+}
 
-  a:hover {
+a:hover {
     background-color: #a9bcd0;
-  }
+}

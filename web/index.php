@@ -7,6 +7,7 @@
    <title>Projecte J-Suite</title>
 </head>
 <body>
+
    <header>
        <h1><a href= "<?= $_SERVER['REQUEST_URI']?>">Projecte J-Suite</a></h1>
    </header>
@@ -18,6 +19,8 @@
        <li>PHP version: <?= phpversion() ?></li>
        <li>IP address: <?= getHostByName(getHostName()) ?></li>
    </ul>
+    
+
    <footer>
        <p>Curs 2021-22 de 2DAW</p>
    </footer>
