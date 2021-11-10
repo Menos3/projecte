@@ -1,0 +1,117 @@
+        ul.acordeon,
+        ul.acordeon * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        #menu,
+        #chat {
+            width: 100%;
+        }
+        
+        ul.acordeon {
+            margin: 10px auto;
+            padding: 0;
+            list-style: none;
+            width: 100%;
+            font-size: 18px;
+        }
+        
+        ul.acordeon li {
+            list-style: none;
+        }
+        
+        ul.acordeon li a {
+            display: block;
+            padding: 10px 10px 10px 20px;
+            background: #58A4B0;
+            color: #eee;
+            border-bottom: 1px solid #1B1B1E;
+            border-top: 1px solid #F5F5F5;
+            text-decoration: none;
+            box-sizing: border-box;
+        }
+        
+        ul.acordeon li ul {
+            max-height: 0;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            overflow: hidden;
+            transition: .4s all ease-in-out;
+        }
+        
+        ul.acordeon li li a {
+            padding: 10px 10px 10px 40px;
+            background: #F5F5F5;
+            color: #1B1B1E;
+            font-size: 16px;
+            border: 0;
+            border-bottom: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        /* ul.acordeon li li:last-child a {
+    border-bottom: 0;
+} */
+        
+        ul.acordeon li:hover ul {
+            max-height: 300px;
+            transition: .4s all ease-in;
+        }
+        
+        ul.acordeon li a:hover {
+            background: #D8DBE2;
+            color: #1B1B1E;
+        }
+        
+        .acordeon__emoji {
+            float: right;
+        }
+        
+        #incidencias {
+            width: 15%;
+            float: right;
+        }
+        
+        #table {
+            float: right;
+            display: block;
+            width: 70%;
+            height: 3%;
+        }
+        
+        .table__td--colorbajo {
+            background-color: greenyellow;
+        }
+        
+        .table__td--coloralto {
+            background-color: red;
+        }
+        
+        .table__td--colormedio {
+            background-color: orange;
+        }
+        
+        .table__td--descripcion {
+            width: 100%;
+        }
+        
+        table th {
+            background-color: #58A4B0;
+            color: #ccc;
+        }
+        
+        table tr {
+            width: 100%;
+        }
+        
+        form {
+            width: 70%;
+        }
+        
+        #formulario {
+            float: left;
+            clear: right;
+            width: 70%;
+        }

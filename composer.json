@@ -8,18 +8,16 @@
             "My\\": "library"
         }
     },
-    "authors": [
-        {
-            "name": "Sergio Melado Alonso",
-            "email": "semeal@fp.insjoaquimmir.cat"
-        },{
-            "name": "Cristina Martínez Sanchez",
-            "email": "crmasa@fp.insjoaquimmir.cat"
-        },{
-            "name": "Francesc Xavier Fortea Lucas",
-            "email": "frfolu@fp.insjoaquimmir.cat"
-        }
-    ],
+    "authors": [{
+        "name": "Sergio Melado Alonso",
+        "email": "semeal@fp.insjoaquimmir.cat"
+    }, {
+        "name": "Cristina Martínez Sanchez",
+        "email": "crmasa@fp.insjoaquimmir.cat"
+    }, {
+        "name": "Francesc Xavier Fortea Lucas",
+        "email": "frfolu@fp.insjoaquimmir.cat"
+    }],
     "minimum-stability": "dev",
     "require": {
         "php": "^8.0.10",
@@ -41,8 +39,8 @@
         "tests": [
             "./vendor/bin/phpunit tests"
         ]
- 
+
     }
- 
-    
+
+
 }
