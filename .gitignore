@@ -7,4 +7,3 @@ composer.lock
 ../tests/DatabaseTest.php
 ../config/mail.php
 logs/app.log
-../web/chatapp/node-modules
