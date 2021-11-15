@@ -7,4 +7,4 @@ library/Database.php
 tests/DatabaseTest.php
 config/mail.php
 logs/app.log
-web/chatapp/node-modules/*
+web/chatapp/node_modules/*
