@@ -6,11 +6,11 @@
     <form action = "forgot2_action.php" method = "POST">
         <h1>Canviar Contrasenya</h1>
         <p>Escriu la nova contraseya</p>
-        <input type = "text" id = "tfNovaContrasenya"/>
+        <input type = "text" name = "novaContrasenya"/>
         <p>Torna a escriure la nova contrasenya</p>
-        <input type = "text" id = "tfRepetirContrasenya"/>
+        <input type = "text" name = "repetirContrasenya"/>
         <br><br>
-        <button id = "btCanviarContrasenya">Canviar Contrasenya</button>
+        <button type = "submit" id = "btCanviarContrasenya">Canviar Contrasenya</button>
     </form>
 </body>
 </html>
