@@ -2,8 +2,6 @@ vendor
 composer
 composer.phar
 composer.lock
-../config/database.php
-../library/Database.php
-../tests/DatabaseTest.php
-../config/mail.php
+library/Database.php
+tests/DatabaseTest.php
 logs/app.log
