@@ -5,3 +5,5 @@ composer.lock
 library/Database.php
 tests/DatabaseTest.php
 logs/app.log
+config/database.php
+config/mail.php
