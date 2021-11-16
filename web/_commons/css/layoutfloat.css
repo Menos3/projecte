@@ -1,0 +1,32 @@
+.floatTop {
+
+    width: 100%;
+    vertical-align: top;
+    border: 1px solid black;
+    height: 235px;
+}
+
+.floatIzquierda {
+    float: left;
+    width: 25%;
+    border: 1px solid black;
+    height: auto;
+}
+
+.floatDerecha {
+    float: right;
+    width: 25%;
+    border: 1px solid black;
+    height: 500px;
+}
+
+section {
+
+    width: 48%;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+@media (max-width: 700px) {
+
+}
