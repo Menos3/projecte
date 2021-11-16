@@ -33,7 +33,7 @@
                         <a href=""><img src="_commons/img/eliminar.png" alt=""></a>
                     </div>
                     <div class="botonera--boton">
-                        <a href=""><img src="_commons/img/editar (1).png" alt=""></a>
+                        <a href=""><img src="_commons/img/editar(1).png" alt=""></a>
                     </div>
                 </div>
             </nav>
