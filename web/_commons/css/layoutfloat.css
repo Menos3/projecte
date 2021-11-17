@@ -1,9 +1,39 @@
 .floatTop {
-
     width: 100%;
     vertical-align: top;
     border: 1px solid black;
     height: 235px;
+    overflow: hidden;
+}
+
+.blogo {
+    float: left;
+    width: 20%;
+}
+
+.bmenu {
+    float: left;
+    width: 60%;
+    top: 50%;
+    margin-top: 70px;
+}
+
+.bloqueMenu__item {
+    width: auto;       
+}
+
+.bloqueMenu__item li {
+    float: left;
+    text-align: center;
+}
+
+.bloqueMenu__item a {
+    display: inline-block;
+}
+
+.busuari {
+    float: left;
+    width: 20%;
 }
 
 .floatIzquierda {
@@ -29,4 +59,40 @@ section {
 
 @media (max-width: 700px) {
 
+    .floatIzquierda {
+        width: 100%;
+        clear: both;
+
+    }
+
+    .floatDerecha {
+        width: 100%;
+        clear: both;
+    }
+
+    section {
+        width: 100%;
+    }
+        
+    .bmenu {
+        float: left;
+        width: 60%;
+        margin-left: 18%;
+        margin-top: 0px;
+    }
+    
+    .bloqueMenu {
+        vertical-align: top;
+        width: 200px;
+    }
+    
+    .bloqueMenu__item li {
+        float: left;
+        text-align: center;
+        height: 38px;
+    }
+
+    .bloqueMenu__item a {
+        display: block;
+    }
 }
