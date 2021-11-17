@@ -1,0 +1,31 @@
+                    /* bloques*/
+                    
+                    body {
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-size: 15px;
+                    }
+                    
+                    header {
+                        display: grid;
+                        grid-template-columns: auto auto auto;
+                        /* grid-template-rows: auto; */
+                        gap: 0px 0px;
+                        grid-template-areas: "menusuperior__img--logo menusuperior__botonera menusuperior_img--usuari"
+                    }
+                    /* modificadores  bloques*/
+                    /* elementos */
+                    
+                    .menusuperior__img--logo {
+                        grid-column-start: 1;
+                    }
+                    
+                    .menusuperior__img--usuari {
+                        grid-column-start: 3;
+                    }
+                    /* .menusuperior__botonera {}
+                    
+                    .menusuperior__botonera--boton {} */
+                    /* modificadores elementos */
+                    /* .menusuperior__img--esquerra {}
+                    
+                    .menusuperior__img--dreta {} */
