@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . "/../../vendor/autoload.php"; ?>
 <!DOCTYPE html>
 <html lang="ca">
     <?= My\Helpers::render("/../_commons/head.php")?>
