@@ -1,31 +1,56 @@
-                    /* bloques*/
-                    
-                    body {
-                        font-family: Arial, Helvetica, sans-serif;
-                        font-size: 15px;
-                    }
-                    
-                    header {
-                        display: grid;
-                        grid-template-columns: auto auto auto;
-                        /* grid-template-rows: auto; */
-                        gap: 0px 0px;
-                        grid-template-areas: "menusuperior__img--logo menusuperior__botonera menusuperior_img--usuari"
-                    }
-                    /* modificadores  bloques*/
-                    /* elementos */
-                    
-                    .menusuperior__img--logo {
-                        grid-column-start: 1;
-                    }
-                    
-                    .menusuperior__img--usuari {
-                        grid-column-start: 3;
-                    }
-                    /* .menusuperior__botonera {}
-                    
-                    .menusuperior__botonera--boton {} */
-                    /* modificadores elementos */
-                    /* .menusuperior__img--esquerra {}
-                    
-                    .menusuperior__img--dreta {} */
+                        /* bloques*/
+                        
+                        body {
+                            font-family: Arial, Helvetica, sans-serif;
+                            font-size: 15px;
+                        }
+                        
+                        header {
+                            display: grid;
+                            grid-template-columns: auto auto auto;
+                            /* grid-template-rows: auto; */
+                            gap: 0px 0px;
+                            grid-template-areas: "menusuperior__img--logo menusuperior__botonera menusuperior_img--usuari"
+                        }
+                        /* modificadores  bloques*/
+                        /* elementos */
+                        
+                        .menusuperior__img--logo {
+                            grid-column-start: 1;
+                        }
+                        
+                        .menusuperior__img--usuari {
+                            grid-column-start: 3;
+                        }
+                        /* BLOQUE */
+                        /* menu de la izquierda */
+                        
+                        .menuizquierda {
+                            grid-column-start: 1;
+                        }
+                        
+                        .menuizquierda__acordeon {}
+                        /* BLOQUE */
+                        /* menu de la derecha */
+                        
+                        .pantalla {
+                            display: grid;
+                            grid-template-columns: auto auto auto auto auto auto;
+                            gap: 0px 0px;
+                        }
+                        
+                        .menuderecha {
+                            grid-column-start: 6;
+                        }
+                        /* BLOQUE */
+                        /* central */
+                        
+                        .centro {
+                            grid-column: 2 / span 4;
+                        }
+                        
+                        .menuderecha__calendario {}
+                        
+                        .menuderecha__tareas {}
+                        
+                        .menuderecha__chat {}
