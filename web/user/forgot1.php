@@ -1,4 +1,4 @@
-<?php require_once __DIR__ . "/../../vendor/autoload.php"; ?>
+<?php require_once __DIR__ . "../../vendor/autoload.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
     <?= My\Helpers::render("/../_commons/head.php")?>

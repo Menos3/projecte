@@ -1,5 +1,5 @@
 <?php
-require("/../../vendor/autoload.php");
+require_once __DIR__ . "/../../vendor/autoload.php";
 
 use Rakit\Validation\Validator;
 
@@ -20,12 +20,28 @@ if(!empty($_POST)) {
         if($validation->fails()) {
 
             $errores = $validation->errors();
+            //Averiguar la forma de tirar para atras
+            $url = My\Helpers::url("user/forgot1.php");
 
             foreach($errores as $error) {
+
                 My\Helpers::flash($error);
             }
             
         } else {
+
+            $database = new My\Database;
+            $database->open();
+            $querySelectEmail = $database->prepare("SELECT email FROM users");
+            $querySelectEmail->execute();
+            $resultado = $query->fetchAll();
+            foreach($resultado as $correo) {
+
+                if ($correo == $_POST["email"]) {
+-
+                    $queryInsertToken = $database->prepare("INSERT into user_token ");
+                }
+            }
 
             //Enviar correo con el email para cambiar la contraseña, enviando un link a forgot2.php
             $correo = new My\Mail("Canvi de contrasenya", "Voste ha sol·licitat canviar la seva contrasenya", false);

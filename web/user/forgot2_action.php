@@ -13,11 +13,14 @@ if(!empty($_POST)) {
 
         $validation = $validator->make($_POST, [
 
-            'novaContrasenya'    => 'required|min:8',
+            'novaContrasenya'    => 'required|min:8|regex:/\d/',
             'repetirContrasenya' => 'required|same:novaContrasenya'
         ]);
         
         //Hacer un SELECT del usuario para obtener su contraseña actual
+        $database = new My\Database;
+        $database -> open();
+        $query = $database ->prepare("SELECT password FROM users WHERE username = ''");
 
         //Cambiar la contraseña
 
