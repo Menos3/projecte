@@ -5,3 +5,4 @@ composer.lock
 logs/app.log
 config/database.php
 config/mail.php
+web/chatapp/node_modules
