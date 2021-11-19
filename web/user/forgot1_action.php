@@ -8,7 +8,7 @@ if(!empty($_POST)) {
     if(!empty($_POST["email"])) {
 
         //Utilizar libreria de validacion
-        $validator = new Validator;
+        $validator = new Validator();
 
         $validation = $validator->make($_POST, [
         'email' => 'required|email'
@@ -19,10 +19,11 @@ if(!empty($_POST)) {
 
         if($validation->fails()) {
 
-            $errores = $validation->errors();
             //Averiguar la forma de tirar para atras
-            $url = My\Helpers::url("user/forgot1.php");
+            $url = My\Helpers::url("forgot1.php");
+            My\Helpers::redirect($url);
 
+            $errores = $validation->errors();
             foreach($errores as $error) {
 
                 My\Helpers::flash($error);
@@ -35,10 +36,11 @@ if(!empty($_POST)) {
             $querySelectEmail = $database->prepare("SELECT email FROM users");
             $querySelectEmail->execute();
             $resultado = $query->fetchAll();
+
             foreach($resultado as $correo) {
 
                 if ($correo == $_POST["email"]) {
--
+
                     $queryInsertToken = $database->prepare("INSERT into user_token ");
                 }
             }
