@@ -20,7 +20,6 @@ if(!empty($_POST)) {
         //Hacer un SELECT del usuario para obtener su contraseña actual
         $database = new My\Database;
         $database -> open();
-        $query = $database ->prepare("SELECT password FROM users WHERE username = ''");
 
         //Cambiar la contraseña
 
