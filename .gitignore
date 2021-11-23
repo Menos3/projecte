@@ -2,10 +2,11 @@ vendor
 composer
 composer.phar
 composer.lock
-library/Database.php
-tests/DatabaseTest.php
 logs/app.log
 config/database.php
 config/mail.php
+<<<<<<< HEAD
 
 web/tickets/node_modules
+=======
+>>>>>>> af5b3410274ae2e1d4a9ed34679ae17ad8f46493
