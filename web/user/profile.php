@@ -2,24 +2,37 @@
 <!DOCTYPE html>
 <html lang="ca">
 <?= My\Helpers::render("/_commons/head.php") ?>
-<!-- <head>
-    <style>
-    div {
-    display: flex;
-    flex-direction: column;
-}
+<?php
+  /* FUNCION GENÉRICA VALIDACIÓN USUARIO */
 
-form {
-    width: 50%;
-    margin: 0 auto;
-    display:flex;
-    flex-direction:column;
-}
-form  * {margin:0 auto;
-}
+  $id = $_POST['id'];
+  function verificarUsuario($id) {
+    $sql_leer = 'SELECT usuario FROM usuarios WHERE id = '.$id.' AND usuario = '.$_SESSION['usuario'].' ';
 
-</style>
-</head> -->
+    $gsnet = $pdo->prepare($sql_leer);
+    $gsnet->execute($id);
+
+    if ($gsnet->fetchColumn() > 0) return true;
+    return false;
+  };
+
+  /* Se cargan los datos del usuario para mostrar en el FORM */
+
+  $sql_leer = 'SELECT id,equipo,email,pas
+  
+  
+  
+  
+  
+  
+  s,thumb FROM usuarios WHERE usuario = '.$_SESSION['usuario'].'';
+
+  $gsnet = $pdo->prepare($sql_leer);
+  $gsnet->execute();
+
+  $resultado = $gsnet->fetchAll();
+
+?>
 
 <body>
    <!-- <?= My\Helpers::render("/_commons/header.php") ?> -->
