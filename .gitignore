@@ -6,7 +6,11 @@ logs/app.log
 config/database.php
 config/mail.php
 <<<<<<< HEAD
+web/chatapp/node_modules
+=======
+<<<<<<< HEAD
 
 web/tickets/node_modules
 =======
 >>>>>>> af5b3410274ae2e1d4a9ed34679ae17ad8f46493
+>>>>>>> 3059a652dd22931ae6e543b07f005c2bb78ed0ca
