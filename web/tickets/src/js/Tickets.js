@@ -8,5 +8,24 @@ export class Tickets {
 
 
     }
+    export class LlibresList {
+
+        constructor() {
+            this.carregarLocalStorage();
+        }
+        nouLlibre(llibre) {
+            this.llibres.push(llibre);
+            this.desarLocalStorage();
+        }
+        desarLocalStorage() {
+            localStorage.setItem('llibres', JSON.stringify(this.llibres));
+        }
+        carregarLocalStorage() {
+            this.llibres = (localStorage.getItem('llibres')) ?
+                JSON.parse(localStorage.getItem('llibres')) :
+                [];
+        }
+    }
+
 
 }

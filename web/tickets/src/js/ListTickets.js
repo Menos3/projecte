@@ -1,5 +1,5 @@
 export class ListTickets {
-    constructor(listTicket) {
+    constructor() {
         this.listTicket = listTicket;
 
     }
