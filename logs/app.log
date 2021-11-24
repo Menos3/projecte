@@ -61,3 +61,7 @@ init
 [2021-11-04T18:59:50.800638+01:00] app.DEBUG: Entro a una pàgina {"page":"index.php"} []
 [2021-11-04T19:00:01.518693+01:00] app.INFO: Entro a la pàgina d'inici [] []
 [2021-11-04T19:00:01.519661+01:00] app.DEBUG: Entro a una pàgina {"page":"index.php"} []
+[2021-11-24T18:31:11.196987+01:00] app.INFO: Entro a la pàgina d'inici [] []
+[2021-11-24T18:31:11.292562+01:00] app.DEBUG: Entro a una pàgina {"page":"index.php"} []
+[2021-11-24T18:31:53.504135+01:00] app.INFO: Entro a la pàgina d'inici [] []
+[2021-11-24T18:31:53.507990+01:00] app.DEBUG: Entro a una pàgina {"page":"index.php"} []
