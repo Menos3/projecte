@@ -8,7 +8,7 @@ if(!empty($_POST)) {
 
     if(!empty($_POST["novaContrasenya"] && $_POST["repetirContrasenya"])) {
 
-        //Utilizar libreria de validacion
+        //UTILIZAR LIBRERIA DE VALIDACION
         $validator = new Validator;
 
         $validation = $validator->make($_POST, [
@@ -17,13 +17,13 @@ if(!empty($_POST)) {
             'repetirContrasenya' => 'required|same:novaContrasenya'
         ]);
         
-        //Hacer un SELECT del usuario
+        //HACER UN SELECT DEL USUARIO
         $database = new My\Database;
         $database -> open();
 
-        //Cambiar la contraseña
+        //SETEAR LA CONTRASEÑA DEL USUARIO CON LA NUEVA CONTRASEÑA
 
-        //Hacer un UPDATE con la contraseña cambiada
+        //HACER UN UPDATE CON LA CONTRASEÑA CAMBIADA
 
     }
 }
