@@ -17,7 +17,7 @@ if(!empty($_POST)) {
             'repetirContrasenya' => 'required|same:novaContrasenya'
         ]);
         
-        //Hacer un SELECT del usuario para obtener su contraseña actual
+        //Hacer un SELECT del usuario
         $database = new My\Database;
         $database -> open();
 

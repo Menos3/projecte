@@ -35,7 +35,7 @@ if(!empty($_POST)) {
             $database = new My\Database;
             $database->open();
             $querySelectEmail = $database->prepare("SELECT email FROM users WHERE email = :email");
-            $querySelectEmail = bindParam(':email', $_POST['email']);
+            //$querySelectEmail = bindParam(':email', $_POST['email']);
             $querySelectEmail->execute();
             $resultado = $query->fetch(PDO::FETCH_ASSOC);
 
