@@ -223,4 +223,7 @@ ul.menuderecha li a:hover {
         grid-column: 1 / span 2;
         width: 100%;
     }
+    .menuderecha__calendario img {
+        width: 100%;
+    }
 }
