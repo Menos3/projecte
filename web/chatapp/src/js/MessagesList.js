@@ -1,7 +1,7 @@
 export class MessagesList {
 
-    constructor(messageList) {
-        this.messageList = messageList;
+    constructor() {
+        this.messageList = [];
     }
 
     addMessage(message) {
@@ -9,7 +9,7 @@ export class MessagesList {
         this.guardarLocalStorage();
     }
 
-    autoincrement_id() {
+    autoincrementId() {
         return this.messageList.at(-1) +1;
     }
 
