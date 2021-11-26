@@ -5,11 +5,11 @@
 <?php
   /* FUNCION GENÉRICA VALIDACIÓN USUARIO */
 
-  $id = $_POST['id'];
+  // $id = $_POST['id'];
   function verificarUsuario($id) {
-    $sql_leer = 'SELECT usuario FROM usuarios WHERE id = '.$id.' AND usuario = '.$_SESSION['usuario'].' ';
-
-    $gsnet = $pdo->prepare($sql_leer);
+    // $sql_leer = 'SELECT usuario FROM usuarios WHERE username= '.$id.' AND usuario = '.$_SESSION['admin'].' ';
+    $sql_user= 'SELECT * FROM users WHERE id=1';
+    $gsnet = $pdo->prepare($sql_user);
     $gsnet->execute($id);
 
     if ($gsnet->fetchColumn() > 0) return true;
@@ -18,19 +18,14 @@
 
   /* Se cargan los datos del usuario para mostrar en el FORM */
 
-  $sql_leer = 'SELECT id,equipo,email,pas
-  
-  
-  
-  
-  
-  
-  s,thumb FROM usuarios WHERE usuario = '.$_SESSION['usuario'].'';
 
-  $gsnet = $pdo->prepare($sql_leer);
-  $gsnet->execute();
-
-  $resultado = $gsnet->fetchAll();
+  
+  
+  
+  
+  
+  
+  
 
 ?>
 
