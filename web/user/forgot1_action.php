@@ -7,6 +7,7 @@ if(!empty($_POST)) {
 
     if(!empty($_POST["email"])) {
 
+        $email = $_POST["email"];
         //UTILIZAR LIBRERIA DE VALIDACION
         $validator = new Validator;
 
@@ -33,14 +34,22 @@ if(!empty($_POST)) {
         } else {
 
             //CREAR OBJETO DATABASE, HACER LA QUERY Y EJECUTARLA
-            $database = new My\Database;
-            $database->open();
-            $querySelectEmail = $database->prepare("SELECT 'email' FROM '2daw.equip02' WHERE email = ?");
-            $querySelectEmail->execute($_POST['email']);
-            $resultado = $querySelectEmail->fetch(PDO::FETCH_ASSOC);
+            $database = new My\Database();
+
+            $querySelectEmail = $database->prepare("SELECT `email` FROM `2daw.equip02`.users WHERE email =?");
+            $querySelectEmail->execute([$email]);
+
+            $coincidencia = false;
+
+            foreach($querySelectEmail as $row) {
+
+                if($row["email"] == $email) {
+                    $coincidencia = true;
+                }
+            }
 
             //COMPROVAR SI EL EMAIL COINCIDE CON EL EMAIL QUE LLEGA DEL FORMULARIO
-            if ($resultado == $_POST["email"]) {
+            if($coincidencia) {
 
                 My\Helpers::flash("El usuario existe");
 
@@ -49,11 +58,11 @@ if(!empty($_POST)) {
                 $token = bin2hex($bytes);
                     
                 //HACER INSERT EN LA TABLA DE USER_TOKENS
-                $queryInsertToken = $database->prepare("INSERT INTO '2daw.equip02', user_tokens VALUES (25, '{$token}', 'R', '24/11/2021')");
+                $queryInsertToken = $database->prepare("INSERT INTO `2daw.equip02`.user_tokens (`user_id`, `token`, `type`, `created`) VALUES (2, `{$token}`, `R`, `24/11/2021`);");
                 $queryInsertToken->execute();
                 My\Helpers::log()->debug($queryInsertToken);
 
-                //TODO: ENVIAR CORREO CON EL ENLACE A FORGOT2.PHP 
+                //ENVIAR CORREO CON EL ENLACE A FORGOT2.PHP 
                 $correo = new My\Mail("Canvi de contrasenya", 'Fes click a aquest link per cambiar la contrasenya: <a href ="http://localhost/projecte/web/user/forgot2.php?token='.$token.'"> </a>', false);
                 $envio = $correo->send($_POST['email']);
 
