@@ -8,24 +8,23 @@ export class Tickets {
 
 
     }
-    export class LlibresList {
+}
+export class ListTickets {
+    tickets;
 
-        constructor() {
-            this.carregarLocalStorage();
-        }
-        nouLlibre(llibre) {
-            this.llibres.push(llibre);
-            this.desarLocalStorage();
-        }
-        desarLocalStorage() {
-            localStorage.setItem('llibres', JSON.stringify(this.llibres));
-        }
-        carregarLocalStorage() {
-            this.llibres = (localStorage.getItem('llibres')) ?
-                JSON.parse(localStorage.getItem('llibres')) :
-                [];
-        }
+    constructor() {
+        this.getLocalStorage();
+
     }
-
-
+    postTicket(ticket) {
+        this.tickets.push(ticket);
+        this.setLocalStorage();
+    }
+    setLocalStorage() {
+        localStorage.setItem('tickets', this.tickets);
+    }
+    getLocalStorage() {
+        this.tickets = (localStorage.getItem('tickets')) ?
+            JSON.parse(localStorage.getItem('tickets')) : [];
+    }
 }
