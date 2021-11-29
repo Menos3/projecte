@@ -36,6 +36,7 @@ function onSubmit() {
         let ticketDesc = document.getElementById('description').value;
         let ticketUser = document.getElementById('tec').value;
         let ticketAsset = document.getElementById('assets').value;
+        console.log(ticketName);
 
     })
 
