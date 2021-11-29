@@ -24,12 +24,31 @@ if($validation->fails()){
 }
 
 else {
-    $database= new My\Database;
-    $database->open();
-    //en la select
-    $data=$database->prepare
-    ('INSERT in to `2daw.equip02`.users (username, password, status, role_id,avatar_id, created, last_access ) VALUES ("{$_POST["username"]}","{$_POST["password"]}","{$_POST["status"]}",0,"{$_POST["avatar_id"]}","","")');
+    $query= new My\Database;
+    $query->open();
 
-}
+    $sql=$query->prepare( "SELECT * FROM users WHERE email ='{$_POST["email"]}'");
+    $sql->execute();
+    $resultados =$sql->fetchAll(PDO::FETCH_OBJ);
+    if($sql->rowCount()>0){
+        foreach($resultados as $resultado){
+            echo "$resultado->id";
+        }
+    }}
+
+
+    
+
+
+    
+    // $sql=('INSERT into users (username, password, status, role_id,avatar_id, created, last_access ) VALUES ("{$_POST["username"]}","{$_POST["password"]}","{$_POST["status"]}",0,"{$_POST["avatar_id"]}","","")');
+    
+    // if
+    //en la select
+    // $query= execute();
+    // $result= $query->fetchAll(PDO::FETCH_OBJ);
+    // $database->prepare($sql);
+    // $data=PDOState->execute();
+
 
 ?>

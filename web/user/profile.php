@@ -48,7 +48,7 @@
                 <input class="formulario__form--input" name="passwordNew" type="password">
                 <label class="formulario__label" for="PasswordRepit">Repite contraseña nueva</label>
                 <input class="formulario__form--input" name="PasswordRepit"type="password">
-                <button  class="formulario__form--button" type="submit">Guardar</button>
+                <button name="guardar" class="formulario__form--button" type="submit">Guardar</button>
                 <button class="formulario__form--button" >Cancelar</button>
         </form>
    </div>
