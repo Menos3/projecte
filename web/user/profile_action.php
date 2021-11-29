@@ -30,11 +30,6 @@ else {
     $data=$database->prepare
     ('INSERT in to `2daw.equip02`.users (username, password, status, role_id,avatar_id, created, last_access ) VALUES ("{$_POST["username"]}","{$_POST["password"]}","{$_POST["status"]}",0,"{$_POST["avatar_id"]}","","")');
 
-
-    
-    
-    
-   
 }
 
 ?>
