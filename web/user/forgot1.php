@@ -12,7 +12,6 @@
             <p>Escriu el correu electrónic amb el que t'has registrat</p>
             <input type = "text" name = "email"/>
             <br><br>
-
             <button id = "btCancelar">Cancelar</button>
             <button type = "submit" id = "btEnviarCorreu">Recuperar Contrasenya</button>
 

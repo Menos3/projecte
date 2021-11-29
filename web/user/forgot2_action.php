@@ -6,6 +6,11 @@ use Rakit\Validation\Validator;
 
 if(!empty($_POST)) {
 
+    //CARGAR USUARIO A TRAVES DEL TOKEN
+    if(!empty($_POST["token"])) {
+
+    }
+
     if(!empty($_POST["novaContrasenya"] && $_POST["repetirContrasenya"])) {
 
         //UTILIZAR LIBRERIA DE VALIDACION
@@ -17,13 +22,8 @@ if(!empty($_POST)) {
             'repetirContrasenya' => 'required|same:novaContrasenya'
         ]);
         
-        //HACER UN SELECT DEL USUARIO
-        $database = new My\Database;
-        $database -> open();
-
-        //SETEAR LA CONTRASEÑA DEL USUARIO CON LA NUEVA CONTRASEÑA
-
         //HACER UN UPDATE CON LA CONTRASEÑA CAMBIADA
+        $database = new My\Database;
 
     }
 }

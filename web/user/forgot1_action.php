@@ -8,6 +8,8 @@ if(!empty($_POST)) {
     if(!empty($_POST["email"])) {
 
         $email = $_POST["email"];
+        $url = My\Helpers::url("user/forgot1.php");
+
         //UTILIZAR LIBRERIA DE VALIDACION
         $validator = new Validator;
 
@@ -20,56 +22,62 @@ if(!empty($_POST)) {
 
         if($validation->fails()) {
 
-            //TODO: Averiguar la forma de tirar para atras
-            $url = My\Helpers::url("user/forgot1.php");
+            My\Helpers::flash("Formato de correo incorrecto");
             My\Helpers::redirect($url);
-
-            $errores = $validation->errors();
-            foreach($errores as $error) {
-
-                //TODO: Corregir error del flash
-                My\Helpers::flash($error);
-            }
             
         } else {
 
-            //CREAR OBJETO DATABASE, HACER LA QUERY Y EJECUTARLA
-            $database = new My\Database();
+            try{
 
-            $querySelectEmail = $database->prepare("SELECT `email` FROM `2daw.equip02`.users WHERE email =?");
-            $querySelectEmail->execute([$email]);
+                //CREAR OBJETO DATABASE, HACER LA QUERY Y EJECUTARLA
+                $database = new My\Database();
 
-            $coincidencia = false;
+                $querySelectEmail = $database->prepare("SELECT email, id FROM users WHERE email = '$email'");
+                $querySelectEmail->execute();
 
-            foreach($querySelectEmail as $row) {
+                $coincidencia = false;
 
-                if($row["email"] == $email) {
-                    $coincidencia = true;
+                foreach($querySelectEmail as $row) {
+
+                    if($row["email"] == $email) {
+                        $coincidencia = true;
+                        $id = $row["id"];
+                    }
                 }
-            }
+                
+                //COMPROVAR SI EL EMAIL COINCIDE CON EL EMAIL QUE LLEGA DEL FORMULARIO
+                if($coincidencia) {
 
-            //COMPROVAR SI EL EMAIL COINCIDE CON EL EMAIL QUE LLEGA DEL FORMULARIO
-            if($coincidencia) {
+                    My\Helpers::flash("El usuario existe");
 
-                My\Helpers::flash("El usuario existe");
+                    //FABRICAMOS TOKEN
+                    $bytes = random_bytes(20);
+                    $token = bin2hex($bytes);
+                
+                    //HACER INSERT EN LA TABLA DE USER_TOKENS
+                    $queryInsertToken = $database->prepare("INSERT INTO user_tokens (user_id, token, type, created) VALUES ($id, '$token', 'R', '2021/11/24 14:25:00');");
+                    $queryInsertToken->execute();
+                    My\Helpers::log();
 
-                //FABRICAMOS TOKEN
-                $bytes = random_bytes(20);
-                $token = bin2hex($bytes);
-                    
-                //HACER INSERT EN LA TABLA DE USER_TOKENS
-                $queryInsertToken = $database->prepare("INSERT INTO `2daw.equip02`.user_tokens (`user_id`, `token`, `type`, `created`) VALUES (2, `{$token}`, `R`, `24/11/2021`);");
-                $queryInsertToken->execute();
-                My\Helpers::log()->debug($queryInsertToken);
+                    //ENVIAR CORREO CON EL ENLACE A FORGOT2.PHP 
+                    $correo = new My\Mail("Canvi de contrasenya", 'Fes click a aquest link per cambiar la contrasenya: <a href ="http://localhost/projecte/web/user/forgot2.php?token='.$token.'"> </a>', false);
+                    $envio = $correo->send([$email]);
 
-                //ENVIAR CORREO CON EL ENLACE A FORGOT2.PHP 
-                $correo = new My\Mail("Canvi de contrasenya", 'Fes click a aquest link per cambiar la contrasenya: <a href ="http://localhost/projecte/web/user/forgot2.php?token='.$token.'"> </a>', false);
-                $envio = $correo->send($_POST['email']);
+                    if($envio) {
+                        echo "Enviado";
+                    }
 
-                if($envio) {
-                    echo "Enviado";
+                } else {
+
+                    My\Helpers::flash("El correo proporcionado no existe");
+                    My\Helpers::redirect($url);
                 }
-            }
+
+            } catch (PDOException $pdoException) {
+
+                My\Helpers::flash("Error al conectarse a la base de datos");
+                My\Helpers::redirect($url);
+            }    
         }
     }
 }
