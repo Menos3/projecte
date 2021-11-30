@@ -5,10 +5,4 @@ export class Usuari {
 		this.password = password;
         this.id_role = id_role;
     }
-
-
-
-
-
-
 }

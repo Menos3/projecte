@@ -1,1 +1,4 @@
-import header from "../../projecte/web/_common/html/header.php";
+import {saludar} from './js/components'
+
+const nom = "Sergio"
+saludar(nom);

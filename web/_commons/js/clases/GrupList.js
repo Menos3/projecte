@@ -2,6 +2,7 @@ export class GrupList {
 
     constructor() {
         this.grupsList = [];
+		this.cargarLocalStorage();
     }
 
     addGroup(group) {
@@ -9,7 +10,7 @@ export class GrupList {
         this.guardarLocalStorage();
     }
 
-    autoincrementId() {
+    autoIncrementId() {
         return this.grupsList.at(-1) +1;
     }
 

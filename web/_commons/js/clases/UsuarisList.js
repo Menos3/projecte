@@ -1,6 +1,6 @@
 export class UsuarisList {
 
-usuaris;
+	usuaris;
 
     constructor() {
         this.usuaris = [];
