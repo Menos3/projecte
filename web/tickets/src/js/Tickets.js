@@ -1,10 +1,18 @@
 export class Tickets {
-    constructor(id, titulo, descripcion, creado, actualizado) {
+    constructor(id, titulo, descripcion, assigenedId, assetId) {
         this.id = id;
         this.titulo = titulo;
         this.decripcion = descripcion;
-        this.creado = creado;
-        this.actualizado = actualizado;
+        this.assigenedId = assigenedId;
+        this.assigenedId = assetId;
+        // this.created = this.getDate();
+        // this.actualizado = this.getDate();
+
+
+    }
+    getDate() {
+        let date = new Date();
+        return date;
 
 
     }
@@ -26,5 +34,9 @@ export class ListTickets {
     getLocalStorage() {
         this.tickets = (localStorage.getItem('tickets')) ?
             JSON.parse(localStorage.getItem('tickets')) : [];
+    }
+    getLastId() {
+        id = this.ticketsat(-1).id;
+        return id;
     }
 }

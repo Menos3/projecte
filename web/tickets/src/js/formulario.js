@@ -32,10 +32,12 @@ function onSubmit() {
     const button = document.getElementById('addTicketButton');
     button.addEventListener("click", event => {
         event.preventDefault();
+        let ticketId = Tickets.getLastId() + 1;
         let ticketName = document.getElementById('titulo').value;
         let ticketDesc = document.getElementById('description').value;
-        let ticketUser = document.getElementById('tec').value;
+        let ticketAssigned = document.getElementById('tec').value;
         let ticketAsset = document.getElementById('assets').value;
+        var ticket = new Tickets(ticketId, ticketName, ticketDesc, ticketAssigned, ticketAsset);
         console.log(ticketName);
 
     })
