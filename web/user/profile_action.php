@@ -3,7 +3,7 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 require_once __DIR__ . "/../../config/database.php";
 // $db=new My\Database();
 // $db->open();
-
+use My\Mail;
 use Rakit\Validation\Validator;
 
 $validator = new Validator;
@@ -42,11 +42,12 @@ else {
         $resultado=$sql->fetch(PDO::FETCH_OBJ);
         
         $passwordEncriptado=hash('sha256', '$_POST["passwordRepit"]');
-        $sql=$query->prepare( "UPDATE users set 'username'='{$_POST["username"]}','email'='{$_POST["email"]}','password'='$passwordEncriptado', 'status'=0");
+        $sql=$query->prepare("UPDATE users set username='{$_POST["username"]}',email='{$_POST["email"]}',password='{$passwordEncriptado}', status=0");
         $sql->execute();
 
-        $correo=new My\Mail("NOTIFICACIÓ CANVI DE EMAIL",'El seu email ha sigut canviat amb exit. Fes click amb aquest enllaç: <a href="http://localhost/projecte/web/user/register_action2.php?token='.$resultado.'"> </a>', false);
-        $enviado=$correo->send([$_POST["email"]]);
+        $correo=new My\Mail("NOTIFICACIÓ CANVI DE EMAIL",'El seu email ha sigut canviat amb exit. Fes click amb aquest enllaç: <a href="http://localhost/projecte/web/user/register_action2.php?token='."hola".'"></a>', false);
+        $email=[$_POST["email"]];
+        $enviado=$correo->send($email);
         if($enviado){
             My\Helpers::flash("enviado");
         }
