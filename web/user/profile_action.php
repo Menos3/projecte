@@ -31,10 +31,31 @@ else {
     $sql->execute();
     $resultados =$sql->fetchAll(PDO::FETCH_OBJ);
     if($sql->rowCount()>0){
-        foreach($resultados as $resultado){
-            echo "$resultado->id";
+        $url=My\Helpers::url("profile.php");
+        My\Helpers::redirect($url);
+    }
+    else{
+        
+        $sql = $query->prepare("SELECT token FROM user_tokens WHERE user_id = 1");
+        $sql->execute();
+        //aqui esta el TOKEN
+        $resultado=$sql->fetch(PDO::FETCH_OBJ);
+        
+        $passwordEncriptado=hash('sha256', '$_POST["passwordRepit"]');
+        $sql=$query->prepare( "UPDATE users set 'username'='{$_POST["username"]}','email'='{$_POST["email"]}','password'='$passwordEncriptado', 'status'=0");
+        $sql->execute();
+
+        $correo=new My\Mail("NOTIFICACIÓ CANVI DE EMAIL",'El seu email ha sigut canviat amb exit. Fes click amb aquest enllaç: <a href="http://localhost/projecte/web/user/register_action2.php?token='.$resultado.'"> </a>', false);
+        $enviado=$correo->send([$_POST["email"]]);
+        if($enviado){
+            My\Helpers::flash("enviado");
         }
-    }}
+        else{
+            My\Helpers::flash("este correo no EXISTE");
+        }
+        
+    }
+    }
 
 
     
