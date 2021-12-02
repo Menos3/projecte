@@ -60,7 +60,7 @@ if(!empty($_POST)) {
                     My\Helpers::log();
 
                     //ENVIAR CORREO CON EL ENLACE A FORGOT2.PHP 
-                    $correo = new My\Mail("Canvi de contrasenya", 'Fes click a aquest link per cambiar la contrasenya: <a href ="http://localhost/projecte/web/user/forgot2.php?token='.$token.'"> </a>', false);
+                    $correo = new My\Mail("Canvi de contrasenya", 'Fes click a aquest link per cambiar la contrasenya: <a href ="http://localhost/projecte/web/user/forgot2.php?token='.$token.'"> </a>', true);
                     $envio = $correo->send([$email]);
 
                     if($envio) {
