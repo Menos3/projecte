@@ -45,7 +45,7 @@ else {
         $sql=$query->prepare("UPDATE users set username='{$_POST["username"]}',email='{$_POST["email"]}',password='{$passwordEncriptado}', status=0");
         $sql->execute();
 
-        $correo=new My\Mail("NOTIFICACIÓ CANVI DE EMAIL",'El seu email ha sigut canviat amb exit. Fes click amb aquest enllaç: <a href="http://localhost/projecte/web/user/register_action2.php?token='."hola".'"></a>', false);
+        $correo=new My\Mail("NOTIFICACIÓ CANVI DE EMAIL",'El seu email ha sigut canviat amb exit. Fes click amb aquest enllaç: <a href="http://localhost/projecte/web/user/profile.php?token='."hola".'"></a>', false);
         $email=[$_POST["email"]];
         $enviado=$correo->send($email);
         if($enviado){

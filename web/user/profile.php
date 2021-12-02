@@ -2,35 +2,11 @@
 <!DOCTYPE html>
 <html lang="ca">
 <?= My\Helpers::render("/_commons/head.php") ?>
-<?php
-  /* FUNCION GENÉRICA VALIDACIÓN USUARIO */
+<!--  -->
 
-  // $id = $_POST['id'];
-  function verificarUsuario($id) {
-    // $sql_leer = 'SELECT usuario FROM usuarios WHERE username= '.$id.' AND usuario = '.$_SESSION['admin'].' ';
-    $sql_user= 'SELECT * FROM users WHERE id=1';
-    $gsnet = $pdo->prepare($sql_user);
-    $gsnet->execute($id);
-
-    if ($gsnet->fetchColumn() > 0) return true;
-    return false;
-  };
-
-  /* Se cargan los datos del usuario para mostrar en el FORM */
-
-
-  
-  
-  
-  
-  
-  
-  
-
-?>
+<?= My\Helpers::render("/_commons/header.php") ?>
 
 <body>
-   <!-- <?= My\Helpers::render("/_commons/header.php") ?> -->
    <h2>Perfil</h2>
    <div class="formulario">
         <form class="formulario__form" action="profile_action.php" method="POST" enctype="multipart/form-data">
