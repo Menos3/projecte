@@ -1,11 +1,11 @@
 import '../css/components.css';
 import webpacklogo from '../assets/img/webpack-logo.png';
 
-export const saludar = (nom) => {
+export const saludar = (nom = 'sense nom') => {
 
     console.log("Creant etiqueta h1");
     const h1 = document.createElement("h1");
-    h1.innerText = "Hola ${nom}";
+    h1.innerText = 'Hola ${nom}';
 
     document.body.append(h1);
 
