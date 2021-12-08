@@ -31,21 +31,29 @@ else {
     $sql->execute();
     $resultados =$sql->fetchAll(PDO::FETCH_OBJ);
     if($sql->rowCount()>0){
+        $passwordEncriptado=hash('sha256', '$_POST["passwordRepit"]');
+        $sql=$query->prepare("UPDATE users set password='{$passwordEncriptado}', status=0");
+        $sql->execute();
+        $correo=new My\Mail("NOTIFICACIÓ CANVI DE CONTRASENYA",'La seva constraseña ha sigut modificada.', false);
+        $email=[$_POST["email"]];
+        $enviado=$correo->send($email);
         $url=My\Helpers::url("profile.php");
         My\Helpers::redirect($url);
     }
-    else{
-        
-        $sql = $query->prepare("SELECT token FROM user_tokens WHERE user_id = 1");
+    else{      
+        $sql=$query->prepare( "SELECT token FROM user_tokens WHERE user_id ='{$_POST["user_id"]}'");
         $sql->execute();
-        //aqui esta el TOKEN
-        $resultado=$sql->fetch(PDO::FETCH_OBJ);
-        
+        $resultados =$sql->fetchAll(PDO::FETCH_OBJ);
         $passwordEncriptado=hash('sha256', '$_POST["passwordRepit"]');
-        $sql=$query->prepare("UPDATE users set username='{$_POST["username"]}',email='{$_POST["email"]}',password='{$passwordEncriptado}', status=0");
+        $sql=$query->prepare("UPDATE users set email='{$_POST["email"]}',password='{$passwordEncriptado}', status=0 WHERE id='{$_POST["user_id"]}'" );
         $sql->execute();
 
-        $correo=new My\Mail("NOTIFICACIÓ CANVI DE EMAIL",'El seu email ha sigut canviat amb exit. Fes click amb aquest enllaç: <a href="http://localhost/projecte/web/user/profile.php?token='."hola".'"></a>', false);
+        $bytes = random_bytes(20);
+        $token = bin2hex($bytes);
+        $sqltoken = "INSERT INTO user_tokens (token, 'type' ) VALUES ('$token', 'A')";
+        $url="http://localhost/projecte/web/user/profile.php";
+        $url .= '?token='.$token;
+        $correo=new My\Mail("NOTIFICACIÓ CANVI DE EMAIL",'El seu email ha sigut canviat amb exit. Fes click amb aquest enllaç: <a href="'.$url.'"></a>', false);
         $email=[$_POST["email"]];
         $enviado=$correo->send($email);
         if($enviado){

@@ -47,14 +47,17 @@ public static function url(string $path, bool $ssl = false): string
        } else if ($file["size"] > self::MAX_FILE_SIZE) {
            throw new \Exception("Upload maximum file exceeded (2MB)");
        } else {
-           $dir  = __DIR__ . "/../uploads/{$folder}";
-           $path = $dir . "/" . basename($file["name"]);
-           $tmp  = $file["tmp_name"];
-          
-           if (move_uploaded_file($tmp, $path)) {
-               return $path;
+           $subdir  = "../uploads/{$folder}";
+           $dirpath = __DIR__ . "/{$subdir}";
+           if (!file_exists($dirpath)) {
+               mkdir($dirpath, 0755, true);
+           }
+           $filename = basename($file["name"]);
+           $filepath = "{$dirpath}/{$filename}";
+           if (move_uploaded_file($file["tmp_name"], $filepath)) {
+               return "{$subdir}/{$filename}";
            } else {
-               throw new \Exception("Unable to upload file at {$path}");
+               throw new \Exception("Unable to upload file at {$dirpath}");
            }
        }
    }
