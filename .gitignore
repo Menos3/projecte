@@ -7,3 +7,4 @@ config/mail.php
 logs/app.log
 web/tickets/node_modules
 web/chatapp/node_modules
+uploads/*
