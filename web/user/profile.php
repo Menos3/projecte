@@ -19,9 +19,9 @@
    <div class="formulario">
         <form class="formulario__form" action="profile_action.php" method="POST" enctype="multipart/form-data">
                 <div class="formulario__foto">
-                    <div>
+                    <!-- <div>
                         <img src="" alt="">
-                    </div>
+                    </div> -->
                     <input class="formulario__form--button" name="avatar" id="archivo" type="file"/>
                     <input class="formulario__form--button" type="submit" name="subir" value="Subir imagen"/>
                 </div>

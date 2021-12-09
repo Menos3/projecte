@@ -45,9 +45,8 @@ else {
         $sql->execute();
         $resultados =$sql->fetchAll(PDO::FETCH_OBJ);
         $passwordEncriptado=hash('sha256', '$_POST["passwordRepit"]');
-        $sql=$query->prepare("UPDATE users set email='{$_POST["email"]}',password='{$passwordEncriptado}', status=0 WHERE id='{$_POST["user_id"]}'" );
+        $sql=$query->prepare("UPDATE users set email='{$_POST["email"]}',password='{$passwordEncriptado}', status=0, avatar_id='{$_FILES["avatar"]}' WHERE id='{$_POST["user_id"]}'" );
         $sql->execute();
-
         $bytes = random_bytes(20);
         $token = bin2hex($bytes);
         $sqltoken = "INSERT INTO user_tokens (token, 'type' ) VALUES ('$token', 'A')";
