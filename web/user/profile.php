@@ -12,6 +12,14 @@
     $sentencia->execute();
     $results = $sentencia->fetchAll(PDO::FETCH_OBJ);
     $user = $results[0];
+
+    $sentencia1 = $db->prepare("SELECT filepath FROM files WHERE id = '{$user->avatar_id}';");
+    $sentencia1->execute();
+    $results2 = $sentencia1->fetchAll(PDO::FETCH_OBJ);
+    $file = $results2[0];
+    $avatarurl = My\Helpers::url($file->filepath);
+    My\Helpers::log()->debug($avatarurl);
+
     //My\Helpers::log()->debug("Datos");
 ?>
 <body>
@@ -19,9 +27,8 @@
    <div class="formulario">
         <form class="formulario__form" action="profile_action.php" method="POST" enctype="multipart/form-data">
                 <div class="formulario__foto">
-                    <!-- <div>
-                        <img src="" alt="">
-                    </div> -->
+                    <img src="<?= $avatarurl ?>"></img>
+
                     <input class="formulario__form--button" name="avatar" id="archivo" type="file"/>
                     <input class="formulario__form--button" type="submit" name="subir" value="Subir imagen"/>
                 </div>
@@ -36,8 +43,8 @@
                 <input class="formulario__form--input" name="passwordNew" type="password">
                 <label class="formulario__label" for="PasswordRepit">Repite contraseña nueva</label>
                 <input class="formulario__form--input" name="PasswordRepit"type="password">
-                <button name="guardar" class="formulario__form--button" type="submit">Guardar</button>
-                <button class="formulario__form--button" >Cancelar</button>
+                <button name="guardar" class="btn btn-primary" type="submit">Guardar</button>
+                <button class="btn btn-danger" >Cancelar</button>
         </form>
    </div>
 

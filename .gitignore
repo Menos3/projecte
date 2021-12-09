@@ -8,3 +8,4 @@ tests/DatabaseTest.php
 config/mail.php
 logs/app.log
 web/tickets/node_modules
+uploads/*
