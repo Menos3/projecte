@@ -2,7 +2,7 @@
 // use PHPUnit\Framework\TestCase;
 // use My\Database;
 // poner el autoLoad con el required
-require_once __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . "/../../vendor/autoload.php";
 $db = new My\Database();
 
 
@@ -11,8 +11,13 @@ $primerApellido=$_POST["cognom"];
 $segundoApellido=$_POST["cognom2"];
 $correoElectronico=$_POST["mail"];
 $pasword=$_POST["contraseña"];
+$role=2;
+$opcionesPasword = [
+    'cost' => 12,
+];
+$pasword=password_hash($pasword, PASSWORD_BCRYPT,$opcionesPasword);
 
-$sentencia=$connect->prepare("select * from '2daw.equip02'.user");
+$sentencia=$db->prepare("select * from users");
 $sentencia -> execute();
 
 foreach ($sentencia as $row)
@@ -21,19 +26,27 @@ foreach ($sentencia as $row)
         My\Helpers::flash("El correo electronico ya existe");
         $url=My\Helpers::url("/user/registrer.php");
     }else{
-        $sentencia=$connect->prepare("select id from '2daw.equip02'.user");
-        $sentencia -> execute();
-        $id=count($sentencia);
-        $id=$id +1;
-        $last_id = $conn->lastInsertId();
+        // $sentencia=$db->prepare("select id from users");
+        // $sentencia->execute();
+        // $id=count($sentencia);
+        // $id=$id +1;
         
+        // $dataCreacio=new DateTime();
+        $datetime = date('Y-m-d H:i:s');
+        
+
         $status=0;
-        $avatar=$_FILES['avatar'];
-        $insert=$connect()->prepare("insert into '2daw.equip02'.users(id,username,password,email) VALUES ('$last_id','$nombre','$pasword','$correoElectronico')");
+        // $avatar=$_FILES['avatar'];
+        
     }
     
 
 }
+
+$sql="insert into users(username,password,email,status,role_id, created,last_access) VALUES ('{$nombre}','{$pasword}','{$correoElectronico}',{$status},{$role},'{$datetime}','{$datetime}')";
+        $insert=$db->prepare($sql);
+        $insert ->execute();
+        $last_id = $db->lastInsertId();
 
 
 
