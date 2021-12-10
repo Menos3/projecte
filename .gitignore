@@ -3,7 +3,14 @@ composer
 composer.phar
 composer.lock
 config/database.php
+library/Database.php
+tests/DatabaseTest.php
 config/mail.php
 logs/app.log
+<<<<<<< HEAD
+web/chatapp/node_modules/*
+=======
 web/tickets/node_modules
 web/chatapp/node_modules
+uploads/*
+>>>>>>> master
