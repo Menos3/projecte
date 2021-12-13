@@ -55,6 +55,7 @@ $row = $stmt->fetch();
         <p>
             <button>Save changes</button>
             <button type="reset">Reset form</button>
+            <button type="></button>
         </p>
     </form>
     <?= My\Helpers::render("/_commons/footer.php") ?>

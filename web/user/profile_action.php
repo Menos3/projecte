@@ -119,7 +119,8 @@ if ($validation->fails()) {
         Helpers::flash("Compte actualitzat.");
 
         // Reset user activation token?
-        if ($email = $data["email"]) {            
+        if (isset($data["email"])) {
+            $email = $data["email"];            
             Helpers::log()->debug("Updating user activation token");
             $token = Token::generate();
             $type = Token::ACTIVATION;
