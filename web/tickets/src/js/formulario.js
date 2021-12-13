@@ -19,14 +19,22 @@ function listRefresh(list) {
     const newList = document.createElement('div');
     newList.setAttribute('id', 'lista');
     list.forEach(element => {
+        //creamos boton
+        let butInfo = document.createElement('button');
+        butInfo.setAttribute('class', 'lista__button');
+        butInfo.setAttribute('id', element.id);
+        butInfo.innerHTML = "Veure";
+        //creamos el div
         let line = document.createElement('div');
         line.setAttribute('class', 'lista__line');
+        line.setAttribute('id', element.id)
         line.innerHTML = `${element.id} 
         ${element.titulo}
         ${element.descripcion}
         ${element.assignedId}
         ${element.assetId}
         ${element.created}`;
+        line.appendChild(butInfo);
         newList.appendChild(line);
 
 
@@ -34,7 +42,29 @@ function listRefresh(list) {
     });
     document.body.append(newList);
 
+    document.querySelector("#lista").addEventListener("click",
+
+        (event) => {
+
+            console.log(event.target.parent.id)
+
+
+
+        }
+
+    )
+
 }
+
+// function ticketInformation(list) {
+//     var id = document.getElementById[id].value;
+//     console.log(id);
+//     id.addEventListener("click", event => {
+//         event.preventDefault();
+
+
+//     })
+// }
 
 function usersOptions() {
     const users = userList.usuaris;
@@ -112,6 +142,9 @@ export function creacionForm() {
     document.body.append(list);
     listRefresh(ticketList.getLocalStorage());
     onSubmit();
+
+
+
 
 
 }
