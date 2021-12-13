@@ -36,25 +36,31 @@ function listRefresh(list) {
         ${element.created}`;
         line.appendChild(butInfo);
         newList.appendChild(line);
-
-
-
     });
     document.body.append(newList);
+    infoTicket(list);
+}
 
-    document.querySelector("#lista").addEventListener("click",
+function infoTicket(list) {
+    console.log(list)
+    let listOld = document.querySelector('#lista');
+    listOld.addEventListener('click', event => {
+        console.log(event.target.parent.id);
+        listOld.style.display = 'none';
 
-        (event) => {
-
-            console.log(event.target.parent.id)
+    })
 
 
-
-        }
-
-    )
 
 }
+// document.querySelector("#lista").addEventListener("click",
+
+//     (event) => {
+
+//         console.log(event.target.parent.id)
+//     }
+
+// )
 
 // function ticketInformation(list) {
 //     var id = document.getElementById[id].value;
@@ -118,19 +124,19 @@ function onSubmit() {
 export function creacionForm() {
 
     var html = `<form action="" >
-<label for="titulo">Tittle</label>
-<input type="text" id='titulo' name="titulo">
-<label for="descripcion">Description</label>
-<input type="text" id='description' name="description">
-<select name="assignation" id="tec">
-    ${usersOptions()}
-</select>
-<select name="assets" id="assets">
-    ${assetsOptions()}
-</select>
-<button type="submit" id="addTicketButton">Crear Incidencia</button>
-<button type="reset" >Cancelar Incidencia</button>
-</form>
+            <label for="titulo">Tittle</label>
+            <input type="text" id='titulo' name="titulo">
+            <label for="descripcion">Description</label>
+            <input type="text" id='description' name="description">
+            <select name="assignation" id="tec">
+                ${usersOptions()}
+            </select>
+            <select name="assets" id="assets">
+                ${assetsOptions()}
+            </select>
+            <button type="submit" id="addTicketButton">Crear Incidencia</button>
+            <button type="reset" >Cancelar Incidencia</button>
+            </form>
 
 `
     let div = document.createElement('div');
@@ -148,6 +154,3 @@ export function creacionForm() {
 
 
 }
-//
-
-//poner toda la informacion en el ticket.
