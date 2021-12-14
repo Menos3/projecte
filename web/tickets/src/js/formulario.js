@@ -14,11 +14,18 @@ var ticketList = new ListTickets();
 //para que este actualizada
 function listRefresh(list) {
     console.log(list);
+    //la lista vieja
     let oldList = document.getElementById('lista');
     document.body.removeChild(oldList);
+    //la lista nueva
     const newList = document.createElement('div');
     newList.setAttribute('id', 'lista');
     list.forEach(element => {
+        let checkDelete = document.createElement('input');
+        checkDelete.setAttribute('class', 'lista__check');
+        checkDelete.setAttribute('id', element.id);
+        checkDelete.setAttribute('type', 'checkbox');
+
         //creamos boton
         let butInfo = document.createElement('button');
         butInfo.setAttribute('class', 'lista__button');
@@ -34,42 +41,18 @@ function listRefresh(list) {
         ${element.assignedId}
         ${element.assetId}
         ${element.created}`;
+        line.appendChild(checkDelete);
         line.appendChild(butInfo);
         newList.appendChild(line);
     });
     document.body.append(newList);
-    infoTicket(list);
-}
-
-function infoTicket(list) {
-    console.log(list)
-    let listOld = document.querySelector('#lista');
-    listOld.addEventListener('click', event => {
-        console.log(event.target.parent.id);
-        listOld.style.display = 'none';
-
-    })
-
-
 
 }
-// document.querySelector("#lista").addEventListener("click",
 
-//     (event) => {
-
-//         console.log(event.target.parent.id)
-//     }
-
-// )
-
-// function ticketInformation(list) {
-//     var id = document.getElementById[id].value;
-//     console.log(id);
-//     id.addEventListener("click", event => {
-//         event.preventDefault();
+// function checked() {
+//     var check = document.querySelector('input[type=checkbox]');
 
 
-//     })
 // }
 
 function usersOptions() {
@@ -91,8 +74,31 @@ function assetsOptions() {
     return option;
 }
 
-function onSubmit() {
+function ondelete(list) {
+    console.log('hola');
+    const chek = document.getElementsByClassName('lista__check');
+    console.log(chek);
+    list.forEach(element => {
+        element.chek == true;
+        console.log(element.chek)
 
+
+    });
+    // const butdelete = document.getElementById('deleteTicketButton');
+    // button.addEventListener("click", event => {
+    //     event.preventDefault();
+    //     list.forEach(element => {
+
+    //         console.log(element.ListTickets)
+
+    //     });
+
+
+
+    // })
+}
+
+function onSubmit() {
     const button = document.getElementById('addTicketButton');
     button.addEventListener("click", event => {
         event.preventDefault();
@@ -115,11 +121,13 @@ function onSubmit() {
         console.log(ticketList.getLocalStorage);
 
         console.log(ticket);
+
         listRefresh(ticketList.getLocalStorage());
 
 
     })
 }
+
 
 export function creacionForm() {
 
@@ -136,6 +144,7 @@ export function creacionForm() {
             </select>
             <button type="submit" id="addTicketButton">Crear Incidencia</button>
             <button type="reset" >Cancelar Incidencia</button>
+            <button type="submit" id="deleteTicketButton">Borrar tickets Selecionados</button>
             </form>
 
 `
@@ -147,10 +156,38 @@ export function creacionForm() {
     list.setAttribute('id', 'lista');
     document.body.append(list);
     listRefresh(ticketList.getLocalStorage());
+    //llamamos a la funcion del checked
+    ondelete(ticketList.getLocalStorage());
     onSubmit();
 
-
-
-
-
 }
+// function infoTicket(list) {
+//     console.log(list)
+//     let listOld = document.querySelector('#lista');
+//     listOld.addEventListener('click', event => {
+//         console.log(event.target.parent.id);
+//         listOld.style.display = 'none';
+
+//     })
+
+
+
+// }
+// document.querySelector("#lista").addEventListener("click",
+
+//     (event) => {
+
+//         console.log(event.target.parent.id)
+//     }
+
+// )
+
+// function ticketInformation(list) {
+//     var id = document.getElementById[id].value;
+//     console.log(id);
+//     id.addEventListener("click", event => {
+//         event.preventDefault();
+
+
+//     })
+// }
