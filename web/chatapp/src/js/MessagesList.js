@@ -11,7 +11,7 @@ export class MessagesList {
     }
 
     autoIncrementId() {
-        let id = this.messageList.length > 0 ? this.messageList.at(-1).id ? 0;
+        let id = this.messageList.length > 0 ? this.messageList.at(-1).id : 0;
 		return id;
     }
 
