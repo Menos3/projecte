@@ -1,11 +1,10 @@
 export class Usuari {
-    user_id;
-    username;
-    role_id;
-    constructor(user_id, username, role_id) {
-        this.user_id = user_id;
-        this.username = username;
-        this.role_id = role_id;
-    }
 
+    constructor(id_usuari, username, password, id_role) {
+        
+        this.id_usuari = id_usuari;
+        this.username = username;
+		this.password = password;
+        this.id_role = id_role;
+    }
 }
