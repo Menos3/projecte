@@ -131,7 +131,7 @@ function onSubmit() {
 
 export function creacionForm() {
 
-    var html = `<form action="" >
+    var html = `<form action="" class="" >
             <label for="titulo">Tittle</label>
             <input type="text" id='titulo' name="titulo">
             <label for="descripcion">Description</label>
