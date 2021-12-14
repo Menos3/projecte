@@ -26,36 +26,36 @@ $row = $stmt->fetch();
     <?= My\Helpers::render("/_commons/header.php") ?>
     <h2>Profile</h2>
     <p>Edit account settings.</p>
-    <form name="profile" action="<?= My\Helpers::url("/user/profile_action.php") ?>" method="post" enctype="multipart/form-data">
-        <p>
-            <label>Username</label><br>
-            <input type="text" name="username" value="<?= $row["username"] ?>" readonly required>
-        </p>
-        <p>
-            <label>Password</label><br>
-            <input type="password" name="password">
-        </p>
-        <p>
-            <label>Repeat password</label><br>
-            <input type="password" name="confirm_password">
-        </p>
-        <p>
-            <label>E-mail</label><br>
-            <input type="email" name="email" value="<?= $row["email"] ?>" required>
-        </p>
-        <p>
-            <label>Image</label><br>
-            <input type="file" name="avatar" value="<?= $row["avatar"] ?>">
-        </p>
+    <form name="profile" class="profile" action="<?= My\Helpers::url("/user/profile_action.php") ?>" method="post" enctype="multipart/form-data">
         <?php if (!empty($row["avatar"])): ?>
-        <p>
+        
             <img src="<?= Helpers::url($row["avatar"]) ?>" height="50px"/>
         </p>
         <?php endif; ?>
         <p>
-            <button>Save changes</button>
-            <button type="reset">Reset form</button>
-            <button type="></button>
+            <label>Username</label><br>
+            <input class="form-control form-control-sm" type="text" name="username" value="<?= $row["username"] ?>" readonly required>
+        </p>
+        <p>
+            <label>Password</label><br>
+            <input class="form-control form-control-sm" type="password" name="password">
+        </p>
+        <p>
+            <label>Repeat password</label><br>
+            <input class="form-control form-control-sm" type="password" name="confirm_password">
+        </p>
+        <p>
+            <label>E-mail</label><br>
+            <input class="form-control form-control-sm" type="email" name="email" value="<?= $row["email"] ?>" required>
+        </p>
+        <p>
+            <label>Image</label><br>
+            <input class="form-control form-control-sm" type="file" name="avatar" value="<?= $row["avatar"] ?>">
+        </p>
+        <p>
+            <button class="btn btn-success">Save changes</button>
+            <button  class="btn btn-danger" type="reset">Reset form</button>
+            
         </p>
     </form>
     <?= My\Helpers::render("/_commons/footer.php") ?>
