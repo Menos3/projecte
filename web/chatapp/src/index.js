@@ -84,7 +84,7 @@ function enviarMensaje() {
             if(listaGrupos[grup].name == nombreGrupo) {
 
                 //AUTHOR_ID CORRESPONDIENTE AL PRIMER ELEMENTO DEL ARRAY DE USUARIOS (NO SE QUE USUARIO HACE ESTO)
-                var mensaje = new Messages(listaGrupos.autoIncrementId(), listaUsuarios[0].id_usuari, cuerpoMensaje, fechaActual(), pubpriv, listaGrupos[grup].id);
+                var mensaje = new Messages(listaGrupos.autoIncrementId() + 1, listaUsuarios[0].id_usuari, cuerpoMensaje, fechaActual(), pubpriv, listaGrupos[grup].id);
 
                 //CARGAR ARRAY DE MENSAJES E INSERTAR EL MENSAJE CREADO
                 let listaMensajes = new MessagesList();
@@ -108,7 +108,7 @@ function enviarMensaje() {
             if(listaUsuarios[user].username == destinatario) {
     
                 //AUTHOR_ID CORRESPONDIENTE AL PRIMER ELEMENTO DEL ARRAY DE USUARIOS (NO SE QUE USUARIO HACE ESTO)
-                let mensaje = new Messages(listaMensajes.autoIncrementId(), listaUsuarios[0].id_usuari, cuerpoMensaje, fechaActual(), pubpriv, listaUsuarios[user].id_usuari);
+                let mensaje = new Messages(listaMensajes.autoIncrementId() + 1, listaUsuarios[0].id_usuari, cuerpoMensaje, fechaActual(), pubpriv, listaUsuarios[user].id_usuari);
 
                 //CARGAR ARRAY DE MENSAJES E INSERTAR EL MENSAJE CREADO
                 let listaMensajes = new MessagesList();
