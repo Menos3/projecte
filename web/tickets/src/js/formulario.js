@@ -20,40 +20,39 @@ function listRefresh(list) {
     //la lista nueva
     const newList = document.createElement('div');
     newList.setAttribute('id', 'lista');
+    //crearmela tabla
+    //añadir a cada elemento a un th
     list.forEach(element => {
         let checkDelete = document.createElement('input');
-        checkDelete.setAttribute('class', 'lista__check');
-        checkDelete.setAttribute('id', element.id);
         checkDelete.setAttribute('type', 'checkbox');
-
-        //creamos boton
+        checkDelete.setAttribute('class', 'lista__check');
+        checkDelete.setAttribute('id', 'check' + element.id);
+        checkDelete.checked = element.isDeleted;
+        checkDelete.addEventListener('click', event => {
+                ticketList.updateTicket(element.id, checkDelete.checked);
+            })
+            //creamos botoninfo
         let butInfo = document.createElement('button');
         butInfo.setAttribute('class', 'lista__button');
-        butInfo.setAttribute('id', element.id);
+        butInfo.setAttribute('id', 'butInfo' + element.id);
         butInfo.innerHTML = "Veure";
         //creamos el div
         let line = document.createElement('div');
         line.setAttribute('class', 'lista__line');
-        line.setAttribute('id', element.id)
+        line.setAttribute('id', 'line' + element.id);
         line.innerHTML = `${element.id} 
         ${element.titulo}
         ${element.descripcion}
         ${element.assignedId}
         ${element.assetId}
-        ${element.created}`;
+        ${element.created}
+        `;
         line.appendChild(checkDelete);
         line.appendChild(butInfo);
         newList.appendChild(line);
     });
     document.body.append(newList);
-
 }
-
-// function checked() {
-//     var check = document.querySelector('input[type=checkbox]');
-
-
-// }
 
 function usersOptions() {
     const users = userList.usuaris;
@@ -74,28 +73,16 @@ function assetsOptions() {
     return option;
 }
 
-function ondelete(list) {
-    console.log('hola');
-    const chek = document.getElementsByClassName('lista__check');
-    console.log(chek);
-    list.forEach(element => {
-        element.chek == true;
-        console.log(element.chek)
-
-
-    });
-    // const butdelete = document.getElementById('deleteTicketButton');
-    // button.addEventListener("click", event => {
-    //     event.preventDefault();
-    //     list.forEach(element => {
-
-    //         console.log(element.ListTickets)
-
-    //     });
-
-
-
-    // })
+function pendingTicket() {
+    let butpending = document.getElementById('pendientes');
+    butpending.addEventListener('click', event => {
+        event.preventDefault();
+        let lista = ticketList.getLocalStorage();
+        let filteredList = lista.filter(element => {
+            return element.isDeleted == false;
+        })
+        listRefresh(filteredList);
+    })
 }
 
 function onSubmit() {
@@ -123,8 +110,6 @@ function onSubmit() {
         console.log(ticket);
 
         listRefresh(ticketList.getLocalStorage());
-
-
     })
 }
 
@@ -144,50 +129,20 @@ export function creacionForm() {
             </select>
             <button type="submit" id="addTicketButton">Crear Incidencia</button>
             <button type="reset" >Cancelar Incidencia</button>
-            <button type="submit" id="deleteTicketButton">Borrar tickets Selecionados</button>
+            <button type="submit" id="pendientes">Borrar tickets Selecionados</button>
             </form>
-
 `
     let div = document.createElement('div');
     div.innerHTML = html;
     document.body.append(div);
 
-    let list = document.createElement('div');
-    list.setAttribute('id', 'lista');
-    document.body.append(list);
+    let listContainer = document.createElement('div');
+    listContainer.setAttribute('id', 'lista');
+    document.body.append(listContainer);
     listRefresh(ticketList.getLocalStorage());
+    //capturamos el contenido
+    var lista = document.getElementById('lista').childNodes;
     //llamamos a la funcion del checked
-    ondelete(ticketList.getLocalStorage());
+    pendingTicket();
     onSubmit();
-
 }
-// function infoTicket(list) {
-//     console.log(list)
-//     let listOld = document.querySelector('#lista');
-//     listOld.addEventListener('click', event => {
-//         console.log(event.target.parent.id);
-//         listOld.style.display = 'none';
-
-//     })
-
-
-
-// }
-// document.querySelector("#lista").addEventListener("click",
-
-//     (event) => {
-
-//         console.log(event.target.parent.id)
-//     }
-
-// )
-
-// function ticketInformation(list) {
-//     var id = document.getElementById[id].value;
-//     console.log(id);
-//     id.addEventListener("click", event => {
-//         event.preventDefault();
-
-
-//     })
-// }

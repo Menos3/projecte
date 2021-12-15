@@ -1,4 +1,3 @@
-import { ListTickets } from "./ListTickets";
 export class Tickets {
     constructor(props) {
         //que solo reciba un objecto en vez de los 5 argumentos
@@ -11,6 +10,7 @@ export class Tickets {
         this.assetId = assetId;
         //esto lo coge del metodo del constructor: nose pasa por props.
         this.created = this.getDate();
+        this.isDeleted = false;
         // this.actualizado = this.getDate();
     }
     getDate() {
@@ -44,5 +44,22 @@ export class ListTickets {
 
         return id;
     }
+    updateTicket(id, value) {
+        this.tickets.forEach(element => {
+            if (element.id == id) {
+                element.isDeleted = value;
+                console.log('funciona');
+                //se hace cuando no va persistir nada.
+                // element.isDeleted = !element.isDeleted;
+
+            }
+
+        });
+        console.log('hasta aqui')
+        this.setLocalStorage();
+        console.log('esta guardado')
+
+    }
+
 
 }
