@@ -18,7 +18,7 @@
         </p>
         <p>
             <label>
-                <input type="checkbox" name="remember">Remember me
+                <input type="checkbox" name="remember"> Remember me </input>
             </label>
         </p>
         <p>

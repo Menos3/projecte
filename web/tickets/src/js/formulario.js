@@ -17,6 +17,27 @@ function listRefresh(list) {
     //la lista vieja
     let oldList = document.getElementById('lista');
     document.body.removeChild(oldList);
+    //div  del titulo
+    let divCabecera = document.createElement('div');
+
+    //divs de los titulos
+    let divId = document.createElement('div');
+    divId.innerHTML = 'ID';
+
+    let divDescription = document.createElement('div');
+    divDescription.innerHTML = 'Descripció';
+    let divAssignacio = document.createElement('div');
+    divAssignacio.innerHTML = 'Assignació';
+
+    let divComponent = document.createElement('div');
+    divComponent.innerHTML = 'Component';
+    let divCreacio = document.createElement('div');
+    divCreacio.innerHTML = 'Creació';
+    let divFet = document.createElement('div');
+    divFet.innerHTML = 'Fet';
+    let divVeure = document.createElement('div');
+    divVeure.innerHTML = 'Veure';
+
     //la lista nueva
     const newList = document.createElement('div');
     newList.setAttribute('id', 'lista');
@@ -51,6 +72,8 @@ function listRefresh(list) {
         line.appendChild(butInfo);
         newList.appendChild(line);
     });
+    divCabecera.appendChild(divId);
+    document.body.appendChild(divCabecera);
     document.body.append(newList);
 }
 

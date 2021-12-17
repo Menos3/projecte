@@ -13,6 +13,11 @@ class User{
         
         return $_COOKIE[COOKIE_NAME];
     }
+    public static function isAuthenticated():bool{
+            if(isset($_COOKIE[COOKIE_NAME])){
+                return true;
+            }else{return false;}
+    }
 }
 
 ?>
