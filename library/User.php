@@ -5,16 +5,16 @@ class User{
     const COOKIE_NAME='session_token';
     public static function getId(): int
     {   
-        session_start();
+        // session_start();
         return $_SESSION['uid'];
 
     }
     public static function getToken():string{
         
-        return $_COOKIE[COOKIE_NAME];
+        return $_COOKIE[self::COOKIE_NAME];
     }
     public static function isAuthenticated():bool{
-            if(isset($_COOKIE[COOKIE_NAME])){
+            if(isset($_COOKIE[self::COOKIE_NAME])){
                 return true;
             }else{return false;}
     }
