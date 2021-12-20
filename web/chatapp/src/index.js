@@ -18,7 +18,7 @@ cbPrivado.addEventListener("change", () => {ocultacionDiv()});
 cbPublic.addEventListener("change", () => {ocultacionDiv()});
 
 //EVENTLISTENER DE LOS BOTONES
-btEnviar.addEventListener("click", () => {enviarMensaje()});
+btEnviar.addEventListener("click", (event) => {enviarMensaje(event)});
 
 //FUNCION DE OCULTAR LOS DIV EN FUNCION DE LOS CHECKBOX MARCADOS
 function ocultacionDiv() {
@@ -64,11 +64,12 @@ function fechaActual() {
 }
 
 //FUNCION DE GUARDAR EL MENSAJE
-function enviarMensaje() {
+function enviarMensaje(event) {
 
+
+    event.preventDefault()
     var pubpriv;
     var cuerpoMensaje = taMensaje.value;
-    let listaUsuarios = new UsuarisList();
 
     //SE EJECUTA CUANDO EL CHECKBOX PUBLIC ES SELECCIONADO
     if(cbPublic.checked) {
@@ -79,9 +80,9 @@ function enviarMensaje() {
         let listaGrupos = new GrupList();
 
         //POR CADA GRUPO EN EL ARRAY, SI EL NOMBRE DE GRUPO INTRODUCIDO COINCIDE CON UNO DEL ARRAY
-        listaGrupos.forEach(grup => {
+        Array.from(listaGrupos).forEach(grup => {
 
-            if(listaGrupos[grup].name == nombreGrupo) {
+            if(listaGrupos[grup].name === nombreGrupo) {
 
                 //AUTHOR_ID CORRESPONDIENTE AL PRIMER ELEMENTO DEL ARRAY DE USUARIOS (NO SE QUE USUARIO HACE ESTO)
                 var mensaje = new Messages(listaGrupos.autoIncrementId() + 1, listaUsuarios[0].id_usuari, cuerpoMensaje, fechaActual(), pubpriv, listaGrupos[grup].id);
@@ -91,6 +92,10 @@ function enviarMensaje() {
                 listaMensajes.addMessage(mensaje);
 
                 alert("Missatge enviat!!");
+                
+            } else {
+
+                alert("El grupo introducido no es correcto");
             }
 
         });
@@ -99,15 +104,19 @@ function enviarMensaje() {
     //SE EJECUTA CUANDO EL CHECKBOX PRIVADO ES SELECCIONADO
     if(cbPrivado.checked) {
 
-        var destinatario = tfUsuario.value;
+        console.log("sopa")
+        let destinatario = tfUsuario.value;
         pubpriv = cbPrivado.value;
+        let listaUsuarios = new UsuarisList();
+        console.log(listaUsuarios)
 
         //POR CADA USUARIO EN EL ARRAY, SI EL USERNAME INTRODUCIDO COINCIDE CON UNO DEL ARRAY
-        listaUsuarios.forEach(user => {
+        for(let x of listaUsuarios.usuaris) {
 
-            if(listaUsuarios[user].username == destinatario) {
+            if(x.username === destinatario) {
     
-                //AUTHOR_ID CORRESPONDIENTE AL PRIMER ELEMENTO DEL ARRAY DE USUARIOS (NO SE QUE USUARIO HACE ESTO)
+                alert("Hola");
+                //AUTHOR_ID CORRESPONDIENTE AL PRIMER ELEMENTO DEL ARRAY DE USUARIOS
                 let mensaje = new Messages(listaMensajes.autoIncrementId() + 1, listaUsuarios[0].id_usuari, cuerpoMensaje, fechaActual(), pubpriv, listaUsuarios[user].id_usuari);
 
                 //CARGAR ARRAY DE MENSAJES E INSERTAR EL MENSAJE CREADO
@@ -115,9 +124,12 @@ function enviarMensaje() {
                 listaMensajes.addMessage(mensaje);
 
                 alert("Missatge enviat!!");
+
+            } else {
+
+                alert("El usuario introducido no existe");
             }
 
-        });
+        }
     }
-
 }

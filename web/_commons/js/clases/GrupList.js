@@ -11,7 +11,8 @@ export class GrupList {
     }
 
     autoIncrementId() {
-        return this.grupsList.at(-1) +1;
+        let id = this.grupsList.length > 0 ? this.grupsList.at(-1).id : 0;
+		return id;
     }
 
     guardarLocalStorage() {
