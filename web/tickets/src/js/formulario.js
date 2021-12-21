@@ -17,8 +17,13 @@ function listRefresh(list) {
     //la lista vieja
     let oldList = document.getElementById('lista');
     document.body.removeChild(oldList);
+
+    let oldDivCabecera = document.getElementById('cabecera');
+    document.body.removeChild(oldDivCabecera);
     //div  del titulo
     let divCabecera = document.createElement('div');
+    divCabecera.setAttribute('id', 'cabecera');
+    divCabecera.setAttribute('class', 'divCabecera');
 
     //divs de los titulos
     let divId = document.createElement('div');
@@ -44,20 +49,32 @@ function listRefresh(list) {
     //crearmela tabla
     //añadir a cada elemento a un th
     list.forEach(element => {
-        let checkDelete = document.createElement('input');
-        checkDelete.setAttribute('type', 'checkbox');
-        checkDelete.setAttribute('class', 'lista__check');
-        checkDelete.setAttribute('id', 'check' + element.id);
-        checkDelete.checked = element.isDeleted;
-        checkDelete.addEventListener('click', event => {
-                ticketList.updateTicket(element.id, checkDelete.checked);
+        let checkMostra = document.createElement('input');
+        checkMostra.setAttribute('type', 'checkbox');
+        checkMostra.setAttribute('class', 'lista__check');
+
+        checkMostra.setAttribute('id', 'check' + element.id);
+        checkMostra.checked = element.isDeleted;
+        checkMostra.addEventListener('click', event => {
+                ticketList.updateTicket(element.id, checkMostra.checked);
             })
             //creamos botoninfo
         let butInfo = document.createElement('button');
-        butInfo.setAttribute('class', 'lista__button');
+        butInfo.setAttribute('class', "btn btn-info");
         butInfo.setAttribute('id', 'butInfo' + element.id);
         butInfo.innerHTML = "Veure";
-        //creamos el div
+
+        let butBorrar = document.createElement('button');
+        butBorrar.setAttribute('class', "btn btn-danger");
+        butBorrar.setAttribute('id', 'Borrar' + element.id);
+        butBorrar.innerHTML = "borrar";
+        butBorrar.addEventListener('click', event => {
+                deleteTicket(element.id);
+
+
+            })
+            //crear un addEventlistenner para este boton.
+            //creamos el div
         let line = document.createElement('div');
         line.setAttribute('class', 'lista__line');
         line.setAttribute('id', 'line' + element.id);
@@ -68,13 +85,28 @@ function listRefresh(list) {
         ${element.assetId}
         ${element.created}
         `;
-        line.appendChild(checkDelete);
+        line.appendChild(checkMostra);
         line.appendChild(butInfo);
+        line.appendChild(butBorrar);
         newList.appendChild(line);
     });
+
+
     divCabecera.appendChild(divId);
+    divCabecera.appendChild(divDescription);
+    divCabecera.appendChild(divAssignacio);
+    divCabecera.appendChild(divComponent);
+
+    divCabecera.appendChild(divCreacio);
+    divCabecera.appendChild(divFet);
     document.body.appendChild(divCabecera);
     document.body.append(newList);
+}
+
+function deleteTicket(list) {
+
+
+
 }
 
 function usersOptions() {
@@ -139,30 +171,45 @@ function onSubmit() {
 
 export function creacionForm() {
 
-    var html = `<form action="" class="" >
-            <label for="titulo">Tittle</label>
-            <input type="text" id='titulo' name="titulo">
-            <label for="descripcion">Description</label>
-            <input type="text" id='description' name="description">
-            <select name="assignation" id="tec">
-                ${usersOptions()}
-            </select>
-            <select name="assets" id="assets">
-                ${assetsOptions()}
-            </select>
-            <button type="submit" id="addTicketButton">Crear Incidencia</button>
-            <button type="reset" >Cancelar Incidencia</button>
-            <button type="submit" id="pendientes">Borrar tickets Selecionados</button>
-            </form>
+    var html = `
+    <div >
+        <div> <p>Incidències</p></div>
+        <form action="" class="form-horizontal" >
+            <div class="form-group">
+                <label for="titulo">Tittle</label>
+                <input  class="form-control" type="text" id='titulo' name="titulo">
+                <label for="descripcion">Description</label>
+                <input class="form-control" type="text" id='description' name="description">
+                <label> Tècnic</label>
+                <select class="form-control" name="assignation" id="tec">
+                    ${usersOptions()}
+                </select>
+                <label>Component Incidència</label>
+                <select  class="form-control" name="assets" id="assets">
+                    ${assetsOptions()}
+                </select>
+                <button class="btn btn-success" type="submit" id="addTicketButton">Crear Incidencia</button>
+                <button class="btn btn-danger" type="reset" >Cancelar Incidencia</button>
+                <button  class="btn btn-primary" type="submit" id="pendientes">Mostrar solamente tareas pendientes.</button>
+            </div>
+        </form>
+    </div>
+
 `
     let div = document.createElement('div');
     div.innerHTML = html;
     document.body.append(div);
 
+    let containerCabecera = document.createElement('div');
+    containerCabecera.setAttribute('id', 'cabecera');
+    document.body.append(containerCabecera);
+
     let listContainer = document.createElement('div');
     listContainer.setAttribute('id', 'lista');
     document.body.append(listContainer);
     listRefresh(ticketList.getLocalStorage());
+
+
     //capturamos el contenido
     var lista = document.getElementById('lista').childNodes;
     //llamamos a la funcion del checked
