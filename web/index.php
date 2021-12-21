@@ -9,7 +9,6 @@
 <?= My\Helpers::render("/_commons/head.php") ?>
 <body>
 <img class="imagen" src="/_commons/img/logo.png " alt=" ">
-   <?php My\Helpers::flash("Required name is empty");?>
    <?= My\Helpers::render("/_commons/header.php") ?>
    <img class="perfil" src="/_commons/img/perfil-del-usuario.png" alt=" ">
     <aside>
