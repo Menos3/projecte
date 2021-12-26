@@ -25,7 +25,7 @@ $row = $stmt->fetch();
 <body>
     <?= My\Helpers::render("/_commons/header.php") ?>
     <h2>Profile</h2>
-    <div>
+    <div class="logout">
         <a href="<?=My\Helpers::url("/user/logout_action.php") ?>"><img src="https://www.pngitem.com/pimgs/m/312-3120816_logout-icon-png-transparent-png.png" alt="logout"></a>
     </div>
     <p>Edit account settings.</p>
