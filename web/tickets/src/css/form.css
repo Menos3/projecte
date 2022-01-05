@@ -1,0 +1,38 @@
+.lista__line {
+    width: 400px;
+    border-color: deepskyblue;
+}
+#cabecera{
+    border:1px solid black;
+    width: 600px;
+    display: flex;
+    justify-content: space-between;
+}
+#lista{
+    border:1px solid black;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+
+}
+.lista__line{
+    border:1px solid black;
+    width:100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+}
+.line__info{
+    width: 50px;
+    border:1px solid red;
+    margin: 0%;
+
+}
+/*Modificadores  */
+.line--pequeños{
+    width: 30px;
+}
+body {
+    background-color: antiquewhite;
+}
