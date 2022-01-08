@@ -22,4 +22,10 @@ export class MessagesList {
     cargarLocalStorage() {
         this.messageList = (localStorage.getItem('messages')) ? JSON.parse(localStorage.getItem('messages')) : [];
     }
+
+    deleteMessage(message) {
+
+        this.messageList.splice(message.id, 1);
+        this.guardarLocalStorage();
+    }
 }
