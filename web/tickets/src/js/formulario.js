@@ -109,70 +109,61 @@ function listRefresh(list) {
 function deleteButtonAction(id) {
     ticketList.deletedTicket(id);
     listRefresh(ticketList.getLocalStorage());   //list refresh
-    
-  
-    
 }
 
-    function usersOptions() {
-        const users = userList.usuaris;
-        let option = "";
-        for (let i of users) {
-            option += `<option value =${i.id_usuari}> ${i.username} </option>`;
-        }
-        return option;
+function usersOptions() {
+    const users = userList.usuaris;
+    let option = "";
+    for (let i of users) {
+        option += `<option value =${i.id_usuari}> ${i.username} </option>`;
     }
-
-    function assetsOptions() {
-        var assets = listAsset.assets;
-        let option = "";
-        for (let i of assets) {
-            option += `<option value =${i.id_asset}>${i.model}</option>`;
-
-        }
-        return option;
+    return option;
+}
+function assetsOptions() {
+    var assets = listAsset.assets;
+    let option = "";
+    for (let i of assets) {
+        option += `<option value =${i.id_asset}>${i.model}</option>`;
     }
-
-    function pendingTicket() {
-        let butpending = document.getElementById('pendientes');
-        butpending.addEventListener('click', event => {
-            event.preventDefault();
-            let lista = ticketList.getLocalStorage();
-            let filteredList = lista.filter(element => {
-                return element.isDone == false;
-            })
-            listRefresh(filteredList);
+    return option;
+}
+function pendingTicket() {
+    let butpending = document.getElementById('pendientes');
+    butpending.addEventListener('click', event => {
+        event.preventDefault();
+        let lista = ticketList.getLocalStorage();
+        let filteredList = lista.filter(element => {
+            return element.isDone == false;
         })
-    }
+        listRefresh(filteredList);
+    })
+}
 
-    function onSubmit() {
-        const button = document.getElementById('addTicketButton');
-        button.addEventListener("click", event => {
-            event.preventDefault();
-            //ya sabe el id que le voy a dar
-            let ticketId = ticketList.getLastId() + 1;
-            let ticketName = document.getElementById('titulo').value;
-            let ticketDesc = document.getElementById('description').value;
-            let ticketAssigned = document.getElementById('tec').value;
-            let ticketAsset = document.getElementById('assets').value;
-            const values = {
-                //ticketId: ticketId,
-                id: ticketId,
-                titulo: ticketName,
-                descripcion: ticketDesc,
-                assignedId: ticketAssigned,
-                assetId: ticketAsset
-            }
-            var ticket = new Tickets(values);
-            ticketList.postTicket(ticket);
-            console.log(ticketList.getLocalStorage);
-
-            console.log(ticket);
-
-            listRefresh(ticketList.getLocalStorage());
-        })
-    }
-
+function onSubmit() {
+    const button = document.getElementById('addTicketButton');
+    button.addEventListener("click", event => {
+        event.preventDefault();
+        //ya sabe el id que le voy a dar
+        let ticketId = ticketList.getLastId() + 1;
+        let ticketName = document.getElementById('titulo').value;
+        let ticketDesc = document.getElementById('description').value;
+        let ticketAssigned = document.getElementById('tec').value;
+        let ticketAsset = document.getElementById('assets').value;
+        const values = {
+            //ticketId: ticketId,
+            id: ticketId,
+            titulo: ticketName,
+            descripcion: ticketDesc,
+            assignedId: ticketAssigned,
+            assetId: ticketAsset
+        }
+        var ticket = new Tickets(values);
+        ticketList.postTicket(ticket);
+        console.log(ticketList.getLocalStorage);
+        console.log(ticket);
+        listRefresh(ticketList.getLocalStorage());
+    })
+}
 
 
 export function creacionForm() {
