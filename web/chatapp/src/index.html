@@ -9,8 +9,14 @@
     </head>
 
     <body>
+        <button type="button" id = "btFormCrearMensaje">Crear Missatges</button>
+        <button type="button" id = "btFormCrearGrupo">Crear Grups</button>
+        <button type="button" id = "btFormMostrarMensajes">Mostrar Missatges</button>
+        <br><br>
 
-        <form name="form">
+        <!--CONTENEDOR DE CREAR MENSAJES-->
+        <div name ="crearMensajes" id="crearMensajes">
+        <form name="formMensajes">
 
             <div class="containerPublic" id = "containerPublic">
                 <label><input type="checkbox" id = "cbPublic" value="public">Public</label>
@@ -40,6 +46,27 @@
             </div>
 
         </form>
+        </div>
+
+        <!--CONTENEDOR DE CREAR GRUPOS-->
+        <div name="crearGrupos" id="crearGrupos">
+
+            <form name="formGrupos">
+                <div name="containerGrupo" id="containerGrupo">
+    
+                    <p>Introdueixi el nom del grup que vol crear:</p>
+                    <input type="text" id="tfNombreGrupo"/>
+                    <button type="submit" id="btCrearGrupo">Crear Grup</button>
+                    <button type="reset" id="btCancelarGrupo">Cancelar</button>
+    
+                </div>
+            </form>
+        </div>
+
+        <!--CONTENEDOR DE MOSTRARS MENSAJES-->
+        <div name="mostrarMensajes" id="mostrarMensajes">
+
+        </div>
 
     </body>
 

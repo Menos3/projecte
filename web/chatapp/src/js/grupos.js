@@ -3,13 +3,13 @@ import {GrupList} from "/xampp/htdocs/projecte/web/_commons/js/clases/GrupList"
 
 //COMPONENTES DEL FORMULARIO
 let tfNom = document.getElementById("tfNom");
-let btCrear = document.getElementById("btCrear");
+let btCrearGrupo = document.getElementById("btCrear");
 
 //EVENTLISTENER DEL BOTON
-btCrear.addEventListener("click", (event) => {crearGrupo(event)});
+btCrearGrupo.addEventListener("click", (event) => {crearGrupo(event)});
 
 //FUNCION DE CREAR EL GRUPO
-function crearGrupo(event) {
+export function crearGrupo(event) {
 
     event.preventDefault();
     var nombreGrupo = tfNom.value();
