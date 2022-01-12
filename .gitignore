@@ -1,0 +1,14 @@
+vendor
+composer
+composer.phar
+composer.lock
+config/database.php
+library/Database.php
+tests/DatabaseTest.php
+config/mail.php
+logs/app.log
+nodejs/chatapp/node_modules/*
+nodejs/tickets/node_modules
+nodejs/chatapp/node_modules
+uploads/*
+
