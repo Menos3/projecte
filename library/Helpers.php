@@ -36,7 +36,7 @@ public static function url(string $path, bool $ssl = false): string
    }
    public static function redirect(string $url) : string 
    {
-       ob_flush(); // use ob_clean() instead to discard previous output       
+       ob_clean(); // use ob_clean() instead to discard previous output       
        header("Location: {$url}");
        exit();
    }

@@ -1,6 +1,9 @@
-import { ListTickets } from "./js/ListTickets";
+import { creacionForm } from "./js/formulario";
+import { veureTicket } from "./js/formulario";
+import "./bootstrap.min.css";
+import "./css/form.css";
 
-import header from "../../projecte/web/_common/html/header.php";
-let div = document.createElement('div');
-div.innerHTML = header
-document.body.append(div);
+creacionForm();
+veureTicket(id);
+
+

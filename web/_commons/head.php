@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="<?= My\Helpers::url("/_commons/css/styles.css") ?>">
 <link rel="stylesheet" href="<?= My\Helpers::url("/_commons/css/componentes.css") ?>">
 <link rel="stylesheet" href="<?= My\Helpers::url("/_commons/css/registro.css") ?>">
+<link rel="stylesheet" href="<?= My\Helpers::url("/_commons/css/profile.css") ?>">
 
 
 <link rel="stylesheet" href="<?= My\Helpers::url("/_commons/css/profile.css") ?>">

@@ -1,108 +1,165 @@
 <?php
-require_once __DIR__ . "/../../vendor/autoload.php";
-require_once __DIR__ . "/../../config/database.php";
-// $db=new My\Database();
-// $db->open();
-use My\Mail;
-use Rakit\Validation\Validator;
 
-$validator = new Validator;
+require_once __DIR__ . "/../../vendor/autoload.php";
+
+use Rakit\Validation\Validator;
+use PHPMailer\PHPMailer\Exception as PHPMailerException;
+use My\Helpers;
+use My\Database;
+use My\Mail;
+use My\Token;
+
+$url = Helpers::url("/user/profile.php");
+
+$validator = new Validator();
 
 $validation = $validator->make($_POST + $_FILES, [
-    'username' => 'required',
-    'email' =>  'required|email',
-    'passwordNew' => 'required|min:8|regex: /\d/',
-    'passwordRepit'   => 'same:passwordNew',
-    'avatar'   =>'uploaded_file:0,2Mb,jpg,png,gif,jpeg'
+    'email'                 => 'required|email',
+    'password'              => 'min:6|regex:/\d/',
+    'confirm_password'      => 'same:password',
+    'avatar'                => 'uploaded_file|max:2M|mimes:jpeg,png'
 ]);
+
 $validation->validate();
-if($validation->fails()){
-    $errors =$validation->errors();
-    echo "<pre>";
-    print_r ($errors->firstOfAll());
-    echo"</pre>";
-}
 
-else {
-    $query= new My\Database;
-    $query->open();
-
-    //imagen subir 
-    $sql = "SELECT MAX(id) FROM files";
-    $sentencia = $query->prepare($sql);
-    $sentencia->execute();
-    $last_id = $query->lastInsertId();
-   
-    if ( !empty($_FILES["avatar"]) ){
-        $image_array = $_FILES["avatar"];
-        $ruta = My\Helpers::upload($_FILES["avatar"],$_POST["username"]);
-        My\Helpers::log()->debug("ruta".$ruta);
-        $sql = "INSERT INTO files (filepath, filesize, uploaded) VALUES ('{$ruta}', '{$image_array["size"]}', now() )";
-        $sentencia = $query->prepare($sql);
-        $sentencia->execute();
-        $last_id = $query->lastInsertId();
-        My\Helpers::log()->debug($last_id);
+if ($validation->fails()) {
+    // See https://github.com/rakit/validation#working-with-error-message
+    $errors = $validation->errors();
+    $messages = $errors->all();
+    foreach ($messages as $message) {
+        Helpers::flash($message);
     }
 
-    
-    
-    $sql=$query->prepare( "SELECT * FROM users WHERE email ='{$_POST["email"]}'");
-    $sql->execute();
-    
+} else {
 
-    if($sql->rowCount()>0){
-        //Email no actualizado
-        //actualizar password y avatar
-        $passwordEncriptado=hash('sha256', '$_POST["passwordRepit"]');
-        $sql=$query->prepare("UPDATE users set password='{$passwordEncriptado}', avatar_id= '$last_id'");
-        $sql->execute();
-        My\Helpers::flash("cuenta actualizada");
-        $url=My\Helpers::url("/user/profile.php");
-        My\Helpers::redirect($url);
-    }
+    $uid = 1; // COOKIE / SESSION in next version!!!
+    $datetime = date('Y-m-d H:i:s');
 
-    else{      
+    try {
 
-        /* $sql=$query->prepare( "SELECT token FROM user_tokens WHERE user_id ='{$_POST["user_id"]}'");
-        $sql->execute();
-        $resultados =$sql->fetchAll(PDO::FETCH_OBJ); */
-        $passwordEncriptado=hash('sha256', '$_POST["passwordRepit"]');
-        $sql=$query->prepare("UPDATE users set email='{$_POST["email"]}',password='{$passwordEncriptado}', status=0, avatar_id='{$last_id}' WHERE id='{$_POST["user_id"]}'" );
-        $sql->execute();
-        //creacion del token
-        $bytes = random_bytes(20);
-        $token = bin2hex($bytes);
-        //insertar token
-        $sqltoken = "INSERT INTO user_tokens (token, 'type' ) VALUES ('$token', 'A')";
-        $url="http://localhost/projecte/web/user/profile.php";
-        $url .= '?token='.$token;
+        // Load user data from DB
+        Helpers::log()->debug("Get user '{$uid}' data");
+        $db = new Database();
+        $sql = "SELECT u.id, u.username, u.email, f.filepath as avatar
+                FROM users u
+                LEFT JOIN files f ON u.avatar_id=f.id
+                WHERE u.id=$uid";
+        Helpers::log()->debug("SQL: {$sql}");
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        $row = $stmt->fetch();
 
-        $correo=new My\Mail("NOTIFICACIÓ CANVI DE EMAIL",'El seu email ha sigut canviat amb exit. Fes click amb aquest enllaç: <a href="'.$url.'"></a>', false);
-        $email=[$_POST["email"]];
-        $enviado=$correo->send($email);
-        if($enviado){
-            My\Helpers::flash("enviado");
+        // Not editable
+        $username = $row["username"];
+
+        // Update data
+        $data = [
+            "last_access" => "'$datetime'"
+        ];
+
+        // Check repeated email
+        $emailChanged = $_POST["email"] != $row["email"];
+        $emailRepeated = false;
+
+        if ($emailChanged) {
+            $email = $_POST["email"];
+            Helpers::log()->debug("Check other users with email '{$email}'");
+            $sql = "SELECT COUNT(*) as count FROM users 
+                    WHERE id!=$uid AND email='$email'";
+            Helpers::log()->debug("SQL: {$sql}");
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $row = $stmt->fetch();
+            $emailRepeated = $row["count"] > 0;
         }
-        else{
-            My\Helpers::flash("este correo no EXISTE");
+
+        if ($emailRepeated) {
+            Helpers::log()->debug("Mail already exists");
+            Helpers::flash("El correu ja existeix i no s'ha modificat");
+        } else if ($emailChanged) {
+            Helpers::log()->debug("Email update");
+            $data["email"] = "'{$_POST["email"]}'";        
+        }
+
+        if (!empty($_POST["password"])) {
+            Helpers::log()->debug("Password update");
+            $data["password"] = "'" . hash("sha256", $_POST["password"]) . "'";
+        }
+
+        // Upload avatar and create file (optional)
+        if (!empty($_FILES["avatar"]["name"])) {
+            Helpers::log()->debug("Uploading file", $_FILES["avatar"]);
+            $filepath = $_FILES["avatar"]["tmp_name"];
+            $filepath = Helpers::upload($_FILES["avatar"], $username);
+            $filesize = $_FILES["avatar"]["size"];
+            $sql = "INSERT INTO files(filepath,filesize,uploaded) 
+                    VALUES ('$filepath',$filesize,'$datetime')";
+            Helpers::log()->debug("SQL: {$sql}");
+            $stmt = $db->prepare($sql);
+            $stmt->execute();
+            $fid = $db->lastInsertId();
+            Helpers::log()->debug("New file with id {$fid}");
+            Helpers::log()->debug("Avatar update");
+            $data["avatar_id"] = $fid;
         }
         
+        // Update user
+        Helpers::log()->debug("Updating user", $data);
+        foreach($data as $k => $v) {
+            $data[$k] = "{$k}={$v}";
+        }
+        $set = implode(", ", $data);
+        $sql = "UPDATE users 
+                SET $set 
+                WHERE id=$uid";
+        Helpers::log()->debug("SQL: {$sql}");
+        $stmt = $db->prepare($sql);
+        $stmt->execute();
+        Helpers::log()->debug("User with id {$uid} updated");
+        Helpers::flash("Compte actualitzat.");
+
+        // Reset user activation token?
+        if (isset($data["email"])) {
+            $email = $data["email"];            
+            Helpers::log()->debug("Updating user activation token");
+            $token = Token::generate();
+            $type = Token::ACTIVATION;
+            $sql = "INSERT INTO user_tokens 
+                    VALUES ($uid, '$token', '$type', '$datetime')";
+            Helpers::log()->debug("SQL: {$sql}");
+            $stmt = $db->prepare($sql);            
+            $stmt->execute();
+            Helpers::log()->debug("New user activation token {$token}");    
+
+            // Send activation mail
+            Helpers::log()->debug("Sending user activation mail");
+            $tokenUrl = Helpers::url("/user/register_action2.php") . "?token={$token}";
+            Helpers::log()->debug("Token URL: {$tokenUrl}");
+            $link = "<a href='{$tokenUrl}'>aquí</a>";
+            $mail = new Mail("Activar compte J-Suite",  "Fes click {$link} per activar el compte.");            
+            $send = $mail->send([$email]);
+            if ($send) {
+                Helpers::log()->debug("Send mail OK");
+                $url = Helpers::url("/"); // Go to home
+                Helpers::flash("Has de reactivar el teu compe. Consulta el correu.");
+            } else {
+                Helpers::log()->debug("Send mail ERR");
+                throw new PHPMailerException("Send method returns false.");
+            }
+        }
+
+        $db->close();
+        
+    } catch (PDOException $e) {
+        Helpers::log()->debug($e->getMessage());
+        Helpers::flash("No s'han pogut desar les dades. Prova-ho més tard.");
+    } catch (PHPMailerException $e) {
+        Helpers::log()->debug($e->getMessage());
+        Helpers::flash("No s'han pogut enviar el correu d'activació. Contacta amb l'administrador/a.");
+    } catch (Exception $e) {
+        Helpers::log()->debug($e->getMessage());
+        Helpers::flash("Hi hagut un error inesperat. Prova-ho més tard.");
     }
-    }
+}
 
-
-    
-
-
-    
-    // $sql=('INSERT into users (username, password, status, role_id,avatar_id, created, last_access ) VALUES ("{$_POST["username"]}","{$_POST["password"]}","{$_POST["status"]}",0,"{$_POST["avatar_id"]}","","")');
-    
-    // if
-    //en la select
-    // $query= execute();
-    // $result= $query->fetchAll(PDO::FETCH_OBJ);
-    // $database->prepare($sql);
-    // $data=PDOState->execute();
-
-
-?>
+Helpers::redirect($url);
