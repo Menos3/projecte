@@ -66,6 +66,9 @@ function listRefresh(list) {
         butInfo.setAttribute('class', "btn btn-info");
         butInfo.setAttribute('id', 'butInfo' + element.id);
         butInfo.innerHTML = "Veure";
+        butInfo.addEventListener('click', event => { 
+            veureTicket(element.id);
+        })
 
         let butBorrar = document.createElement('button');
         butBorrar.setAttribute('class', "btn btn-danger");
@@ -104,6 +107,17 @@ function listRefresh(list) {
     divCabecera.appendChild(divFet);
     document.body.appendChild(divCabecera);
     document.body.append(newList);
+}
+function filtersearch() { 
+    let buscador = document.getElementById('filtrar');
+    buscador.addEventListener('click', event => { 
+       
+        let mostrar = document.getElementById('textSearch');
+        mostrar.style.display = 'block';
+
+    })
+
+
 }
 
 function deleteButtonAction(id) {
@@ -165,12 +179,20 @@ function onSubmit() {
     })
 }
 
+function closeTicket(){ 
+    let cerrarTicket = document.getElementById('cerrarInfoTicket');
+    cerrarTicket.addEventListener('click', event => { 
+        var cabeceraOcultar = document.getElementById('infoTicket');
+        cabeceraOcultar.style.display = 'none';
+        
+    })
+}
 
 export function creacionForm() {
 
         var html = `
-        <div >
-            <div> <p>Incidències</p></div>
+        <div class='container'>
+            <div class='inci'> Incidències</div>
             <form action="" class="form-horizontal" >
                 <div class="form-group">
                     <label for="titulo">Tittle</label>
@@ -188,6 +210,12 @@ export function creacionForm() {
                     <button class="btn btn-success" type="submit" id="addTicketButton">Crear Incidencia</button>
                     <button class="btn btn-danger" type="reset" >Cancelar Incidencia</button>
                     <button  class="btn btn-primary" type="submit" id="pendientes">Mostrar solamente tareas pendientes.</button>
+                    <button class="btn btn-info" type="submit" id="mostrarIncidencias"> Mostrar lista de incidencias</button>
+                    <button class="btn btn-warning" type="submit" id="filtrar">Buscar</button>
+                    <div id= "buscador">
+                        <input class="form-control" type="text" id="textSearch" placeholder="escriu el que vols buscar"
+                        <button id='buttonSearch'> buscar</buscar>
+                    </div>
                 </div>
             </form>
         </div>
@@ -205,11 +233,41 @@ export function creacionForm() {
         listContainer.setAttribute('id', 'lista');
         document.body.append(listContainer);
         listRefresh(ticketList.getLocalStorage());
-    
-    
+         
+        let mostrar = document.getElementById('textSearch');
+        mostrar.style.display = 'none';
         //capturamos el contenido
-        var lista = document.getElementById('lista').childNodes;
+        // var lista = document.getElementById('lista').childNodes;
         //llamamos a la funcion del checked
         pendingTicket();
         onSubmit();
+        filtersearch();
+}
+export function veureTicket(id) { 
+    var cabeceraOcultar = document.getElementById('cabecera');
+    cabeceraOcultar.style.display = 'none';
+    var listaOcultar = document.getElementById('lista');
+    listaOcultar.style.display = 'none';
+
+    var ticket = `
+    <div id='infoTicket' class="infoTicket">
+        <div>Informació Ticket </div>
+    <div>
+        
+        <button class="btn btn-danger" id="cerrarInfoTicket"> cerrar</button>
+    </div>
+
+    </div>
+`
+
+
+    let divTicket = document.createElement('div');
+    divTicket.innerHTML = ticket;
+    document.body.append(divTicket);
+
+    let ticketInfo = document.createElement('div');
+    ticketInfo.setAttribute('id', 'ticketInfo');
+    document.body.append(ticketInfo);
+
+    closeTicket();
 }
