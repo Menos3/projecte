@@ -1,9 +1,9 @@
-import {Grup} from "/xampp/htdocs/projecte/web/_commons/js/clases/Grup"
-import {GrupList} from "/xampp/htdocs/projecte/web/_commons/js/clases/GrupList"
+import {Grup} from "/xampp/htdocs/projecte/nodejs/commons/Grup"
+import {GrupList} from "/xampp/htdocs/projecte/nodejs/commons/GrupList"
 
 //COMPONENTES DEL FORMULARIO
-let tfNom = document.getElementById("tfNom");
-let btCrearGrupo = document.getElementById("btCrear");
+let tfNombreGrupo = document.getElementById("tfNombreGrupo");
+let btCrearGrupo = document.getElementById("btCrearGrupo");
 
 //EVENTLISTENER DEL BOTON
 btCrearGrupo.addEventListener("click", (event) => {crearGrupo(event)});
@@ -12,7 +12,7 @@ btCrearGrupo.addEventListener("click", (event) => {crearGrupo(event)});
 export function crearGrupo(event) {
 
     event.preventDefault();
-    var nombreGrupo = tfNom.value();
+    var nombreGrupo = tfNombreGrupo.value();
     var gruposList = new GrupList();
 
     var grupo = new Grup(1, nombreGrupo, 1);
