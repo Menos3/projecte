@@ -1,4 +1,4 @@
-    /* .formulario {
+/* .formulario {
         display: flex;
         flex-direction: column;
     }
@@ -18,17 +18,20 @@
         width: 15%;
 <<<<<<< HEAD
     } */
-    
-    form {
-        width: 400px;
-        display: block;
-        justify-content: center;
-        margin-left: 35%;
-    }
-    
-    label {
-        display: flex;
-        text-align: center;
-        =======>>>>>>>incidencias
-    }
-    /* modificadores boton examinar */
+
+form {
+    width: 400px;
+    display: block;
+    justify-content: center;
+    margin-left: 35%;
+}
+
+.logout {}
+
+label {
+    display: flex;
+    text-align: center;
+}
+
+
+/* modificadores boton examinar */

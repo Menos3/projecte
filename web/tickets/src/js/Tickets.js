@@ -10,12 +10,12 @@ export class Tickets {
         this.assetId = assetId;
         //esto lo coge del metodo del constructor: nose pasa por props.
         this.created = this.getDate();
-        this.isDeleted = false;
+        this.isDone = false;
         // this.actualizado = this.getDate();
     }
     getDate() {
         let date = new Date();
-        return date;
+        return date.toDateString();
 
 
     }
@@ -47,10 +47,10 @@ export class ListTickets {
     updateTicket(id, value) {
         this.tickets.forEach(element => {
             if (element.id == id) {
-                element.isDeleted = value;
+                element.isDone = value;
                 console.log('funciona');
                 //se hace cuando no va persistir nada.
-                // element.isDeleted = !element.isDeleted;
+                // element.isDone = !element.isDone;
 
             }
 
@@ -58,8 +58,29 @@ export class ListTickets {
         console.log('hasta aqui')
         this.setLocalStorage();
         console.log('esta guardado')
+    }
+    deletedTicket(id) { 
+        //get
+        this.getLocalStorage();
+        //tengo encontrar el ticket e iterar sobre la lista "tickets"
+        this.tickets = this.tickets.filter(element => { 
+            return element.id != id;
+        })
+        this.setLocalStorage();
+        
+        //set
+        //lista actulizada
 
     }
+    getItemByID(id) { 
+        this.getLocalStorage();
+        return this.tickets.filter(element => {
+            element.id == id;
+
+        })[0];
+        
+    }
+
 
 
 }

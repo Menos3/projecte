@@ -8,7 +8,8 @@
     <h2>Sign in</h2>
     <p>Welcome back!</p>
     <form name="login" action="<?= My\Helpers::url("/user/login_action.php") ?>" method="post">
-        <p>
+    
+    <p>
             <label>Username</label><br>
             <input type="text" name="username" required>
         </p>

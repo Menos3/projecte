@@ -25,7 +25,11 @@ $row = $stmt->fetch();
 <body>
     <?= My\Helpers::render("/_commons/header.php") ?>
     <h2>Profile</h2>
+    <div class="logout">
+        <a href="<?=My\Helpers::url("/user/logout_action.php") ?>"><img src="https://www.pngitem.com/pimgs/m/312-3120816_logout-icon-png-transparent-png.png" alt="logout"></a>
+    </div>
     <p>Edit account settings.</p>
+
     <form name="profile" class="profile" action="<?= My\Helpers::url("/user/profile_action.php") ?>" method="post" enctype="multipart/form-data">
         <?php if (!empty($row["avatar"])): ?>
         

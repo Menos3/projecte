@@ -1,0 +1,59 @@
+body{
+    margin:0%;
+    padding: 0%;
+}
+.container{
+    grid-template-columns: auto auto  auto;
+    grid-template-rows: auto auto;
+}
+.container__titulo{
+    grid-column: 1/3;
+    grid-row: 1;
+}
+.container__miembro1{
+    width:50%;
+    grid-column-start: 2;
+    grid-row: 1;
+}
+
+.container__foto1{
+    width:10%;
+    grid-column: 1;
+    grid-row:1;
+
+}
+.container__nombre1{
+    grid-column: 1;
+    grid-row: 1;
+}
+.container__cargo1{
+    grid-column: 1;
+    grid-row: 1;
+
+}
+.imagen1{
+    filter: grayscale(100%);
+    width: 50%;
+    min-height: 290px;
+    min-width: 290px;
+    display:block;
+}
+.imagen2{
+    display:none;
+}
+.imagen1:hover{
+    -webkit-transform: rotate(1080deg);
+    transform: rotate(1080deg);
+    transition:all 0.3s;
+
+}
+.imagen2{
+    display:block;
+
+}
+
+
+
+img{
+    width:55px;
+}
