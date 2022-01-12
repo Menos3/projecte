@@ -4,6 +4,6 @@ import "./bootstrap.min.css";
 import "./css/form.css";
 
 creacionForm();
-veureTicket(id);
+
 
 

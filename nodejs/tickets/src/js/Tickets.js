@@ -80,6 +80,13 @@ export class ListTickets {
         })[0];
         
     }
+    getSearchInfo(value) {
+        this.getLocalStorage();
+        return this.tickets.filter(element => { 
+            element.descripcion==value || element.titulo==value ||element.assetId
+        })
+        
+     }
 
 
 

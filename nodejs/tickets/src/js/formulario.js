@@ -111,13 +111,30 @@ function listRefresh(list) {
 function filtersearch() { 
     let buscador = document.getElementById('filtrar');
     buscador.addEventListener('click', event => { 
-       
-        let mostrar = document.getElementById('textSearch');
-        mostrar.style.display = 'block';
+        let mostrarDivBuscador = document.getElementById('buscador');
+        mostrarDivBuscador.style.display = 'block';
+        event.preventDefault();
+        buscarInfo();
+
+        // let mostrar = document.getElementById('textSearch');
+        // mostrar.style.display = 'block';
+        // let mostrarButtonBuscar = document.getElementById('buttonSearch');
+        // mostrarButtonBuscar.style.display = 'block';
 
     })
 
 
+
+}
+function buscarInfo() { 
+    let infoTicket = document.getElementById('buttonSearch');
+    infoTicket.addEventListener('click', event => { 
+        event.preventDefault();
+        let textoBuscar = document.getElementById('textSearch').value;
+        console.log(textoBuscar);
+        ticketList.getSearchInfo(textoBuscar);
+
+    })
 }
 
 function deleteButtonAction(id) {
@@ -211,10 +228,10 @@ export function creacionForm() {
                     <button class="btn btn-danger" type="reset" >Cancelar Incidencia</button>
                     <button  class="btn btn-primary" type="submit" id="pendientes">Mostrar solamente tareas pendientes.</button>
                     <button class="btn btn-info" type="submit" id="mostrarIncidencias"> Mostrar lista de incidencias</button>
-                    <button class="btn btn-warning" type="submit" id="filtrar">Buscar</button>
-                    <div id= "buscador">
-                        <input class="form-control" type="text" id="textSearch" placeholder="escriu el que vols buscar"
-                        <button id='buttonSearch'> buscar</buscar>
+                    <button class="btn btn-warning" type="submit" id="filtrar">Filtrar</button>
+                    <div id= "buscador" >
+                        <input class="form-control"  id="textSearch" placeholder="escriu el que vols buscar"/>
+                        <button  class="btn btn-primary" id='buttonSearch'> buscar</button>
                     </div>
                 </div>
             </form>
@@ -233,15 +250,16 @@ export function creacionForm() {
         listContainer.setAttribute('id', 'lista');
         document.body.append(listContainer);
         listRefresh(ticketList.getLocalStorage());
-         
-        let mostrar = document.getElementById('textSearch');
-        mostrar.style.display = 'none';
+      
         //capturamos el contenido
         // var lista = document.getElementById('lista').childNodes;
         //llamamos a la funcion del checked
         pendingTicket();
         onSubmit();
-        filtersearch();
+    
+    let divBuscador = document.getElementById('buscador');
+    divBuscador.style.display = 'none';
+    filtersearch();
 }
 export function veureTicket(id) { 
     var cabeceraOcultar = document.getElementById('cabecera');
