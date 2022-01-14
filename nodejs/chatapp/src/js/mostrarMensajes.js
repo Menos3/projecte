@@ -1,4 +1,4 @@
-import {MessagesList} from "/xampp/htdocs/projecte/web/chatapp/src/js/MessagesList"
+import {MessagesList} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/MessagesList"
 
 export function crearHTMLMostrarMensajes() {
     

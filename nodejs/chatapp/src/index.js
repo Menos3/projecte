@@ -1,9 +1,9 @@
-import {UsuarisList} from "/xampp/htdocs/projecte/web/_commons/js/clases/UsuarisList"
-import {Messages} from "/xampp/htdocs/projecte/web/chatapp/src/js//Messages"
-import {MessagesList} from "/xampp/htdocs/projecte/web/chatapp/src/js/MessagesList"
-import {GrupList} from "/xampp/htdocs/projecte/web/_commons/js/clases/GrupList"
-import {crearGrupo} from "/xampp/htdocs/projecte/web/chatapp/src/js/grupos"
-import {crearHTMLMostrarMensajes} from "/xampp/htdocs/projecte/web/chatapp/src/js/mostrarMensajes"
+import {UsuarisList} from "/xampp/htdocs/projecte/nodejs/commons/UsuarisList"
+import {Messages} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/Messages"
+import {MessagesList} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/MessagesList"
+import {GrupList} from "/xampp/htdocs/projecte/nodejs/commons/GrupList"
+import {crearGrupo} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/grupos"
+import {crearHTMLMostrarMensajes} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/mostrarMensajes"
 
 //COMPONENTES DE TODOS LOS FORMULARIOS
 let btFormCrearMensaje = document.getElementById("btFormCrearMensaje");
@@ -20,13 +20,11 @@ let taMensaje = document.getElementById("taMensaje");
 let btEnviar = document.getElementById("btEnviar");
 let divPublic = document.getElementById("containerPublic");
 let divPrivate = document.getElementById("containerPrivate");
-let tfNombreGrupo = document.getElementById("tfNombreGrupo");
-let btCrearGrupo = document.getElementById("btCrearGrupo");
 
 //EVENTLISTENER DE LOS BOTONES DEL MENU
-btFormCrearMensaje.addEventListener("click", (event) => {mostrarFormCrearMensaje()});
-btFormCrearGrupo.addEventListener("click", (event) => {mostrarFormCrearGrupo()});
-btFormMostrarMensajes.addEventListener("click", (event) => {mostrarFormMostrarMensajes()});
+btFormCrearMensaje.addEventListener("click", (event) => {mostrarFormCrearMensaje(event)});
+btFormCrearGrupo.addEventListener("click", (event) => {mostrarFormCrearGrupo(event)});
+btFormMostrarMensajes.addEventListener("click", (event) => {mostrarFormMostrarMensajes(event)});
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE CREAR MENSAJES
 function mostrarFormCrearMensaje(event) {
@@ -163,7 +161,7 @@ function mostrarFormCrearGrupo(event) {
     divCrearMensajes.style.display = "none";
     divMostrarMensajes.style.display = "none";
     divCrearGrupos.style.display = "block";
-    crearGrupo();
+    crearGrupo(event);
 }
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE MOSTRAR MENSAJES
