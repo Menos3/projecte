@@ -103,7 +103,7 @@ function mostrarFormCrearMensaje(event) {
             //POR CADA GRUPO EN EL ARRAY, SI EL NOMBRE DE GRUPO INTRODUCIDO COINCIDE CON UNO DEL ARRAY
             for(let grupos of listaGrupos.grupsList) {
 
-                if(grupos.name == nombreGrupo) {
+                if(grupos.name === nombreGrupo) {
 
                     //AUTHOR_ID CORRESPONDIENTE AL PRIMER ELEMENTO DEL ARRAY DE USUARIOS (NO SE QUE USUARIO HACE ESTO)
                     var mensaje = new Messages(listaGrupos.autoIncrementId() + 1, listaUsuarios.usuaris[0].id_usuari, cuerpoMensaje, fechaActual(), pubpriv, grupos.id);
@@ -132,7 +132,7 @@ function mostrarFormCrearMensaje(event) {
             //POR CADA USUARIO EN EL ARRAY, SI EL USERNAME INTRODUCIDO COINCIDE CON UNO DEL ARRAY
             for(let usuarios of listaUsuarios.usuaris) {
 
-                if(usuarios.username == destinatario) {
+                if(usuarios.username === destinatario) {
 
                     //CARGAR ARRAY DE MENSAJES
                     let listaMensajes = new MessagesList();

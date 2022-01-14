@@ -2,13 +2,13 @@ import {MessagesList} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/Message
 
 export function crearHTMLMostrarMensajes() {
     
-    let divMostrarMensajes = document.getElementById("mostrarMensajes");
+    //let divMostrarMensajes = document.getElementById("mostrarMensajes");
 
     //CREAR ELEMENT FORM Y AÑADIRLO AL DIV PRINCIPAL
     var formulario = document.createElement("form");
     formulario.id = "formMostrarMensajes";
 
-    divMostrarMensajes.appendChild(formulario);
+    document.body.appendChild(formulario);
     //CREAR ELEMENT DIV
     var div = document.createElement("div");
     div.name = "containerMensajes";
@@ -24,30 +24,32 @@ export function crearHTMLMostrarMensajes() {
 
     //LLAMAR A LA LISTA DE MENSAJES
     var messagesList = new MessagesList();
+    console.log(messagesList);
 
     //A CADA VUELTA DE BUCLE, GENERA UNA FILA Y 5 COLUMNAS
-    for(var i = 0; i < messagesList.length; i++) {
+    for(let mensajes of messagesList.messageList) {
 
+        console.log(mensajes);
         //CREAR ELEMENT TR
         var tr = document.createElement("tr");
 
         //CREAR ELEMENTS TD PARA LA ID, EL MENSAJE, PUBPRIV, CREATED Y PARA ELIMINARLO
         var tdId = document.createElement("td");
-        tdId.innerText = i.id;
+        tdId.innerHtml = mensajes.id;
 
         var tdMensaje = document.createElement("td");
-        tdMensaje.innerText = i.message;
+        tdMensaje.innerText = mensajes.message;
 
         var tdFechaCreacion = document.createElement("td");
-        tdFechaCreacion.innerText = i.created;
+        tdFechaCreacion.innerText = mensajes.created;
 
         var tdPubPriv = document.createElement("td");
-        tdPubPriv.innerText = i.pubpriv;
+        tdPubPriv.innerText = mensajes.pubpriv;
 
         var tdBorrar = document.createElement("td");
         var a = document.createElement("a");
         a.href = "";
-        a.id = "datosMensaje" + i.id;
+        a.id = "datosMensaje" + mensajes.id;
         a.innerText = "X";
 
         //AÑADIR ELEMENT A AL TDBORRAR
@@ -69,7 +71,7 @@ export function crearHTMLMostrarMensajes() {
             event.preventDefault();
             console.log(event.target.id);
             event.target.parentNode.parentNode.remove();
-            messagesList.deleteMessage(i);
+            messagesList.deleteMessage(mensajes);
 
         });
 

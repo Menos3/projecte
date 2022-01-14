@@ -12,11 +12,20 @@ btCrearGrupo.addEventListener("click", (event) => {crearGrupo(event)});
 export function crearGrupo(event) {
 
     event.preventDefault();
-    var nombreGrupo = tfNombreGrupo.value();
+    var nombreGrupo = tfNombreGrupo.value;
     var gruposList = new GrupList();
 
     var grupo = new Grup(1, nombreGrupo, 1);
 
     gruposList.addGroup(grupo);
 
+    if(grupo != null) {
+
+        alert("Grupo creado correctamente");
+        tfNombreGrupo.value = "";
+
+    } else {
+
+        alert("Error al crear el grupo");
+    }
 }
