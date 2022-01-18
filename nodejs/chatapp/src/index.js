@@ -9,9 +9,11 @@ import {crearHTMLMostrarMensajes} from "/xampp/htdocs/projecte/nodejs/chatapp/sr
 let btFormCrearMensaje = document.getElementById("btFormCrearMensaje");
 let btFormCrearGrupo = document.getElementById("btFormCrearGrupo");
 let btFormMostrarMensajes = document.getElementById("btFormMostrarMensajes");
+let btFormFiltrarMensajes = document.getElementById("btFormFiltrarMensajes");
 let divCrearMensajes = document.getElementById("crearMensajes");
 let divCrearGrupos = document.getElementById("crearGrupos");
 let divMostrarMensajes = document.getElementById("mostrarMensajes");
+let divFiltrarMensajes = document.getElementById("filtrarMensajes");
 let cbPublic = document.getElementById("cbPublic");
 let tfGrupo = document.getElementById("tfGrupo");
 let cbPrivado = document.getElementById("cbPrivado");
@@ -25,6 +27,7 @@ let divPrivate = document.getElementById("containerPrivate");
 btFormCrearMensaje.addEventListener("click", (event) => {mostrarFormCrearMensaje(event)});
 btFormCrearGrupo.addEventListener("click", (event) => {mostrarFormCrearGrupo(event)});
 btFormMostrarMensajes.addEventListener("click", (event) => {mostrarFormMostrarMensajes(event)});
+btFormFiltrarMensajes.addEventListener("click", (event) => {mostrarFormFiltrarMensajes(event)});
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE CREAR MENSAJES
 function mostrarFormCrearMensaje(event) {
@@ -32,6 +35,7 @@ function mostrarFormCrearMensaje(event) {
     event.preventDefault();
     divCrearGrupos.style.display = "none";
     divMostrarMensajes.style.display = "none";
+    divFiltrarMensajes.style.display = "none";
     divCrearMensajes.style.display = "block";
 
     //EVENTLISTENER DE LOS CHECKBOX
@@ -160,6 +164,7 @@ function mostrarFormCrearGrupo(event) {
     event.preventDefault();
     divCrearMensajes.style.display = "none";
     divMostrarMensajes.style.display = "none";
+    divFiltrarMensajes.style.display = "none";
     divCrearGrupos.style.display = "block";
     crearGrupo(event);
 }
@@ -170,6 +175,18 @@ function mostrarFormMostrarMensajes(event) {
     event.preventDefault();
     divCrearMensajes.style.display = "none";
     divCrearGrupos.style.display = "none";
+    divFiltrarMensajes.style.display = "none";
     divMostrarMensajes.style.display = "block";
     crearHTMLMostrarMensajes();
+}
+
+//FUNCION QUE CONTROLA EL FORMULARIO DE FILTRAJE DE MENSAJES
+function mostrarFormFiltrarMensajes(event) {
+
+    event.preventDefault();
+    divCrearMensajes.style.display = "none";
+    divCrearGrupos.style.display = "none";
+    divMostrarMensajes.style.display = "none";
+    divFiltrarMensajes.style.display = "block";
+    crearHTMLFiltrarMensajes();
 }

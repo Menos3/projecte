@@ -1,8 +1,6 @@
 import {MessagesList} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/MessagesList"
 
 export function crearHTMLMostrarMensajes() {
-    
-    //let divMostrarMensajes = document.getElementById("mostrarMensajes");
 
     //CREAR ELEMENT FORM Y AÑADIRLO AL DIV PRINCIPAL
     var formulario = document.createElement("form");
