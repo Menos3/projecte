@@ -111,11 +111,20 @@ function listRefresh(list) {
 function filtersearch() { 
     let buscador = document.getElementById('filtrar');
     buscador.addEventListener('click', event => { 
-       
+        console.log('hola11111');
         let mostrar = document.getElementById('textSearch');
-        mostrar.style.display = 'block';
+        if (mostrar.style.display == 'block') {
+            mostrar.style.display = 'none';
+            console.log('hola');
+        }
+        else { 
+            mostrar.style.display = 'block';
+            console.log('change');
+        }
+       
 
     })
+    
 
 
 }

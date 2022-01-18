@@ -39,8 +39,6 @@ img:hover {
     -webkit-transform: rotate(1080deg);
     transform: rotate(1080deg);
     transition:all 0.10s;
-
-
 }
 .imagen1{
     
@@ -53,11 +51,17 @@ img:hover {
 .imagen2{
     display: none;
 }
-
 .miembro__foto1:hover .imagen1{
+    -webkit-transform: rotate(1080deg);
+    transform: rotate(1080deg);
+    transition:all 0.30s;
+    
+}
+
+/* .miembro__foto1:hover .imagen1{
     
     display: none;
-}
+} */
 .miembro__foto1:hover .imagen2{
     display: block;
     width: 50%;
