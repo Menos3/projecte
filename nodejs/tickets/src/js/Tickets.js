@@ -82,9 +82,12 @@ export class ListTickets {
     }
     getSearchInfo(value) {
         this.getLocalStorage();
-        return this.tickets.filter(element => { 
-            element.descripcion==value || element.titulo==value ||element.assetId
-        })
+        this.tickets = this.tickets.filter(element => {
+            return element.descripcion == value || element.titulo == value;
+
+        })[0];
+       
+
         
      }
 

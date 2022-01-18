@@ -3,33 +3,38 @@ body{
     padding: 0%;
     font-size: 2.5em;
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    display: grid;
+ 
+}
+.miembro__pasion{
+    display: none;
 }
 .container{
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
     display: grid;
+    width: 100%;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-template-rows: 200px auto auto;
+    justify-items: center;
 }
 .container__titulo{
-
-display: flex;
-flex-direction: column;
+    font-size: 3.5em;
+grid-column-start: 1;
+grid-column-end: span col3;
 }
+
 .container__miembro1{
-    width:50%;
-    grid-column-start:3;
-    grid-column-end: 3;
-    grid-row-start: 1;
+    place-self: center;
+    grid-column-start:2;
+   
+}
+.container__miembro2{
+    grid-column-start: 1;
+}
+.container__miembro3{
+    grid-column-start: 3;
 }
 
-.container__nombre1{
-    grid-column: 1;
-    grid-row: 1;
-}
-.container__cargo1{
-    grid-column: 1;
-    grid-row: 1;
-}
+
 img:hover {
     -webkit-transform: rotate(1080deg);
     transform: rotate(1080deg);
@@ -38,8 +43,9 @@ img:hover {
 
 }
 .imagen1{
+    
     filter: grayscale(100%);
-    width: 50%;
+    width: 300px;
     min-height: 290px;
     min-width: 290px;
     display:block;
@@ -58,12 +64,33 @@ img:hover {
     min-height: 290px;
     min-width: 290px;
 }
-img:hover .miembro__cargo1{
+.container__miembro1:hover .miembro__cargo{
     display: none;
 }
-img:hover .miembro__pasion1{
+.container__miembro1:hover .miembro__pasion{
     display: block;
+    color:cadetblue;
 }
 
-
-
+@media screen and (max-width:600px) {
+    .container{       
+        grid-template-columns: 1fr ;
+        grid-template-rows: auto auto auto auto;
+    }
+    .container__titulo{
+        font-size:2.1em;
+        grid-row-start: 1;
+    
+    }
+    .container__miembro2{
+        grid-row-start: 2;
+    }
+    .container__miembro1{
+        place-self: center;
+        grid-row-start:3;
+       
+    }
+    .container__miembro3{
+        grid-row-start: 4;
+    }
+}
