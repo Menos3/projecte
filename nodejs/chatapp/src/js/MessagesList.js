@@ -23,9 +23,13 @@ export class MessagesList {
         this.messageList = (localStorage.getItem('messages')) ? JSON.parse(localStorage.getItem('messages')) : [];
     }
 
-    deleteMessage(message) {
+    deleteMessage(idMessage) {
 
-        this.messageList.splice(message.id, 1);
+        this.cargarLocalStorage();
+        this.messageList = this.messageList.filter(element => {
+            return element.id != idMessage;
+        });
+
         this.guardarLocalStorage();
     }
 }

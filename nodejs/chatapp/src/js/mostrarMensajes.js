@@ -71,7 +71,7 @@ export function crearHTMLMostrarMensajes() {
             event.preventDefault();
             console.log(event.target.id);
             event.target.parentNode.parentNode.remove();
-            messagesList.deleteMessage(mensajes);
+            messagesList.deleteMessage(mensajes.id);
 
         });
 
