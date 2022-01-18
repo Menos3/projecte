@@ -1,0 +1,44 @@
+#container {
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 40%;
+}
+
+.seria {
+    filter: grayscale(150%);
+    width: 337px;
+    height: 415px;
+}
+
+.divertida {
+    display: none;
+}
+
+img:hover {
+    -webkit-transform: rotateY(180deg);
+    -webkit-transform-style: preserve-3d;
+    transform: rotateY(180deg);
+    transform-style: preserve-3d;
+    transition: all 3s;
+}
+#imagen:hover .seria {
+    display: none;
+}
+
+#imagen:hover .divertida {
+    display: block;
+}
+
+#frase:hover {
+    
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 8%;
+}
+
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 6%;
+}
