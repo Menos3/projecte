@@ -4,6 +4,7 @@ import {MessagesList} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/Message
 import {GrupList} from "/xampp/htdocs/projecte/nodejs/commons/GrupList"
 import {crearGrupo} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/grupos"
 import {crearHTMLMostrarMensajes} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/mostrarMensajes"
+import {crearHTMLFiltrarMensajes} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/filtrarMensajes"
 
 //COMPONENTES DE TODOS LOS FORMULARIOS
 let btFormCrearMensaje = document.getElementById("btFormCrearMensaje");

@@ -32,4 +32,15 @@ export class MessagesList {
 
         this.guardarLocalStorage();
     }
+
+    filteredList(keyWord) {
+
+        this.cargarLocalStorage();
+
+        //TODO: COMPROBAR QUE KEYWORD SEA UN NUMERO O UN STRING
+        
+        this.messageList = this.messageList.filter(element => {
+            return element.id != idMessage;
+        });
+    }
 }
