@@ -34,12 +34,14 @@ grid-column-end: span col3;
     grid-column-start: 3;
 }
 
-
-img:hover {
+/* 
+img:hover{
+    display: block;
     -webkit-transform: rotate(1080deg);
     transform: rotate(1080deg);
     transition:all 0.10s;
-}
+} */
+
 .imagen1{
     
     filter: grayscale(100%);
@@ -51,19 +53,33 @@ img:hover {
 .imagen2{
     display: none;
 }
-.miembro__foto1:hover .imagen1{
+/* .imagen1:hover {
+ /* display: none; */
+ /* display: block; */
+    /* -webkit-transform: rotate(1080deg);
+    transform: rotate(1080deg);
+    transition:all 0.23s; */
+img:hover::before{
+    content: url(C:\Users\crist\OneDrive\Escritorio\DAW2\m09\foto1.png);
+}
+img:hover{
     -webkit-transform: rotate(1080deg);
     transform: rotate(1080deg);
-    transition:all 0.30s;
-    
+    transition:all 0.23s;
 }
+img:hover::after{
+    content: url(C:\Users\crist\OneDrive\Escritorio\DAW2\m09\imagen2.webp);
+}
+/* .miembro__foto1:hover::after .imagen2{
+    display: block;
+} */
 
 /* .miembro__foto1:hover .imagen1{
     
     display: none;
-} */
+} */r
 .miembro__foto1:hover .imagen2{
-    display: block;
+    
     width: 50%;
     min-height: 290px;
     min-width: 290px;
