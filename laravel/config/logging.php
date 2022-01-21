@@ -50,15 +50,29 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['single'],
+            'channels' => ['file', 'firephp', 'errorlog'],
             'ignore_exceptions' => false,
         ],
 
-        'single' => [
-            'driver' => 'single',
-            'path' => storage_path('logs/laravel.log'),
-            'level' => env('LOG_LEVEL', 'debug'),
-        ],
+        // 'single' => [
+        //     'driver' => 'single',
+        //     'path' => storage_path('logs/laravel.log'),
+        //     'level' => env('LOG_LEVEL', 'debug'),
+        // ], este es el que te venia por defecto en laravel
+
+         
+       'file' => [
+        'driver' => 'single',
+        'path' => storage_path('logs/laravel.log'),
+        'level' => env('LOG_LEVEL', 'debug'),
+    ],
+
+    'firephp' => [
+        'driver' => 'monolog',
+        'handler' => Monolog\Handler\FirePHPHandler::class,
+    ],
+
+
 
         'daily' => [
             'driver' => 'daily',

@@ -1,6 +1,5 @@
-import { saludar } from './js/componentes';
+import { createTasques } from './js/boards-formulario';
+import { creacionForm } from './js/formulario2';
 import './styles.css';
-
-const nombre = 'Xavi';
-
-saludar( nombre );
+creacionForm();
+createTasques();
