@@ -23,6 +23,8 @@ export function crearHTMLFiltrarMensajes() {
     //EVENTO DEL BOTON DE FILTRAJE
     btFiltrar.addEventListener("click", (event) => {
 
+        event.preventDefault();
+
         if(tfBusqueda.value == "") {
             console.log("jelou");
             crearListaMensajesSinFiltrar();
@@ -104,8 +106,25 @@ function crearListaMensajesSinFiltrar() {
 
 function crearListaMensajesFiltrada(keyWord) {
 
-    var listaFiltrada = listaMensajes.filteredList(keyWord);
+    //CREAR ELEMENT FORM
+    let formulario = document.createElement("form");
 
+    //CREAR ELEMENT DIV
+    let divMensajesFiltrados = document.createElement("div");
+    divMensajesFiltrados.id = "divFiltrajeMensajes";
+
+    formulario.appendChild(divMensajesFiltrados);
+
+    //CREAR ELEMENT TABLE
+    let tabla = document.createElement("table");
+
+    //AÑADIR ELEMENT TABLE AL DIV
+    divMensajesFiltrados.appendChild(tabla);
+
+    //LISTA FILTRADA
+    var listaFiltrada = listaMensajes.filteredList(keyWord);
+    console.log(listaFiltrada);
+    
     for(let mensajesFiltrados of listaFiltrada) {
 
         //CREAR ELEMENT TR
@@ -145,7 +164,7 @@ function crearListaMensajesFiltrada(keyWord) {
         btVisualizar.addEventListener("click", (event) => {
 
             event.preventDefault();
-            alert("La id del missatge es: " + mensajes.id + " amb el missatge: " + mensajes.message + " creat el dia: " + mensajes.created + "i el missatge és: " + mensajes.pubpriv);
+            alert("La id del missatge es: " + mensajesFiltrados.id + " amb el missatge: " + mensajesFiltrados.message + " creat el dia: " + mensajesFiltrados.created + "i el missatge és: " + mensajesFiltrados.pubpriv);
         });
     }
 }
