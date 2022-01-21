@@ -36,11 +36,12 @@ export class MessagesList {
     filteredList(keyWord) {
 
         this.cargarLocalStorage();
-
-        //TODO: COMPROBAR QUE KEYWORD SEA UN NUMERO O UN STRING
         
-        this.messageList = this.messageList.filter(element => {
-            return element.id != idMessage;
-        });
+        this.messageList = this.messageList.filter((element) => {
+            if(element.message.match(new RegExp(keyWord, "i")))
+            return true;
+        })
+
+        return this.messageList;   
     }
 }

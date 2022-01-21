@@ -167,7 +167,7 @@ function mostrarFormCrearGrupo(event) {
     divMostrarMensajes.style.display = "none";
     divFiltrarMensajes.style.display = "none";
     divCrearGrupos.style.display = "block";
-    crearGrupo(event);
+    crearGrupo();
 }
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE MOSTRAR MENSAJES
