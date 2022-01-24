@@ -11,5 +11,5 @@ chatapp/node_modules/*
 tickets/node_modules
 chatapp/node_modules
 uploads/*
-newTickets/node_modules
+./node_modules
 
