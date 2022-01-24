@@ -25,15 +25,14 @@ let divPublic = document.getElementById("containerPublic");
 let divPrivate = document.getElementById("containerPrivate");
 
 //EVENTLISTENER DE LOS BOTONES DEL MENU
-btFormCrearMensaje.addEventListener("click", (event) => {mostrarFormCrearMensaje(event)});
-btFormCrearGrupo.addEventListener("click", (event) => {mostrarFormCrearGrupo(event)});
-btFormMostrarMensajes.addEventListener("click", (event) => {mostrarFormMostrarMensajes(event)});
-btFormFiltrarMensajes.addEventListener("click", (event) => {mostrarFormFiltrarMensajes(event)});
+btFormCrearMensaje.addEventListener("click", (event) => {mostrarFormCrearMensaje()});
+btFormCrearGrupo.addEventListener("click", (event) => {mostrarFormCrearGrupo()});
+btFormMostrarMensajes.addEventListener("click", (event) => {mostrarFormMostrarMensajes()});
+btFormFiltrarMensajes.addEventListener("click", (event) => {mostrarFormFiltrarMensajes()});
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE CREAR MENSAJES
-function mostrarFormCrearMensaje(event) {
+function mostrarFormCrearMensaje() {
 
-    event.preventDefault();
     divCrearGrupos.style.display = "none";
     divMostrarMensajes.style.display = "none";
     divFiltrarMensajes.style.display = "none";
@@ -160,9 +159,8 @@ function mostrarFormCrearMensaje(event) {
 }
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE CREAR GRUPOS
-function mostrarFormCrearGrupo(event) {
+function mostrarFormCrearGrupo() {
 
-    event.preventDefault();
     divCrearMensajes.style.display = "none";
     divMostrarMensajes.style.display = "none";
     divFiltrarMensajes.style.display = "none";
@@ -171,9 +169,8 @@ function mostrarFormCrearGrupo(event) {
 }
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE MOSTRAR MENSAJES
-function mostrarFormMostrarMensajes(event) {
+function mostrarFormMostrarMensajes() {
 
-    event.preventDefault();
     divCrearMensajes.style.display = "none";
     divCrearGrupos.style.display = "none";
     divFiltrarMensajes.style.display = "none";
@@ -182,9 +179,8 @@ function mostrarFormMostrarMensajes(event) {
 }
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE FILTRAJE DE MENSAJES
-function mostrarFormFiltrarMensajes(event) {
+function mostrarFormFiltrarMensajes() {
 
-    event.preventDefault();
     divCrearMensajes.style.display = "none";
     divCrearGrupos.style.display = "none";
     divMostrarMensajes.style.display = "none";

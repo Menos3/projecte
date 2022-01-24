@@ -38,9 +38,10 @@ export class MessagesList {
         this.cargarLocalStorage();
         
         this.messageList = this.messageList.filter((element) => {
+
             if(element.message.match(new RegExp(keyWord, "i")))
             return true;
-        })
+        });
 
         return this.messageList;   
     }

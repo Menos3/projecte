@@ -26,7 +26,7 @@ export function crearHTMLFiltrarMensajes() {
         event.preventDefault();
 
         if(tfBusqueda.value == "") {
-            console.log("jelou");
+
             crearListaMensajesSinFiltrar();
 
         } else {
@@ -50,18 +50,16 @@ function crearListaMensajesSinFiltrar() {
     formulario.appendChild(divFiltrajeMensajes);
 
     //CREAR ELEMENT TABLE
-    let tabla = document.createElement("table");
+    let tablaSinFiltrar = document.createElement("table");
 
     //AÑADIR ELEMENT TABLE AL DIV
-    divFiltrajeMensajes.appendChild(tabla);
-
-    //LLAMAR A LA LISTA DE MENSAJES
-    var messagesList = new MessagesList();
-    console.log(messagesList);
+    divFiltrajeMensajes.appendChild(tablaSinFiltrar);
 
     //A CADA VUELTA DE BUCLE, GENERA UNA FILA Y 5 COLUMNAS
-    for(let mensajes of messagesList.messageList) {
+    for(let mensajes of listaMensajes.messageList) {
 
+        console.log("estoy dentro del bucle 1");
+        
         //CREAR ELEMENT TR
         var tr = document.createElement("tr");
 
@@ -93,7 +91,7 @@ function crearListaMensajesSinFiltrar() {
         tr.appendChild(tdVisualizar);
 
         //AÑADIR EL TR A LA TABLE
-        tabla.appendChild(tr);
+        tablaSinFiltrar.appendChild(tr);
 
         //EVENTLISTENER PARA VISUALIZAR EL MENSAJE
         btVisualizar.addEventListener("click", (event) => {
@@ -101,25 +99,11 @@ function crearListaMensajesSinFiltrar() {
             event.preventDefault();
             alert("La id del missatge es: " + mensajes.id + " amb el missatge: " + mensajes.message + " creat el dia: " + mensajes.created + "i el missatge és: " + mensajes.pubpriv);
         });
+        console.log("llegare aqui?");
     }
 }
 
 function crearListaMensajesFiltrada(keyWord) {
-
-    //CREAR ELEMENT FORM
-    let formulario = document.createElement("form");
-
-    //CREAR ELEMENT DIV
-    let divMensajesFiltrados = document.createElement("div");
-    divMensajesFiltrados.id = "divFiltrajeMensajes";
-
-    formulario.appendChild(divMensajesFiltrados);
-
-    //CREAR ELEMENT TABLE
-    let tabla = document.createElement("table");
-
-    //AÑADIR ELEMENT TABLE AL DIV
-    divMensajesFiltrados.appendChild(tabla);
 
     //LISTA FILTRADA
     var listaFiltrada = listaMensajes.filteredList(keyWord);
@@ -127,6 +111,7 @@ function crearListaMensajesFiltrada(keyWord) {
     
     for(let mensajesFiltrados of listaFiltrada) {
 
+        console.log("estoy dentro del bucle 2");
         //CREAR ELEMENT TR
         let tr = document.createElement("tr");
 
@@ -158,7 +143,7 @@ function crearListaMensajesFiltrada(keyWord) {
         tr.appendChild(tdVisualizar);
 
         //AÑADIR EL TR A LA TABLE
-        tabla.appendChild(tr);
+        tablaSinFiltrar.appendChild(tr);
 
         //EVENTLISTENER PARA VISUALIZAR EL MENSAJE
         btVisualizar.addEventListener("click", (event) => {

@@ -26,8 +26,7 @@ export function crearHTMLMostrarMensajes() {
 
     //A CADA VUELTA DE BUCLE, GENERA UNA FILA Y 5 COLUMNAS
     for(let mensajes of messagesList.messageList) {
-
-        console.log(mensajes);
+        
         //CREAR ELEMENT TR
         var tr = document.createElement("tr");
 
