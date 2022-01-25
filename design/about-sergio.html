@@ -7,30 +7,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Sergio</title>
     <link rel="stylesheet" href="about-sergio.css">
-    <script type="text/javascript" src="about-sergio.js"></script>
+    
 
 </head>
 
 <body>
     
+    <!--AUDIO AL PASAR POR ENCIMA DEL DIV DE LAS IMAGENES-->
+
+    <audio id="soundClip">
+        <source src="./soundclip-SeraphineKDA-Passive.mp3" type="audio/mpeg"></source>
+    </audio>
+
+    <!--#################################################-->
+
     <div class = "container" id = "container">
-        <div class = "imagen" id = "imagen">
+
+        <div class = "imagen" id = "divImagen">
+
             <!--IMG QUE CAMBIA-->
             <img class = "foto">
 
-            <!--AUDIO AL PASAR POR ENCIMA-->
-            <audio id="soundClip">
-                <source src=""></source>
-            </audio>
         </div>
 
         <h1>Sergio Melado</h1>
 
-        <div name="frase" id="frase">
+        <div name="frase" id="divFrase">
+
             <h2>"Software Developer"</h2>
+
         </div>
         
     </div>
 
+    <div class="modal" id = "ventanaVideos" tabindex="-1" style="display: none;">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Visualitzador de Videos</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    <script type="text/javascript" src="about-sergio.js"></script>
 </body>
 </html>

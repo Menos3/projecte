@@ -2,7 +2,8 @@ export class MessagesList {
 
     constructor() {
         this.messageList = [];
-        this.cargarLocalStorage();
+        //this.cargarLocalStorage();
+        this.messageList = this.cargarMensajesBBDD();
     }
 
     addMessage(message) {
@@ -44,5 +45,24 @@ export class MessagesList {
         });
 
         return this.messageList;   
+    }
+
+    async cargarMensajesBBDD() {
+
+        let mensajes;
+
+        try {
+
+            mensajes = await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/messages.json');
+            mensajes = await mensajes.json();
+
+            return mensajes;
+
+        } catch {
+
+            alert("Problemas a la hora de cargar los mensajes de la BBDD");
+            return null;
+
+        }
     }
 }
