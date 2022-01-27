@@ -22,8 +22,8 @@
     transition: all 3s;
 }
 
-#divFrase:hover {
-    
+#divFrase:hover h1 {
+
 }
 
 h1 {
