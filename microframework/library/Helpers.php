@@ -23,13 +23,13 @@ class Helpers{
     public static function url(string $path, bool $ssl = false): string 
     {
        $protocol = $ssl ? "https" : "http";
-       return "{$protocol}://localhost/tarda/projecte/microframework/web/{$path}";
+       return "{$protocol}://localhost/projecte/microframework/web/prova1/{$path}";
 
    }
    public static function render(string $path, array $__params = []) : string 
    {
        ob_start();
-       $root = __DIR__ . "/../web";
+       $root = __DIR__ . "../../web";
        include("{$root}/{$path}");
        $content = ob_get_contents();
        ob_end_clean();

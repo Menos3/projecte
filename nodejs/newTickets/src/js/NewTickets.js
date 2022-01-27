@@ -22,75 +22,38 @@ export class Tickets {
 }
 export class ListTickets {
     tickets;
-
+    data;
     constructor() {
-        this.getLocalStorage();
+        this.getInformation().then;
 
     }
-    postTicket(ticket) {
-        this.tickets.push(ticket);
-        this.setLocalStorage();
+    async getInformation() {
+        try {
+            this.data = (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json')).json();
+            console.log(this.data);
+            return this.data;
+        }
+        catch (e) {
+            console.log(e);
+            console.log("error al mostrar los tickets.");
+            return null;
+        }
+    
     }
-    setLocalStorage() {
-        localStorage.setItem('tickets', JSON.stringify(this.tickets));
+    async setInformation(ticket, id) {
+        try {
+            const ticket = (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets/' + id + '.json',
+                {
+                    method: PUT,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(ticket)
+                })
+            )
+        }
+        catch (error) { }
     }
-    getLocalStorage() {
-        this.tickets = (localStorage.getItem('tickets')) ?
-            JSON.parse(localStorage.getItem('tickets')) : [];
-        return this.tickets;
-    }
-    getLastId() {
-        let id = this.tickets.length > 0 ? this.tickets.at(-1).id : 0;
 
-        return id;
-    }
-    updateTicket(id, value) {
-        this.tickets.forEach(element => {
-            if (element.id == id) {
-                element.isDone = value;
-                console.log('funciona');
-                //se hace cuando no va persistir nada.
-                // element.isDone = !element.isDone;
+}    
 
-            }
-
-        });
-        console.log('hasta aqui')
-        this.setLocalStorage();
-        console.log('esta guardado')
-    }
-    deletedTicket(id) { 
-        //get
-        this.getLocalStorage();
-        //tengo encontrar el ticket e iterar sobre la lista "tickets"
-        this.tickets = this.tickets.filter(element => { 
-            return element.id != id;
-        })
-        this.setLocalStorage();
-        
-        //set
-        //lista actulizada
-
-    }
-    getItemByID(id) { 
-        this.getLocalStorage();
-        return this.tickets.filter(element => {
-            element.id == id;
-
-        })[0];
-        
-    }
-    getSearchInfo(value) {
-        this.getLocalStorage();
-        this.tickets = this.tickets.filter(element => {
-            return element.descripcion == value || element.titulo == value;
-
-        })[0];
-       
-
-        
-     }
-
-
-
-}

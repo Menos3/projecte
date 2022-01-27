@@ -18,80 +18,92 @@ function listRefresh(list) {
     //la lista vieja
     let oldList = document.getElementById('containerLista');
     document.body.removeChild(oldList);
+    
     let tabla = document.createElement('table');
     tabla.setAttribute('class', 'table');
     tabla.setAttribute('id', 'tabla');
-    containerList.appendChild(tabla);
+
+
     //creacion del col de la tabla.
     let cabecera = document.createElement('thead');
     cabecera.setAttribute('class', 'th');
-    tabla.appendChild(cabecera);
+  
+    
     let tiId = document.createElement('th');
     tiId.innerHTML = 'Nº Id';
-    cabecera.appendChild(tiId);
+
 
     let tiTitulo = document.createElement('th');
     tiTitulo.innerHTML = 'Titulo';
-    cabecera.appendChild(tiTitulo);
+    
 
     let tiDesc = document.createElement('th');
     tiDesc.innerHTML = 'Descripcion';
-    cabecera.appendChild(tiDesc);
 
     let tiEquipo = document.createElement('th');
     tiEquipo.innerHTML = 'Equipo';
-    cabecera.appendChild(tiEquipo);
 
     let tiAsig = document.createElement('th');
     tiAsig.innerHTML = 'Asignacion';
-    cabecera.appendChild(tiAsig);
 
     let tiCrea = document.createElement('th');
     tiCrea.innerHTML = 'Emitido';
-    cabecera.appendChild(tiCrea);
 
     let tiFet= document.createElement('th');
     tiFet.innerHTML = 'Realizado';
-    cabecera.appendChild(tiFet);
 
     let cuerpoTabla = document.createElement('tbody');
-    tabla.appendChild(cuerpoTabla);
 
-    
-}
-
-function deleteButtonAction(id) {
-    ticketList.deletedTicket(id);
-    listRefresh(ticketList.getLocalStorage());   //list refresh
-}
-function filtersearch() { 
-        let buscador = document.getElementById('filtrar');
-        buscador.addEventListener('click', event => { 
-        let mostrarDivBuscador = document.getElementById('buscador');
-        mostrarDivBuscador.style.display = 'block';
-        event.preventDefault();
-        buscarInfo();
-        
-        // let mostrar = document.getElementById('textSearch');
-        // mostrar.style.display = 'block';
-        // let mostrarButtonBuscar = document.getElementById('buttonSearch');
-        // mostrarButtonBuscar.style.display = 'block';
-
+    const newList = document.createElement('div');
+    newList.setAttribute('id', 'containerLista');
+    list.forEach(element => {
+        //boton borrar
+        let butBorrar = document.createElement('button');
+        butBorrar.setAttribute('class', "btn btn-danger");
+        butBorrar.setAttribute('id', 'Borrar' + element.id);
+        butBorrar.innerHTML = "borrar";
+        //boton veure
+        let butInfo = document.createElement('button');
+        butInfo.setAttribute('class', "btn btn-info");
+        butInfo.setAttribute('id', 'butInfo' + element.id);
+        butInfo.innerHTML = "Veure";
+        //Check
+        let checkMostra = document.createElement('input');
+        checkMostra.setAttribute('type', 'checkbox');
+        checkMostra.setAttribute('class', 'lista__check');
+        checkMostra.setAttribute('id', 'check' + element.id);
+        //linea
+        let linea = document.createElement('tr');
+        linea.setAttribute('class', 'list__line');
+        linea.setAttribute('id', 'line' + element.id);
+        linea.innerHTML = `<td>${element.id}</td>
+        <td>${element.titulo}</td>
+        <td>${element.descripcion}</td>
+        <td>${element.assetId}</td>
+        <td>${element.assignedId}</td>
+        <td>${element.created}</td>
+        `;
+        //añadimos propiedades a las lineas
+        newList.appendChild(tabla);
+        //añadimos a la tabla
+        tabla.appendChild(cabecera);
+        //añadimos a la cabecera
+        cabecera.appendChild(tiId);
+        cabecera.appendChild(tiTitulo);
+        cabecera.appendChild(tiDesc);
+        cabecera.appendChild(tiEquipo);
+        cabecera.appendChild(tiAsig);
+        cabecera.appendChild(tiCrea);
+        cabecera.appendChild(tiFet);
+        tabla.appendChild(cuerpoTabla);
+        cuerpoTabla.appendChild(linea);
+        linea.appendChild(checkMostra);
+        linea.appendChild(butInfo);
+        linea.appendChild(butBorrar);
     })
-
-
-
+        document.body.append(newList);
 }
-function buscarInfo() { 
-    let infoTicket = document.getElementById('buttonSearch');
-    infoTicket.addEventListener('click', event => { 
-        event.preventDefault();
-        let textoBuscar = document.getElementById('textSearch').value;
-        console.log(textoBuscar);
-        ticketList.getSearchInfo(textoBuscar);
 
-    })
-}
 
 
 function usersOptions() {
@@ -110,23 +122,11 @@ function assetsOptions() {
     }
     return option;
 }
-function pendingTicket() {
-    let butpending = document.getElementById('pendientes');
-    butpending.addEventListener('click', event => {
-        event.preventDefault();
-        let lista = ticketList.getLocalStorage();
-        let filteredList = lista.filter(element => {
-            return element.isDone == false;
-        })
-        listRefresh(filteredList);
-    })
-}
 
 function onSubmit() {
-    const button = document.getElementById('addTicketButton');
-    button.addEventListener("click", event => {
+    let añadir = document.getElementById('addTicketButton');
+    añadir.addEventListener("click", event => { 
         event.preventDefault();
-        //ya sabe el id que le voy a dar
         let ticketId = ticketList.getLastId() + 1;
         let ticketName = document.getElementById('titulo').value;
         let ticketDesc = document.getElementById('description').value;
@@ -141,23 +141,26 @@ function onSubmit() {
             assetId: ticketAsset
         }
         var ticket = new Tickets(values);
-        ticketList.postTicket(ticket);
-        console.log(ticketList.getLocalStorage);
-        console.log(ticket);
-        listRefresh(ticketList.getLocalStorage());
+        ticketList.setInformation(ticket, ticketId).then;
+        ticketList.getInformation().then((data) => {
+            listRefresh(data);
+        })
+    
+
     })
+  
 }
 
-function closeTicket(){ 
-    let cerrarTicket = document.getElementById('cerrarInfoTicket');
-    cerrarTicket.addEventListener('click', event => { 
-        var cabeceraOcultar = document.getElementById('infoTicket');
-        cabeceraOcultar.style.display = 'none';
+// function closeTicket(){ 
+//     let cerrarTicket = document.getElementById('cerrarInfoTicket');
+//     cerrarTicket.addEventListener('click', event => { 
+//         var cabeceraOcultar = document.getElementById('infoTicket');
+//         cabeceraOcultar.style.display = 'none';
         
-    })
-}
+//     })
+// }
 
-export function creacionForm() {
+export async function creacionForm() {
 
         var html = `
         <div class='containerFormulario'>
@@ -193,46 +196,23 @@ export function creacionForm() {
     div.innerHTML = html;
     document.body.append(div);
 
-    let divBuscador = document.getElementById('buscador');
-    divBuscador.style.display = 'none';
+    // let divBuscador = document.getElementById('buscador');
+    // divBuscador.style.display = 'none';
     //creacion del container que contiene la tabla.
-    let containerList = document.createElement('div');
-    containerList.setAttribute('id', 'containerLista');
-    containerList.setAttribute('class', 'containerLista');
-    document.body.append(containerList);
+    let containerLista = document.createElement('div');
+    containerLista.setAttribute('id', 'containerLista');
+    containerLista.setAttribute('class', 'containerLista');
+    document.body.append(containerLista);
     //creacion del row tabla.
     let tabla = document.createElement('table');
     tabla.setAttribute('class', 'table');
     tabla.setAttribute('id', 'tabla');
-    containerList.appendChild(tabla);
+    containerLista.appendChild(tabla);
 
-    filtersearch();
+    ticketList.getInformation().then((data) => {
+        listRefresh(data);
+    })
+    onSubmit();
+
+    // filtersearch();
 }
-// export function veureTicket(id) { 
-//     var cabeceraOcultar = document.getElementById('cabecera');
-//     cabeceraOcultar.style.display = 'none';
-//     var listaOcultar = document.getElementById('lista');
-//     listaOcultar.style.display = 'none';
-
-//     var ticket = `
-//     <div id='infoTicket' class="infoTicket">
-//         <div>Informació Ticket </div>
-//     <div>
-        
-//         <button class="btn btn-danger" id="cerrarInfoTicket"> cerrar</button>
-//     </div>
-
-//     </div>
-// `
-
-
-//     let divTicket = document.createElement('div');
-//     divTicket.innerHTML = ticket;
-//     document.body.append(divTicket);
-
-//     let ticketInfo = document.createElement('div');
-//     ticketInfo.setAttribute('id', 'ticketInfo');
-//     document.body.append(ticketInfo);
-
-//     closeTicket();
-// }

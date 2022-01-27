@@ -401,3 +401,5 @@ init
 [2022-01-09T18:13:19.471063+01:00] app.DEBUG: Invalid username and password [] []
 [2022-01-09T18:13:19.502615+01:00] app.INFO: Entro a la pàgina d'inici [] []
 [2022-01-09T18:13:19.503667+01:00] app.DEBUG: Entro a una pàgina {"page":"index.php"} []
+[2022-01-26T18:32:11.360997+01:00] app.INFO: Entro a la pàgina d'inici [] []
+[2022-01-26T18:32:11.410087+01:00] app.DEBUG: Entro a una pàgina {"page":"index.php"} []
