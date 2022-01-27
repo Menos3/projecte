@@ -15,6 +15,7 @@ export function crearGrupo() {
     var gruposList = new GrupList();
 
     if(nombreGrupo != "") {
+        
         var grupo = new Grup(gruposList.autoIncrementId(), nombreGrupo, 1);
         gruposList.addGroup(grupo);
         alert("Grupo creado correctamente");

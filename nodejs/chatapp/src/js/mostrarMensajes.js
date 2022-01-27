@@ -21,56 +21,65 @@ export function crearHTMLMostrarMensajes() {
     div.appendChild(tabla);
 
     //LLAMAR A LA LISTA DE MENSAJES
-    var messagesList = new MessagesList();
+    const messagesList = new MessagesList();
     console.log(messagesList);
 
     //A CADA VUELTA DE BUCLE, GENERA UNA FILA Y 5 COLUMNAS
-    for(let mensajes of messagesList.messageList) {
-        
-        //CREAR ELEMENT TR
-        var tr = document.createElement("tr");
+    //for(let mensajes of messagesList) {
+    
+    //TEST DE LA BASE DE DATOS
+    messagesList.then(
 
-        //CREAR ELEMENTS TD PARA LA ID, EL MENSAJE, PUBPRIV, CREATED Y PARA ELIMINARLO
-        var tdId = document.createElement("td");
-        tdId.innerHtml = mensajes.id;
+        function(value) {
 
-        var tdMensaje = document.createElement("td");
-        tdMensaje.innerText = mensajes.message;
+            for(var i = 0; i < value.length; i++) {
 
-        var tdFechaCreacion = document.createElement("td");
-        tdFechaCreacion.innerText = mensajes.created;
+                //CREAR ELEMENT TR
+                var tr = document.createElement("tr");
 
-        var tdPubPriv = document.createElement("td");
-        tdPubPriv.innerText = mensajes.pubpriv;
+                //CREAR ELEMENTS TD PARA LA ID, EL MENSAJE, PUBPRIV, CREATED Y PARA ELIMINARLO
+                var tdId = document.createElement("td");
+                tdId.innerHtml = value.id;
 
-        var tdBorrar = document.createElement("td");
-        var a = document.createElement("a");
-        a.href = "";
-        a.id = "datosMensaje" + mensajes.id;
-        a.innerText = "X";
+                var tdMensaje = document.createElement("td");
+                tdMensaje.innerText = value.message;
 
-        //AÑADIR ELEMENT A AL TDBORRAR
-        tdBorrar.appendChild(a);
+                var tdFechaCreacion = document.createElement("td");
+                tdFechaCreacion.innerText = value.created;
 
-        //AÑADIR LOS TD AL TR
-        tr.appendChild(tdId);
-        tr.appendChild(tdMensaje);
-        tr.appendChild(tdFechaCreacion);
-        tr.appendChild(tdPubPriv);
-        tr.appendChild(tdBorrar);
+                var tdPubPriv = document.createElement("td");
+                tdPubPriv.innerText = value.pubpriv;
 
-        //AÑADIR EL TR A LA TABLE
-        tabla.appendChild(tr);
+                var tdBorrar = document.createElement("td");
+                var a = document.createElement("a");
+                a.href = "";
+                a.id = "datosMensaje" + value.id;
+                a.innerText = "X";
 
-        //EVENTLISTENER PARA BORRAR LA HILERA
-        a.addEventListener("click", (event) => {
+                //AÑADIR ELEMENT A AL TDBORRAR
+                tdBorrar.appendChild(a);
 
-            event.preventDefault();
-            console.log(event.target.id);
-            event.target.parentNode.parentNode.remove();
-            messagesList.deleteMessage(mensajes.id);
+                //AÑADIR LOS TD AL TR
+                tr.appendChild(tdId);
+                tr.appendChild(tdMensaje);
+                tr.appendChild(tdFechaCreacion);
+                tr.appendChild(tdPubPriv);
+                tr.appendChild(tdBorrar);
 
-        });
+                //AÑADIR EL TR A LA TABLE
+                tabla.appendChild(tr);
 
-    }
+                //EVENTLISTENER PARA BORRAR LA HILERA
+                a.addEventListener("click", (event) => {
+
+                event.preventDefault();
+                console.log(event.target.id);
+                event.target.parentNode.parentNode.remove();
+                messagesList.deleteMessage(value.id);
+
+                });
+            }
+        }
+    );
 }
+    //}

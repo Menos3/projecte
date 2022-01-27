@@ -53,7 +53,7 @@ export function crearHTMLFiltrarMensajes() {
         divMensajesSinFiltrar.appendChild(tablaSinFiltrar);
 
         //A CADA VUELTA DE BUCLE, GENERA UNA FILA Y 5 COLUMNAS
-        for(let mensajes of listaMensajes.messageList) {
+        for(let mensajes of listaMensajes) {
 
             console.log("estoy dentro del bucle 1");
         

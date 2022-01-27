@@ -20,9 +20,9 @@ export class MessagesList {
         localStorage.setItem('messages', JSON.stringify(this.messageList));
     }
 
-    cargarLocalStorage() {
-        this.messageList = (localStorage.getItem('messages')) ? JSON.parse(localStorage.getItem('messages')) : [];
-    }
+    //cargarLocalStorage() {
+        //this.messageList = (localStorage.getItem('messages')) ? JSON.parse(localStorage.getItem('messages')) : [];
+    //}
 
     deleteMessage(idMessage) {
 
@@ -36,7 +36,8 @@ export class MessagesList {
 
     filteredList(keyWord) {
 
-        this.cargarLocalStorage();
+        //this.cargarLocalStorage();
+        this.cargarMensajesBBDD();
         
         this.messageList = this.messageList.filter((element) => {
 
@@ -49,14 +50,14 @@ export class MessagesList {
 
     async cargarMensajesBBDD() {
 
-        let mensajes;
+        let messageList = [];
 
         try {
 
-            mensajes = await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/messages.json');
-            mensajes = await mensajes.json();
+            messageList = await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/messages.json');
+            messageList = await messageList.json();
 
-            return mensajes;
+            return messageList;
 
         } catch {
 
