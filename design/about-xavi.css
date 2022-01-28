@@ -48,19 +48,19 @@ box-shadow: 0px 0px 15px 15px #ec731e;
 -webkit-box-shadow: 0px 0px 15px 15px #ec731e;
 transform: rotate(361deg);
 -webkit-transform: rotate(361deg);
-transition: all 3s; 
-animation-duration: 3s;
+transition: all 1.5s; 
+animation-duration: 1.5s;
 
-transition-delay: 4s;
+
 
 
  }
  
 
- #img1:hover::after{
+ /* #img1:hover::after{ */
      /* display: none; */
-    content: attr("multimedia/homer-simpson.svg");
- } 
+    /* content: attr("multimedia/homer-simpson.svg"); */
+ /* }  */
 /* #contenedorFoto:hover #img1{display: 
     
     none;} */
@@ -71,7 +71,9 @@ transition-delay: 4s;
      none;}  */
 
 #contenedorFoto:hover #prof{display: none;}
-#contenedorFoto:hover #img2{display: block;}
+#contenedorFoto:hover #img2{display: block;} 
+#contenedorFoto:hover #img1{visibility: hidden;
+width: 1px;} 
 #contenedorFoto:hover #frase{display: block;}
 
 

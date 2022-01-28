@@ -21,11 +21,27 @@ function optionTicket(){
 
 }
 
+export function startBoard(){
+    var board = new Board(values);
+    boardList.postBoard(board);
+    console.log(boardList.getLocalStorage);
+    console.log(board);
+    // newDivBoard=document.createElement("div");
+    var newDivBoard=document.getElementById("contenedorBoards");
+    for(let i=0;i<localStorage.length;i++){
+        // var newBoard=localStorage[i];
+        // document.newDivBoard.append(newBoard);
+        // newDivBoard.innerHTML=board.id+" "+board.descripcion;
+        newDivBoard.appendChild(board.id+" "+board.descripcion);
+    }
+    document.body.append(newDivBoard);
+}
+
 function onSubmitTasca() {
     const button = document.getElementById('botonCrearTasca');
     button.addEventListener("click", event => {
         event.preventDefault();
-
+        let newDivBoard= document.createElement("div");
         let boardId = boardList.getLastId() + 1;
         // let boardName = document.getElementById('titulo').value;
         let boardDesc = document.getElementById('descripcion').value;
@@ -45,9 +61,23 @@ function onSubmitTasca() {
         console.log(board);
         // listRefresh(boardList.getLocalStorage());
 
+        for(let i=0;i<localStorage.length;i++){
+            var newBoard=localStorage[i];
+            // document.newDivBoard.append(newBoard);
+            newDivBoard.innerHTML=board.id+" "+board.descripcion;
+        }
+        document.body.append(newDivBoard);
+
 
 
     })}
+
+    // function refreshTaulaBoards(){
+    //     let divB=document.getElementById("contenedorB");
+    //     divB.setAttribute("")
+            // for(localStorage()) hacer bucle de los boards del locarStorage.
+            // i ir imprimiendolos en el div de Boards
+    // }
 
 export function refreshTicketX(){
     let oldTasca=document.getElementById('contenedorTotal');
@@ -93,6 +123,10 @@ export function createTasques(){
         <button type='submit' id='zoom'>Veure</button>
         <button type='submit' id='subir'>Crear Tasca</button>
         <button type='reset' id='cancel'>Eliminar</button>
+    </div>
+
+    <div id="contenedorBoards">
+   
     </div>
 `
 let div2 = document.createElement('div');

@@ -1,0 +1,20 @@
+*{
+    box-sizing: border-box;
+}
+
+div{
+    width: 100%;
+    
+}
+div button{
+    width: 10%;
+}
+div input,label,select{
+    width: 50%;
+    margin: 0 auto;
+}
+#botonCrearTasca{
+    width: 10%;
+    display: block;
+    clear: left;
+}

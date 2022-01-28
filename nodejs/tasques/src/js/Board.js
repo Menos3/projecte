@@ -8,7 +8,9 @@ export class Board {
         this.descripcion = descripcion;
         this.ticket=ticket;
         //esto lo coge del metodo del constructor: nose pasa por props.
+        
         this.created = this.getDate();
+        // this.created.setLocalStorage();
         // this.isDone = false;
         // this.actualizado = this.getDate();
     }
