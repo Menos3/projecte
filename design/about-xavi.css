@@ -1,11 +1,28 @@
+*{
+    box-sizing: border-box;
+}
 
+#contenedor{
+    border: 1px solid black;
+   
+    
+}
 #contenedorFoto{
-    width: 20%;
-    border: 1px solid;
+    width: 100%;
+    display: flex;  
+    flex-direction: column;
+    /* display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto auto; */
+    /* border: 1px solid; */
 }
 img{
-    width: 100%;
+    width: 20%;
+    border: black 1px solid;
+    /* grid-column-start: 2;
+    grid-row-start: 1; */
     /* height: 40%; */
+    margin: 0 auto;
 }
 
 #img2{
@@ -15,26 +32,61 @@ img{
     display: none;
 }
 p{
-    width: 10%;
+    width: 40%;
     size: 10%;
+    margin: 0 auto;
 }
-
-#contenedorFoto:hover #img1{display: none;}
-#contenedorFoto:hover #prof{display: none;}
-#contenedorFoto:hover #img2{display: block;}
-#contenedorFoto:hover #frase{display: block;}
-
-
-
-img:hover{
-border-radius:50%;
+/* #trampa{
+    width: 100%;
+    height: 100vh;
+} */
+#contenedorFoto:hover #img1{ 
+ border-radius:50%;
+ 
 -webkit-border-radius:50%;
 box-shadow: 0px 0px 15px 15px #ec731e;
 -webkit-box-shadow: 0px 0px 15px 15px #ec731e;
 transform: rotate(361deg);
 -webkit-transform: rotate(361deg);
-transition: all 3s;
-}
+transition: all 1.5s; 
+animation-duration: 1.5s;
+
+
+
+
+ }
+ 
+
+ /* #img1:hover::after{ */
+     /* display: none; */
+    /* content: attr("multimedia/homer-simpson.svg"); */
+ /* }  */
+/* #contenedorFoto:hover #img1{display: 
+    
+    none;} */
+    /* #contenedorFoto:hover #trampa{display: none;} */
+
+     /* #contenedorFoto:hover #img1{display: 
+    
+     none;}  */
+
+#contenedorFoto:hover #prof{display: none;}
+#contenedorFoto:hover #img2{display: block;} 
+#contenedorFoto:hover #img1{visibility: hidden;
+width: 1px;} 
+#contenedorFoto:hover #frase{display: block;}
+
+
+
+/* img:hover{ */
+/* border-radius:50%;
+-webkit-border-radius:50%;
+box-shadow: 0px 0px 15px 15px #ec731e;
+-webkit-box-shadow: 0px 0px 15px 15px #ec731e;
+transform: rotate(361deg);
+-webkit-transform: rotate(361deg);
+transition: all 3s; */
+/* } */
 
 /* img:hover #prof{
     display: none;
