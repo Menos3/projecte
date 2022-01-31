@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,6 @@ Route::get('/', function (Request $request) {
     return view('welcome');
  });
 
-Route::get('mail/test', [MailController::class, 'test']);
+Route::get('mail/test', [MailController::class, 'test'])->middleware("auth");
 
  

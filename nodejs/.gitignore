@@ -15,4 +15,5 @@ newTickets/node_modules
 newTickets/pakage-lock.json
 newTickets/pakage.json
 newTickets/webpack.config.js
-
+nodejs/newTickets/package-lock.json
+nosejs/newTickets/package.json

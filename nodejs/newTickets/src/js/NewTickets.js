@@ -1,3 +1,8 @@
+import { initializeApp } from "firebase/app";
+
+
+
+
 export class Tickets {
     constructor(props) {
         //que solo reciba un objecto en vez de los 5 argumentos
@@ -25,8 +30,23 @@ export class ListTickets {
     data;
     constructor() {
         this.getInformation().then;
+    }
+    conection() { 
+        const firebaseConfig = {
+            apiKey: "AIzaSyBjfR57eGmzI-baQMUQKUC1MgolVdM6b4c",
+            authDomain: "jsuite-710e7.firebaseapp.com",
+            databaseURL: "https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app",
+            projectId: "jsuite-710e7",
+            storageBucket: "jsuite-710e7.appspot.com",
+            messagingSenderId: "840700028054",
+            appId: "1:840700028054:web:fc18c8d887325a8793ceb7"
+          };
+          
+          // Initialize Firebase
+          const app = initializeApp(firebaseConfig);
 
     }
+
     async getInformation() {
         try {
             this.data = (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json')).json();
@@ -42,9 +62,9 @@ export class ListTickets {
     }
     async setInformation(ticket, id) {
         try {
-            const ticket = (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets/' + id + '.json',
+            ticket = (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets/' + ticket + '.json',
                 {
-                    method: PUT,
+                    method: SET,
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -52,7 +72,14 @@ export class ListTickets {
                 })
             )
         }
-        catch (error) { }
+        catch (error) { 
+            console.log("no furrula")
+        }
+    }
+    getLastId() {
+        let id = this.data.length > 0 ? this.data.at(-1).id : 0;
+
+        return id;
     }
 
 }    

@@ -235,6 +235,8 @@ export function creacionForm() {
                     </div>
                 </div>
             </form>
+            <div id='veureTicket class='infoTicket' display='none'>
+            </div>
         </div>
     
     `
@@ -262,30 +264,12 @@ export function creacionForm() {
     filtersearch();
 }
 export function veureTicket(id) { 
-    var cabeceraOcultar = document.getElementById('cabecera');
-    cabeceraOcultar.style.display = 'none';
-    var listaOcultar = document.getElementById('lista');
-    listaOcultar.style.display = 'none';
+    let ocultar = document.getElementById('lista');
+    ocultar.style.display = 'none';
 
-    var ticket = `
-    <div id='infoTicket' class="infoTicket">
-        <div>Informació Ticket </div>
-    <div>
-        
-        <button class="btn btn-danger" id="cerrarInfoTicket"> cerrar</button>
-    </div>
+    let mostar=document.getElementById('infoTicket')
 
-    </div>
-`
-
-
-    let divTicket = document.createElement('div');
-    divTicket.innerHTML = ticket;
-    document.body.append(divTicket);
-
-    let ticketInfo = document.createElement('div');
-    ticketInfo.setAttribute('id', 'ticketInfo');
-    document.body.append(ticketInfo);
+    
 
     closeTicket();
 }

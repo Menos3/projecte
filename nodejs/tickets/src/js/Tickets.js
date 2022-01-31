@@ -39,11 +39,7 @@ export class ListTickets {
             JSON.parse(localStorage.getItem('tickets')) : [];
         return this.tickets;
     }
-    getLastId() {
-        let id = this.tickets.length > 0 ? this.tickets.at(-1).id : 0;
-
-        return id;
-    }
+   
     updateTicket(id, value) {
         this.tickets.forEach(element => {
             if (element.id == id) {

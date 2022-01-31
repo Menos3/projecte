@@ -16,7 +16,7 @@ class AdminTest extends TestCase
     public function test_exists()
     {
         $count = DB::table ('users')
-            ->where('username', '=', 'admin1')
+            ->where('name', '=', 'admin')
             ->count();
         $this->assertEquals($count,1);
        
