@@ -67,7 +67,8 @@ function listRefresh(list) {
         butInfo.setAttribute('id', 'butInfo' + element.id);
         butInfo.innerHTML = "Veure";
         butInfo.addEventListener('click', event => { 
-            veureTicket(element.id);
+            const ticketSeleccionado = ticketList.getItemByID(element.id);
+            veureTicket(ticketSeleccionado);
         })
 
         let butBorrar = document.createElement('button');
@@ -263,13 +264,86 @@ export function creacionForm() {
     divBuscador.style.display = 'none';
     filtersearch();
 }
-export function veureTicket(id) { 
+function veureTicket(ticket) { 
     let ocultar = document.getElementById('lista');
     ocultar.style.display = 'none';
 
-    let mostar=document.getElementById('infoTicket')
+    const mostar = document.getElementById('infoTicket')
+    mostar.style.display = 'block';
 
+    //creamos la tabla
+    let tablaInfoTicket = document.createElement('table');
+    tabla.setAttribute('class', 'tableInfoTicket');
+    tabla.setAttribute('id', 'tablaInfoTicket');
+
+    let cabecera = document.createElement('thead');
+    cabecera.setAttribute('class', 'th');
+
+    let tiId = document.createElement('th');
+    tiId.innerHTML = 'Nº Id';
+
+
+    let tiTitulo = document.createElement('th');
+    tiTitulo.innerHTML = 'Titulo';
     
+
+    let tiDesc = document.createElement('th');
+    tiDesc.innerHTML = 'Descripcion';
+
+    let tiEquipo = document.createElement('th');
+    tiEquipo.innerHTML = 'Equipo';
+
+    let tiAsig = document.createElement('th');
+    tiAsig.innerHTML = 'Asignacion';
+
+    let tiCrea = document.createElement('th');
+    tiCrea.innerHTML = 'Emitido';
+
+    let tiFet= document.createElement('th');
+    tiFet.innerHTML = 'Realizado';
+
+    let cuerpoTabla = document.createElement('tbody');
+    
+
+
+    ticket.for(){
+        console.log("Ha entrado")
+
+        let butInfo = document.createElement('button');
+        butInfo.setAttribute('class', "btn btn-info");
+        butInfo.setAttribute('id', 'butInfo' + element.id);
+        butInfo.innerHTML = "Veure";
+        //Check
+        let checkMostra = document.createElement('input');
+        checkMostra.setAttribute('type', 'checkbox');
+        checkMostra.setAttribute('class', 'lista__check');
+        checkMostra.setAttribute('id', 'check' + element.id);
+        //linea
+        let linea = document.createElement('tr');
+        linea.setAttribute('class', 'list__line');
+        linea.setAttribute('id', 'line' + element.id);
+        linea.innerHTML = `<td>${element.id}</td>
+        <td>${element.titulo}</td>
+        <td>${element.descripcion}</td>
+        <td>${element.assetId}</td>
+        <td>${element.assignedId}</td>
+        <td>${element.created}</td>
+        `;
+        //añadimos
+        mostar.appendChild(tablaInfoTicket);
+        tablaInfoTicket.appendChild(cabecera);
+        cabecera.appendChild(tiId);
+        cabecera.appendChild(tiTitulo);
+        cabecera.appendChild(tiDesc);
+        cabecera.appendChild(tiEquipo);
+        cabecera.appendChild(tiAsig);
+        cabecera.appendChild(tiCrea);
+        cabecera.appendChild(tiFet);
+        tablaInfoTicket.appendChild(cuerpoTabla);
+        cuerpoTabla.appendChild(linea);
+        linea.appendChild(checkMostra);
+        
+    })
 
     closeTicket();
 }

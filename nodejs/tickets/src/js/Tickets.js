@@ -39,6 +39,11 @@ export class ListTickets {
             JSON.parse(localStorage.getItem('tickets')) : [];
         return this.tickets;
     }
+    getLastId() {
+        let id = this.tickets.length > 0 ? this.tickets.at(-1).id : 0;
+
+        return id;
+    }
    
     updateTicket(id, value) {
         this.tickets.forEach(element => {
@@ -71,11 +76,14 @@ export class ListTickets {
     getItemByID(id) { 
         this.getLocalStorage();
         return this.tickets.filter(element => {
-            element.id == id;
+            element.id==id;
+            console.log(element.id, id);
 
         })[0];
         
+        
     }
+   
     getSearchInfo(value) {
         this.getLocalStorage();
         this.tickets = this.tickets.filter(element => {
