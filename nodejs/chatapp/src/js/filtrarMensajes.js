@@ -36,8 +36,6 @@ export function crearHTMLFiltrarMensajes() {
 
     });
 
-
-
     function crearListaMensajesSinFiltrar() {
 
         //CREAR ELEMENT DIV

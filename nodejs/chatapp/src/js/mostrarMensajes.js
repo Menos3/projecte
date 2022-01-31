@@ -21,18 +21,16 @@ export function crearHTMLMostrarMensajes() {
     div.appendChild(tabla);
 
     //LLAMAR A LA LISTA DE MENSAJES
-    const messagesList = new MessagesList();
+    var messagesList = new MessagesList();
     console.log(messagesList);
 
     //A CADA VUELTA DE BUCLE, GENERA UNA FILA Y 5 COLUMNAS
-    //for(let mensajes of messagesList) {
+    for(let mensajes of messagesList) {
     
     //TEST DE LA BASE DE DATOS
-    messagesList.then(
+    //messagesList.then((value) => {
 
-        function(value) {
-
-            for(var i = 0; i < value.length; i++) {
+            for(var i = 0; i < messagesList.length; i++) {
 
                 //CREAR ELEMENT TR
                 var tr = document.createElement("tr");
@@ -80,6 +78,6 @@ export function crearHTMLMostrarMensajes() {
                 });
             }
         }
-    );
+    //);
 }
     //}

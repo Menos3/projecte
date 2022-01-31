@@ -3,7 +3,9 @@ export class MessagesList {
     constructor() {
         this.messageList = [];
         //this.cargarLocalStorage();
-        this.messageList = this.cargarMensajesBBDD();
+        this.messageList = this.cargarMensajesBBDD().then((datos) => {
+
+        });
     }
 
     addMessage(message) {
@@ -50,14 +52,14 @@ export class MessagesList {
 
     async cargarMensajesBBDD() {
 
-        let messageList = [];
+        let listaMensajesBBDD = [];
 
         try {
 
-            messageList = await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/messages.json');
-            messageList = await messageList.json();
+            listaMensajesBBDD = await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/messages.json');
+            listaMensajesBBDD = await listaMensajesBBDD.json();
 
-            return messageList;
+            return listaMensajesBBDD;
 
         } catch {
 
