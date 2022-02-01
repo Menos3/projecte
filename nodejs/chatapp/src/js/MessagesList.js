@@ -3,9 +3,6 @@ export class MessagesList {
     constructor() {
         this.messageList = [];
         //this.cargarLocalStorage();
-        this.messageList = this.cargarMensajesBBDD().then((datos) => {
-
-        });
     }
 
     addMessage(message) {
@@ -36,19 +33,18 @@ export class MessagesList {
         this.guardarLocalStorage();
     }
 
-    filteredList(keyWord) {
+    //filteredList(keyWord) {
 
         //this.cargarLocalStorage();
-        this.cargarMensajesBBDD();
         
-        this.messageList = this.messageList.filter((element) => {
+        //this.messageList = this.messageList.filter((element) => {
 
-            if(element.message.match(new RegExp(keyWord, "i")))
-            return true;
-        });
+            //if(element.message.match(new RegExp(keyWord, "i")))
+            //return true;
+        //});
 
-        return this.messageList;   
-    }
+        //return this.messageList;   
+    //}
 
     async cargarMensajesBBDD() {
 
