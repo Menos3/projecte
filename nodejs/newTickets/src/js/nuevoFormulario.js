@@ -13,7 +13,7 @@ var ticketList = new ListTickets();
 //funcion que reciba la lista de ticket y esta se pone
 //dentro de un div y este div de destruye y contruye
 //para que este actualizada
-function listRefresh(list) {
+async function listRefresh(list) {
     console.log(list);
     //la lista vieja
     let oldList = document.getElementById('containerLista');
@@ -125,40 +125,35 @@ function assetsOptions() {
 
 function onSubmit() {
     let añadir = document.getElementById('addTicketButton');
-    añadir.addEventListener("click", event => { 
+    añadir.addEventListener("click", event => {
         event.preventDefault();
-        let ticketId = ticketList.getLastId() + 1;
+        // let ticketId = ticketList.getLastId() + 1;
         let ticketName = document.getElementById('titulo').value;
         let ticketDesc = document.getElementById('description').value;
         let ticketAssigned = document.getElementById('tec').value;
         let ticketAsset = document.getElementById('assets').value;
         const values = {
             //ticketId: ticketId,
-            id: ticketId,
+            // id: ticketId,
             titulo: ticketName,
             descripcion: ticketDesc,
             assignedId: ticketAssigned,
             assetId: ticketAsset
         }
         var ticket = new Tickets(values);
-        ticketList.setInformation(ticket, ticketId).then;
+        // ticketList.upDateList(ticket);
+        ticketList.createTicket(ticket);
         ticketList.getInformation().then((data) => {
             listRefresh(data);
         })
     
 
-    })
-  
+    });
 }
+  
 
-// function closeTicket(){ 
-//     let cerrarTicket = document.getElementById('cerrarInfoTicket');
-//     cerrarTicket.addEventListener('click', event => { 
-//         var cabeceraOcultar = document.getElementById('infoTicket');
-//         cabeceraOcultar.style.display = 'none';
-        
-//     })
-// }
+
+
 
 export async function creacionForm() {
 

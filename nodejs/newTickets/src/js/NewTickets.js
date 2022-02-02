@@ -26,31 +26,18 @@ export class Tickets {
     }
 }
 export class ListTickets {
+    ticket;
     tickets;
     data;
     constructor() {
         this.getInformation().then;
     }
-    conection() { 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBjfR57eGmzI-baQMUQKUC1MgolVdM6b4c",
-            authDomain: "jsuite-710e7.firebaseapp.com",
-            databaseURL: "https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app",
-            projectId: "jsuite-710e7",
-            storageBucket: "jsuite-710e7.appspot.com",
-            messagingSenderId: "840700028054",
-            appId: "1:840700028054:web:fc18c8d887325a8793ceb7"
-          };
-          
-          // Initialize Firebase
-          const app = initializeApp(firebaseConfig);
-
-    }
 
     async getInformation() {
         try {
             this.data = (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json')).json();
-            console.log(this.data);
+            console.log(this.data, "esto es data");
+            
             return this.data;
         }
         catch (e) {
@@ -60,27 +47,36 @@ export class ListTickets {
         }
     
     }
-    async setInformation(ticket, id) {
+    async createTicket(ticket) {
+        // var id = this.getLastId();
         try {
-            ticket = (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets/' + ticket + '.json',
+          
+            // let id = this.data.length > 0 ? this.data.at(-1).id : 0;
+
+            this.ticket = (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json',
                 {
-                    method: SET,
+                    method: "POST",
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(ticket)
                 })
-            )
+            ).json();
+            console.log(this.ticket);
         }
         catch (error) { 
-            console.log("no furrula")
+            // console.log("no furrula");
+            console.log(error) 
+                
+            
         }
     }
-    getLastId() {
-        let id = this.data.length > 0 ? this.data.at(-1).id : 0;
+    //  getLastId() {
 
-        return id;
-    }
+    //     let id = this.data.length > 0 ? this.data.at(-1).id : 0;
+    //     console.log(id);
+    //     return id;
+    // }
 
 }    
 

@@ -15,8 +15,20 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
             $table->timestamps();
         });
+        Schema::table('users', function (Blueprint $table) {
+            $table->unsignedBigInteger('role_id');
+            $table->foreign('role_id')->references('id')->on('roles');
+        });
+
+        Artisan::call('db:seed', [
+        '--class' => 'RoleSeeder',
+        '--force' => true
+        ]);
+ 
+
     }
 
     /**
@@ -26,6 +38,11 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
+        Schema::table('user', function(Blueprint $table){
+            $table->dropForeign('roles_id_foreign');
+            $table->dropColumn('role_id');
+        });
+
         Schema::dropIfExists('roles');
     }
 }

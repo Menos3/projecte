@@ -3,7 +3,7 @@ import "./bootstrap.min.css";
 import "./css/form.css";
 
 
- creacionForm();
+creacionForm();
 
 
 
