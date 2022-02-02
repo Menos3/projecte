@@ -1,13 +1,16 @@
+//COMPONENTES
 let audio = document.getElementById("soundClip");
 let divImagen = document.getElementById("divImagen");
 let ventanaVideos = document.getElementById("ventanaVideos");
 let btCerrar = document.getElementById("btCerrar");
-var videos = document.getElementsByTagName("video");
+var iFrames = document.getElementsByTagName("iframe");
 var prevBtn = document.getElementsByClassName("carousel-control-prev")[0];
 var nextBtn = document.getElementsByClassName("carousel-control-next")[0];
+var btClose = document.getElementsByClassName("btn-close")[0];
 
+//VARIABLES
 var cur = 0;
-var max = videos.length;
+var max = iFrames.length;
 
 //EL AUDIO SE ACTIVA AL PASAR POR ENCIMA DEL DIV
 divImagen.addEventListener("mouseover", () => {
@@ -25,29 +28,41 @@ divImagen.addEventListener("click", () => {
     ventanaVideos.style.display = "block";
 });
 
-//CERRAR VENTANA MODAL
+//CERRAR VENTANA MODAL CON LA X
 btCerrar.addEventListener("click", () => {
+    ventanaVideos.style.display = "none";
+});
+
+//CERRAR VENTANA MODAL CON EL BOTON CLOSE
+btClose.addEventListener("click", () => {
     ventanaVideos.style.display = "none";
 });
 
 console.log("Loaded videos: " + max);
  
-var playVideos = function(){
-    // Pause all videos
-    for (v=0; v<max; v++) {
-        videos[v].pause();
+var playVideos = function() {
+
+    // PAUSAR TODOS LOS VIDEOS
+    for (v = 0; v < max; v++) {
+
+        iFrames[v].pause();
     }
-    // Play current video
+    
+    // REPRODUCIR VIDEO ACTUAL
     console.log("Play video " + cur);
-    videos[cur].play();
+    iFrames[cur].play();
 }
  
-prevBtn.addEventListener("click", function(){
-    cur = (cur-1 >= 0) ? cur-1 : max;
+prevBtn.addEventListener("click", function() {
+
+    cur = (cur - 1 >= 0) ? cur - 1 : max;
     playVideos();
+
 });
  
-nextBtn.addEventListener("click", function(){
-   cur = (cur+1 < max) ? cur+1 : 0;
+nextBtn.addEventListener("click", function() {
+
+   cur = (cur + 1 < max) ? cur + 1 : 0;
    playVideos();
+
 });
