@@ -1,8 +1,3 @@
-import { initializeApp } from "firebase/app";
-
-
-
-
 export class Tickets {
     constructor(props) {
         //que solo reciba un objecto en vez de los 5 argumentos
@@ -27,41 +22,32 @@ export class Tickets {
 }
 export class ListTickets {
     ticket;
-    tickets;
-    constructor() { 
-        this.getInformation();
-    }
-   
+    tickets; 
+    ticketsFirebaseUrl = 'https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json';
 
-    getInformation() {
+    async getInformation() {
         
-        let response = axios('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json')
-            
-            .then(response => response.data)
-            .catch(error => { 
-            console.log(error);
-            console.log("error al mostrar los tickets el await.");
-                
-            })
-            //que no exista JSON
-        Promise.resolve(response).then(data => { 
-            this.tickets = data;
-        });
-            console.log(this.tickets, "hasjdahksd");
-            return this.tickets;
-        
-        
-    }
-    async createTicket(ticket) {
-        // var id = this.getLastId();
-        try {
+        try{        
+            let response = await axios(this.ticketsFirebaseUrl);
+            this.tickets = response.data;
             if (!this.tickets) { 
                 this.tickets = [];
             }
-            // let id = this.data.length > 0 ? this.data.at(-1).id : 0;
-            
+            return this.tickets;
+        }catch(e){
+            console.log("Error al cargar info de la BBDD"); 
+            console.log(e);
+        }        
+
+    }
+
+    async createTicket(ticket) {
+        try {
+            if (!this.tickets) { 
+                this.tickets = [];
+            }            
             this.tickets.push(ticket);
-            (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json',
+            (await fetch(this.ticketsFirebaseUrl,
                 {
                         //devuelvo lo que le mandas
                     method: "PUT",
@@ -70,8 +56,7 @@ export class ListTickets {
                     },
                     body: JSON.stringify(this.tickets)
                 })
-            ).json();
-            
+            );  
         }
         catch (error) { 
             console.log("no furrula la subida del ticket");
@@ -80,16 +65,10 @@ export class ListTickets {
             
         }
     }
+    
     generateId() {
         let id = Math.floor(Math.random() * 9999999999);
         return id;
     }
-    //  getLastId() {
-
-    //     let id = this.data.length > 0 ? this.data.at(-1).id : 0;
-    //     console.log(id);
-    //     return id;
-    // }
-
 }    
 
