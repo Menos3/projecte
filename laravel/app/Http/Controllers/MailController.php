@@ -1,13 +1,13 @@
 <?php
- 
+
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
 use App\Mail\TestMail;
- 
+
 class MailController extends Controller
 {
-   public function test(Request $request)
+    public function test(Request $request)
    {
        try {
            $mail = new TestMail([
@@ -20,5 +20,6 @@ class MailController extends Controller
        } catch (\Exception $e) {
            echo '<pre>Error - ' . $e .'</pre>';
        }
-   }
+    }
 }
+?>

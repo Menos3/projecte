@@ -6,17 +6,24 @@ let tfNombreGrupo = document.getElementById("tfNombreGrupo");
 let btCrearGrupo = document.getElementById("btCrearGrupo");
 
 //EVENTLISTENER DEL BOTON
-btCrearGrupo.addEventListener("click", (event) => {crearGrupo(event)});
+btCrearGrupo.addEventListener("click", (event) => {crearGrupo()});
 
 //FUNCION DE CREAR EL GRUPO
-export function crearGrupo(event) {
+export function crearGrupo() {
 
-    event.preventDefault();
-    var nombreGrupo = tfNombreGrupo.value();
+    var nombreGrupo = tfNombreGrupo.value;
     var gruposList = new GrupList();
 
-    var grupo = new Grup(1, nombreGrupo, 1);
+    if(nombreGrupo != "") {
+        
+        var grupo = new Grup(gruposList.autoIncrementId(), nombreGrupo, 1);
+        gruposList.setGroup(grupo,gruposList.autoIncrementId() + 1);
+        //gruposList.addGroup(grupo);
+        
+        alert("Grupo creado correctamente");
+        tfNombreGrupo.value = "";
 
-    gruposList.addGroup(grupo);
-
+    } else {
+        alert("Error al crear el grupo");
+    }
 }

@@ -1,14 +1,12 @@
 import {MessagesList} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/MessagesList"
 
 export function crearHTMLMostrarMensajes() {
-    
-    let divMostrarMensajes = document.getElementById("mostrarMensajes");
 
-    //CREAR ELEMENT FORM Y AÑADIRLO AL DIV PRINCIPAL
+    //CREAR ELEMENT FORM
     var formulario = document.createElement("form");
     formulario.id = "formMostrarMensajes";
 
-    divMostrarMensajes.appendChild(formulario);
+    document.body.appendChild(formulario);
     //CREAR ELEMENT DIV
     var div = document.createElement("div");
     div.name = "containerMensajes";
@@ -25,53 +23,56 @@ export function crearHTMLMostrarMensajes() {
     //LLAMAR A LA LISTA DE MENSAJES
     var messagesList = new MessagesList();
 
-    //A CADA VUELTA DE BUCLE, GENERA UNA FILA Y 5 COLUMNAS
-    for(var i = 0; i < messagesList.length; i++) {
+    //CARGAR BASE DE DATOS
+    messagesList.cargarMensajesBBDD().then((datosBBDD) => {
+        
+        //A CADA VUELTA DE BUCLE, GENERA UNA FILA Y 5 COLUMNAS
+        for(let mensajes of datosBBDD) {
 
-        //CREAR ELEMENT TR
-        var tr = document.createElement("tr");
+            //CREAR ELEMENT TR
+            var tr = document.createElement("tr");
 
-        //CREAR ELEMENTS TD PARA LA ID, EL MENSAJE, PUBPRIV, CREATED Y PARA ELIMINARLO
-        var tdId = document.createElement("td");
-        tdId.innerText = i.id;
+            //CREAR ELEMENTS TD PARA LA ID, EL MENSAJE, PUBPRIV, CREATED Y PARA ELIMINARLO
+            var tdId = document.createElement("td");
+            tdId.innerHtml = mensajes.id;
 
-        var tdMensaje = document.createElement("td");
-        tdMensaje.innerText = i.message;
+            var tdMensaje = document.createElement("td");
+            tdMensaje.innerText = mensajes.message;
 
-        var tdFechaCreacion = document.createElement("td");
-        tdFechaCreacion.innerText = i.created;
+            var tdFechaCreacion = document.createElement("td");
+            tdFechaCreacion.innerText = mensajes.created;
 
-        var tdPubPriv = document.createElement("td");
-        tdPubPriv.innerText = i.pubpriv;
+            var tdPubPriv = document.createElement("td");
+            tdPubPriv.innerText = mensajes.pubpriv;
 
-        var tdBorrar = document.createElement("td");
-        var a = document.createElement("a");
-        a.href = "";
-        a.id = "datosMensaje" + i.id;
-        a.innerText = "X";
+            var tdBorrar = document.createElement("td");
+            var a = document.createElement("a");
+            a.href = "";
+            a.id = "datosMensaje" + mensajes.id;
+            a.innerText = "X";
 
-        //AÑADIR ELEMENT A AL TDBORRAR
-        tdBorrar.appendChild(a);
+            //AÑADIR ELEMENT A AL TDBORRAR
+            tdBorrar.appendChild(a);
 
-        //AÑADIR LOS TD AL TR
-        tr.appendChild(tdId);
-        tr.appendChild(tdMensaje);
-        tr.appendChild(tdFechaCreacion);
-        tr.appendChild(tdPubPriv);
-        tr.appendChild(tdBorrar);
+            //AÑADIR LOS TD AL TR
+            tr.appendChild(tdId);
+            tr.appendChild(tdMensaje);
+            tr.appendChild(tdFechaCreacion);
+            tr.appendChild(tdPubPriv);
+            tr.appendChild(tdBorrar);
 
-        //AÑADIR EL TR A LA TABLE
-        tabla.appendChild(tr);
+            //AÑADIR EL TR A LA TABLE
+            tabla.appendChild(tr);
 
-        //EVENTLISTENER PARA BORRAR LA HILERA
-        a.addEventListener("click", (event) => {
+            //EVENTLISTENER PARA BORRAR LA HILERA
+            a.addEventListener("click", (event) => {
 
-            event.preventDefault();
-            console.log(event.target.id);
-            event.target.parentNode.parentNode.remove();
-            messagesList.deleteMessage(i);
+                event.preventDefault();
+                console.log(event.target.id);
+                event.target.parentNode.parentNode.remove();
+                messagesList.deleteMessage(mensajes.id);
 
-        });
-
-    }
+            });
+        }
+    });
 }

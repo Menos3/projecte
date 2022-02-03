@@ -1,0 +1,75 @@
+{
+    "groups":[{
+
+        "id":1,
+        "name":"",
+        "parent_id":1
+        },
+        {
+        "id":1,
+        "name":"infectados de covid",
+        "parent_id":1
+        },
+        {
+        "id":1,
+        "name":"supervivientes covid",
+        "parent_id":1},
+        {
+        "id":1,
+        "name":"test",
+        "parent_id":1
+    }],
+
+    "messages":[{
+
+        "id":1,
+        "author_id":0,
+        "message":"hola",
+        "created":"01/14/2022",
+        "pubpriv":"private",
+        "dest_id":0
+        },
+        {
+        "id":2,
+        "author_id":0,
+        "message":"eeeeyyyyy",
+        "created":"01/21/2022",
+        "pubpriv":"private",
+        "dest_id":0
+        },
+        {
+        "id":3,
+        "author_id":0,
+        "message":"que tal?",
+        "created":"01/21/2022",
+        "pubpriv":"private",
+        "dest_id":0
+    }],
+
+    "tickets": [{
+        "id": 1,
+        "titulo": "Teclano de oficina 3",
+        "descripcion": "No funaciona la letra A",
+        "assignedId": "0",
+        "assetId": "2",
+        "created": "Sat Jan 22 2022",
+        "isDone": false
+        }, {
+        "id": 2,
+        "titulo": "Pixels muertos",
+        "descripcion": "La pantalla tiene unos pixels muertos que hace que no pueda trabjar como es debido.",
+        "assignedId": "1",
+        "assetId": "4",
+        "created": "Sat Jan 22 2022",
+        "isDone": false
+        }, {
+        "id": 3,
+        "titulo": "no funciona",
+        "descripcion": "No se que le pasa",
+        "assignedId": "2",
+        "assetId": "6",
+        "created": "Sat Jan 22 2022",
+        "isDone": false
+    }]
+}
+

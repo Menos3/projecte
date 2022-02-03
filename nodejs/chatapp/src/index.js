@@ -4,14 +4,17 @@ import {MessagesList} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/Message
 import {GrupList} from "/xampp/htdocs/projecte/nodejs/commons/GrupList"
 import {crearGrupo} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/grupos"
 import {crearHTMLMostrarMensajes} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/mostrarMensajes"
+import {crearHTMLFiltrarMensajes} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/filtrarMensajes"
 
 //COMPONENTES DE TODOS LOS FORMULARIOS
 let btFormCrearMensaje = document.getElementById("btFormCrearMensaje");
 let btFormCrearGrupo = document.getElementById("btFormCrearGrupo");
 let btFormMostrarMensajes = document.getElementById("btFormMostrarMensajes");
+let btFormFiltrarMensajes = document.getElementById("btFormFiltrarMensajes");
 let divCrearMensajes = document.getElementById("crearMensajes");
 let divCrearGrupos = document.getElementById("crearGrupos");
 let divMostrarMensajes = document.getElementById("mostrarMensajes");
+let divFiltrarMensajes = document.getElementById("filtrarMensajes");
 let cbPublic = document.getElementById("cbPublic");
 let tfGrupo = document.getElementById("tfGrupo");
 let cbPrivado = document.getElementById("cbPrivado");
@@ -22,16 +25,17 @@ let divPublic = document.getElementById("containerPublic");
 let divPrivate = document.getElementById("containerPrivate");
 
 //EVENTLISTENER DE LOS BOTONES DEL MENU
-btFormCrearMensaje.addEventListener("click", (event) => {mostrarFormCrearMensaje(event)});
-btFormCrearGrupo.addEventListener("click", (event) => {mostrarFormCrearGrupo(event)});
-btFormMostrarMensajes.addEventListener("click", (event) => {mostrarFormMostrarMensajes(event)});
+btFormCrearMensaje.addEventListener("click", (event) => {mostrarFormCrearMensaje()});
+btFormCrearGrupo.addEventListener("click", (event) => {mostrarFormCrearGrupo()});
+btFormMostrarMensajes.addEventListener("click", (event) => {mostrarFormMostrarMensajes()});
+btFormFiltrarMensajes.addEventListener("click", (event) => {mostrarFormFiltrarMensajes()});
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE CREAR MENSAJES
-function mostrarFormCrearMensaje(event) {
+function mostrarFormCrearMensaje() {
 
-    event.preventDefault();
     divCrearGrupos.style.display = "none";
     divMostrarMensajes.style.display = "none";
+    divFiltrarMensajes.style.display = "none";
     divCrearMensajes.style.display = "block";
 
     //EVENTLISTENER DE LOS CHECKBOX
@@ -103,14 +107,14 @@ function mostrarFormCrearMensaje(event) {
             //POR CADA GRUPO EN EL ARRAY, SI EL NOMBRE DE GRUPO INTRODUCIDO COINCIDE CON UNO DEL ARRAY
             for(let grupos of listaGrupos.grupsList) {
 
-                if(grupos.name == nombreGrupo) {
+                if(grupos.name === nombreGrupo) {
 
                     //AUTHOR_ID CORRESPONDIENTE AL PRIMER ELEMENTO DEL ARRAY DE USUARIOS (NO SE QUE USUARIO HACE ESTO)
                     var mensaje = new Messages(listaGrupos.autoIncrementId() + 1, listaUsuarios.usuaris[0].id_usuari, cuerpoMensaje, fechaActual(), pubpriv, grupos.id);
 
                     //CARGAR ARRAY DE MENSAJES E INSERTAR EL MENSAJE CREADO
                     let listaMensajes = new MessagesList();
-                    listaMensajes.addMessage(mensaje);
+                    listaMensajes.setMessage(mensaje, listaUsuarios.usuaris[0].id_usuari);
 
                     alert("Missatge enviat!!");
                 
@@ -132,7 +136,7 @@ function mostrarFormCrearMensaje(event) {
             //POR CADA USUARIO EN EL ARRAY, SI EL USERNAME INTRODUCIDO COINCIDE CON UNO DEL ARRAY
             for(let usuarios of listaUsuarios.usuaris) {
 
-                if(usuarios.username == destinatario) {
+                if(usuarios.username === destinatario) {
 
                     //CARGAR ARRAY DE MENSAJES
                     let listaMensajes = new MessagesList();
@@ -141,7 +145,7 @@ function mostrarFormCrearMensaje(event) {
                     let mensaje = new Messages(listaMensajes.autoIncrementId() + 1, listaUsuarios.usuaris[0].id_usuari, cuerpoMensaje, fechaActual(), pubpriv, usuarios.id_usuari);
 
                     //INSERTAR EL MENSAJE CREADO
-                    listaMensajes.addMessage(mensaje);
+                    listaMensajes.setMessage(mensaje, listaUsuarios.usuaris[0].id_usuari);
 
                     alert("Missatge enviat!!");
 
@@ -155,21 +159,31 @@ function mostrarFormCrearMensaje(event) {
 }
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE CREAR GRUPOS
-function mostrarFormCrearGrupo(event) {
+function mostrarFormCrearGrupo() {
 
-    event.preventDefault();
     divCrearMensajes.style.display = "none";
     divMostrarMensajes.style.display = "none";
+    divFiltrarMensajes.style.display = "none";
     divCrearGrupos.style.display = "block";
-    crearGrupo(event);
+    crearGrupo();
 }
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE MOSTRAR MENSAJES
-function mostrarFormMostrarMensajes(event) {
+function mostrarFormMostrarMensajes() {
 
-    event.preventDefault();
     divCrearMensajes.style.display = "none";
     divCrearGrupos.style.display = "none";
+    divFiltrarMensajes.style.display = "none";
     divMostrarMensajes.style.display = "block";
     crearHTMLMostrarMensajes();
+}
+
+//FUNCION QUE CONTROLA EL FORMULARIO DE FILTRAJE DE MENSAJES
+function mostrarFormFiltrarMensajes() {
+
+    divCrearMensajes.style.display = "none";
+    divCrearGrupos.style.display = "none";
+    divMostrarMensajes.style.display = "none";
+    divFiltrarMensajes.style.display = "block";
+    crearHTMLFiltrarMensajes();
 }

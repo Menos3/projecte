@@ -20,12 +20,16 @@ class TestMail extends Mailable
     {
         $this->content = $content;
     }
-  
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
     public function build()
     {
         // pass here your email template file
-        return $this->markdown('mails.testmail')
-            ->with('content', $this->content);
+       return $this->markdown('mails.testmail')
+       ->with('content', $this->content);
     }
- 
 }
