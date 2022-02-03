@@ -114,7 +114,7 @@ function mostrarFormCrearMensaje() {
 
                     //CARGAR ARRAY DE MENSAJES E INSERTAR EL MENSAJE CREADO
                     let listaMensajes = new MessagesList();
-                    listaMensajes.addMessage(mensaje);
+                    listaMensajes.setMessage(mensaje, listaUsuarios.usuaris[0].id_usuari);
 
                     alert("Missatge enviat!!");
                 
@@ -145,7 +145,7 @@ function mostrarFormCrearMensaje() {
                     let mensaje = new Messages(listaMensajes.autoIncrementId() + 1, listaUsuarios.usuaris[0].id_usuari, cuerpoMensaje, fechaActual(), pubpriv, usuarios.id_usuari);
 
                     //INSERTAR EL MENSAJE CREADO
-                    listaMensajes.addMessage(mensaje);
+                    listaMensajes.setMessage(mensaje, listaUsuarios.usuaris[0].id_usuari);
 
                     alert("Missatge enviat!!");
 

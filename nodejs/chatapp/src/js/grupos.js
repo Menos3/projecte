@@ -17,7 +17,9 @@ export function crearGrupo() {
     if(nombreGrupo != "") {
         
         var grupo = new Grup(gruposList.autoIncrementId(), nombreGrupo, 1);
-        gruposList.addGroup(grupo);
+        gruposList.setGroup(grupo,gruposList.autoIncrementId() + 1);
+        //gruposList.addGroup(grupo);
+        
         alert("Grupo creado correctamente");
         tfNombreGrupo.value = "";
 

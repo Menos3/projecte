@@ -1,9 +1,11 @@
+import { list } from "postcss";
+import { message } from "statuses";
+
 export class GrupList {
 
     constructor() {
         this.grupsList = [];
 		//this.cargarLocalStorage();
-        this.grupsList = this.cargarGruposBBDD();
     }
 
     addGroup(group) {
@@ -26,20 +28,40 @@ export class GrupList {
 
     async cargarGruposBBDD() {
 
-        let grupos;
+        let listaGruposBBDD = [];
 
         try {
 
-            grupos = await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/grupos.json');
-            grupos = await grupos.json();
+            listaGruposBBDD = await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/grupos.json');
+            listaGruposBBDD = await listaGruposBBDD.json();
 
-            return grupos;
+            return listaGruposBBDD;
 
         } catch {
 
             alert("Problemas a la hora de cargar los grupos de la BBDD");
             return null;
 
+        }
+    }
+    
+    async setGroup(group, id) {
+
+        try {
+
+            const res = await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/groups/'+id+'.json',
+
+            {
+                method:'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body:JSON.stringify(group)
+            })
+            
+        } catch (error) {
+
+            alert(error);
         }
     }
 }
