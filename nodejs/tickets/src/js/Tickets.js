@@ -60,6 +60,7 @@ export class ListTickets {
         this.setLocalStorage();
         console.log('esta guardado')
     }
+    
     deletedTicket(id) { 
         //get
         this.getLocalStorage();
@@ -75,10 +76,10 @@ export class ListTickets {
     }
     getItemByID(id) { 
         this.getLocalStorage();
+        console.log(this.tickets)
         return this.tickets.filter(element => {
-            element.id==id;
-            console.log(element.id, id);
-
+            return element.id==id;
+            
         })[0];
         
         
@@ -89,12 +90,9 @@ export class ListTickets {
         this.tickets = this.tickets.filter(element => {
             return element.descripcion == value || element.titulo == value;
 
-        })[0];
-       
-
-        
+        })[0];  
      }
-
+    
 
 
 }

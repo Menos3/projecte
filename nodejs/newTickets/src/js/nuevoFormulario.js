@@ -127,14 +127,14 @@ function onSubmit() {
     let añadir = document.getElementById('addTicketButton');
     añadir.addEventListener("click", event => {
         event.preventDefault();
-        // let ticketId = ticketList.getLastId() + 1;
+        let ticketId = ticketList.generateId();
         let ticketName = document.getElementById('titulo').value;
         let ticketDesc = document.getElementById('description').value;
         let ticketAssigned = document.getElementById('tec').value;
         let ticketAsset = document.getElementById('assets').value;
         const values = {
             //ticketId: ticketId,
-            // id: ticketId,
+            id: ticketId,
             titulo: ticketName,
             descripcion: ticketDesc,
             assignedId: ticketAssigned,
@@ -143,17 +143,14 @@ function onSubmit() {
         var ticket = new Tickets(values);
         // ticketList.upDateList(ticket);
         ticketList.createTicket(ticket);
-        ticketList.getInformation().then((data) => {
-            listRefresh(data);
-        })
+        let data = ticketList.getInformation();
+        listRefresh(data);
+        
     
 
     });
 }
   
-
-
-
 
 export async function creacionForm() {
 
@@ -204,9 +201,11 @@ export async function creacionForm() {
     tabla.setAttribute('id', 'tabla');
     containerLista.appendChild(tabla);
 
-    ticketList.getInformation().then((data) => {
-        listRefresh(data);
-    })
+    let data = ticketList.getInformation();
+    console.log(data);
+    listRefresh(data);
+    
+    
     onSubmit();
 
     // filtersearch();
