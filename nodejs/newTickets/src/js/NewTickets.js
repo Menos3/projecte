@@ -28,48 +28,61 @@ export class Tickets {
 export class ListTickets {
     ticket;
     tickets;
-    data;
-    constructor() {
-        this.getInformation().then;
+    constructor() { 
+        this.getInformation();
     }
+   
 
-    async getInformation() {
-        try {
-            this.data = (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json')).json();
-            console.log(this.data, "esto es data");
+    getInformation() {
+        
+        let response = axios('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json')
             
-            return this.data;
-        }
-        catch (e) {
-            console.log(e);
-            console.log("error al mostrar los tickets.");
-            return null;
-        }
-    
+            .then(response => response.data)
+            .catch(error => { 
+            console.log(error);
+            console.log("error al mostrar los tickets el await.");
+                
+            })
+            //que no exista JSON
+        Promise.resolve(response).then(data => { 
+            this.tickets = data;
+        });
+            console.log(this.tickets, "hasjdahksd");
+            return this.tickets;
+        
+        
     }
     async createTicket(ticket) {
         // var id = this.getLastId();
         try {
-          
+            if (!this.tickets) { 
+                this.tickets = [];
+            }
             // let id = this.data.length > 0 ? this.data.at(-1).id : 0;
-
-            this.ticket = (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json',
+            
+            this.tickets.push(ticket);
+            (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json',
                 {
-                    method: "POST",
+                        //devuelvo lo que le mandas
+                    method: "PUT",
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(ticket)
+                    body: JSON.stringify(this.tickets)
                 })
             ).json();
-            console.log(this.ticket);
+            
         }
         catch (error) { 
-            // console.log("no furrula");
+            console.log("no furrula la subida del ticket");
             console.log(error) 
                 
             
         }
+    }
+    generateId() {
+        let id = Math.floor(Math.random() * 9999999999);
+        return id;
     }
     //  getLastId() {
 

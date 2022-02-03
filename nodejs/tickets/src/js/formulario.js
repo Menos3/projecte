@@ -68,6 +68,7 @@ function listRefresh(list) {
         butInfo.innerHTML = "Veure";
         butInfo.addEventListener('click', event => { 
             const ticketSeleccionado = ticketList.getItemByID(element.id);
+           
             veureTicket(ticketSeleccionado);
         })
 
@@ -197,14 +198,14 @@ function onSubmit() {
     })
 }
 
-function closeTicket(){ 
-    let cerrarTicket = document.getElementById('cerrarInfoTicket');
-    cerrarTicket.addEventListener('click', event => { 
-        var cabeceraOcultar = document.getElementById('infoTicket');
-        cabeceraOcultar.style.display = 'none';
+// function closeTicket(){ 
+//     let cerrarTicket = document.getElementById('cerrarInfoTicket');
+//     cerrarTicket.addEventListener('click', event => { 
+//         var cabeceraOcultar = document.getElementById('infoTicket');
+//         cabeceraOcultar.style.display = 'none';
         
-    })
-}
+//     })
+// }
 
 export function creacionForm() {
 
@@ -264,17 +265,19 @@ export function creacionForm() {
     divBuscador.style.display = 'none';
     filtersearch();
 }
-function veureTicket(ticket) { 
+function veureTicket(ticket) {
     let ocultar = document.getElementById('lista');
     ocultar.style.display = 'none';
+    let ocultarCabecera = document.getElementById('cabecera');
+    ocultarCabecera.style.display = 'none';
 
-    const mostar = document.getElementById('infoTicket')
-    mostar.style.display = 'block';
+    let divTable = document.createElement('div');
+    divTable.setAttribute('id', 'divTable');
 
     //creamos la tabla
     let tablaInfoTicket = document.createElement('table');
-    tabla.setAttribute('class', 'tableInfoTicket');
-    tabla.setAttribute('id', 'tablaInfoTicket');
+    tablaInfoTicket.setAttribute('class', 'tableInfoTicket');
+    tablaInfoTicket.setAttribute('id', 'tablaInfoTicket');
 
     let cabecera = document.createElement('thead');
     cabecera.setAttribute('class', 'th');
@@ -299,38 +302,38 @@ function veureTicket(ticket) {
     let tiCrea = document.createElement('th');
     tiCrea.innerHTML = 'Emitido';
 
-    let tiFet= document.createElement('th');
+    let tiFet = document.createElement('th');
     tiFet.innerHTML = 'Realizado';
 
     let cuerpoTabla = document.createElement('tbody');
+    console.log(ticket);
     
-
-
-    ticket.for(){
-        console.log("Ha entrado")
+    
 
         let butInfo = document.createElement('button');
         butInfo.setAttribute('class', "btn btn-info");
-        butInfo.setAttribute('id', 'butInfo' + element.id);
+        butInfo.setAttribute('id', 'butInfo' + ticket.id);
         butInfo.innerHTML = "Veure";
         //Check
         let checkMostra = document.createElement('input');
         checkMostra.setAttribute('type', 'checkbox');
         checkMostra.setAttribute('class', 'lista__check');
-        checkMostra.setAttribute('id', 'check' + element.id);
+        checkMostra.setAttribute('id', 'check' + ticket.id);
         //linea
         let linea = document.createElement('tr');
         linea.setAttribute('class', 'list__line');
-        linea.setAttribute('id', 'line' + element.id);
-        linea.innerHTML = `<td>${element.id}</td>
-        <td>${element.titulo}</td>
-        <td>${element.descripcion}</td>
-        <td>${element.assetId}</td>
-        <td>${element.assignedId}</td>
-        <td>${element.created}</td>
+        linea.setAttribute('id', 'line' + ticket.id);
+        linea.innerHTML = `<td>${ticket.id}</td>
+        <td>${ticket.titulo}</td>
+        <td>${ticket.descripcion}</td>
+        <td>${ticket.assetId}</td>
+        <td>${ticket.assignedId}</td>
+        <td>${ticket.created}</td>
         `;
         //añadimos
-        mostar.appendChild(tablaInfoTicket);
+        document.body.append(divTable);
+        divTable.appendChild(tablaInfoTicket);
+        // mostar.appendChild(tablaInfoTicket);
         tablaInfoTicket.appendChild(cabecera);
         cabecera.appendChild(tiId);
         cabecera.appendChild(tiTitulo);
@@ -343,7 +346,8 @@ function veureTicket(ticket) {
         cuerpoTabla.appendChild(linea);
         linea.appendChild(checkMostra);
         
-    })
 
-    closeTicket();
+
+    // closeTicket();
+
 }
