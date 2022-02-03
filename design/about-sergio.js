@@ -39,30 +39,31 @@ btClose.addEventListener("click", () => {
 });
 
 console.log("Loaded videos: " + max);
- 
-var playVideos = function() {
 
-    // PAUSAR TODOS LOS VIDEOS
-    for (v = 0; v < max; v++) {
+//CAROUSEL
+// var playVideos = function() {
 
-        iFrames[v].pause();
-    }
+//     // PAUSAR TODOS LOS VIDEOS
+//     for (v = 0; v < max; v++) {
+
+//         iFrames[v].pause();
+//     }
     
-    // REPRODUCIR VIDEO ACTUAL
-    console.log("Play video " + cur);
-    iFrames[cur].play();
-}
+//     // REPRODUCIR VIDEO ACTUAL
+//     console.log("Play video " + cur);
+//     iFrames[cur].play();
+// }
  
-prevBtn.addEventListener("click", function() {
+// prevBtn.addEventListener("click", function() {
 
-    cur = (cur - 1 >= 0) ? cur - 1 : max;
-    playVideos();
+//     cur = (cur - 1 >= 0) ? cur - 1 : max;
+//     playVideos();
 
-});
+// });
  
-nextBtn.addEventListener("click", function() {
+// nextBtn.addEventListener("click", function() {
 
-   cur = (cur + 1 < max) ? cur + 1 : 0;
-   playVideos();
+//    cur = (cur + 1 < max) ? cur + 1 : 0;
+//    playVideos();
 
-});
+// });
