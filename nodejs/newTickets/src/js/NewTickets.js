@@ -22,13 +22,17 @@ export class Tickets {
 }
 export class ListTickets {
     ticket;
-    tickets;   
+    tickets; 
+    ticketsFirebaseUrl = 'https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json';
 
     async getInformation() {
         
         try{        
-            let response = await axios('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json');
+            let response = await axios(this.ticketsFirebaseUrl);
             this.tickets = response.data;
+            if (!this.tickets) { 
+                this.tickets = [];
+            }
             return this.tickets;
         }catch(e){
             console.log("Error al cargar info de la BBDD"); 
@@ -36,16 +40,14 @@ export class ListTickets {
         }        
 
     }
+
     async createTicket(ticket) {
-        // var id = this.getLastId();
         try {
             if (!this.tickets) { 
                 this.tickets = [];
-            }
-            // let id = this.data.length > 0 ? this.data.at(-1).id : 0;
-            
+            }            
             this.tickets.push(ticket);
-            (await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json',
+            (await fetch(this.ticketsFirebaseUrl,
                 {
                         //devuelvo lo que le mandas
                     method: "PUT",
@@ -63,16 +65,10 @@ export class ListTickets {
             
         }
     }
+    
     generateId() {
         let id = Math.floor(Math.random() * 9999999999);
         return id;
     }
-    //  getLastId() {
-
-    //     let id = this.data.length > 0 ? this.data.at(-1).id : 0;
-    //     console.log(id);
-    //     return id;
-    // }
-
 }    
 
