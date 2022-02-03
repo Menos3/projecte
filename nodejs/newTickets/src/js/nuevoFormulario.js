@@ -14,7 +14,6 @@ var ticketList = new ListTickets();
 //dentro de un div y este div de destruye y contruye
 //para que este actualizada
 async function listRefresh(list) {
-    console.log(list);
     //la lista vieja
     let oldList = document.getElementById('containerLista');
     document.body.removeChild(oldList);
@@ -123,9 +122,9 @@ function assetsOptions() {
     return option;
 }
 
-function onSubmit() {
+async function onSubmit() {
     let añadir = document.getElementById('addTicketButton');
-    añadir.addEventListener("click", event => {
+    añadir.addEventListener("click", async event => {
         event.preventDefault();
         let ticketId = ticketList.generateId();
         let ticketName = document.getElementById('titulo').value;
@@ -142,12 +141,10 @@ function onSubmit() {
         }
         var ticket = new Tickets(values);
         // ticketList.upDateList(ticket);
-        ticketList.createTicket(ticket);
-        let data = ticketList.getInformation();
-        listRefresh(data);
-        
-    
+        await ticketList.createTicket(ticket);
 
+        let data = await ticketList.getInformation();
+        listRefresh(data);
     });
 }
   
@@ -201,12 +198,11 @@ export async function creacionForm() {
     tabla.setAttribute('id', 'tabla');
     containerLista.appendChild(tabla);
 
-    let data = ticketList.getInformation();
-    console.log(data);
+    let data = await ticketList.getInformation();
     listRefresh(data);
     
     
-    onSubmit();
+    await onSubmit();
 
     // filtersearch();
 }

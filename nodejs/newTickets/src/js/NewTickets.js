@@ -1,8 +1,3 @@
-import { initializeApp } from "firebase/app";
-
-
-
-
 export class Tickets {
     constructor(props) {
         //que solo reciba un objecto en vez de los 5 argumentos
@@ -27,30 +22,19 @@ export class Tickets {
 }
 export class ListTickets {
     ticket;
-    tickets;
-    constructor() { 
-        this.getInformation();
-    }
-   
+    tickets;   
 
-    getInformation() {
+    async getInformation() {
         
-        let response = axios('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json')
-            
-            .then(response => response.data)
-            .catch(error => { 
-            console.log(error);
-            console.log("error al mostrar los tickets el await.");
-                
-            })
-            //que no exista JSON
-        Promise.resolve(response).then(data => { 
-            this.tickets = data;
-        });
-            console.log(this.tickets, "hasjdahksd");
+        try{        
+            let response = await axios('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tickets.json');
+            this.tickets = response.data;
             return this.tickets;
-        
-        
+        }catch(e){
+            console.log("Error al cargar info de la BBDD"); 
+            console.log(e);
+        }        
+
     }
     async createTicket(ticket) {
         // var id = this.getLastId();
@@ -70,8 +54,7 @@ export class ListTickets {
                     },
                     body: JSON.stringify(this.tickets)
                 })
-            ).json();
-            
+            );  
         }
         catch (error) { 
             console.log("no furrula la subida del ticket");
