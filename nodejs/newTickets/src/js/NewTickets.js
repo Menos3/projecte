@@ -1,9 +1,11 @@
-export class Tickets {
+export class Ticket {
     constructor(props) {
         //que solo reciba un objecto en vez de los 5 argumentos
         // destructuracion
-        const { id, titulo, descripcion, assignedId, assetId } = props;
-        this.id = id;
+        const { titulo, descripcion, assignedId, assetId } = props;
+
+        //esto lo coge del metodo del constructor: nose pasa por props.
+        this.id = this.generateId();
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.assignedId = assignedId;
@@ -11,14 +13,16 @@ export class Tickets {
         //esto lo coge del metodo del constructor: nose pasa por props.
         this.created = this.getDate();
         this.isDone = false;
-        // this.actualizado = this.getDate();
     }
     getDate() {
         let date = new Date();
         return date.toDateString();
-
-
     }
+    generateId() {
+        let id = Math.floor(Math.random() * 9999999999);
+        return id;
+    }
+
 }
 export class ListTickets {
     ticket;
@@ -47,7 +51,7 @@ export class ListTickets {
                 this.tickets = [];
             }            
             this.tickets.push(ticket);
-            (await fetch(this.ticketsFirebaseUrl,
+            (await axios(this.ticketsFirebaseUrl,
                 {
                         //devuelvo lo que le mandas
                     method: "PUT",
@@ -64,11 +68,6 @@ export class ListTickets {
                 
             
         }
-    }
-    
-    generateId() {
-        let id = Math.floor(Math.random() * 9999999999);
-        return id;
     }
 }    
 

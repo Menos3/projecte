@@ -1,8 +1,7 @@
-import { Tickets } from "./newTickets";
+import { Ticket, ListTickets } from "./newTickets";
 import { AssetsList } from "./assets-list-class";
 import { Asset } from "./asset-class";
 import { UsuarisList } from "./usuaris-list-class";
-import { ListTickets } from "./newTickets";
 
 var asset = new Asset
 var listAsset = new AssetsList();
@@ -17,45 +16,67 @@ async function listRefresh(list) {
     //la lista vieja
     let oldList = document.getElementById('containerLista');
     document.body.removeChild(oldList);
+
+    let listContainer = document.createElement('div');
+    listContainer.setAttribute('id', 'containerLista');
     
+    document.body.appendChild(listContainer);
+
     let tabla = document.createElement('table');
-    tabla.setAttribute('class', 'table');
+    tabla.setAttribute('class', 'table table-striped table-hover');
     tabla.setAttribute('id', 'tabla');
 
+    listContainer.appendChild(tabla);
 
     //creacion del col de la tabla.
     let cabecera = document.createElement('thead');
-    cabecera.setAttribute('class', 'th');
-  
+    tabla.appendChild(cabecera);
+    
+    let trCabecera = document.createElement('tr');
+    cabecera.appendChild(trCabecera);
+
     
     let tiId = document.createElement('th');
+    tiId.setAttribute('scope', 'col');
     tiId.innerHTML = 'Nº Id';
 
-
     let tiTitulo = document.createElement('th');
+    tiTitulo.setAttribute('scope', 'col');
     tiTitulo.innerHTML = 'Titulo';
     
-
     let tiDesc = document.createElement('th');
+    tiDesc.setAttribute('scope', 'col');
     tiDesc.innerHTML = 'Descripcion';
 
     let tiEquipo = document.createElement('th');
+    tiEquipo.setAttribute('scope', 'col');
     tiEquipo.innerHTML = 'Equipo';
 
     let tiAsig = document.createElement('th');
+    tiAsig.setAttribute('scope', 'col');
     tiAsig.innerHTML = 'Asignacion';
 
     let tiCrea = document.createElement('th');
+    tiCrea.setAttribute('scope', 'col');
     tiCrea.innerHTML = 'Emitido';
 
     let tiFet= document.createElement('th');
+    tiFet.setAttribute('scope', 'col');
     tiFet.innerHTML = 'Realizado';
 
-    let cuerpoTabla = document.createElement('tbody');
+    trCabecera.appendChild(tiId);
+    trCabecera.appendChild(tiTitulo);
+    trCabecera.appendChild(tiDesc);
+    trCabecera.appendChild(tiEquipo);
+    trCabecera.appendChild(tiAsig);
+    trCabecera.appendChild(tiCrea);
+    trCabecera.appendChild(tiFet);
 
-    const newList = document.createElement('div');
-    newList.setAttribute('id', 'containerLista');
-    list.forEach(element => {
+    let cuerpoTabla = document.createElement('tbody');
+    tabla.appendChild(cuerpoTabla);
+
+    list.forEach((element) => {
+        let linea = document.createElement('tr');
         //boton borrar
         let butBorrar = document.createElement('button');
         butBorrar.setAttribute('class', "btn btn-danger");
@@ -72,35 +93,24 @@ async function listRefresh(list) {
         checkMostra.setAttribute('class', 'lista__check');
         checkMostra.setAttribute('id', 'check' + element.id);
         //linea
-        let linea = document.createElement('tr');
         linea.setAttribute('class', 'list__line');
         linea.setAttribute('id', 'line' + element.id);
-        linea.innerHTML = `<td>${element.id}</td>
+        linea.innerHTML = 
+        `
+        <td>${element.id}</td>
         <td>${element.titulo}</td>
         <td>${element.descripcion}</td>
         <td>${element.assetId}</td>
         <td>${element.assignedId}</td>
         <td>${element.created}</td>
         `;
+
+        cuerpoTabla.appendChild(linea)
         //añadimos propiedades a las lineas
-        newList.appendChild(tabla);
-        //añadimos a la tabla
-        tabla.appendChild(cabecera);
-        //añadimos a la cabecera
-        cabecera.appendChild(tiId);
-        cabecera.appendChild(tiTitulo);
-        cabecera.appendChild(tiDesc);
-        cabecera.appendChild(tiEquipo);
-        cabecera.appendChild(tiAsig);
-        cabecera.appendChild(tiCrea);
-        cabecera.appendChild(tiFet);
-        tabla.appendChild(cuerpoTabla);
-        cuerpoTabla.appendChild(linea);
         linea.appendChild(checkMostra);
         linea.appendChild(butInfo);
         linea.appendChild(butBorrar);
     })
-        document.body.append(newList);
 }
 
 
@@ -126,20 +136,18 @@ async function onSubmit() {
     let añadir = document.getElementById('addTicketButton');
     añadir.addEventListener("click", async event => {
         event.preventDefault();
-        let ticketId = ticketList.generateId();
         let ticketName = document.getElementById('titulo').value;
         let ticketDesc = document.getElementById('description').value;
         let ticketAssigned = document.getElementById('tec').value;
         let ticketAsset = document.getElementById('assets').value;
         const values = {
             //ticketId: ticketId,
-            id: ticketId,
             titulo: ticketName,
             descripcion: ticketDesc,
             assignedId: ticketAssigned,
             assetId: ticketAsset
         }
-        var ticket = new Tickets(values);
+        let ticket = new Ticket(values);
         // ticketList.upDateList(ticket);
         await ticketList.createTicket(ticket);
 
@@ -151,11 +159,11 @@ async function onSubmit() {
 
 export async function creacionForm() {
 
-        var html = `
+        let html = `
         <div class='containerFormulario'>
-            <div class='inci'> Incidències</div>
+            <p class='h1 header'> Incidencias</p>
             <form action="" class="form-horizontal" >
-                <div class="form-group">
+                <div class="form-group container form-container">
                     <label for="titulo">Tittle</label>
                     <input  class="form-control" type="text" id='titulo' name="titulo">
                     <label for="descripcion">Description</label>
@@ -168,16 +176,19 @@ export async function creacionForm() {
                     <select  class="form-control" name="assets" id="assets">
                         ${assetsOptions()}
                     </select>
+                </div>
+                <div class="container actions-container">
                     <button class="btn btn-success" type="submit" id="addTicketButton">Crear Incidencia</button>
                     <button class="btn btn-danger" type="reset" >Cancelar Incidencia</button>
                     <button  class="btn btn-primary" type="submit" id="pendientes">Mostrar solamente tareas pendientes.</button>
                     <button class="btn btn-info" type="submit" id="mostrarIncidencias"> Mostrar lista de incidencias</button>
                     <button class="btn btn-warning" type="submit" id="filtrar">Filtrar</button>
-                    <div id= "buscador" >
-                        <input class="form-control"  id="textSearch" placeholder="escriu el que vols buscar"/>
-                        <button  class="btn btn-primary" id='buttonSearch'> buscar</button>
-                    </div>
                 </div>
+                <div class="container search-container" id= "buscador" >
+                    <input class="form-control customize-input"  id="textSearch" placeholder="escriu el que vols buscar"/>
+                    <button  class="btn btn-primary" id='buttonSearch'> Buscar</button>
+                </div>
+                
             </form>
         </div>
     `
@@ -203,6 +214,4 @@ export async function creacionForm() {
     
     
     await onSubmit();
-
-    // filtersearch();
 }
