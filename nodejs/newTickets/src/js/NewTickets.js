@@ -51,7 +51,7 @@ export class ListTickets {
                 this.tickets = [];
             }            
             this.tickets.push(ticket);
-            (await fetch(this.ticketsFirebaseUrl,
+            (await axios(this.ticketsFirebaseUrl,
                 {
                         //devuelvo lo que le mandas
                     method: "PUT",
