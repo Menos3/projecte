@@ -1,6 +1,3 @@
-import { list } from "postcss";
-import { message } from "statuses";
-
 export class GrupList {
 
     constructor() {
@@ -32,7 +29,7 @@ export class GrupList {
 
         try {
 
-            listaGruposBBDD = await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/grupos.json');
+            listaGruposBBDD = await fetch('https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/groups.json');
             listaGruposBBDD = await listaGruposBBDD.json();
 
             return listaGruposBBDD;
