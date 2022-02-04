@@ -74,14 +74,22 @@ async function listRefresh(list) {
 
     let cuerpoTabla = document.createElement('tbody');
     tabla.appendChild(cuerpoTabla);
+    console.log(list, "antes");
 
     list.forEach((element) => {
+        console.log(list, "despues");
         let linea = document.createElement('tr');
         //boton borrar
         let butBorrar = document.createElement('button');
         butBorrar.setAttribute('class', "btn btn-danger");
         butBorrar.setAttribute('id', 'Borrar' + element.id);
         butBorrar.innerHTML = "borrar";
+        butBorrar.addEventListener('click', async event => { 
+            event.preventDefault();
+            let list = await ticketList.deleteTicket(element.id);
+            console.log(list,"borrar")
+            listRefresh(list);  
+        })
         //boton veure
         let butInfo = document.createElement('button');
         butInfo.setAttribute('class', "btn btn-info");
@@ -111,6 +119,7 @@ async function listRefresh(list) {
         linea.appendChild(butInfo);
         linea.appendChild(butBorrar);
     })
+    
 }
 
 

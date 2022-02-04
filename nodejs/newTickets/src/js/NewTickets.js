@@ -42,7 +42,6 @@ export class ListTickets {
             console.log("Error al cargar info de la BBDD"); 
             console.log(e);
         }        
-
     }
 
     async createTicket(ticket) {
@@ -51,6 +50,8 @@ export class ListTickets {
                 this.tickets = [];
             }            
             this.tickets.push(ticket);
+            //axios devuelve un objeto llamado data
+            //aqui la respuesta no la utilizo
             (await axios(this.ticketsFirebaseUrl,
                 {
                         //devuelvo lo que le mandas
@@ -58,16 +59,40 @@ export class ListTickets {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify(this.tickets)
+                    data: JSON.stringify(this.tickets)
                 })
             );  
         }
         catch (error) { 
             console.log("no furrula la subida del ticket");
-            console.log(error) 
-                
-            
+            console.log(error)      
         }
     }
-}    
+    async deleteTicket(id) {
+        //objeto devuelto data aqui si se utiliza
+        try {
+            await this.getInformation();
+            this.tickets = this.tickets.filter(element => element.id != id);
+            const rest=(await axios(this.ticketsFirebaseUrl,
+                {
+                        //devuelvo lo que le mandas
+                    method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: JSON.stringify(this.tickets)
+                })
+            );
+            console.log(rest.data)
+            return rest.data
+        }
+
+        catch (error) { 
+            console.log("no furrula la delete del ticket");
+            console.log(error)      
+        }
+    }
+    }
+    // async cleanArray()
+ 
 
