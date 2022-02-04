@@ -95,6 +95,10 @@ async function listRefresh(list) {
         butInfo.setAttribute('class', "btn btn-info");
         butInfo.setAttribute('id', 'butInfo' + element.id);
         butInfo.innerHTML = "Veure";
+        // butInfo.addEventListener('click', async event => { 
+        //     event.preventDefault();
+        //     await ticketList.viewTicket(element.id);
+        })
         //Check
         let checkMostra = document.createElement('input');
         checkMostra.setAttribute('type', 'checkbox');
