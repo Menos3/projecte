@@ -5,6 +5,7 @@ body{
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
  
 }
+
 .miembro__pasion{
     display: none;
 }
@@ -15,6 +16,17 @@ body{
     grid-template-columns: 1fr 1fr 1fr ;
     grid-template-rows: 200px auto auto;
     justify-items: center;
+}
+#foto1{
+    background-image: url("./Blank\ 6\ Grids\ Collage.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+}
+
+#foto2{
+    background-image: url("./Blank\ 6\ Grids\ Collage.png");
+    background-repeat: no-repeat;
+    background-position: bottom right;
 }
 .container__titulo{
     font-size: 3.5em;

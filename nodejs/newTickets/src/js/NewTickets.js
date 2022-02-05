@@ -92,18 +92,18 @@ export class ListTickets {
             console.log(error)      
         }
     }
-    async viewTicket(id) { 
-        try {
-            await this.getInformation();
-            this.tickets = this.tickets.filter(element => {
-                return element.id == id
-            })[0];
-        }
-        catch (e) {
-            console.log(e)
-            console.log("filtrado no va");
-         }
-    }
+    // async viewTicket(id) { 
+    //     try {
+    //         await this.getInformation();
+    //         this.tickets = this.tickets.filter(element => {
+    //             return element.id == id
+    //         })[0];
+    //     }
+    //     catch (e) {
+    //         console.log(e)
+    //         console.log("filtrado no va");
+    //      }
+    // }
 }
     
     // async cleanArray()

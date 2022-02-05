@@ -98,7 +98,7 @@ async function listRefresh(list) {
         // butInfo.addEventListener('click', async event => { 
         //     event.preventDefault();
         //     await ticketList.viewTicket(element.id);
-        })
+        // })
         //Check
         let checkMostra = document.createElement('input');
         checkMostra.setAttribute('type', 'checkbox');
@@ -125,6 +125,7 @@ async function listRefresh(list) {
     })
     
 }
+
 
 
 
