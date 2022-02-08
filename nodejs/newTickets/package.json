@@ -5,7 +5,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build:dev": "webpack --config webpack.prod.js",
-        "start": "webpack serve --config webpack.config.js --open --port=8080"
+        "start": "webpack serve --config webpack.prod.js --open --port=8080"
     },
     "keywords": [],
     "author": "Cristina Martinez Sanchez",
@@ -29,6 +29,7 @@
     },
     "description": "",
     "dependencies": {
-        "firebase": "^9.6.5"
+        "firebase": "^9.6.5",
+        "jquery": "^3.6.0"
     }
 }

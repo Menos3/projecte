@@ -1,0 +1,236 @@
+/* bloques*/
+:root{
+    --prymari-color:#382c1e;
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+
+header {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    /* grid-template-rows: auto; */
+    gap: 0px 0px;
+    grid-template-areas: "menusuperior__img--logo menusuperior__botonera menusuperior_img--usuari"
+}
+
+
+/* componentes CSS*/
+
+ul.menuizquierda__acordeon,
+ul.menuizquierda__acordeon ul.menuderecha * {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#menu,
+#chat {
+    width: 100%;
+}
+
+ul.menuderecha {
+    margin: 10px auto;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    font-size: 18px;
+}
+
+ul.menuizquierda__acordeon li,
+ul.menuderecha li {
+    list-style: none;
+}
+
+ul.menuizquierda__acordeon li a,
+ul.menuderecha li a {
+    display: block;
+    padding: 10px 10px 10px 20px;
+    background: #58A4B0;
+    color: #eee;
+    border-bottom: 1px solid #1B1B1E;
+    border-top: 1px solid #F5F5F5;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+ul.menuizquierda__acordeon li ul,
+ul.menuderecha li ul {
+    max-height: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    transition: .4s all ease-in-out;
+}
+
+ul.menuizquierda__acordeon li li a,
+ul.menuderecha li li a {
+    padding: 10px 10px 10px 40px;
+    background: #F5F5F5;
+    color: #1B1B1E;
+    font-size: 16px;
+    border: 0;
+    border-bottom: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+/* ul.acordeon li li:last-child a {
+    border-bottom: 0;
+} */
+
+ul.menuizquierda__acordeon li:hover ul,
+ul.menuderecha li:hover ul {
+    max-height: 300px;
+    transition: .4s all ease-in;
+}
+
+ul.menuizquierda__acordeon li a:hover,
+ul.menuderecha li a:hover {
+    background: #D8DBE2;
+    color: #1B1B1E;
+}
+
+.menuizquierda__acordeon--emoji {
+    float: right;
+}
+
+#incidencias {
+    width: 100%;
+    /* float: right; */
+}
+
+
+/* Acordeon derecha */
+
+
+/* 
+#table {
+    float: right;
+    display: block;
+    width: 70%;
+    height: 3%;
+} */
+
+.table__td--colorbajo {
+    background-color: greenyellow;
+}
+
+.table__td--coloralto {
+    background-color: red;
+}
+
+.table__td--colormedio {
+    background-color: orange;
+}
+
+.table__td--descripcion {
+    width: 100%;
+}
+
+#formulario {
+    float: left;
+    clear: right;
+    width: 70%;
+}
+
+
+/* elementos */
+
+.menusuperior__img--logo {
+    grid-column-start: 1;
+}
+
+.menusuperior__img--usuari {
+    grid-column-start: 3;
+}
+
+
+/* BLOQUE */
+
+
+/* menu de la izquierda */
+
+.menuizquierda {
+    grid-column-start: 1;
+    width: 100%;
+}
+
+
+/* BLOQUE */
+
+
+/* menu de la derecha */
+
+.pantalla {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    gap: 0px 0px;
+}
+
+.menuderecha {
+    grid-column-start: 6;
+}
+
+
+/* BLOQUE */
+
+
+/* central */
+
+.centro {
+    grid-column: 2 / span 4;
+}
+
+.centro__foto {
+    width: 100%;
+    height: 100%;
+}
+
+.menuderecha__calendario img {
+    width: 150px;
+    height: 150px;
+}
+video{
+    width: 100%;
+    height: 100%;
+}
+
+
+/* .menuderecha__calendario {}
+                        
+                        .menuderecha__tareas {}
+                        
+                        .menuderecha__chat {} */
+
+@media only screen and (max-width:800px) {
+    .menusuperior__botonera {
+        display: none;
+    }
+    .pantalla {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto auto auto auto auto;
+    }
+    .menuizquierda {
+        grid-row-start: 1;
+        grid-column: 1 / span 2;
+        width: 100%;
+    }
+    .menuderecha {
+        grid-row-start: 3;
+        grid-column: 1 / span 2;
+        width: 100%;
+    }
+    .centro {
+        grid-row-start: 2;
+        grid-column: 1 / span 2;
+        width: 100%;
+    }
+    .menuderecha__calendario img {
+        width: 100%;
+    }
+}
