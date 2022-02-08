@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
+var webpack = require('webpack');
 
 module.exports = {
 
@@ -60,6 +61,10 @@ module.exports = {
     },
 
     plugins: [
+        new webpack.ProvidePlugin({
+            $:'jquery',
+            JQuery:'jquery'
+        }),
         new HtmlWebpackPlugin ({
             template: './src/index.html',
             filename: './index.html'

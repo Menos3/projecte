@@ -1,3 +1,4 @@
+import 'jquery'
 import {UsuarisList} from "/xampp/htdocs/projecte/nodejs/commons/UsuarisList"
 import {Messages} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/Messages"
 import {MessagesList} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/MessagesList"
