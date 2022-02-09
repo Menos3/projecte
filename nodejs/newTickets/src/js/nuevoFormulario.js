@@ -147,8 +147,7 @@ function assetsOptions() {
 }
 
 async function onSubmit() {
-    let añadir = document.getElementById('addTicketButton');
-    añadir.addEventListener("click", async event => {
+   document.querySelector("#addTicketButton").addEventListener("click", async event => {
         event.preventDefault();
         let ticketName = document.getElementById('titulo').value;
         let ticketDesc = document.getElementById('description').value;

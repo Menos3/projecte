@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
@@ -15,7 +16,7 @@ class MailController extends Controller
                'body' => 'Testing mail',
                'url'  => '/'
            ]);
-           \Mail::to('example@example.com')->send($mail);
+           Mail::to('example@example.com')->send($mail);
            echo '<h1>Mail send successfully</h1>';
        } catch (\Exception $e) {
            echo '<pre>Error - ' . $e .'</pre>';
