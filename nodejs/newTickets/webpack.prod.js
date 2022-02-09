@@ -3,8 +3,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require('copy-webpack-plugin');
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const Webpack = require('webpack');
-const { webpack } = require('webpack');
+const webpack = require('webpack');
+// const { webpack } = require('webpack');
 module.exports = {
     mode: 'production',
 
@@ -51,12 +51,16 @@ module.exports = {
         minimize: true,
         minimizer: [new CssMinimizerPlugin(), new TerserPlugin()]
     },
+    experiments: {
+        topLevelAwait: true
+    },
     plugins:
+        
     //aqui me he quedado
         [
         new webpack.ProvidePlugin({
             $:'jquery',
-            JQuery:'jquery'
+            jQuery:'jquery'
             }),
         new HtmlWebPackPlugin({
             template: './src/index.html',
