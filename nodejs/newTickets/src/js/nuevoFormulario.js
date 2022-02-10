@@ -148,11 +148,15 @@ function assetsOptions() {
 
 async function onSubmit() {
    document.querySelector("#addTicketButton").addEventListener("click", async event => {
-        event.preventDefault();
-        let ticketName = document.getElementById('titulo').value;
-        let ticketDesc = document.getElementById('description').value;
-        let ticketAssigned = document.getElementById('tec').value;
-        let ticketAsset = document.getElementById('assets').value;
+       event.preventDefault();
+       let ticketName = $("#titulo").val();
+       let ticketDesc = $("#description").val();
+       let ticketAssigned = $("#tec").val();
+       let ticketAsset = $("#assets").val();
+        // let ticketName = document.getElementById('titulo').value;
+        // let ticketDesc = document.getElementById('description').value;
+        // let ticketAssigned = document.getElementById('tec').value;
+        // let ticketAsset = document.getElementById('assets').value;
         const values = {
             //ticketId: ticketId,
             titulo: ticketName,
@@ -205,6 +209,7 @@ export async function creacionForm() {
             </form>
         </div>
     `
+    
     let div = document.createElement('div');
     div.innerHTML = html;
     document.body.append(div);
