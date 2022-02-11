@@ -15,8 +15,12 @@ class CreateAssetsTable extends Migration
     {
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
+            $table->integer('model_id');
+            $table->timestamp('created_at');
+            $table->timestamp('update_at');
             $table->timestamps();
         });
+        Schema::
     }
 
     /**
