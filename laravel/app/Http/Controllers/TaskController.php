@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Task;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -13,7 +14,8 @@ class TaskController extends Controller
      */
     public function index()
     {
-        
+        $tasks = Task::all();
+        return \response($tasks);
     }
 
     /**
@@ -24,7 +26,14 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+        'name'=>'required',
+        'description'=>'required|max:255',
+        'status'=>'required'
+        ]);
+
+        $tasks = Task::create($request->all());
+        return \response($tasks);
     }
 
     /**
@@ -35,7 +44,8 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
+        $task = Task::findOrFail($id);
+        return \response($task);
     }
 
     /**
@@ -47,7 +57,9 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tasks = Task::findOrFail($id)
+            ->update($request->all());
+        return \response($tasks);
     }
 
     /**
@@ -58,6 +70,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Task::destroy($id);
+        return \response (content: "La tarea con id: ${id} ha sido eliminado");
     }
 }

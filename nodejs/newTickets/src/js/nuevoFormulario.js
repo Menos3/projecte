@@ -14,16 +14,23 @@ var ticketList = new ListTickets();
 //para que este actualizada
 async function listRefresh(list) {
     //la lista vieja
+    
     let oldList = document.getElementById('containerLista');
     document.body.removeChild(oldList);
+    
 
-    let listContainer = document.createElement('div');
-    listContainer.setAttribute('id', 'containerLista');
+    
+    let listContainer = $("<div/>", {
+        id: "containerLista"
+        
+    })
+    // listContainer.setAttribute('id', 'containerLista');
     
     document.body.appendChild(listContainer);
 
     let tabla = document.createElement('table');
-    tabla.setAttribute('class', 'table table-striped table-hover');
+    $("tabla").attr('class', 'table table-striped table-hover');
+    // tabla.setAttribute('class', 'table table-striped table-hover');
     tabla.setAttribute('id', 'tabla');
 
     listContainer.appendChild(tabla);

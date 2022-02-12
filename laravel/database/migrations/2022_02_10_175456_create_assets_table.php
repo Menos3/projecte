@@ -18,9 +18,9 @@ class CreateAssetsTable extends Migration
             $table->integer('model_id');
             $table->timestamp('created_at');
             $table->timestamp('update_at');
-            $table->timestamps();
+
         });
-        Schema::
+
     }
 
     /**
