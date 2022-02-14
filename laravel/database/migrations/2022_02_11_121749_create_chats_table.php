@@ -13,14 +13,15 @@ class CreateChatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('chats', function (Blueprint $table) {
+       Schema::create('chats', function (Blueprint $table) {
             $table->id();
             $table->string('name', 30);
-            $table->integer('author_id');
-            $table->timestamps('created');
+            $table->timestamps();
+
         });
 
         Schema::table('chats', function(Blueprint $table) {
+            $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('users');
         });
     }
@@ -32,10 +33,10 @@ class CreateChatsTable extends Migration
      */
     public function down()
     {
-        
-        Schema::table('chat', function(Blueprint $table) {
-            $table->dropForeign('author_id_foreign');
-        });
-        Schema::dropIfExists('chats');
+
+        // Schema::table('chat', function(Blueprint $table) {
+        //     $table->dropForeign('author_id_foreign');
+        // });
+        // Schema::dropIfExists('chats');
     }
 }

@@ -30,6 +30,6 @@ class CreateAssetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('assets');
+        // Schema::dropIfExists('assets');
     }
 }

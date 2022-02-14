@@ -25,6 +25,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::apiResource(name:'tasks', controller: App\Http\Controllers\TaskController::class);
+Route::apiResource(name:'users', controller: App\Http\Controllers\UserController::class);
+
 
 Route::get('/test', function () {
     return "Hola Mundo";

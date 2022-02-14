@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Ticket;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
-// use Illuminate\Support\Facades\Task;
 
+use Illuminate\Http\Request;
 
-class TicketController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +14,13 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //listar tickets
+     //listar
     public function index()
     {
-        $ticket=DB::table('tickets')
-        ->select('id','title','assigned_id')
+        $user=DB::table('users')
+        ->select('id', 'name')
         ->get();
-        return \response($ticket);
+        return \response($user);
     }
 
     /**
@@ -30,18 +29,12 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //Insert in to....
+
+
     public function store(Request $request)
     {
-        $request->validate([
-            'title'=>'required|max:50',
-            'description'=>'required|max:255',
-            'author_id'=>'required',
-            'assigned_id'=>'required',
-            'asset_id'=>'required'
-        ]);
 
-        $ticket=Ticket::create($request->all());
-        return \response($ticket);
     }
 
     /**
@@ -50,6 +43,7 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //coger un id de una tabla
     public function show($id)
     {
         //
@@ -62,6 +56,8 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //actualizar un ticket
     public function update(Request $request, $id)
     {
         //
@@ -73,6 +69,8 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     //destruir un ticket
     public function destroy($id)
     {
         //

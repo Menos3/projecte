@@ -18,16 +18,14 @@ class CreateTicketsTable extends Migration
             $table->string('title', 50);
             $table->string('description',255);
             $table->integer('author_id');
-            $table->integer('assigned_id');
             $table->integer('asset_id');
             $table->timestamp('created_at');
             $table->timestamp('update_at');
         });
-        // Schema::table('tickets', function(Blueprint $table){
-        //     $table->Integer('assigned_id');
-        //     $table->foreign('assigned_id')->references('id')->on('users');
-
-        // });
+        Schema::table('tickets', function (Blueprint $table) {
+            $table->unsignedBigInteger('assigned_id');
+            $table->foreign('assigned_id')->references('id')->on('users');
+        });
     }
 
     /**
@@ -37,11 +35,11 @@ class CreateTicketsTable extends Migration
      */
     public function down()
     {
-        // Schema::table('ticket', function(Blueprint $table){
+        // Schema::table('tickets', function(Blueprint $table){
         //     $table->dropForeign('assigned_id_foreign');
         //     $table->dropColumn('assigned_id');
         // });
-        Schema::dropIfExists('tickets');
+        // Schema::dropIfExists('tickets');
     }
 }
 
