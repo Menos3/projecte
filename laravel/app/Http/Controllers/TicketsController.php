@@ -52,7 +52,8 @@ class TicketController extends Controller
      */
     public function show($id)
     {
-        //
+        $ticket=Ticket::findOrFail($id);
+        return response($ticket);
     }
 
     /**
@@ -64,7 +65,10 @@ class TicketController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ticket=Ticket::findOrFail($id)
+            ->update($request->all());
+        return response($ticket);
+
     }
 
     /**
@@ -75,6 +79,7 @@ class TicketController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Ticket::destroy($id);
+        return response(content:" La tarea ${id}ha sido eliminada con exito");
     }
 }

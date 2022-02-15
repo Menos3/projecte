@@ -20,17 +20,14 @@ async function listRefresh(list) {
     
 
     
-    let listContainer = $("<div/>", {
-        id: "containerLista"
-        
-    })
-    // listContainer.setAttribute('id', 'containerLista');
+    let listContainer = document.createElement('div');
+    listContainer.setAttribute('id', 'containerLista');
     
-    document.body.appendChild(listContainer);
+    document.body.append(listContainer);
 
     let tabla = document.createElement('table');
-    $("tabla").attr('class', 'table table-striped table-hover');
-    // tabla.setAttribute('class', 'table table-striped table-hover');
+    // $("tabla").attr('class', 'table table-striped table-hover');
+    tabla.setAttribute('class', 'table table-striped table-hover');
     tabla.setAttribute('id', 'tabla');
 
     listContainer.appendChild(tabla);
@@ -133,19 +130,26 @@ async function listRefresh(list) {
     
 }
 
+function crearAsset() { 
+    //ocultar la lista de los tickets
+    //mostrar el formulario para crear el nuevo asset
+    //enviar el asset a la Base de datos.
+    //hacer boton salir y que se oculte este div se
+    //se muestre la lista anterior.
+}
 
 
-
-function usersOptions() {
-    const users = userList.usuaris;
+ function usersOptions() {
+    const users =userList.usuaris;
     let option = "";
     for (let i of users) {
         option += `<option value =${i.id_usuari}> ${i.username} </option>`;
     }
     return option;
 }
-function assetsOptions() {
-    var assets = listAsset.assets;
+async function assetsOptions() {
+    var assets = await listAsset.getAssets();
+    console.log(assets,"COMO VA ESTO");
     let option = "";
     for (let i of assets) {
         option += `<option value =${i.id_asset}>${i.model}</option>`;
@@ -156,14 +160,14 @@ function assetsOptions() {
 async function onSubmit() {
    document.querySelector("#addTicketButton").addEventListener("click", async event => {
        event.preventDefault();
-       let ticketName = $("#titulo").val();
-       let ticketDesc = $("#description").val();
-       let ticketAssigned = $("#tec").val();
-       let ticketAsset = $("#assets").val();
-        // let ticketName = document.getElementById('titulo').value;
-        // let ticketDesc = document.getElementById('description').value;
-        // let ticketAssigned = document.getElementById('tec').value;
-        // let ticketAsset = document.getElementById('assets').value;
+    //    let ticketName = $('#titulo').val();
+    //    let ticketDesc = $("#description").val();
+    //    let ticketAssigned = $("#tec").val();
+    //    let ticketAsset = $("#assets").val();
+        let ticketName = document.getElementById('titulo').value;
+        let ticketDesc = document.getElementById('description').value;
+        let ticketAssigned = document.getElementById('tec').value;
+        let ticketAsset = document.getElementById('assets').value;
         const values = {
             //ticketId: ticketId,
             titulo: ticketName,
@@ -207,6 +211,7 @@ export async function creacionForm() {
                     <button  class="btn btn-primary" type="submit" id="pendientes">Mostrar solamente tareas pendientes.</button>
                     <button class="btn btn-info" type="submit" id="mostrarIncidencias"> Mostrar lista de incidencias</button>
                     <button class="btn btn-warning" type="submit" id="filtrar">Filtrar</button>
+                    <button class="btn btn-succes" id="newAsset" type=submit>Crear asset nuevo</button>
                 </div>
                 <div class="container search-container" id= "buscador" >
                     <input class="form-control customize-input"  id="textSearch" placeholder="escriu el que vols buscar"/>

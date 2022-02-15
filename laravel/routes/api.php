@@ -24,8 +24,11 @@ Route::apiResource('chats', ChatController::class);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::apiResource(name:'tasks', controller: App\Http\Controllers\TaskController::class);
 Route::apiResource(name:'users', controller: App\Http\Controllers\UserController::class);
+Route::apiResource(name:'tickets', controller: App\Http\Controllers\TicketsController::class);
+
 
 
 Route::get('/test', function () {
