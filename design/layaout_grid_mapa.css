@@ -186,24 +186,49 @@ ul.menuderecha li a:hover {
 /* central */
 
 .centro {
+    color: white;
+    font-size:3rem;
     grid-column: 2 / span 4;
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    padding: 0 20px;
 }
 .video__container{
     position:absolute;
     top:0%;
     left: 0%;
     overflow: hidden;
-    background: var(--prymari-color) url('./multimedia/cubierta.jpg') no-repeat center;
+    background: var(--prymari-color) url('./multimedia/cubierta.jpg') no-repeat center center/cover;
 }
 .video__container video{
     min-width: 50%;
     min-height: 50%;
-   
+   object-fit: cover;
+   position: relative;
+   top:0;
+   left:0;
+}
+
+
+.video__container:after{
+    z-index: 9;
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: 0%; 
+    background:rgba(56, 44, 30, 0.6);
+    width: 100%;
+    height: 100%;
+    
+
+}
+.contenido{
+    z-index:10;
+
 }
 
 /* .centro__foto {
