@@ -19,8 +19,8 @@ class CreateTicketsTable extends Migration
             $table->string('description',255);
             $table->integer('author_id');
             $table->integer('asset_id');
-            $table->timestamp('created_at');
-            $table->timestamp('update_at');
+            $table->timestamps();
+
         });
         Schema::table('tickets', function (Blueprint $table) {
             $table->unsignedBigInteger('assigned_id');
