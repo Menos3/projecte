@@ -201,7 +201,7 @@ ul.menuderecha li a:hover {
     position:absolute;
     top:0%;
     left: 0%;
-    overflow: hidden;
+    /* overflow: hidden; */
     background: var(--prymari-color) url('./multimedia/cubierta.jpg') no-repeat center center/cover;
 }
 .video__container video{
@@ -244,6 +244,17 @@ video{
     width: 100%;
     height: 100%;
 }
+.mapa{
+    display: grid;
+    height: 400px;
+    margin-top:50px;
+    width: 100%;
+    background:none;
+}
+.mapa__text{
+    margin-top: 500px;
+    color: black;
+}
 
 
 /* .menuderecha__calendario {}
@@ -278,5 +289,9 @@ video{
     }
     .menuderecha__calendario img {
         width: 100%;
+    }
+    .mapa__text{
+        margin-top: 100px;
+        
     }
 }
