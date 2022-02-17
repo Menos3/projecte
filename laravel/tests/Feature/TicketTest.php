@@ -21,15 +21,15 @@ class TicketTest extends TestCase
     public function test_ticket_created()
     {
         $ticket=[
-            'title'=>'sexo en New York',
-            'description'=>'no se pudo rodar por falta de tickets',
-            'author'=>1,
-            'asset_id'=>0,
-            'assigned_id'=>2,
+            'title'=>'sexo en New TICKET',
+            'description'=>'no se pudo rodar por falta de LOS FATALISIMOS TICKETSSSSSSS',
+            'author_id'=>1,
+            'assigned_id'=>0,
+            'asset_id'=>2,
 
         ];
 
-        $response=$this->postJson('api/tickets', [$ticket]);
+        $response=$this->postJson('api/tickets/', [$ticket]);
         $response->assertStatus(200);
     }
     //obtener un Ticket con un ID especifico
@@ -43,7 +43,8 @@ class TicketTest extends TestCase
         $response=$this->put('api/tickets/1',
         [
             'title'=>'lo que no se grabó',
-            'description'=>'nunca pasó'
+            'description'=>'nunca pasó controle',
+
         ]);
         $response->assertStatus(200);
     }

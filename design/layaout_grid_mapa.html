@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
     <link rel="stylesheet" href="layaout_grid_mapa.css">
+    
     <title>Document</title>
 </head>
 <header class="menusuperior">
@@ -77,6 +81,8 @@
                 </ul>
             </nav>
         </aside>
+        <!-- CENTROOOOOOOOOOOOOOOOOO
+         -->
         <Section class="centro">
             <div class="video__container">
             <!-- no esta posicionado ni por el ABOSLUTE NI RELATIVE por tanto será el ultimo -->
@@ -84,16 +90,27 @@
                 <source src="./multimedia/Secuencia.mp4" type="video/mp4">
             </video>
 
-        </div>
-        <div class="contenido">
-            <h1>Contactan's</h1>
-            <h2>Envia el teu missatge</h2>
-            <a  href="" class="btn">Formulario</a>
+            </div>
+            <div class="contenido">
+                <h1>Contactan's</h1>
+                <h2>Envia el teu missatge</h2>
+                <a  href="" class="btn">Formulario</a>
 
-        </div>
-       
+            </div>
+            <!-- MAPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -->
+            <div class="mapa__text">
+                <p class=>Vols visitarnos</p>
+                <h2>Ubicans al mapa</h2>
+            </div>
+            <div id="map" class="mapa">
+                
+            </div>
 
     </Section>
+   
+ 
+
+    <!-- HACER GRID PARA EL ELEMENTO MAPA -->
     <aside class="menuderecha ">
         <div class="menuderecha__calendario " class="contorno ">
             
@@ -164,14 +181,19 @@
     </aside>
 
     <footer class="contorno ">
-        <!-- PLUGINS !!! redes sociales !!!!!!
+        <!-- PLUGINS !!! redes sociales !!!!!! -->
         <i class="fa-brands fa-twitter"></i>
         <i class="fa-brands fa-facebook"></i>
         <i class="fa-brands fa-instagram"></i>
-        <i class="fa-brands fa-youtube"></i> -->
+        <i class="fa-brands fa-youtube"></i>
     </footer>
     </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+   <script src="./layaout_grid_mapaCris.js"></script>
     </body>
+
 
 
 </html>

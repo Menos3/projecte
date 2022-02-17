@@ -3,11 +3,11 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
-use App\Http\Controllers\TicketController;
+use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\ChatController;
 
 Route::apiResource('tasks', TaskController::class);
-Route::apiResource('tickets', TicketController::class);
+Route::apiResource('tickets', TicketsController::class);
 Route::apiResource('chats', ChatController::class);
 
 /*

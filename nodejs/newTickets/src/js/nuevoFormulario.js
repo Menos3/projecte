@@ -130,8 +130,20 @@ async function listRefresh(list) {
     
 }
 
-function crearAsset() { 
+function mostrarFormAsset() { 
     //ocultar la lista de los tickets
+    $("#containerLista").hide();
+    let html = `
+    <div id="altaAsset class="'containerFormulario'> Donar d'alta un Asset
+        
+
+
+
+
+    </div>
+    `
+    
+    
     //mostrar el formulario para crear el nuevo asset
     //enviar el asset a la Base de datos.
     //hacer boton salir y que se oculte este div se

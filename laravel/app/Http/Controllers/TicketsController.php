@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 // use Illuminate\Support\Facades\Task;
 
 
-class TicketController extends Controller
+class TicketsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -52,7 +52,7 @@ class TicketController extends Controller
      */
     public function show($id)
     {
-        $ticket=Ticket::findOrFail($id);
+        $ticket=Ticket::find($id);
         return response($ticket);
     }
 
@@ -80,6 +80,6 @@ class TicketController extends Controller
     public function destroy($id)
     {
         Ticket::destroy($id);
-        return response(content:" La tarea ${id}ha sido eliminada con exito");
+        return response(content:" La tarea ${id} ha sido eliminada con exito");
     }
 }
