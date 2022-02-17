@@ -244,6 +244,30 @@ video{
     width: 100%;
     height: 100%;
 }
+.textmap{
+    color:black;
+    margin-top:375px;
+
+}
+.mapa {
+    display: block;
+    width: 700px;
+    height: 600px;
+    color: black;
+}
+
+.marker {
+    background-image: url('mapbox-icon.png');
+    background-size: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.mapboxgl-popup {
+    max-width: 200px;
+}
 
 
 /* .menuderecha__calendario {}
@@ -278,5 +302,9 @@ video{
     }
     .menuderecha__calendario img {
         width: 100%;
+    }
+    .textmap{
+    margin-top:150px ;
+    font-size: 0.5em;
     }
 }
