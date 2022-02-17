@@ -17,8 +17,8 @@ class ChatTest extends TestCase
     public function test_chat_created() {
 
         $chat = [
-            'name'=>'prueba de Testeo A',
-            'author_id'=>1
+            'name'=>"prueba de Testeo A",
+            'author_id'=>2
         ];
 
         $response = $this->postJson('api/chats', [$chat]);
@@ -27,22 +27,22 @@ class ChatTest extends TestCase
 
     public function test_chat_get() {
 
-        $response = $this->get('api/chats/1');
+        $response = $this->get('api/chats/3');
         $response->assertStatus(200);
     }
 
     public function test_chat_update() {
 
-        $response = $this->put('api/chats/1', 
+        $response = $this->put('api/chats/3', 
         [
-            'name' => 'prueba Testeo Update'
+            'name' => "prueba Testeo Update"
         ]);
         $response->assertStatus(200);
     }
 
     public function test_chat_deleted() {
 
-        $response = $this->delete('api/chats/1');
+        $response = $this->delete('api/chats/3');
         $response->assertStatus(200);
     }
 }

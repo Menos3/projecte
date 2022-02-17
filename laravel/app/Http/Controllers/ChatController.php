@@ -19,7 +19,7 @@ class ChatController extends Controller
         ->select('id', 'name', 'author_id')
         ->get();
 
-        return \response($chat);
+        return response($chat);
     }
 
     /**
@@ -37,7 +37,7 @@ class ChatController extends Controller
 
         $chat = Chat::create($request->all());
 
-        return \response($chat);
+        return response($chat);
     }
 
     /**
