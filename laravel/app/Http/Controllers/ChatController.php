@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Chat;
+use Illuminate\Support\Facades\DB;
 
 class ChatController extends Controller
 {
@@ -13,7 +15,11 @@ class ChatController extends Controller
      */
     public function index()
     {
-        //
+        $chat=DB::table('chats')
+        ->select('id', 'name', 'author_id')
+        ->get();
+
+        return \response($chat);
     }
 
     /**
@@ -24,7 +30,14 @@ class ChatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required|max:30',
+            'author_id'=>'required'
+        ]);
+
+        $chat = Chat::create($request->all());
+
+        return \response($chat);
     }
 
     /**
@@ -35,7 +48,9 @@ class ChatController extends Controller
      */
     public function show($id)
     {
-        //
+        $chat = Chat::findOrFail($id);
+
+        return response($chat);
     }
 
     /**
@@ -47,7 +62,10 @@ class ChatController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $chat = Chat::findOrFail($id)
+        ->update($request->all());
+
+        return response($chat);
     }
 
     /**
@@ -58,6 +76,7 @@ class ChatController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Chat::destroy($id);
+        return response(content: "El chat ${id} ha sido eliminado con exito");
     }
 }

@@ -290,8 +290,8 @@ video{
     .menuderecha__calendario img {
         width: 100%;
     }
-    .mapa__text{
-        margin-top: 100px;
-        
+    .textmap{
+    margin-top:150px ;
+    font-size: 0.5em;
     }
 }

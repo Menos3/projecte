@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\UserController;
 
 Route::apiResource('tasks', TaskController::class);
 Route::apiResource('tickets', TicketsController::class);
 Route::apiResource('chats', ChatController::class);
+Route::apiResource('users', UserController::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -24,12 +26,6 @@ Route::apiResource('chats', ChatController::class);
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::apiResource(name:'tasks', controller: App\Http\Controllers\TaskController::class);
-Route::apiResource(name:'users', controller: App\Http\Controllers\UserController::class);
-Route::apiResource(name:'tickets', controller: App\Http\Controllers\TicketsController::class);
-
-
 
 Route::get('/test', function () {
     return "Hola Mundo";

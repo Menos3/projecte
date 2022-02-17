@@ -8,28 +8,32 @@ import {crearHTMLMostrarMensajes} from "/xampp/htdocs/projecte/nodejs/chatapp/sr
 import {crearHTMLFiltrarMensajes} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/filtrarMensajes"
 
 //COMPONENTES DE TODOS LOS FORMULARIOS
-let btFormCrearMensaje = document.getElementById("btFormCrearMensaje");
-let btFormCrearGrupo = document.getElementById("btFormCrearGrupo");
-let btFormMostrarMensajes = document.getElementById("btFormMostrarMensajes");
-let btFormFiltrarMensajes = document.getElementById("btFormFiltrarMensajes");
+//let btFormCrearMensaje = document.getElementById("btFormCrearMensaje");
+//let btFormCrearGrupo = document.getElementById("btFormCrearGrupo");
+//let btFormMostrarMensajes = document.getElementById("btFormMostrarMensajes");
+//let btFormFiltrarMensajes = document.getElementById("btFormFiltrarMensajes");
 // let divCrearMensajes = document.getElementById("crearMensajes");
 // let divCrearGrupos = document.getElementById("crearGrupos");
 // let divMostrarMensajes = document.getElementById("mostrarMensajes");
 // let divFiltrarMensajes = document.getElementById("filtrarMensajes");
 let cbPublic = document.getElementById("cbPublic");
-let tfGrupo = document.getElementById("tfGrupo");
+//let tfGrupo = document.getElementById("tfGrupo");
 let cbPrivado = document.getElementById("cbPrivado");
 let tfUsuario = document.getElementById("tfUsuario");
-let taMensaje = document.getElementById("taMensaje");
+//let taMensaje = document.getElementById("taMensaje");
 let btEnviar = document.getElementById("btEnviar");
 let divPublic = document.getElementById("containerPublic");
 //let divPrivate = document.getElementById("containerPrivate");
 
 //EVENTLISTENER DE LOS BOTONES DEL MENU
-btFormCrearMensaje.addEventListener("click", (event) => {mostrarFormCrearMensaje()});
-btFormCrearGrupo.addEventListener("click", (event) => {mostrarFormCrearGrupo()});
-btFormMostrarMensajes.addEventListener("click", (event) => {mostrarFormMostrarMensajes()});
-btFormFiltrarMensajes.addEventListener("click", (event) => {mostrarFormFiltrarMensajes()});
+$('#btFormCrearMensaje').on("click", (event)=>{mostrarFormCrearMensaje()});
+//btFormCrearMensaje.addEventListener("click", (event) => {mostrarFormCrearMensaje()});
+$('#btFormCrearGrupo').on("click", (event)=>{mostrarFormCrearGrupo()});
+//btFormCrearGrupo.addEventListener("click", (event) => {mostrarFormCrearGrupo()});
+$('#btFormMostrarMensajes').on("click", (event)=>{mostrarFormMostrarMensajes()});
+//btFormMostrarMensajes.addEventListener("click", (event) => {mostrarFormMostrarMensajes()});
+$('#btFormFiltrarMensajes').on("click", (event)=>{mostrarFormFiltrarMensajes()});
+//btFormFiltrarMensajes.addEventListener("click", (event) => {mostrarFormFiltrarMensajes()});
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE CREAR MENSAJES
 function mostrarFormCrearMensaje() {
@@ -111,7 +115,8 @@ function mostrarFormCrearMensaje() {
 
             var nombreGrupo = $("#tfGrupo").val();
             //var nombreGrupo = tfGrupo.value;
-            pubpriv = cbPublic.value;
+            pubpriv = $('#cbPublic').val();
+            //pubpriv = cbPublic.value;
 
             let listaGrupos = new GrupList();
 
