@@ -55,7 +55,7 @@ function mostrarFormCrearMensaje() {
     }
 
     //FUNCION DE COGER LA FECHA ACTUAL DEL SISTEMA
-    function fechaActual() {
+    $.fn.fechaActual = function() {
 
         var hoy = new Date();
         var dia = hoy.getDate();
@@ -84,7 +84,7 @@ function mostrarFormCrearMensaje() {
         let listaUsuarios = new UsuarisList();
 
         //SE EJECUTA CUANDO EL CHECKBOX PUBLIC ES SELECCIONADO
-        if(cbPublic.checked) {
+        if($('#cbPublic').is(':checked')) {
 
             var nombreGrupo = $("#tfGrupo").val();
             pubpriv = $('#cbPublic').val();
@@ -114,7 +114,7 @@ function mostrarFormCrearMensaje() {
         }
 
         //SE EJECUTA CUANDO EL CHECKBOX PRIVADO ES SELECCIONADO
-        if(cbPrivado.checked) {
+        if($('#cbPrivado').is(':checked')) {
 
             //COGEMOS EL VALOR DEL TEXTFIELD, EL VALOR DEL CHECKBOX, LLAMAMOS A LA LISTA DE USUARIOS Y CREAMOS LA ID DEL USUARIO QUE MANDA EL MENSAJE
             let destinatario = $('#tfUsuario').val();
