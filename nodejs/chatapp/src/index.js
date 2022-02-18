@@ -8,32 +8,14 @@ import {crearHTMLMostrarMensajes} from "/xampp/htdocs/projecte/nodejs/chatapp/sr
 import {crearHTMLFiltrarMensajes} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/filtrarMensajes"
 
 //COMPONENTES DE TODOS LOS FORMULARIOS
-//let btFormCrearMensaje = document.getElementById("btFormCrearMensaje");
-//let btFormCrearGrupo = document.getElementById("btFormCrearGrupo");
-//let btFormMostrarMensajes = document.getElementById("btFormMostrarMensajes");
-//let btFormFiltrarMensajes = document.getElementById("btFormFiltrarMensajes");
-// let divCrearMensajes = document.getElementById("crearMensajes");
-// let divCrearGrupos = document.getElementById("crearGrupos");
-// let divMostrarMensajes = document.getElementById("mostrarMensajes");
-// let divFiltrarMensajes = document.getElementById("filtrarMensajes");
 let cbPublic = document.getElementById("cbPublic");
-//let tfGrupo = document.getElementById("tfGrupo");
 let cbPrivado = document.getElementById("cbPrivado");
-let tfUsuario = document.getElementById("tfUsuario");
-//let taMensaje = document.getElementById("taMensaje");
-let btEnviar = document.getElementById("btEnviar");
-let divPublic = document.getElementById("containerPublic");
-//let divPrivate = document.getElementById("containerPrivate");
 
 //EVENTLISTENER DE LOS BOTONES DEL MENU
 $('#btFormCrearMensaje').on("click", (event)=>{mostrarFormCrearMensaje()});
-//btFormCrearMensaje.addEventListener("click", (event) => {mostrarFormCrearMensaje()});
 $('#btFormCrearGrupo').on("click", (event)=>{mostrarFormCrearGrupo()});
-//btFormCrearGrupo.addEventListener("click", (event) => {mostrarFormCrearGrupo()});
 $('#btFormMostrarMensajes').on("click", (event)=>{mostrarFormMostrarMensajes()});
-//btFormMostrarMensajes.addEventListener("click", (event) => {mostrarFormMostrarMensajes()});
 $('#btFormFiltrarMensajes').on("click", (event)=>{mostrarFormFiltrarMensajes()});
-//btFormFiltrarMensajes.addEventListener("click", (event) => {mostrarFormFiltrarMensajes()});
 
 //FUNCION QUE CONTROLA EL FORMULARIO DE CREAR MENSAJES
 function mostrarFormCrearMensaje() {
@@ -42,17 +24,13 @@ function mostrarFormCrearMensaje() {
     $("#mostrarMensajes").hide();
     $("#filtrarMensajes").hide();
     $("#crearMensajes").show();
-    // divCrearGrupos.style.display = "none";
-    // divMostrarMensajes.style.display = "none";
-    // divFiltrarMensajes.style.display = "none";
-    // divCrearMensajes.style.display = "block";
 
     //EVENTLISTENER DE LOS CHECKBOX
-    cbPrivado.addEventListener("change", () => {ocultacionDiv()});
-    cbPublic.addEventListener("change", () => {ocultacionDiv()});
+    $('#cbPrivado').on("change", () =>{ocultacionDiv()});
+    $('#cbPublic').on("change", () => {ocultacionDiv()});
 
     //EVENTLISTENER DEL BOTON QUE ENVIA LOS MENSAJES
-    btEnviar.addEventListener("click", (event) => {enviarMensaje(event)});
+    $('#btEnviar').on("click", (event) => {enviarMensaje(event)});
 
     //FUNCION DE OCULTAR LOS DIV EN FUNCION DE LOS CHECKBOX MARCADOS
     function ocultacionDiv() {
@@ -60,23 +38,19 @@ function mostrarFormCrearMensaje() {
         if(cbPublic.checked) {
 
             $("#containerPrivate").hide();
-            //divPrivate.style.display = "none";
 
         } else {
 
             $("#containerPrivate").show();
-            //divPrivate.style.display = "block";
         }
 
         if(cbPrivado.checked) {
 
             $("#containerPublic").hide();
-            //divPublic.style.display = "none";
 
         } else {
 
             $("#containerPublic").show();
-            //divPublic.style.display = "block";
         }
     }
 
@@ -106,7 +80,6 @@ function mostrarFormCrearMensaje() {
 
         event.preventDefault();
         var pubpriv;
-        //var cuerpoMensaje = taMensaje.value;
         var cuerpoMensaje = $("#taMensaje").val();
         let listaUsuarios = new UsuarisList();
 
@@ -114,9 +87,7 @@ function mostrarFormCrearMensaje() {
         if(cbPublic.checked) {
 
             var nombreGrupo = $("#tfGrupo").val();
-            //var nombreGrupo = tfGrupo.value;
             pubpriv = $('#cbPublic').val();
-            //pubpriv = cbPublic.value;
 
             let listaGrupos = new GrupList();
 
@@ -146,8 +117,8 @@ function mostrarFormCrearMensaje() {
         if(cbPrivado.checked) {
 
             //COGEMOS EL VALOR DEL TEXTFIELD, EL VALOR DEL CHECKBOX, LLAMAMOS A LA LISTA DE USUARIOS Y CREAMOS LA ID DEL USUARIO QUE MANDA EL MENSAJE
-            let destinatario = tfUsuario.value;
-            pubpriv = cbPrivado.value;
+            let destinatario = $('#tfUsuario').val();
+            pubpriv = $('#cbPrivado').val();
 
             //POR CADA USUARIO EN EL ARRAY, SI EL USERNAME INTRODUCIDO COINCIDE CON UNO DEL ARRAY
             for(let usuarios of listaUsuarios.usuaris) {
@@ -182,10 +153,6 @@ function mostrarFormCrearGrupo() {
     $("#filtrarMensajes").hide();
     $("#crearGrupos").show();
 
-    // divCrearMensajes.style.display = "none";
-    // divMostrarMensajes.style.display = "none";
-    // divFiltrarMensajes.style.display = "none";
-    // divCrearGrupos.style.display = "block";
     crearGrupo();
 }
 
@@ -197,10 +164,6 @@ function mostrarFormMostrarMensajes() {
     $("#filtrarMensajes").hide();
     $("#mostrarMensajes").show();
 
-    // divCrearMensajes.style.display = "none";
-    // divCrearGrupos.style.display = "none";
-    // divFiltrarMensajes.style.display = "none";
-    // divMostrarMensajes.style.display = "block";
     crearHTMLMostrarMensajes();
 }
 
@@ -212,9 +175,5 @@ function mostrarFormFiltrarMensajes() {
     $("#mostrarMensajes").hide();
     $("#filtrarMensajes").show();
 
-    // divCrearMensajes.style.display = "none";
-    // divCrearGrupos.style.display = "none";
-    // divMostrarMensajes.style.display = "none";
-    // divFiltrarMensajes.style.display = "block";
     crearHTMLFiltrarMensajes();
 }

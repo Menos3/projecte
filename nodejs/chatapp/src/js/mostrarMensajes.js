@@ -3,10 +3,11 @@ import {MessagesList} from "/xampp/htdocs/projecte/nodejs/chatapp/src/js/Message
 export function crearHTMLMostrarMensajes() {
 
     //CREAR ELEMENT FORM
-    var formulario = document.createElement("form");
+    let formulario = document.createElement("form");
     formulario.id = "formMostrarMensajes";
 
     document.body.appendChild(formulario);
+
     //CREAR ELEMENT DIV
     var div = document.createElement("div");
     div.name = "containerMensajes";
@@ -65,10 +66,9 @@ export function crearHTMLMostrarMensajes() {
             tabla.appendChild(tr);
 
             //EVENTLISTENER PARA BORRAR LA HILERA
-            a.addEventListener("click", (event) => {
+            $('#datosMensaje'+ mensajes.id).on("click", (event) => {
 
                 event.preventDefault();
-                console.log(event.target.id);
                 event.target.parentNode.parentNode.remove();
                 messagesList.deleteMessage(mensajes.id);
 

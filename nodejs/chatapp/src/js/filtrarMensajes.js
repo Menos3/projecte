@@ -7,7 +7,8 @@ export function crearHTMLFiltrarMensajes() {
 
         //CREAR ELEMENT FORM
         let formulario = document.createElement("form");
-        formulario.id = "formFiltrarMensajes";
+        formulario.id = "formFiltrarMensaje";
+
         document.body.appendChild(formulario);
     
         //CREAR ELEMENT INPUT Y EL BOTON DE FILTRAJE Y ANADIRLOS AL FORM
@@ -22,17 +23,17 @@ export function crearHTMLFiltrarMensajes() {
         formulario.appendChild(btFiltrar);
     
         //EVENTO DEL BOTON DE FILTRAJE
-        btFiltrar.addEventListener("click", (event) => {
-    
+        $('#btFiltrar').on("click", (event) => {
+        
             event.preventDefault();
     
-            if(tfBusqueda.value == "") {
+            if($('#tfBusqueda').val() == "") {
     
                 crearListaMensajesSinFiltrar();
     
             } else {
     
-                crearListaMensajesFiltrada(tfBusqueda.value);
+                crearListaMensajesFiltrada($('#tfBusqueda').val());
             }
     
         });
@@ -55,8 +56,6 @@ export function crearHTMLFiltrarMensajes() {
             //A CADA VUELTA DE BUCLE, GENERA UNA FILA Y 5 COLUMNAS
             for(let mensajes of datosBBDD) {
     
-                console.log("estoy dentro del bucle 1");
-            
                 //CREAR ELEMENT TR
                 var tr = document.createElement("tr");
     
@@ -92,8 +91,8 @@ export function crearHTMLFiltrarMensajes() {
                 tablaSinFiltrar.appendChild(tr);
     
                 //EVENTLISTENER PARA VISUALIZAR EL MENSAJE
-                btVisualizar.addEventListener("click", (event) => {
-    
+                $('#btVisualizar').on("click", (event) => {
+
                     event.preventDefault();
                     alert("La id del missatge es: " + mensajes.id + " amb el missatge: " + mensajes.message + " creat el dia: " + mensajes.created + " i el missatge és: " + mensajes.pubpriv);
                 });
@@ -154,7 +153,7 @@ export function crearHTMLFiltrarMensajes() {
                 tablaFiltrada.appendChild(tr);
     
                 //EVENTLISTENER PARA VISUALIZAR EL MENSAJE
-                btVisualizar.addEventListener("click", (event) => {
+                $('#btVisualizar').on("click", (event) => {
     
                     event.preventDefault();
                     alert("La id del missatge es: " + mensajesFiltrados.id + " amb el missatge: " + mensajesFiltrados.message + " creat el dia: " + mensajesFiltrados.created + "i el missatge és: " + mensajesFiltrados.pubpriv);
