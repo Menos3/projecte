@@ -65,9 +65,10 @@ class TicketsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $ticket=Ticket::findOrFail($id)
+        Ticket::findOrFail($id)
+
             ->update($request->all());
-        return response($ticket);
+        return response("se ha actualizado");
 
     }
 

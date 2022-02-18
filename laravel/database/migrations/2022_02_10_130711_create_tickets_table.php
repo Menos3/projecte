@@ -17,9 +17,10 @@ class CreateTicketsTable extends Migration
             $table->id();
             $table->string('title', 50);
             $table->string('description',255);
-            $table->integer('author_id');
             $table->integer('asset_id');
             $table->timestamps();
+            $table->timestamps();
+            $table->integer('author_id');
 
         });
         Schema::table('tickets', function (Blueprint $table) {
@@ -35,11 +36,11 @@ class CreateTicketsTable extends Migration
      */
     public function down()
     {
-        // Schema::table('tickets', function(Blueprint $table){
-        //     $table->dropForeign('assigned_id_foreign');
-        //     $table->dropColumn('assigned_id');
-        // });
-        // Schema::dropIfExists('tickets');
+        Schema::table('tickets', function(Blueprint $table){
+            $table->dropForeign('assigned_id_foreign');
+            $table->dropColumn('assigned_id');
+        });
+        Schema::dropIfExists('tickets');
     }
 }
 

@@ -22,22 +22,3 @@ class AdminTest extends TestCase
        $this->assertEquals($count, 1);
     }
 }
-
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic functional test example.
-     *
-     * @return void
-     */
-    public function test_making_an_api_request()
-    {
-        $response = $this->postJson('/api/user', ['name' => 'Sally']);
- 
-        $response
-            ->assertStatus(201)
-            ->assertJson([
-                'created' => true,
-            ]);
-    }
-}
