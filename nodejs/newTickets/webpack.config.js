@@ -1,6 +1,8 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+var webpack = require('webpack')
+
 module.exports = {
     mode: 'development',
 
@@ -38,6 +40,10 @@ module.exports = {
         topLevelAwait: true
     },
     plugins: [
+        new webpack.ProvidePlugin({
+            $:'jquery',
+            jQuery:'jquery'
+            }),
         new HtmlWebPackPlugin({
             template: './src/index.html',
             filename: './index.html'

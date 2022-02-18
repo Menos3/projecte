@@ -130,19 +130,30 @@ async function listRefresh(list) {
     
 }
 
-function mostrarFormAsset() { 
+export function mostrarFormAsset() { 
     //ocultar la lista de los tickets
     $("#containerLista").hide();
     let html = `
     <div id="altaAsset class="'containerFormulario'> Donar d'alta un Asset
-        
-
-
-
-
+        <p class='h1 header> Crear Asset</p>
+        <form action="" class="form-horizontal">
+            <div class="form-group container form-container">
+                <label for="name">Nombre del componente</label>
+                <input class="form-control" type="text" id="name" name="name">
+                <label for="model">Modelo</label>
+                <input class="form-control" type="text" id="model" name="modelo">
+            </div>
+            <div class="container actions-container">
+                <button class="btn btn-success" type="submit" id="addAssetButton">Crear</button>
+                <button class="btn btn-danger" type="reset">Cancelar</button>
+            </div>
+        </form>
     </div>
     `
+    let asetDiv = $("<div></div>");
+    $("body").append(asetDiv);
     
+
     
     //mostrar el formulario para crear el nuevo asset
     //enviar el asset a la Base de datos.
@@ -172,14 +183,14 @@ async function assetsOptions() {
 async function onSubmit() {
    document.querySelector("#addTicketButton").addEventListener("click", async event => {
        event.preventDefault();
-    //    let ticketName = $('#titulo').val();
-    //    let ticketDesc = $("#description").val();
-    //    let ticketAssigned = $("#tec").val();
-    //    let ticketAsset = $("#assets").val();
-        let ticketName = document.getElementById('titulo').value;
-        let ticketDesc = document.getElementById('description').value;
-        let ticketAssigned = document.getElementById('tec').value;
-        let ticketAsset = document.getElementById('assets').value;
+        let ticketName = $('#titulo').val();
+        let ticketDesc = $("#description").val();
+        let ticketAssigned = $("#tec").val();
+        let ticketAsset = $("#assets").val();
+        //let ticketName = document.getElementById('titulo').value;
+        //let ticketDesc = document.getElementById('description').value;
+        //let ticketAssigned = document.getElementById('tec').value;
+        //let ticketAsset = document.getElementById('assets').value;
         const values = {
             //ticketId: ticketId,
             titulo: ticketName,
