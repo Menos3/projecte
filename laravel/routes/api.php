@@ -11,6 +11,7 @@ Route::apiResource('tasks', TaskController::class);
 Route::apiResource('tickets', TicketsController::class);
 Route::apiResource('chats', ChatController::class);
 Route::apiResource('users', UserController::class);
+Route::apiResource('messages', MessagesController::class);
 
 /*
 |--------------------------------------------------------------------------

@@ -21,28 +21,41 @@ class ChatTest extends TestCase
             'author_id'=>2
         ];
 
-        $response = $this->postJson('api/chats', [$chat]);
+        $response = $this->postJson('api/chats/', $chat);
+        $response->assertStatus(200);
+
+        $json = json_decode($response->getContent());
+
+        return $json->id;
+    }
+
+    /**
+     * @depends test_chat_created
+     */
+    public function test_chat_get($id) {
+
+        $response = $this->get("api/chats/{$id}");
         $response->assertStatus(200);
     }
 
-    public function test_chat_get() {
+    /**
+     * @depends test_chat_created
+     */
+    public function test_chat_update($id) {
 
-        $response = $this->get('api/chats/3');
-        $response->assertStatus(200);
-    }
-
-    public function test_chat_update() {
-
-        $response = $this->put('api/chats/3', 
+        $response = $this->put("api/chats/{$id}", 
         [
             'name' => "prueba Testeo Update"
         ]);
         $response->assertStatus(200);
     }
 
-    public function test_chat_deleted() {
+    /**
+     * @depends test_chat_created
+     */
+    public function test_chat_deleted($id) {
 
-        $response = $this->delete('api/chats/3');
+        $response = $this->delete("api/chats/{$id}");
         $response->assertStatus(200);
     }
 }
