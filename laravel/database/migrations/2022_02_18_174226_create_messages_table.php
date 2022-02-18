@@ -15,6 +15,11 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            $table->string('message', 255);
+            $table->unsignedBigInteger('chat_id');
+            $table->unsignedBigInteger('author_id');
+            $table->foreign('author_id')->references('id')->on('users');
+            $table->foreign('chat_id')->references('id')->on('chats');
             $table->timestamps();
         });
     }
@@ -26,6 +31,11 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
+        Schema::table('messages', function(Blueprint $table) {
+            $table->dropForeign(['author_id']);
+            $table->dropForeign(['chat_id']);
+        });
+
         Schema::dropIfExists('messages');
     }
 }
