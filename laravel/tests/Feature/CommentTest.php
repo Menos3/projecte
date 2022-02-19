@@ -21,13 +21,13 @@ class CommentTest extends TestCase
         $response->assertStatus(200);
     }
     //CREACION
-    public function test_ticket_created()
+    public function test_comment_created()
     {
         $comment=[
             'msg'=>'me esta empezando a gustar esto',
             'created_at'=>"2022-02-17 17:49:56",
             'updated_at'=>"2022-02-17 17:49:56",
-            'author_id'=>1,
+            'author_id'=>2,
             'ticket_id'=>8
 
 
