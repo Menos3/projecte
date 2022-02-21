@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Messages;
+use Illuminate\Support\Facades\DB;
 
 class MessagesController extends Controller
 {
@@ -28,7 +30,15 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'message'=> 'required|max:255',
+            'author_id'=> 'required',
+            'chat_id'=> 'required'
+        ]);
+
+        $message = Messages::create($request->all());
+
+        return response($message);
     }
 
     /**
@@ -39,7 +49,9 @@ class MessagesController extends Controller
      */
     public function show($id)
     {
-        //
+        $message = Messages::findOrFail($id);
+
+        return response($message);
     }
 
     /**
@@ -51,7 +63,10 @@ class MessagesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $message = Messages::findOrFail($id)
+        ->update($request->all());
+
+        return respnse($message);
     }
 
     /**
@@ -62,6 +77,7 @@ class MessagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Messages::destroy($id);
+        return response(content: "El mensaje ${id} ha sido eliminado con exito");
     }
 }
