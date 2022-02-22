@@ -15,4 +15,5 @@ design/node_modules
 design/package.json
 design/package-lock.json
 nodejs/newTicketscopy/node_modules/*
+node_modules
 
