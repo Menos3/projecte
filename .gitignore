@@ -11,4 +11,5 @@ nodejs/chatapp/node_modules/*
 nodejs/tickets/node_modules
 nodejs/chatapp/node_modules
 uploads/*
+node_modules
 
