@@ -11,10 +11,5 @@ chatapp/node_modules/*
 tickets/node_modules
 chatapp/node_modules
 uploads/*
-newTickets/node_modules
-newTickets/pakage-lock.json
-newTickets/pakage.json
-newTickets/webpack.config.js
-nodejs/newTickets/package-lock.json
-nodejs/newTickets/package.json
-nodejs/newTicketscopy/node_modules/*
+./node_modules
+

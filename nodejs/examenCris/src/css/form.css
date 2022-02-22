@@ -1,0 +1,38 @@
+.form-container{
+    margin: 10px;
+    padding: 5px;
+    -webkit-box-shadow: 4px 4px 8px -1px #000000; 
+    box-shadow: 4px 4px 8px -1px #000000;
+}
+
+.actions-container{
+    margin: 10px;
+    padding: 5px;
+    -webkit-box-shadow: 4px 4px 8px -1px #000000; 
+    box-shadow: 4px 4px 8px -1px #000000;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.search-container{
+    margin: 10px;
+    padding: 5px;
+    -webkit-box-shadow: 4px 4px 8px -1px #000000; 
+    box-shadow: 4px 4px 8px -1px #000000;
+    display: flex;
+    flex-direction: row;
+}
+
+#containerLista{
+    margin: 10px;
+    padding: 5px;
+
+}
+
+.customize-input{
+    margin-right: 5px;
+}
+
+.header{
+    text-align: center;
+}
