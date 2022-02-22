@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <script src="js/actividad3.js"></script> -->
+</head>
+<body>
+    <!-- <script src="index.js"></script> -->
+
+    <script>
+   function crearForm(){
+    var formulario=`
+   
+
+    <form  >
+
+        <label for="idUsiario">Nombre </label> <br>
+        <input type="text" name="idUsuario" id="nomUsuario"> <br> <br>
+        <label for="descripcion">Apellido</label> <br>
+        <input type="text" name="apellido" id="apellido"> <br> <br>
+       
+        <button  name="boton" id="boton" onclick='onSubmit()'>Enviar</button> <br> <br>
+        
+      
+        
+        
+
+
+    </form>
+    `
+    let div2 = document.createElement('div');
+    div2.innerHTML=formulario;
+    document.body.append(div2);
+
+    // document.body.innerHTML=formulario;
+
+}
+
+    function obtenerDatos(){
+        let nombre= document.getElementById('nomUsuario').value;
+            
+        let apellido= document.getElementById("apellido").value;
+
+        var r= [nombre, apellido];
+        return r;
+
+    }
+
+
+
+    function onSubmit(){
+
+        for (i=0; i<input.length; i++) {
+        input[i].addEventListener("change",  function(){
+        resultados = obtenerDatos();
+        console.log(resultados);
+        if(i%2!=0){
+            localStorage.setItem("apellido :",resultados);
+        }else{
+        localStorage.setItem("Nombre :",resultados);}
+                                });
+    };
+        
+        
+        // botton.addEventListener("submit",event =>{
+        //     event.preventDefault();
+            // document.write("Iniciando");
+            // let nombre= document.getElementById('nomUsuario');
+            
+            // let apellido= document.getElementById("apellido");
+            // console.log(nombre);
+            // console.log(apellido);
+            
+            // localStorage.setItem("Apellido :",apellido);
+        // })
+    }
+    
+
+crearForm();
+
+// var time, position, resultados;
+// var x1,v1,a1,x2,v2,a2; // variables Globales
+
+// function obtenerDatos(){
+//  x1 = document.getElementById("x1").value;
+//  v1 = document.getElementById("v1").value;
+//  a1 = document.getElementById("a1").value;
+//  x2 = document.getElementById("x2").value;
+//  v2 = document.getElementById("v2").value;
+//  a2 = document.getElementById("a2").value;
+
+//     var r = [x1, x2, v1, v2, a1, a2];
+//     return r;
+// }
+
+// var input = document.getElementsByTagName("INPUT");
+
+// for (i=0; i<input.length; i++) {
+//  input[i].addEventListener("change",  function(){
+//   resultados = obtenerDatos();
+//   console.log(resultados);
+//  });
+// };
+    </script>
+</body>
+</html>
