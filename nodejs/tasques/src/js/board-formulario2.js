@@ -5,17 +5,19 @@ var boardList= new ListBoards;
 
 async function optionTicket(){
     // const ticketOption=listTicket.getLocalStorage();
+
     try {
-        const res = await fetch ("https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tiquets/"+id+".json",{
+        // id="prueba";
+        const res = await fetch ("https://jsuite-710e7-default-rtdb.europe-west1.firebasedatabase.app/tiquets/"+".json",{
             // Podrias ser POST tambien
             method: "GET",
             headers: {
                 "content-Type": "aplication/json"
             },
-            body: JSON.stringify(tasca)
+            body: JSON.stringify()
         });
         const db = await res.json();
-        longi++;
+        // longi++;
         console.log(db);
         var option="";
         for(let i=0; i<res.length;i++){
@@ -57,16 +59,17 @@ function onSubmitTasca() {
             // titulo: boardName,
             descripcion: boardDesc,
             assignedId: boardAssigned,
-            boardTicket: boardTicket
+            // boardTicket: boardTicket
         }
         var board = new Board(values);
         boardList.postBoard(board);
-       var todosBoards= boardList.getFirebase();
-        document.newDivBoard.append(todosBoards);
+       var todosBoards= boardList.getFirebase().then(  document.newDivBoard.append(todosBoards),
+       document.body.append(newDivBoard)  );
+        // document.newDivBoard.append(todosBoards);
         // listRefresh(boardList.getLocalStorage());
 
         
-        document.body.append(newDivBoard);
+        // document.body.append(newDivBoard);
 
 
 
@@ -77,7 +80,7 @@ function onSubmitTasca() {
         var htmlTasques=`
         <div id="contenedorTotal">
     
-        <form action="boards.js" method="post">
+        <form  >
     
             <label for="idUsiario">Nombre de Usuario</label> <br>
             <input type="text" name="idUsuario" id="nomUsuario"> <br> <br>
@@ -105,9 +108,9 @@ function onSubmitTasca() {
        
         </div>
     `
-    // let div2 = document.createElement('div');
-    // div2.innerHTML=htmlTasques;
-    // document.body.append(div2);
+    let div2 = document.createElement('div');
+    div2.innerHTML=htmlTasques;
+    document.body.append(div2);
     // actualizaTicket();
     
     
