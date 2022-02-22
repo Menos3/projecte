@@ -1,4 +1,4 @@
-var map = L.map('map').setView([41.2311566, 1.7285224886456212], 24);
+var map = L.map('map').setView([41.2311566, 1.7285224886456212],24);
 // map.panto({ lat: 41.25862, long: 1.77086 });
 var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
     maxZoom: 18,
@@ -39,7 +39,7 @@ function showPosition(position) {
   var latitud = position.coords.latitude;
   var longitud = position.coords.longitude;
   
-  map.setView([latitud, longitud], 10);
+  map.setView([latitud, longitud], 24);
   let marker = L.marker([latitud, longitud]).addTo(map);
   marker.bindPopup("Esta Aqui!").openPopup();
   
