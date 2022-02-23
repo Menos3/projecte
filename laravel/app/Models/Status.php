@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Status extends Model
 {
     use HasFactory;
+
+    protected $table = 'database1.status';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -15,12 +18,7 @@ class Status extends Model
      */
 
     protected $fillable=[
-        'title',
-        'description',
-        'author_id',
-        'assigned_id',
-        'asset_id'
-
+        'name'
     ];
 
 }

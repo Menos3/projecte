@@ -7,6 +7,7 @@ use App\Http\Controllers\TicketsController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\StatusController;
 
 Route::apiResource('tasks', TaskController::class);
 Route::apiResource('tickets', TicketsController::class);
@@ -14,6 +15,7 @@ Route::apiResource('chats', ChatController::class);
 Route::apiResource('users', UserController::class);
 Route::apiResource('messages', MessagesController::class);
 Route::apiResource('comments', CommentController::class);
+Route::apiResource('status',StatusController::class);
 
 
 /*cls

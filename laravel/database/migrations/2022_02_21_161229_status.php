@@ -17,7 +17,7 @@ class Status extends Migration
             $table->id();
             $table->string('name',30);
         });
-        Schema::table('users', function (Blueprint $table){
+        Schema::table('tickets', function (Blueprint $table){
             $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')->references('id')->on('status');
         });
@@ -30,7 +30,7 @@ class Status extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table){
+        Schema::table('tickets', function (Blueprint $table){
             $table->dropForeign('status_id_foreign');
             $table->dropColumn('status_id');
         });

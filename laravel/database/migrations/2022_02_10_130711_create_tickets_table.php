@@ -19,6 +19,7 @@ class CreateTicketsTable extends Migration
             $table->string('description',255);
             $table->integer('asset_id');
             $table->integer('author_id');
+            $table->timestamps();
 
         });
         Schema::table('tickets', function (Blueprint $table) {
