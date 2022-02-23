@@ -18,8 +18,6 @@ class CreateTicketsTable extends Migration
             $table->string('title', 50);
             $table->string('description',255);
             $table->integer('asset_id');
-            $table->timestamps();
-            $table->timestamps();
             $table->integer('author_id');
 
         });
