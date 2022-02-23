@@ -18,7 +18,7 @@ class ChatTest extends TestCase
 
         $chat = [
             'name'=>"prueba de Testeo A",
-            'author_id'=>2
+            'author_id'=>1
         ];
 
         $response = $this->postJson('api/chats/', $chat);
