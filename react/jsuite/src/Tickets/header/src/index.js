@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Tickets from './Tickets';
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <Tickets/>
   </React.StrictMode>,
   document.getElementById('root')
 );
