@@ -44,16 +44,25 @@ function showPosition(position) {
 getLocation();
 
 //ACCESSKEYS
-key('ctrl+alt+g', function(){alert(navigator.geolocation.getCurrentPosition(showPosition))});
-key('ctrl+alt+c', function(){
-  
-  var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-  maxZoom: 18,
-  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
-      'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-  id: 'mapbox/streets-v11',
-  tileSize: 512,
-  zoomOffset: -1
-  }).addTo(map);
+
+//AL APRETAR CTRL+ALT+G, MOSTRAR ALERT CON LAS COORDENADAS DEL USUARIO
+key('ctrl+alt+g', function(){
+
+  if(navigator.geolocation) {
+
+    var success = function(position) {
+
+      var latitud = position.coords.latitude,
+      longitud = position.coords.longitude;
+
+      alert(latitud + "," + longitud);
+    }
+
+  }
 
 });
+
+//AL APRETAR CTRL+ALT+C, CENTRAR EL MAPA EN LAS COORDENADAS DEL INSTI
+key('ctrl+alt+c', function(){
+  map.setView([41.2311566, 1.7285224886456212],24); return true;
+}); 
