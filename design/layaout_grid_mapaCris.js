@@ -9,6 +9,8 @@ var tiles = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}
     zoomOffset: -1
 }).addTo(map);
 
+
+
 let marker = L.marker([41.2311566, 1.7285224886456212]).addTo(map);
 
 // var mapita=L.map.locate({ setView: true, maxZoom: 10 });
@@ -42,9 +44,21 @@ function showPosition(position) {
   map.setView([latitud, longitud], 10);
   let marker = L.marker([latitud, longitud]).addTo(map);
   marker.bindPopup("Esta Aqui!").openPopup();
+ 
+  Mousetrap.bind('ctrl+alt+g', function () { 
   
+    alert("esta es tu latitud "+latitud+" y tu longitud es "+longitud );
+    console.log("Presionaste escapar, ¡no intentes correr!"); 
+  // On keyup
+  });
 
 }
+Mousetrap.bind('ctrl+alt+c', function () { 
+  
+  alert("esta es la latitud del Centro  Latitud 41.2311566, Longitud 1.7285224886456212 ");
+  console.log("Presionaste escapar, ¡no intentes correr!"); 
+// On keyup
+});
 // L.Routing.control({
 //   waypoints: [
 //       L.latLng(41.2311566, 1.7285224886456212),
