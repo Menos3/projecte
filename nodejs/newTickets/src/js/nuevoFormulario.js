@@ -21,14 +21,16 @@ async function listRefresh(list) {
 
     
     let listContainer = document.createElement('div');
-    listContainer.setAttribute('id', 'containerLista');
+    $('listContainer').attr('id', 'constainerLista');
+    // listContainer.setAttribute('id', 'containerLista');
     
     document.body.append(listContainer);
 
     let tabla = document.createElement('table');
-    // $("tabla").attr('class', 'table table-striped table-hover');
-    tabla.setAttribute('class', 'table table-striped table-hover');
-    tabla.setAttribute('id', 'tabla');
+    $("tabla").attr('class', 'table table-striped table-hover');
+    // tabla.setAttribute('class', 'table table-striped table-hover');
+    $("tabla").attr('id', 'tabla');
+    // tabla.setAttribute('id', 'tabla');
 
     listContainer.appendChild(tabla);
 
@@ -41,31 +43,38 @@ async function listRefresh(list) {
 
     
     let tiId = document.createElement('th');
-    tiId.setAttribute('scope', 'col');
+    $('tiID').attr('scope', 'col');
+    // tiId.setAttribute('scope', 'col');
     tiId.innerHTML = 'Nº Id';
 
     let tiTitulo = document.createElement('th');
-    tiTitulo.setAttribute('scope', 'col');
+    $('tiTitulo').attr('scope', 'col');
+    // tiTitulo.setAttribute('scope', 'col');
     tiTitulo.innerHTML = 'Titulo';
     
     let tiDesc = document.createElement('th');
-    tiDesc.setAttribute('scope', 'col');
+    $('tiDesc').attr('scope', 'col');
+    // tiDesc.setAttribute('scope', 'col');
     tiDesc.innerHTML = 'Descripcion';
 
     let tiEquipo = document.createElement('th');
-    tiEquipo.setAttribute('scope', 'col');
+    $('tiEquipo').attr('scope', 'col');
+    // tiEquipo.setAttribute('scope', 'col');
     tiEquipo.innerHTML = 'Equipo';
 
     let tiAsig = document.createElement('th');
-    tiAsig.setAttribute('scope', 'col');
+    $('tiAsig').attr('scope', 'col');
+    // tiAsig.setAttribute('scope', 'col');
     tiAsig.innerHTML = 'Asignacion';
 
     let tiCrea = document.createElement('th');
-    tiCrea.setAttribute('scope', 'col');
+    $('tiCrea').attr('scope', 'col');
+    // tiCrea.setAttribute('scope', 'col');
     tiCrea.innerHTML = 'Emitido';
 
-    let tiFet= document.createElement('th');
-    tiFet.setAttribute('scope', 'col');
+    let tiFet = document.createElement('th');
+    $('tiFet').attr('scope', 'col');
+    // tiFet.setAttribute('scope', 'col');
     tiFet.innerHTML = 'Realizado';
 
     trCabecera.appendChild(tiId);
