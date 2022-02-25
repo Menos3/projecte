@@ -46,8 +46,8 @@ class StatusTest extends TestCase
     /**
      * @depends test_status_created
      */
-    public function test_status_update($id){
-        $response=$this->put("api/status/{$id}",
+    public function test_status_update($tid){
+        $response=$this->put("api/status/{$tid}",
         [
             'name'=>'gucci'
         ]);
@@ -57,8 +57,8 @@ class StatusTest extends TestCase
     /**
      * @depends test_statu_created
      */
-    public function test_status_deleted($id){
-        $response=$this->delete("api/status/{$id}");
+    public function test_status_deleted($tid){
+        $response=$this->delete("api/tickets/{$tid}/status/{$id}");
         $response->assertStatus(200);
     }
 }

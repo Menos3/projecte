@@ -30,6 +30,7 @@ class TicketTest extends TestCase
             'created_at'=>"2022-02-17 17:49:56",
             'updated_at'=>"2022-02-17 17:49:56",
             'author_id'=>1,
+            'status_id'=>1
 
 
         ];

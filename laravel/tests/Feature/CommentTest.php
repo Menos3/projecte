@@ -21,19 +21,19 @@ class CommentTest extends TestCase
         $response->assertStatus(200);
     }
     //CREACION
-    public function test_comment_created()
+    public function test_comment_created($id)
     {
         $comment=[
             'msg'=>'me esta empezando a gustar esto',
             'created_at'=>"2022-02-17 17:49:56",
             'updated_at'=>"2022-02-17 17:49:56",
             'author_id'=>2,
-            'ticket_id'=>8
+            'ticket_id'=>$id
 
 
         ];
 
-        $response=$this->postJson('api/comments/', $comment);
+        $response=$this->postJson('api/tickets/'+$id+'/comments/', $comment);
         $response->assertStatus(200);
 
         $json = json_decode($response->getContent());
