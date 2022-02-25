@@ -1,49 +1,48 @@
 <?php
 
 namespace Tests\Feature;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class TicketTest extends TestCase
+class TaskTest extends TestCase
 {
     /**
      * A basic feature test example.
      *
      * @return void
      */
-    //LISTAR
-    public function test_tickets_listed()
+    public function test_example()
     {
-        $response = $this->get('/api/tickets');
+        $response = $this->get('/');
 
         $response->assertStatus(200);
     }
-    //CREACION
-    public function test_ticket_created()
+
+    public function test_task_created()
     {
-        $ticket=[
-            'title'=>'sexo en New TICKET',
-            'description'=>'no se pudo rodar por falta de LOS FATALISIMOS TICKETSSSSSSS',
+        $task=[
+            'title'=>'Arreglar cañerias',
+            'description'=>'no se puede usar el WC hay qie arreglar sus cañerias',
             'assigned_id'=>2,
             'asset_id'=>2,
             'created_at'=>"2022-02-17 17:49:56",
             'updated_at'=>"2022-02-17 17:49:56",
-            'author_id'=>1,
-            'status_id'=>1
+            'author_id'=>2,
 
 
         ];
 
-        $response=$this->postJson('api/tickets/', $ticket);
+        $response=$this->postJson('api/task/', $task);
         $response->assertStatus(200);
 
         $json = json_decode($response->getContent());
 
         return $json->id;
     }
-    //obtener un Ticket con un ID especifico
-    /**
+
+     /**
      * @depends test_ticket_created
      */
     public function test_ticket_get($id)
@@ -54,13 +53,13 @@ class TicketTest extends TestCase
     }
     //ACTUALIZAR
     /**
-     * @depends test_ticket_created
+     * @depends test_task_created
      */
-    public function test_ticket_update($id){
-        $response=$this->put("api/tickets/{$id}",
+    public function test_task_update($id){
+        $response=$this->put("api/task/{$id}",
         [
-            'title'=>'lo que no se grabó',
-            'description'=>'nunca pasó controle',
+            'title'=>'Cañerias',
+            'description'=>'ya se esta arreglando',
 
 
 
@@ -69,10 +68,15 @@ class TicketTest extends TestCase
     }
     //BORRAR TICKETS
     /**
-     * @depends test_ticket_created
+     * @depends test_task_created
      */
-    public function test_ticket_deleted($id){
-        $response=$this->delete("api/tickets/{$id}");
+    public function test_task_deleted($id){
+        $response=$this->delete("api/task/{$id}");
         $response->assertStatus(200);
     }
+
+
+
+
+
 }

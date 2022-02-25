@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Ticket;
 
 
 
@@ -15,11 +16,13 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function index(){
-         $comment=DB::table('comments')
-            ->select('id','msg','author_id','ticket_id')
-            ->get();
-            return \response($comment);
+     public function index($tid){
+
+        //  $comment=DB::table('comments')
+        //     ->select('id','msg','author_id','ticket_id')
+        //     ->where($tid)
+        //     ->get();
+
      }
      /**
      * Store a newly created resource in storage.
@@ -44,10 +47,18 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($tid,$id)
     {
-        $comment=Comment::find($id);
-        return response($comment);
+        $comments = Comment::where("ticket_id",$tid)->first();
+        if(!$comments==null){
+            // $comments=Comment::find($id);
+            return \response($comments);
+        }
+        else{
+            return "no existe";
+        }
+        // $comment=Comment::find($id);
+        // return response($comment);
     }
      /**
      * Update the specified resource in storage.

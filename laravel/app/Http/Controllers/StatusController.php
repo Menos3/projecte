@@ -12,11 +12,12 @@ class StatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
-        $statu = DB::table('status')
-        ->select('id','name')
-        ->get();
-        return \response($statu);
+    public function index($id){
+        $status=Status::where('status_id','='$id)
+        // $statu = DB::table('status')
+        // ->select('id','name')
+        // ->get();
+        return \response($status);
     }
      /**
      * Store a newly created resource in storage.
@@ -24,8 +25,9 @@ class StatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,$id)
     {
+        $statu=Status::where('status')
         $request->validate([
             'name'=>'required|max:30'
         ]);
