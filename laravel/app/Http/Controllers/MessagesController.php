@@ -13,13 +13,12 @@ class MessagesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($cid)
     {
-        $message=DB::table('messages')
-        ->select('id', 'message', 'chat_id', 'author_id')
-        ->get();
 
-        return response($message);
+        $messages = Messages::where('chat_id', "=", $cid);
+
+        return response($messages);
     }
 
     /**
@@ -28,7 +27,7 @@ class MessagesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($cid, Request $request)
     {
         $request->validate([
             'message'=> 'required|max:255',
@@ -47,9 +46,9 @@ class MessagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($cid, $mid)
     {
-        $message = Messages::findOrFail($id);
+        $message = Messages::findOrFail($mid);
 
         return response($message);
     }
@@ -61,12 +60,12 @@ class MessagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($cid, Request $request, $mid)
     {
-        $message = Messages::findOrFail($id)
+        $message = Messages::findOrFail($mid)
         ->update($request->all());
 
-        return respnse($message);
+        return response($message);
     }
 
     /**
@@ -75,9 +74,9 @@ class MessagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($cid, $mid)
     {
-        Messages::destroy($id);
-        return response(content: "El mensaje ${id} ha sido eliminado con exito");
+        Messages::destroy($mid);
+        return response(content: "El mensaje ${mid} ha sido eliminado con exito");
     }
 }
