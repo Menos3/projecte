@@ -1,8 +1,12 @@
 import React from 'react'
+import ListaActores from './Ejercicio1/ListaActores'
+
 
 const Body = () => {
   return (
-    <div>Body</div>
+    <>
+      <ListaActores/>
+    </>
   )
 }
 

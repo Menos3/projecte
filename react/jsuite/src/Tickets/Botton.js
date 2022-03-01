@@ -1,5 +1,6 @@
 import React from 'react'
 //importarla
+
 export default function Botton({ name, color}) {
     
   return (
