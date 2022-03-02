@@ -25,14 +25,12 @@ class TicketTest extends TestCase
         $ticket=[
             'title'=>'sexo en New TICKET',
             'description'=>'no se pudo rodar por falta de LOS FATALISIMOS TICKETSSSSSSS',
-            'assigned_id'=>2,
-            'asset_id'=>2,
+            'assigned_id'=>1,
+            'asset_id'=>1,
             'created_at'=>"2022-02-17 17:49:56",
             'updated_at'=>"2022-02-17 17:49:56",
             'author_id'=>1,
             'status_id'=>1
-
-
         ];
 
         $response=$this->postJson('api/tickets/', $ticket);

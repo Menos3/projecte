@@ -17,6 +17,9 @@ class CreateCommentsTable extends Migration
             $table->id();
             $table->string('msg');
             $table->timestamps();
+
+
+
         });
         Schema::table('comments', function (Blueprint $table){
             $table->unsignedBigInteger('author_id');
@@ -26,6 +29,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('ticket_id');
             $table->foreign('ticket_id')->references('id')->on('tickets');
         });
+        
 
     }
 

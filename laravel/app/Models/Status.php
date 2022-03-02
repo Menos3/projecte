@@ -9,7 +9,7 @@ class Status extends Model
 {
     use HasFactory;
 
-    protected $table = 'database1.status';
+    protected $table = 'status';
 
     /**
      * The attributes that are mass assignable.

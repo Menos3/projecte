@@ -16,6 +16,8 @@ class Status extends Migration
         Schema::create('status', function (Blueprint $table){
             $table->id();
             $table->string('name',30);
+            $table->timestamps();
+       
         });
         Schema::table('tickets', function (Blueprint $table){
             $table->unsignedBigInteger('status_id');
