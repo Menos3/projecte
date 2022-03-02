@@ -16,7 +16,8 @@ class MessagesController extends Controller
     public function index($cid)
     {
 
-        $messages = Messages::where('chat_id', "=", $cid);
+        $messages = Messages::all()->
+        where('chat_id', "=", $cid);
 
         return response($messages);
     }
@@ -32,10 +33,11 @@ class MessagesController extends Controller
         $request->validate([
             'message'=> 'required|max:255',
             'author_id'=> 'required',
-            'chat_id'=> 'required'
         ]);
 
-        $message = Messages::create($request->all());
+        $all = $request->all();
+        $all["chat_id"] = $cid;
+        $message = Messages::create($all);
 
         return response($message);
     }
@@ -48,7 +50,8 @@ class MessagesController extends Controller
      */
     public function show($cid, $mid)
     {
-        $message = Messages::findOrFail($mid);
+        $message = Messages::where('chat_id', "=", $cid)
+        ->findOrFail($mid);
 
         return response($message);
     }
@@ -62,7 +65,9 @@ class MessagesController extends Controller
      */
     public function update($cid, Request $request, $mid)
     {
-        $message = Messages::findOrFail($mid)
+
+        $message = Messages::where('chat_id', "=", $cid)
+        ->findOrFail($mid)
         ->update($request->all());
 
         return response($message);
@@ -76,7 +81,9 @@ class MessagesController extends Controller
      */
     public function destroy($cid, $mid)
     {
+        Messages::where('chat_id', "=", $cid);
         Messages::destroy($mid);
+
         return response(content: "El mensaje ${mid} ha sido eliminado con exito");
     }
 }

@@ -8,6 +8,8 @@ use Tests\TestCase;
 
 class MessagesTest extends TestCase
 {
+    const CHATID = 1;
+
     /**
      * A basic feature test example.
      *
@@ -15,19 +17,23 @@ class MessagesTest extends TestCase
      */
     public function test_messages_listed() {
 
-        $response = $this->get('/api/messages');
+        $cid = self::CHATID;
+
+        $response = $this->get("/api/chats/{$cid}/messages");
         $response->assertStatus(200);
     }
 
     public function test_message_created() {
 
+        $cid = self::CHATID;
+
         $message = [
             'message' => "Hola Test",
-            'chat_id' => 6,
-            'author_id' => 2
+            'chat_id' => $cid,
+            'author_id' => 1
         ];
 
-        $response = $this->postJson('api/messages/', $message);
+        $response = $this->postJson("api/chats/{$cid}/messages", $message);
         $response->assertStatus(200);
 
         $json = json_decode($response->getContent());
@@ -40,7 +46,8 @@ class MessagesTest extends TestCase
     */
     public function test_message_get($id) {
 
-        $response = $this->get("api/messages/{$id}");
+        $cid = self::CHATID;
+        $response = $this->get("api/chats/{$cid}/messages/{$id}");
         $response->assertStatus(200);
     }
 
@@ -49,7 +56,9 @@ class MessagesTest extends TestCase
      */
     public function test_message_update($id) {
 
-        $response = $this->put("api/messages/{$id}",
+        $cid = self::CHATID;
+
+        $response = $this->put("api/chats/{$cid}/messages/{$id}",
         [
             'message' => "Hello World, Test is here"
         ]);
@@ -61,7 +70,8 @@ class MessagesTest extends TestCase
      */
     public function test_message_deleted($id) {
 
-        $response = $this->delete("api/messages/{$id}");
+        $cid = self::CHATID;
+        $response = $this->delete("api/chats/{$cid}/messages/{$id}");
         $response->assertStatus(200);
     }
 }
