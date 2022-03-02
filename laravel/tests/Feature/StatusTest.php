@@ -8,6 +8,7 @@ use Tests\TestCase;
 
 class StatusTest extends TestCase
 {
+    const ticketId=1;
     /**
      * A basic feature test example.
      *
@@ -15,7 +16,7 @@ class StatusTest extends TestCase
      */
     public function test_status_listed()
     {
-        $response = $this->get('/api/status');
+        $response = $this->get('/api/tickets//status');
 
         $response->assertStatus(200);
     }
@@ -34,7 +35,7 @@ class StatusTest extends TestCase
     }
     //obtener un Ticket con un ID especifico
     /**
-     * @depends test_comment_created
+     * @depends test_status_created
      */
     public function test_status_get($id)
     {
@@ -46,8 +47,8 @@ class StatusTest extends TestCase
     /**
      * @depends test_status_created
      */
-    public function test_status_update($tid){
-        $response=$this->put("api/status/{$tid}",
+    public function test_status_update($id){
+        $response=$this->put("api/status/{$id}",
         [
             'name'=>'gucci'
         ]);
@@ -55,10 +56,10 @@ class StatusTest extends TestCase
     }
     //BORRAR TICKETS
     /**
-     * @depends test_statu_created
+     * @depends test_status_created
      */
-    public function test_status_deleted($tid){
-        $response=$this->delete("api/tickets/{$tid}/status/{$id}");
+    public function test_status_deleted($id){
+        $response=$this->delete("api/status/{$id}");
         $response->assertStatus(200);
     }
 }

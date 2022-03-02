@@ -12,12 +12,12 @@ class StatusController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id){
-        $status=Status::where('status_id','='$id)
-        // $statu = DB::table('status')
-        // ->select('id','name')
-        // ->get();
-        return \response($status);
+    public function index(){
+        // $status=Status::where('ticket_id','=',$tid);
+        $statu = DB::table('status')
+        ->select('id','name')
+        ->get();
+        return \response($statu);
     }
      /**
      * Store a newly created resource in storage.
@@ -25,14 +25,14 @@ class StatusController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,$id)
+    public function store(Request $request)
     {
-        $statu=Status::where('status')
+
         $request->validate([
             'name'=>'required|max:30'
         ]);
-        $statu=Status::create($request->all());
-        return \response($statu);
+        $status=Status::create($request->all());
+        return \response($status);
     }
     /**
      * Display the specified resource.
@@ -41,8 +41,9 @@ class StatusController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show ($id){
-        $statu=Status::find($id);
-        return \response($statu);
+        $status=Status::find($id);
+
+        return \response($status);
     }
 
     /**
@@ -55,7 +56,6 @@ class StatusController extends Controller
     public function update(Request $request, $id)
     {
         Status::findOrFail($id)
-
             ->update($request->all());
         return response("se ha actualizado");
 

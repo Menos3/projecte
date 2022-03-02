@@ -19,7 +19,8 @@ class Ticket extends Model
         'description',
         'author_id',
         'assigned_id',
-        'asset_id'
+        'asset_id',
+        'status_id'
 
     ];
 

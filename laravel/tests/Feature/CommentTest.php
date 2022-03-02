@@ -7,7 +7,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CommentTest extends TestCase
+
 {
+    const NUMTICKET=1;
     /**
      * A basic feature test example.
      *
@@ -16,7 +18,8 @@ class CommentTest extends TestCase
     // Llistas
     public function test_comments_listed()
     {
-        $response = $this->get('/api/comments');
+        $tid=self::NUMTICKET;
+        $response = $this->get("/api/tickets/{$tid}/comments/");
 
         $response->assertStatus(200);
     }

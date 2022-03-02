@@ -15,7 +15,7 @@ Route::apiResource('tickets', TicketsController::class);
 Route::apiResource('chats', ChatController::class);
 Route::apiResource('users', UserController::class);
 Route::apiResource('chats/{cid}/messages', MessagesController::class);
-Route::apiResource('comments', CommentController::class);
+Route::apiResource('tickets/{tid}/comments', CommentController::class);
 Route::apiResource('status',StatusController::class);
 
 
