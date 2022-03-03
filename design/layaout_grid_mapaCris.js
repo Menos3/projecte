@@ -48,13 +48,36 @@ function showPosition(position) {
   
 
   
-  }
-Mousetrap.bind('ctrl+ñ', function (e) {
-  
-  alert("alert tu latitud y tu longitud es ");
+  Mousetrap.bind('ctrl+alt+g',activacionBomba );
+}
+
+Mousetrap.bind('ctrl+alt+c', descativarBomba );
+Mousetrap.bind('ctrl+alt+u', function (e) {
+    
+  Mousetrap.unbind('ctrl+alt+c');
+  Mousetrap.unbind('ctrl+alt+g');
+
+});
+
+Mousetrap.bind('ctrl+alt+a', function (e) {
+  Mousetrap.bind('ctrl+alt+g',activacionBomba)
+  Mousetrap.bind('ctrl+alt+c', descativarBomba)
+})
+
+function activacionBomba() {
+    
+    
+  alert("alert tu latitud y tu longitud es "+'latitud'+ latitud +'longitud' +longitud);
+
+}
+function descativarBomba(){
+    
+  var latitud = 41.2311566;
+  var longitud = 1.7285224886456212;
+  alert("tu latitud y tu longitud es "+'latitud'+ latitud +'longitud' +longitud);
 
   
-});
+}
 // L.Routing.control({
 //   waypoints: [
 //       L.latLng(41.2311566, 1.7285224886456212),
