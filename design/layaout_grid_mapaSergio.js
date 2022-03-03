@@ -68,4 +68,11 @@ key('ctrl+alt+c', () => {
 
   map.setView([41.2311566, 1.7285224886456212],24); return true;
 
-}); 
+});
+
+//AL APRETAR CTRL+ALT+Q, DESACTIVAR ACCESSKEYS
+key('ctrl+alt+q', () => {
+
+  key.unbind('ctrl+alt+g');
+  key.unbind('ctrl+alt+c');
+})
