@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <link rel="stylesheet" href="layaout_grid_mapaSergio.css">
+    
+    <title>Contactanos</title>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet'/>
+    <script type="text/javascript" src="./keymaster.js"></script>
+
+</head>
+<header class="menusuperior">
+
+    <img class="menusuperior__img--logo  menusuperior__img--esquerra" " src=" ./img/logo.png " alt=" ">
+    <div class=menusuperior__botonera>
+        <button class="class=menusuperior__botonera--boton ">Comandes</button>
+        <button class="class=menusuperior__botonera--boton ">Incidencias</button>
+        <button class="class=menusuperior__botonera--boton ">Seguridad</button>
+        <button class="class=menusuperior__botonera--boton ">Tareas</button>
+        <button class="class=menusuperior__botonera--boton ">Inventario</button>
+        <button class="class=menusuperior__botonera--boton ">Mensajeria</button>
+    </div>
+    
+
+    <img class="menusuperior__img--usuari menusuperior__img--dreta "src="./img/perfil-del-usuario.png " alt=" ">
+</header>
+
+<body>
+    <!-- bloque menu izquierdo -->
+        <div class="pantalla ">
+        <aside class=" menuizquierda ">
+            <nav>
+                <ul class=" menuizquierda__acordeon ">
+                    <li><a href="# ">Comandas <span class=menuizquierda__acordeon--emoji>▼</span></a>
+                        <ul>
+                            <li><a href=" ">Dar de alta empresa</a></li>
+                            <li><a href=" ">Buscar artículos</a></li>
+                            <li><a href=" ">Pedido expres</a></li>
+                            <li><a href=" ">Consultar comandas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="# ">Tareas<span class=menuizquierda__acordeon--emoji>▼</span></a>
+                        <ul>
+                            <li><a href=" ">Crear tarea</a></li>
+                            <li><a href=" ">Editar tarea</a></li>
+                            <li><a href=" ">Cambiar estado</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="# ">Incidencias<span class=menuizquierda__acordeon--emoji>▼</span></a>
+                        <ul>
+                            <li><a href=" ">Crear incidencia</a></li>
+                            <li><a href=" ">Visualización incidencias</a></li>
+                            <li><a href=" ">Editar incidencias</a></li>
+                            <li><a href=" ">Borrar incidencia</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="# ">Seguridad<span class=menuizquierda__acordeon--emoji>▼</span></a>
+                        <ul>
+                            <li><a href=" ">Visualizar lista de permisos</a></li>
+                            <li><a href=" ">Editar Permisos</a></li>
+                            <li><a href=" ">Crear Permisos</a></li>
+                            <li><a href=" ">Eliminar Permisos</a></li>
+                            <li><a href=" ">Visualizar lista de roles</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="# ">Mensajeria<span class=menuizquierda__acordeon--emoji>▼</span></a>
+                        <ul>
+                            <li><a href=" ">Opción 3.1</a></li>
+                            <li><a href=" ">Opción 3.2</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="# ">Inventario<span class=menuizquierda__acordeon--emoji>▼</span></a>
+                        <ul>
+                            <li><a href=" ">Opción 3.1</a></li>
+                            <li><a href=" ">Opción 3.2</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <!-- CENTROOOOOOOOOOOOOOOOOO
+         -->
+        <Section class="centro">
+            <div class="video__container">
+                <!-- no esta posicionado ni por el ABOSLUTE NI RELATIVE por tanto será el ultimo -->
+                <video class="video__contenido" muted autoplay  loop>
+                 <source src="./multimedia/Secuencia.mp4" type="video/mp4">
+                </video>
+
+            </div>
+            <div class="contenido">
+                <h1>Contactan's</h1>
+                <h2>Envia el teu missatge</h2>
+                <a  href="" class="btn">Formulario</a>
+
+            </div>
+            <!-- MAPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA -->
+            <div class="mapa__text">
+                <p class=>Vols visitarnos</p>
+                <h2>Ubicans al mapa</h2>
+            </div>
+            <div id="map" class="mapa">
+                
+            </div>
+
+    </Section>
+   
+ 
+
+    <!-- HACER GRID PARA EL ELEMENTO MAPA -->
+    <aside class="menuderecha ">
+        <div class="menuderecha__calendario " class="contorno ">
+            
+            <img src="./img/calendario.jpeg " alt=" ">
+        </div>
+
+        <div id='incidencias'>
+    <ul class="menuderecha ">
+    <div>
+        <li><a href=" ">Incidencias <span class=acordeon__emoji>‼</span></a>
+            <ul>
+
+                <li>
+                    <div class='acordeon__item'>
+                        <div class="acordeon__item_color "></div><a href=" ">incidencia 1</a>
+                    </div>
+                </li>
+                <li>
+                    <div class='acordeon__item'>
+                        <div class="acordeon__item_color "></div><a href=" ">incidencia 2</a>
+                    </div>
+                </li>
+                <li>
+                    <div class='acordeon__item'>
+                        <div class="acordeon__item_color "></div><a href=" ">incidencia 3</a>
+                    </div>
+                </li>
+                <li>
+                    <div class='acordeon__item'>
+                        <div class="acordeon__item_color "></div><a href=" ">incidencia 4</a>
+                    </div>
+                </li>
+
+            </ul>
+        </li>
+
+    </div>
+    </ul>
+
+    </div>
+
+    <ul class="menuderecha ">
+        <div>
+            <li><a href=" ">Chat <span class=acordeon__emoji>✉</span></a>
+                <ul>
+
+                    <li><a href=" ">Paquito</a></li>
+                    <li><a href=" ">Manolo</a></li>
+                    <li><a href=" ">Sergio</a></li>
+                    <li><a href=" ">Xavi</a></li>
+
+                </ul>
+            </li>
+
+        </div>
+    </ul>
+    <!-- <div >
+            <li><a href="# ">Mensajeria<span class=acordeon__emoji>▼</span></a>
+                <ul>
+                    <li><a href=" ">Opción 3.1</a></li>
+                    <li><a href=" ">Opción 3.2</a></li>
+                </ul>
+            </li>
+        </div> -->
+
+
+
+    </aside>
+
+    <footer class="contorno ">
+        <!-- PLUGINS !!! redes sociales !!!!!! -->
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-facebook"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-youtube"></i>
+    </footer>
+    </div>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+   <script src="./layaout_grid_mapaSergio.js"></script>
+    </body>
+
+
+
+</html>
