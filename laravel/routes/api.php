@@ -9,6 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\AuthController;
 
 Route::apiResource('tasks', TaskController::class);
 Route::apiResource('tickets', TicketsController::class);
@@ -38,3 +39,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/test', function () {
     return "Hola Mundo";
 });
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/userinfo', [AuthController::class, 'infoUser'])->middleware('auth:sanctum');

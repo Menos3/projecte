@@ -16,8 +16,7 @@ class MessagesController extends Controller
     public function index($cid)
     {
 
-        $messages = Messages::all()->
-        where('chat_id', "=", $cid);
+        $messages = Messages::where('chat_id', "=", $cid)->get();
 
         return response($messages);
     }
