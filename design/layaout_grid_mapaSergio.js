@@ -46,8 +46,9 @@ getLocation();
 //ACCESSKEYS
 
 //AL APRETAR CTRL+ALT+G, MOSTRAR ALERT CON LAS COORDENADAS DEL USUARIO
-key('ctrl+alt+g', function(){
+key('ctrl+alt+g', () => {
 
+  console.log("hola");
   if(navigator.geolocation) {
 
     var success = function(position) {
@@ -58,11 +59,14 @@ key('ctrl+alt+g', function(){
       alert(latitud + "," + longitud);
     }
 
+    navigator.geolocation.getCurrentPosition(success);
   }
 
 });
 
 //AL APRETAR CTRL+ALT+C, CENTRAR EL MAPA EN LAS COORDENADAS DEL INSTI
-key('ctrl+alt+c', function(){
+key('ctrl+alt+c', () => {
+  console.log("hola 2");
   map.setView([41.2311566, 1.7285224886456212],24); return true;
+
 }); 
