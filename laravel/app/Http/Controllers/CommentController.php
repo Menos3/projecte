@@ -16,12 +16,10 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function index($tid){
+     public function index(){
 
-        //  $comment=DB::table('comments')
-        //     ->select('id','msg','author_id','ticket_id')
-        //     ->where($tid)
-        //     ->get();
+       $comments=Comment::all();
+       return \response($comments);
 
      }
      /**
@@ -47,19 +45,14 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($tid,$id)
+    public function show($id)
     {
-        $comments = Comment::where("ticket_id",$tid)->first();
-        if(!$comments==null){
-            // $comments=Comment::find($id);
-            return \response($comments);
-        }
-        else{
-            return "no existe";
+        $comments = Comment::findOrFail($id);
+        return \response($comments);
         }
         // $comment=Comment::find($id);
         // return response($comment);
-    }
+
      /**
      * Update the specified resource in storage.
      *
@@ -69,10 +62,9 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Comment::findOrFail($id)
-
-            ->update($request->all());
-        return response("se ha actualizado");
+        $comment=Comment::findOrFail($id)
+        ->update ($request->all());
+        return response($comment);
 
     }
 
