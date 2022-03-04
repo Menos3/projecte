@@ -18,6 +18,8 @@ function Asset({ id}) {
   )
 }
 
-Asset.propTypes = {}
+Asset.propTypes = {
+    model: PropTypes.string
+}
 
 export default Asset

@@ -33,6 +33,9 @@ function ListTickets(props) {
   )
 }
 
-ListTickets.propTypes = {}
+ListTickets.propTypes = {
+    key: PropTypes.string,
+    data: PropTypes.object
+}
 
 export default ListTickets
