@@ -15,11 +15,6 @@ use App\Http\Controllers\MailController;
 |
 */
 
-Route::get('/', function () {
-    Log::info('Loading welcome page');
-    return view('welcome');
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

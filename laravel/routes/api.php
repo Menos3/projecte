@@ -42,4 +42,4 @@ Route::get('/test', function () {
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/userinfo', [AuthController::class, 'infoUser'])->middleware('auth:sanctum');
+Route::get('/userinfo', [AuthController::class, 'infouser'])->middleware('auth:sanctum');
