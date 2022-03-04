@@ -136,7 +136,8 @@
       }
       ],
     
-      "tickets": [ {
+      "tickets": [ 
+        {
         "id" : 0,
         "title" : "No funciona projector",
         "desc" : "El projector ha cascat. Ha fet puff, ha tret fum i adeu",
@@ -180,11 +181,9 @@
         "created": "23/01/2022",
         "updated": "23/01/2022"
         }
-      
-      
       ],
-      "comments": [
 
+      "comments": [
         {
             "id":0,
             "author_id": 1,
@@ -206,10 +205,9 @@
             "msg": "Please, saldo de color cyan i groc també !!!",
             "created": "22/2/22"
         }
-
       ],
-      "messages": [
 
+      "messages": [
             {
                 "id":0,
                 "message": "Bon dia Company!!",
@@ -252,9 +250,8 @@
                 "author_id": 3,
                 "published": "22/2/22"
         }
-
-
       ],
+
       "chats": [
 
         {
@@ -276,6 +273,7 @@
             "created": "22/2/22"
         }
       ],
+
       "user_chats":[
           {
             "id": 0,
@@ -305,15 +303,9 @@
             "id": 1,
             "chat_id": 1
           }
-
-
-
-
-
-
       ],
-      "tasks": [
 
+      "tasks": [
         {
             "id": 0,
             "title": "Comprar connector",
@@ -375,18 +367,13 @@
             "id":1,
             "name": "Completat"
         }
-
     ],
-    "notes": [
 
+    "notes": [
         {
             "id": 0,
             "body": "Comprar en comerç local",
             "task_id": 0
         }
     ]
-
-
-    
-    
     }
