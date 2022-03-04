@@ -94,25 +94,26 @@ async function listRefresh(list) {
         let linea = document.createElement('tr');
         //boton borrar
         let butBorrar = document.createElement('button');
-        $('butBorrar').attr({
-            class: "btn btn-danger",
-            id: "Borrar" + element.id,
-        });
-        $('butBorrar').on('click', async event => {
-            event.preventDefault();
-            let list = await ticketList.deleteTicket(element.id);
-                console.log(list,"borrar")
-                listRefresh(list);  
-        })
-        // butBorrar.setAttribute('class', "btn btn-danger");
-        // butBorrar.setAttribute('id', 'Borrar' + element.id);
-        // butBorrar.innerHTML = "borrar";
-        // butBorrar.addEventListener('click', async event => { 
+        // $('butBorrar').attr({
+        //     class: "btn btn-danger",
+        //     id: "Borrar" + element.id,
+        //     innerHTML:'Borrar'
+        // });
+        // $('butBorrar').on('click', async event => {
         //     event.preventDefault();
         //     let list = await ticketList.deleteTicket(element.id);
-        //     console.log(list,"borrar")
-        //     listRefresh(list);  
+        //         console.log(list,"borrar")
+        //         listRefresh(list);  
         // })
+        butBorrar.setAttribute('class', "btn btn-danger");
+        butBorrar.setAttribute('id', 'Borrar' + element.id);
+        butBorrar.innerHTML = "borrar";
+        butBorrar.addEventListener('click', async event => { 
+            event.preventDefault();
+            let list = await ticketList.deleteTicket(element.id);
+            console.log(list,"borrar")
+            listRefresh(list);  
+        })
         //boton veure
         let butInfo = document.createElement('button');
         butInfo.setAttribute('class', "btn btn-info");
