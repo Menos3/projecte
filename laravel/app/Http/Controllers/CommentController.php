@@ -16,10 +16,11 @@ class CommentController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function index(){
+     public function index($tid){
+         $comment= Comment::where('ticket_id','=',$tid)->get();
 
-       $comments=Comment::all();
-       return \response($comments);
+    //    $comments=Comment::all();
+       return \response($comment);
 
      }
      /**
@@ -28,15 +29,16 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($tid,Request $request)
     {
         $request->validate([
             'msg'=>'required|max:255',
             'author_id'=>'required',
             'ticket_id'=>'required'
         ]);
-
-        $comment=Comment::create($request->all());
+        $all=$request->all();
+        $all["ticket_id"]=$tid;
+        $comment=Comment::create($all);
         return \response($comment);
     }
      /**
@@ -45,9 +47,10 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($tid,$id)
     {
-        $comments = Comment::findOrFail($id);
+        $comments = Comment::where('ticket_id','=',$tid)
+        ->findOrFail($id);
         return \response($comments);
         }
         // $comment=Comment::find($id);
@@ -74,8 +77,9 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id,$tid)
     {
+        Comment::where('ticket_id','=',$tid);
         Comment::destroy($id);
         return response(content:" La tarea ${id} ha sido eliminada con exito");
     }
