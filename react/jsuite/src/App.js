@@ -1,8 +1,8 @@
 import React from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import Body from './Body'
-import Footer from './Footer'
-import Header from './Header'
+import Body from './proyecte/Commons/Body'
+import Footer from './proyecte/Commons/Footer'
+import Header from './proyecte/Commons/Header'
 
 
 

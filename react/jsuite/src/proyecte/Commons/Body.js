@@ -1,8 +1,8 @@
 import React from 'react'
 // import ListaActores from './Ejercicio1/ListaActores'
-import ListTickets from './proyecte/ListTickets'
-import Acciones from './proyecte/Commons/Acciones'
-import Navegacion from './proyecte/Commons/Navegacion'
+import ListTickets from '../ListTickets'
+import Acciones from './Acciones'
+import Navegacion from './Navegacion'
 
 const Body = () => {
   return (
