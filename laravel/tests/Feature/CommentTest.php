@@ -16,13 +16,13 @@ class CommentTest extends TestCase
      * @return void
      */
     // Llistas
-    // public function test_comments_listed()
-    // {
-    //     $tid=self::NUMTICKET;
-    //     $response = $this->get("/api/tickets/{$tid}/comments/");
+    public function test_comments_listed()
+    {
+        $tid=self::NUMTICKET;
+        $response = $this->get("/api/tickets/{$tid}/comments/");
 
-    //     $response->assertStatus(200);
-    // }
+        $response->assertStatus(200);
+    }
     //CREACION
     public function test_comment_created()
     {
@@ -42,10 +42,10 @@ class CommentTest extends TestCase
     /**
      * @depends test_comment_created
      */
-    public function test_comment_get()
+    public function test_comment_get($id)
     {
         $tid=self::NUMTICKET;
-        $response=$this->get("api/tickets/{$tid}/comments");
+        $response=$this->get("api/tickets/{$tid}/comments/{$id}");
         $response->assertStatus(200);
 
     }

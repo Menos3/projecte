@@ -99,10 +99,11 @@ async function listRefresh(list) {
         butInfo.setAttribute('class', "btn btn-info");
         butInfo.setAttribute('id', 'butInfo' + element.id);
         butInfo.innerHTML = "Veure";
-        // butInfo.addEventListener('click', async event => { 
-        //     event.preventDefault();
-        //     await ticketList.viewTicket(element.id);
-        // })
+        butInfo.addEventListener('click', async event => { 
+            event.preventDefault();
+            // await ticketList.viewTicket(element.id);
+            verTicket(element);
+        })
         //Check
         let checkMostra = document.createElement('input');
         checkMostra.setAttribute('type', 'checkbox');
@@ -130,36 +131,93 @@ async function listRefresh(list) {
     
 }
 
-export function mostrarFormAsset() { 
-    //ocultar la lista de los tickets
-    $("#containerLista").hide();
+function verTicket(ticket) { 
+    let formulario = document.getElementById('formulario');
+    formulario.style.display = 'none';
+    cardTicket(ticket);
+
+}
+function cardTicket(ticket) { 
+
     let html = `
-    <div id="altaAsset class="'containerFormulario'> Donar d'alta un Asset
-        <p class='h1 header> Crear Asset</p>
-        <form action="" class="form-horizontal">
-            <div class="form-group container form-container">
-                <label for="name">Nombre del componente</label>
-                <input class="form-control" type="text" id="name" name="name">
-                <label for="model">Modelo</label>
-                <input class="form-control" type="text" id="model" name="modelo">
+    <div id='assetCard'>
+        <div class="card" style="width: 18rem;">
+            <div class="card-header">
+            Ticket
             </div>
-            <div class="container actions-container">
-                <button class="btn btn-success" type="submit" id="addAssetButton">Crear</button>
-                <button class="btn btn-danger" type="reset">Cancelar</button>
-            </div>
-        </form>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">${ticket.titulo}</li>
+                <li class="list-group-item">${ticket.descripcion}</li>
+                <li class="list-group-item">${ticket.created}</li>
+            </ul>
+
+        </div>
+        <button id='cerrarCard' class="btn btn-danger" type="reset" >Salir</button>
     </div>
     `
-    let asetDiv = $("<div></div>");
-    $("body").append(asetDiv);
+    let card = document.createElement('div');
+    card.setAttribute('id', 'cardContainer');
+    let container1 = document.getElementById('container1');
+    let oldCard = document.getElementById('cardContainer')
+    if (oldCard) { 
+        console.log(oldCard)
+        container1.removeChild(oldCard);
+    }
+    container1.appendChild(card);
+    card.innerHTML = html;
+
+    let salir = document.getElementById('cerrarCard');
+    salir.addEventListener('click', (event) => { 
+        event.preventDefault();
+        outCard(container1, card);
+
+
+    })
+
+
+}
+
+function outCard(container1,card) { 
+
+    container1.removeChild(card);
+    let formulario = document.getElementById('formulario');
+    formulario.style.display = 'block';
+
+
+
+}
+
+
+// export function mostrarFormAsset() { 
+//     //ocultar la lista de los tickets
+//     $("#containerLista").hide();
+//     let html = `
+//     <div id="altaAsset class="'containerFormulario'> Donar d'alta un Asset
+//         <p class='h1 header> Crear Asset</p>
+//         <form action="" class="form-horizontal">
+//             <div class="form-group container form-container">
+//                 <label for="name">Nombre del componente</label>
+//                 <input class="form-control" type="text" id="name" name="name">
+//                 <label for="model">Modelo</label>
+//                 <input class="form-control" type="text" id="model" name="modelo">
+//             </div>
+//             <div class="container actions-container">
+//                 <button class="btn btn-success" type="submit" id="addAssetButton">Crear</button>
+//                 <button class="btn btn-danger" type="reset">Cancelar</button>
+//             </div>
+//         </form>
+//     </div>
+//     `
+//     let asetDiv = $("<div></div>");
+//     $("body").append(asetDiv);
     
 
     
-    //mostrar el formulario para crear el nuevo asset
-    //enviar el asset a la Base de datos.
-    //hacer boton salir y que se oculte este div se
-    //se muestre la lista anterior.
-}
+//     //mostrar el formulario para crear el nuevo asset
+//     //enviar el asset a la Base de datos.
+//     //hacer boton salir y que se oculte este div se
+//     //se muestre la lista anterior.
+// }
 
 
  function usersOptions() {
@@ -170,8 +228,8 @@ export function mostrarFormAsset() {
     }
     return option;
 }
-async function assetsOptions() {
-    var assets = await listAsset.getAssets();
+function assetsOptions() {
+    var assets = listAsset.assets;
     console.log(assets,"COMO VA ESTO");
     let option = "";
     for (let i of assets) {
@@ -210,38 +268,41 @@ async function onSubmit() {
 
 export async function creacionForm() {
 
-        let html = `
-        <div class='containerFormulario'>
-            <p class='h1 header'> Incidencias</p>
-            <form action="" class="form-horizontal" >
-                <div class="form-group container form-container">
-                    <label for="titulo">Tittle</label>
-                    <input  class="form-control" type="text" id='titulo' name="titulo">
-                    <label for="descripcion">Description</label>
-                    <input class="form-control" type="text" id='description' name="description">
-                    <label> Tècnic</label>
-                    <select class="form-control" name="assignation" id="tec">
-                        ${usersOptions()}
-                    </select>
-                    <label>Component Incidència</label>
-                    <select  class="form-control" name="assets" id="assets">
-                        ${assetsOptions()}
-                    </select>
-                </div>
-                <div class="container actions-container">
-                    <button class="btn btn-success" type="submit" id="addTicketButton">Crear Incidencia</button>
-                    <button class="btn btn-danger" type="reset" >Cancelar Incidencia</button>
-                    <button  class="btn btn-primary" type="submit" id="pendientes">Mostrar solamente tareas pendientes.</button>
-                    <button class="btn btn-info" type="submit" id="mostrarIncidencias"> Mostrar lista de incidencias</button>
-                    <button class="btn btn-warning" type="submit" id="filtrar">Filtrar</button>
-                    <button class="btn btn-succes" id="newAsset" type=submit>Crear asset nuevo</button>
-                </div>
-                <div class="container search-container" id= "buscador" >
-                    <input class="form-control customize-input"  id="textSearch" placeholder="escriu el que vols buscar"/>
-                    <button  class="btn btn-primary" id='buttonSearch'> Buscar</button>
-                </div>
-                
-            </form>
+    let html = `
+        <div id='container1'>
+        
+            <div  id='formulario' class='containerFormulario'>
+                <p class='h1 header'> Incidencias</p>
+                <form action="" class="form-horizontal" >
+                    <div class="form-group container form-container">
+                        <label for="titulo">Tittle</label>
+                        <input  class="form-control" type="text" id='titulo' name="titulo">
+                        <label for="descripcion">Description</label>
+                        <input class="form-control" type="text" id='description' name="description">
+                        <label> Tècnic</label>
+                        <select class="form-control" name="assignation" id="tec">
+                            ${usersOptions()}
+                        </select>
+                        <label>Component Incidència</label>
+                        <select  class="form-control" name="assets" id="assets">
+                            ${assetsOptions()}
+                        </select>
+                    </div>
+                    <div class="container actions-container">
+                        <button class="btn btn-success" type="submit" id="addTicketButton">Crear Incidencia</button>
+                        <button class="btn btn-danger" type="reset" >Cancelar Incidencia</button>
+                        <button  class="btn btn-primary" type="submit" id="pendientes">Mostrar solamente tareas pendientes.</button>
+                        <button class="btn btn-info" type="submit" id="mostrarIncidencias"> Mostrar lista de incidencias</button>
+                        <button class="btn btn-warning" type="submit" id="filtrar">Filtrar</button>
+                        <button class="btn btn-succes" id="newAsset" type=submit>Crear asset nuevo</button>
+                    </div>
+                    <div class="container search-container" id= "buscador" >
+                        <input class="form-control customize-input"  id="textSearch" placeholder="escriu el que vols buscar"/>
+                        <button  class="btn btn-primary" id='buttonSearch'> Buscar</button>
+                    </div>
+                    
+                </form>
+            </div>
         </div>
     `
     

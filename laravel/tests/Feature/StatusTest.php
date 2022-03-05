@@ -16,7 +16,7 @@ class StatusTest extends TestCase
      */
     public function test_status_listed()
     {
-        $response = $this->get('/api/tickets//status');
+        $response = $this->get('/api/tickets/status');
 
         $response->assertStatus(200);
     }
