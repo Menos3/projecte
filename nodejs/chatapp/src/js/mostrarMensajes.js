@@ -66,7 +66,7 @@ export function crearHTMLMostrarMensajes() {
             tabla.appendChild(tr);
 
             //EVENTLISTENER PARA BORRAR LA HILERA
-            $('#datosMensaje'+ mensajes.id).on("click", (event) => {
+            a.addEventListener("click", (event) => {
 
                 event.preventDefault();
                 event.target.parentNode.parentNode.remove();

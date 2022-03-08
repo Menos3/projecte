@@ -13,4 +13,8 @@ const User = ({id}) => {
   )
 }
 
+User.propTypes = {
+  username: PropTypes.string
+}
+
 export default User

@@ -15,7 +15,7 @@ const Chat = ({id}) => {
 }
 
 Chat.propTypes = {
-    
+    name : PropTypes.string
 }
 
 export default Chat

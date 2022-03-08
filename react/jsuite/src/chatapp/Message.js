@@ -20,7 +20,11 @@ const Message = (props) => {
 }
 
 Message.propTypes = {
-
+  id: PropTypes.number,
+  message: PropTypes.string,
+  chat_id: PropTypes.number,
+  author_id: PropTypes.number,
+  published: PropTypes.date
 }
 
 export default Message

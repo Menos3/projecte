@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import * as data from './BaseDatos.json'
 import Message from './Message'
 
-const Chatapp = (props) => {
+const Chatapp = () => {
 
   const bbddData = (JSON.parse(JSON.stringify(data)));
 
@@ -28,7 +28,5 @@ const Chatapp = (props) => {
     </div>
   )
 }
-
-Chatapp.propTypes = {}
 
 export default Chatapp
