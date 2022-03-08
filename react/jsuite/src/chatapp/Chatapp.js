@@ -23,7 +23,7 @@ const Chatapp = () => {
       {bbddData.messages.map((element, index) => {
         console.log(element.message);
         return <Message key={index} datos={element}/>
-      })};
+      })}
       </tbody>
     </div>
   )

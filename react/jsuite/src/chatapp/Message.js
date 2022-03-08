@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 const Message = (props) => {
 
-    const {id, message, chat_id, author_id, published} = props.data;
+    const {id, message, chat_id, author_id, published} = props.datos;
 
   return (
     
@@ -24,7 +24,8 @@ Message.propTypes = {
   message: PropTypes.string,
   chat_id: PropTypes.number,
   author_id: PropTypes.number,
-  published: PropTypes.date
+  published: PropTypes.string
+  
 }
 
 export default Message
