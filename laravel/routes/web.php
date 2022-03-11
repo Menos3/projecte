@@ -31,3 +31,7 @@ Route::get('/', function (Request $request) {
 Route::get('mail/test', [MailController::class, 'test'])->middleware("auth");
 
  
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
