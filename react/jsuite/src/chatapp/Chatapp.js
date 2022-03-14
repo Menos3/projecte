@@ -1,6 +1,5 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import * as data from './BaseDatos.json'
-import Message from './Message'
 import shortid from 'shortid';
 
 const Chatapp = () => {
@@ -13,7 +12,12 @@ const Chatapp = () => {
 
   const bbdd =(JSON.parse(JSON.stringify(data)));
   
-  setMensajes(bbdd.messages);
+  useEffect ( ()=> {
+
+    setMensajes(bbdd.messages);
+    console.log(mensajes)
+  
+  },[])
 
   const agregarMensaje = e => {
 
@@ -25,7 +29,7 @@ const Chatapp = () => {
       return;
     }
 
-    setMensajes([...mensajes, {id: shortid.generate(), mensaje, chat_id: shortid.generate(), author_id: shortid.generate(), published: "22/2/22"}]);
+    setMensajes([...mensajes, {id: shortid.generate(), message: mensaje, chat_id: shortid.generate(), author_id: shortid.generate(), published: "22/2/22"}]);
     setMensaje('');
   }
 
@@ -38,7 +42,7 @@ const Chatapp = () => {
   const editar = item => {
 
     setModoEdicion(true);
-    setMensaje(item.mensaje);
+    setMensaje(item.message);
     setId(item.id);
   }
 
@@ -64,40 +68,29 @@ const Chatapp = () => {
 
     <>
     <div className="container mt-5">
-    <h1>CRUD MENSAJES</h1>
-    <br/>
-    </div>
-
-    <div className= "lista-chats">
-      <thead> {/* Cabecera de la tabla */}
-        <tr>
-          <th>Id</th>
-          <th>Mensaje</th>
-          <th>Chat</th>
-          <th>Autor</th>
-          <th>Publicado</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {
-          mensajes.length === 0 ? (
-            <li className="list-group-item">Sin Tareas</li>
-          ) : (
-            mensajes.map(item => (
-
+      <h1 className='text-center'>CRUD MENSAJES</h1>
+      <hr/>
+      <div className='row'>
+        <div className='col-8'>
+          <h4 className='text-center'>Lista de Mensajes</h4>
+          <ul className='"list-group'>
+            {
+              mensajes.length === 0 ? (
+              <li className="list-group-item">Sin Mensajes</li>
+              ) : (
+               mensajes.map(item => (
+              
               <li className="list-group-item" key={item.id}>
-                <span className="lead">{item.mensaje}</span>
-                <button className="btn btn-sm btn-danger float-right mx-2"onClick={() => eliminarMensaje(item.id)}>Eliminar Mensaje</button>
-                <button className="btn btn-sm btn-warning float-right" onClick={() => editar(item)}>Editar Mensaje</button>
+                <span className="lead">{item.message}</span>
+                <button className="btn btn-sm btn-danger float-end mx-2" onClick={() => eliminarMensaje(item.id)}>Eliminar Mensaje</button>
+                <button className="btn btn-sm btn-warning float-end" onClick={() => editar(item)}>Editar Mensaje</button>
               </li>
-            ))
-          )
-        }
-      
-      </tbody>
-    </div>
-      <br/>
+                ))
+              )
+            }
+          </ul>
+        </div>
+
     <div className="col-4">
       <h4 className="text-center">
         {
@@ -113,6 +106,7 @@ const Chatapp = () => {
           className="form-control mb-2"
           placeholder="Ingrese Mensaje"
           onChange={e => setMensaje(e.target.value)}
+          value={mensaje}
         />
         {
           modoEdicion ? (
@@ -123,7 +117,9 @@ const Chatapp = () => {
         }
       </form>
     </div>
-    </>
+  </div>
+</div>  
+</>
   )
 }
 
