@@ -2,11 +2,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
-
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\Auth;
 
 
 /*
@@ -35,8 +34,9 @@ Route::get('/', function (Request $request) {
 
 Route::get('mail/test', [MailController::class, 'test'])->middleware("auth");
 
-
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('files',FileController::class);
+
