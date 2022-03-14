@@ -72,7 +72,8 @@ class FileController extends Controller
      */
     public function update(Request $request, File $file)
     {
-        //
+        $path = $request->file('avatar')->store('avatars');
+        return $path;
     }
 
     /**
