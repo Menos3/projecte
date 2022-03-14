@@ -5,19 +5,15 @@ export class Board {
         //que solo reciba un objecto en vez de los 5 argumentos
         // destructuracion
         const { id, titulo, descripcion
-            // , 
-            // ticket
+          
          } = props;
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
-        // this.ticket=ticket;
-        //esto lo coge del metodo del constructor: nose pasa por props.
+        
         
         this.created = this.getDate();
-        // this.created.setLocalStorage();
-        // this.isDone = false;
-        // this.actualizado = this.getDate();
+       
     }
     getDate() {
         let date = new Date();
