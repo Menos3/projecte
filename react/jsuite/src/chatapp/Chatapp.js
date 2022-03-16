@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import * as data from './BaseDatos.json'
-import shortid from 'shortid';
+import nanoid from 'nanoid';
 
 const Chatapp = () => {
 
@@ -17,7 +17,7 @@ const Chatapp = () => {
     setMensajes(bbdd.messages);
     console.log(mensajes)
   
-  },[])
+  },[]);
 
   const agregarMensaje = e => {
 
@@ -29,7 +29,7 @@ const Chatapp = () => {
       return;
     }
 
-    setMensajes([...mensajes, {id: shortid.generate(), message: mensaje, chat_id: shortid.generate(), author_id: shortid.generate(), published: "22/2/22"}]);
+    setMensajes([...mensajes, {id: nanoid.generate(), message: mensaje, chat_id: nanoid.generate(), author_id: nanoid.generate(), published: "22/2/22"}]);
     setMensaje('');
   }
 
@@ -76,8 +76,11 @@ const Chatapp = () => {
           <ul className='"list-group'>
             {
               mensajes.length === 0 ? (
+
               <li className="list-group-item">Sin Mensajes</li>
+
               ) : (
+
                mensajes.map(item => (
               
               <li className="list-group-item" key={item.id}>
