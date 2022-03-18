@@ -38,7 +38,7 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // crear modelo Files
     }
 
     /**
@@ -49,7 +49,9 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        //
+        return view("files.show", [
+            "file"=>$file
+        ]);
     }
 
     /**
@@ -72,8 +74,7 @@ class FileController extends Controller
      */
     public function update(Request $request, File $file)
     {
-        $path = $request->file('avatar')->store('avatars');
-        return $path;
+        //
     }
 
     /**
