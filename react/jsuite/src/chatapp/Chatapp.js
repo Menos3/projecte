@@ -67,81 +67,80 @@ const Chatapp = () => {
   }
 
   return (
+      <>
+        <div className="container mt-5">
+          <h1 className='text-center'>CRUD MENSAJES</h1>
+          <hr/>
+          <div className='row'>
+            <div className='col-8'>
+              <h4 className='text-center'>Lista de Mensajes</h4>
+                {
+                  mensajes.length === 0 ? (
 
-    <>
-      <div className="container mt-5">
-        <h1 className='text-center'>CRUD MENSAJES</h1>
-        <hr/>
-        <div className='row'>
-          <div className='col-8'>
-            <h4 className='text-center'>Lista de Mensajes</h4>
-              {
-                mensajes.length === 0 ? (
+                  <li className="list-group-item">Sin Mensajes</li>
 
-                <li className="list-group-item">Sin Mensajes</li>
+                  ) : (
 
-                ) : (
+                  <Table striped bordered hover>
 
-                <Table striped bordered hover>
+                    <thead>
 
-                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Mensaje</th>
+                      <th>Autor</th>
 
-                  <tr>
-                    <th>Id</th>
-                    <th>Mensaje</th>
-                    <th>Autor</th>
+                    </tr>
 
-                  </tr>
+                    </thead>
 
-                  </thead>
+                    <tbody>
+                    {
+                      mensajes.map((e, index) => {
+                        return <tr key={index}>
+                          <td>{e.id}</td>
+                          <td>{e.message}</td>
+                          <td><User id={e.author_id}/></td>
+                          <td><Button variant = "warning" onClick={() => eliminarMensaje(e.id)}>Eliminar Mensaje</Button>
+                          <Button variant = "danger" onClick={() => editar(e)}>Editar Mensaje</Button></td>
+                        </tr>
+                      })
+                    }
+                    </tbody>
+                  </Table>
+                  )}
+      
+            </div>
 
-                  <tbody>
-                  {
-                    mensajes.map((e, index) => {
-                      return <tr key={index}>
-                        <td>{e.id}</td>
-                        <td>{e.message}</td>
-                        <td><User id={e.author_id}/></td>
-                        <td><Button variant = "warning" onClick={() => eliminarMensaje(e.id)}>Eliminar Mensaje</Button>
-                        <Button variant = "danger" onClick={() => editar(e)}>Editar Mensaje</Button></td>
-                      </tr>
-                    })
-                  }
-                  </tbody>
-                </Table>
-                )}
-    
-          </div>
-
-      <div className="col-4">
-        <h4 className="text-center">
-          {
-            modoEdicion ? 'Editar Mensaje' : 'Agregar Mensaje'
-          }
-        </h4>
-        <form onSubmit={modoEdicion ? editarMensaje : agregarMensaje}>
-          {
-            error ? <span className="text-danger">{error}</span> : null
-          }
-          <input 
-            type="text" 
-            className="form-control mb-2"
-            placeholder="Ingrese Mensaje"
-            onChange={e => setMensaje(e.target.value)}
-            value={mensaje}
-          />
-          {
-            modoEdicion ? (
-              <button className="btn btn-dark btn-block" type="submit">Editar Mensaje</button>
-            ) : (
-              <button className="btn btn-dark btn-block" type="submit">Agregar Mensaje</button>
-            )
-          }
-        </form>
+        <div className="col-4">
+          <h4 className="text-center">
+            {
+              modoEdicion ? 'Editar Mensaje' : 'Agregar Mensaje'
+            }
+          </h4>
+          <form onSubmit={modoEdicion ? editarMensaje : agregarMensaje}>
+            {
+              error ? <span className="text-danger">{error}</span> : null
+            }
+            <input 
+              type="text" 
+              className="form-control mb-2"
+              placeholder="Ingrese Mensaje"
+              onChange={e => setMensaje(e.target.value)}
+              value={mensaje}
+            />
+            {
+              modoEdicion ? (
+                <button className="btn btn-dark btn-block" type="submit">Editar Mensaje</button>
+              ) : (
+                <button className="btn btn-dark btn-block" type="submit">Agregar Mensaje</button>
+              )
+            }
+          </form>
+        </div>
       </div>
-    </div>
-  </div>  
-</>
+    </div>  
+  </>
   )
 }
 
