@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import * as data from './BaseDatos.json'
-import nanoid from 'nanoid';
+import {nanoid} from 'nanoid';
+import User from "./User";
+import {Table, Button} from 'react-bootstrap'
 
 const Chatapp = () => {
 
@@ -67,61 +69,78 @@ const Chatapp = () => {
   return (
 
     <>
-    <div className="container mt-5">
-      <h1 className='text-center'>CRUD MENSAJES</h1>
-      <hr/>
-      <div className='row'>
-        <div className='col-8'>
-          <h4 className='text-center'>Lista de Mensajes</h4>
-          <ul className='"list-group'>
-            {
-              mensajes.length === 0 ? (
+      <div className="container mt-5">
+        <h1 className='text-center'>CRUD MENSAJES</h1>
+        <hr/>
+        <div className='row'>
+          <div className='col-8'>
+            <h4 className='text-center'>Lista de Mensajes</h4>
+              {
+                mensajes.length === 0 ? (
 
-              <li className="list-group-item">Sin Mensajes</li>
+                <li className="list-group-item">Sin Mensajes</li>
 
-              ) : (
+                ) : (
 
-               mensajes.map(item => (
-              
-              <li className="list-group-item" key={item.id}>
-                <span className="lead">{item.message}</span>
-                <button className="btn btn-sm btn-danger float-end mx-2" onClick={() => eliminarMensaje(item.id)}>Eliminar Mensaje</button>
-                <button className="btn btn-sm btn-warning float-end" onClick={() => editar(item)}>Editar Mensaje</button>
-              </li>
-                ))
-              )
-            }
-          </ul>
-        </div>
+                <Table striped bordered hover>
 
-    <div className="col-4">
-      <h4 className="text-center">
-        {
-          modoEdicion ? 'Editar Mensaje' : 'Agregar Mensaje'
-        }
-      </h4>
-      <form onSubmit={modoEdicion ? editarMensaje : agregarMensaje}>
-        {
-          error ? <span className="text-danger">{error}</span> : null
-        }
-        <input 
-          type="text" 
-          className="form-control mb-2"
-          placeholder="Ingrese Mensaje"
-          onChange={e => setMensaje(e.target.value)}
-          value={mensaje}
-        />
-        {
-          modoEdicion ? (
-            <button className="btn btn-dark btn-block" type="submit">Editar Mensaje</button>
-          ) : (
-            <button className="btn btn-dark btn-block" type="submit">Agregar Mensaje</button>
-          )
-        }
-      </form>
+                  <thead>
+
+                  <tr>
+                    <th>Id</th>
+                    <th>Mensaje</th>
+                    <th>Autor</th>
+
+                  </tr>
+
+                  </thead>
+
+                  <tbody>
+                  {
+                    mensajes.map((e, index) => {
+                      return <tr key={index}>
+                        <td>{e.id}</td>
+                        <td>{e.message}</td>
+                        <td><User id={e.author_id}/></td>
+                        <td><Button variant = "warning" onClick={() => eliminarMensaje(e.id)}>Eliminar Mensaje</Button>
+                        <Button variant = "danger" onClick={() => editar(e)}>Editar Mensaje</Button></td>
+                      </tr>
+                    })
+                  }
+                  </tbody>
+                </Table>
+                )}
+    
+          </div>
+
+      <div className="col-4">
+        <h4 className="text-center">
+          {
+            modoEdicion ? 'Editar Mensaje' : 'Agregar Mensaje'
+          }
+        </h4>
+        <form onSubmit={modoEdicion ? editarMensaje : agregarMensaje}>
+          {
+            error ? <span className="text-danger">{error}</span> : null
+          }
+          <input 
+            type="text" 
+            className="form-control mb-2"
+            placeholder="Ingrese Mensaje"
+            onChange={e => setMensaje(e.target.value)}
+            value={mensaje}
+          />
+          {
+            modoEdicion ? (
+              <button className="btn btn-dark btn-block" type="submit">Editar Mensaje</button>
+            ) : (
+              <button className="btn btn-dark btn-block" type="submit">Agregar Mensaje</button>
+            )
+          }
+        </form>
+      </div>
     </div>
-  </div>
-</div>  
+  </div>  
 </>
   )
 }
