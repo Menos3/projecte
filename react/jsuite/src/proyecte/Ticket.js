@@ -15,7 +15,10 @@ function Ticket(props) {
         <td>{updated}</td>
         <td><Asset id={ asset_id} /></td>
         <td><Usser id={author_id} /></td>
-        <td><Usser id={assigned_id }/></td>
+      <td><Usser id={assigned_id} /></td>
+      
+      
+      
       
         
       </tr>

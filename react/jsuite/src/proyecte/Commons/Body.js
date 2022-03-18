@@ -11,7 +11,7 @@ const Body = () => {
       {/* <ListaActores/> */}
       {/* <Navegacion/> */}
       {/* <Acciones /> */}
-      <Calculadora/>
+      {/* <Calculadora/> */}
       {/* <ListTickets/> */}
 
     </>

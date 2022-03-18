@@ -2,8 +2,12 @@
 
 import { useState} from 'react'
 import { nanoid } from 'nanoid';
+import Menu from ''
 function App() {
 
+  const optionsAsset [
+    { value=1 , label="Armand"}
+  ]
   const [cesta, setCesta] = useState("");
   const [lista, setLista] = useState([]);
 
