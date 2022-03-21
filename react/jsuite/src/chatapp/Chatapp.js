@@ -11,13 +11,17 @@ const Chatapp = () => {
   const [modoEdicion, setModoEdicion] = useState(false);
   const [id, setId] = useState('');
   const [error, setError] = useState(null);
+  const [chat, setChat] = useState("");
+  const [chats, setChats] = useState([]);
 
-  const bbdd =(JSON.parse(JSON.stringify(data)));
+  const bbdd = (JSON.parse(JSON.stringify(data)));
   
   useEffect ( ()=> {
 
     setMensajes(bbdd.messages);
-    console.log(mensajes)
+    console.log(mensajes);
+    setChats(bbdd.chats);
+    console.log(chats);
   
   },[]);
 
@@ -31,7 +35,7 @@ const Chatapp = () => {
       return;
     }
 
-    setMensajes([...mensajes, {id: nanoid.generate(), message: mensaje, chat_id: nanoid.generate(), author_id: nanoid.generate(), published: "22/2/22"}]);
+    setMensajes([...mensajes, {id: nanoid.generate(), message: mensaje, chat_id: chat.id, author_id: nanoid.generate(), published: "22/2/22"}]);
     setMensaje('');
   }
 
@@ -96,13 +100,13 @@ const Chatapp = () => {
 
                     <tbody>
                     {
-                      mensajes.map((e, index) => {
+                      mensajes.map((element, index) => {
                         return <tr key={index}>
-                          <td>{e.id}</td>
-                          <td>{e.message}</td>
+                          <td>{element.id}</td>
+                          <td>{element.message}</td>
                           <td><User id={e.author_id}/></td>
-                          <td><Button variant = "warning" onClick={() => eliminarMensaje(e.id)}>Eliminar Mensaje</Button>
-                          <Button variant = "danger" onClick={() => editar(e)}>Editar Mensaje</Button></td>
+                          <td><Button variant = "warning" onClick={() => eliminarMensaje(element.id)}>Eliminar Mensaje</Button>
+                          <Button variant = "danger" onClick={() => editar(element)}>Editar Mensaje</Button></td>
                         </tr>
                       })
                     }
@@ -122,6 +126,20 @@ const Chatapp = () => {
             {
               error ? <span className="text-danger">{error}</span> : null
             }
+            <div>
+              <p>Escull el xat a on vols enviar el missatge:</p>
+              <select onChange={e => setChat(e.target.value)} key="chats">
+              
+              {
+                chats.map((element, index) => {
+
+                  <option key = {index} value = {element.name}>{element.name}</option>
+                })
+              }
+              
+              </select>
+            </div>
+
             <input 
               type="text" 
               className="form-control mb-2"
@@ -129,6 +147,7 @@ const Chatapp = () => {
               onChange={e => setMensaje(e.target.value)}
               value={mensaje}
             />
+
             {
               modoEdicion ? (
                 <button className="btn btn-dark btn-block" type="submit">Editar Mensaje</button>
@@ -136,6 +155,7 @@ const Chatapp = () => {
                 <button className="btn btn-dark btn-block" type="submit">Agregar Mensaje</button>
               )
             }
+
           </form>
         </div>
       </div>
