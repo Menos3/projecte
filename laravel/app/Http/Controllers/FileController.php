@@ -27,7 +27,7 @@ class FileController extends Controller
      */
     public function create()
     {
-        
+        return view('files.create');
     }
 
     /**
@@ -62,7 +62,7 @@ class FileController extends Controller
      */
     public function edit(File $file)
     {
-        //
+        return view("files.edit", ["file"=>$file]);
     }
 
     /**

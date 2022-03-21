@@ -7,9 +7,9 @@
            <div class="card">
                <div class="card-header">{{ __('Files') }}</div>
                <div class="card-body">
-                <form method="POST" action="http://localhost:8000/files/" accept-charset="UTF-8" enctype="multipart/form-data">
+                <form method="POST" action="http://localhost:8000/files/{{$file}}" accept-charset="UTF-8" enctype="multipart/form-data">
                     <label for='id'>Id</label>
-                    <input name='id' readonly>
+                    <input name='id' readonly value={{$file->id}}>
                     <label for='foto'>Selecciona un archivo</label>
                     <input type='file' name='foto'>
                     <input type='submit' >Guardar<input>

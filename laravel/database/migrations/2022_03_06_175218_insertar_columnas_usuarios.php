@@ -13,7 +13,11 @@ class InsertarColumnasUsuarios extends Migration
      */
     public function up()
     {
-        
+        Schema::table('users', function (Blueprint $table){
+            $table->unsignedBigInteger('avatar_id');
+
+        });
+
     }
 
     /**
@@ -23,6 +27,9 @@ class InsertarColumnasUsuarios extends Migration
      */
     public function down()
     {
+        Schema::table('users', function(Blueprint $table) {
+            $table->dropColumn('avatar_id');
+        });
         //
     }
 }

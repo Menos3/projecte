@@ -27,7 +27,7 @@
                            </tr>
                        </tbody>
                    </table>
-                   <button >Borrar</button>
+                   <button>Borrar</button>
                    <button>Editar</button>
                </div>
            </div>
