@@ -20,9 +20,9 @@ console.log(tecnicos, componentes)
 function Menu(props) {
   const [listTicket, setListTicket]=useState([])
   const [ticket, setTicket] = useState(
-    { id:nanoid(),idTecnicos: -1, idComponentes: -1, titulo: "Titulo del Ticket", description: "Describe la informacion"}
+    { id:nanoid(),idTecnicos: -1, nameTec: -1,idComponentes: -1,nameComponentes:-1, titulo: "Titulo del Ticket", description: "Describe la informacion"}
   );
-
+ 
   // const handlerCargarTecnico = function (e){ 
   //   e.preventDefault();
   //   const opcion = e.target.value;
@@ -34,6 +34,23 @@ function Menu(props) {
     setListTicket([...listTicket, ticket]);
     console.log(ticket);
   }
+  const borrarTicket =id=> { 
+  
+    const lista = listTicket.filter(ticket => ticket.id !== id);
+    setListTicket(lista)
+  }
+  const editarTicket = e => { 
+    e.preventDefault();
+    if (!ticket.trim()) { 
+      return
+    }
+
+
+
+
+    
+  }
+  
  
   // const fechaActual = function () { 
   //   fechaActual = now date();
@@ -43,13 +60,14 @@ function Menu(props) {
   // }
   return (
     <div>
-      <form onSubmit={handlerEnviar}>
+      <form onSubmit={ handlerEnviar }>
+        <h1>CRUD TICKETS</h1>
         <div className="row">
-          <div className="col-2">
+          <div className="col-4">
             <h3>Titulo</h3>
             <input onChange={e => setTicket({...ticket,titulo:e.target.value})}></input>
           </div>
-          <div className="col-2">
+          <div className="col-4">
             <h3>Description</h3>
             <input onChange={e => setTicket({...ticket,titulo:e.target.value})}></input>
           </div>
@@ -57,10 +75,10 @@ function Menu(props) {
         <div className="row">
           <div className="col-4">
             <h3>Técnicos</h3> 
-            <select name="tec" id='selTecnicos' onChange={e=>setTicket({...ticket,idTecnicos:e.target.value})}>
+            <select name="tec" id='selTecnicos' onChange={e=>setTicket({...ticket,idTecnicos:e.target.value, nameTec:e.target.value})}>
               <option value={-1}>Selecciona un tecnnico</option>
               {
-                tecnicos.map((e, id) => (<option key={"tecnico"+id} value={id} >{e.label}</option>) )
+                tecnicos.map((e, id) => (<option key={"tecnico" + id} value={e.value} >{ e.label}</option>) )
               }
             </select>
             {/* <input type='date' onChange={e=>setTicket({...ticket,creacion:})}></input> */}
@@ -74,8 +92,8 @@ function Menu(props) {
               }
             </select>
           </div>
-          <Button className='col-1' variant="success" type='submit'>Enviar</Button>
         </div>
+          <Button className='col-1' variant="success" type='submit'>Enviar</Button>
       </form>
       <Table striped bordered hover>
         <thead>
@@ -88,16 +106,11 @@ function Menu(props) {
           </tr>
         </thead>
         <tbody>
-
-
-          {listTicket.map((e, index) => {
+          { listTicket.length ===0 ? (<tr> No hay Ningun ticket</tr>):(listTicket.map((e, index) => {
             console.log(e);
-            return <tr key={ "ticket "+ index} ><td>{ e.id}</td><td>{ e.titulo}</td><td>{ e.description}</td><td>{ e.idTecnicos}</td><td>{ e.idComponentes}</td><td><Button>Borrar</Button><Button>Editar</Button></td>
-          </tr>
-
-          })
-        }
-          
+            return <tr key={"ticket " + index} ><td>{e.id}</td><td>{e.titulo}</td><td>{e.description}</td><td>{e.name}</td><td>{e.idComponentes}</td><td><Button variant="danger" onClick={ ()=> borrarTicket(e.id)}>Borrar</Button><Button variant="warning" type="submit">Editar</Button></td>
+          </tr>})
+          )}
         </tbody>
       </Table>
     </div>
