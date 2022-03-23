@@ -3,8 +3,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Body from './proyecte/Commons/Body'
 import Footer from './proyecte/Commons/Footer'
 import Header from './proyecte/Commons/Header'
-import Menu from './proyecte/Commons/Menu'
-
+import GestorTickets from './proyecte/Commons/GestorTickets'
 
 
 
@@ -13,7 +12,7 @@ const App = () => {
     <>
       <Header/>
       <Body />
-      <Menu></Menu>
+      <GestorTickets/>
       <Footer/>
      
     </>
