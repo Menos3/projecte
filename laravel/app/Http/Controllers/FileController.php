@@ -38,7 +38,10 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        // crear modelo Files
+        $path = $request->file('file')->store('public/storage');
+
+        return $path;
+
     }
 
     /**

@@ -8,7 +8,6 @@
                <div class="card-header">{{ __('Files') }}</div>
                <div class="card-body">
                 <form method="POST" action="http://localhost:8000/files" accept-charset="UTF-8" enctype="multipart/form-data">
-                  
                   <label for='foto'>Selecciona un archivo</label>
                   <input type='file' name='foto'>
                   <input type='submit' >Crear<input>
