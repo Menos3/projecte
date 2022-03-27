@@ -7,10 +7,11 @@
            <div class="card">
                <div class="card-header">{{ __('Files') }}</div>
                <div class="card-body">
-                <form method="POST" action="http://localhost:8000/files" accept-charset="UTF-8" enctype="multipart/form-data">
+                <form role="form" method="POST" action="{{route('files.store')}}" enctype="multipart/form-data">
+                    @csrf
                   <label for='foto'>Selecciona un archivo</label>
-                  <input type='file' name='foto'>
-                  <input type='submit' >Crear<input>
+                  <input type='file' name='file'>
+                  <input type='submit' />Crear
                 </form>
                </div>
            </div>

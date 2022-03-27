@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\File;
 use Illuminate\Http\Request;
+// use App\Http\Controller\Validator\Validator;
+use Illuminate\Support\Facades\Validator;
 
 class FileController extends Controller
 {
@@ -38,10 +39,20 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        $path = $request->file('file')->store('public/storage');
+        $validator= Validator::make($request->all(),[
+            'file'=>'required|mimes:jpeg,png,gif|max:2048'
+        ]);
+        
+        if($validator->fails()) {
+            return view('files.create');
+        }else{
+            $path = $request->file('file')->store('public/storage');
+            return view('files.show');
+        }
+
+
 
         return $path;
-
     }
 
     /**
