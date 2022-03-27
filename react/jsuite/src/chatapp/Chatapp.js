@@ -1,22 +1,58 @@
 import React, {useEffect, useState} from 'react'
-import * as data from './BaseDatos.json'
-import {nanoid} from 'nanoid';
 import User from "./User";
 import Chat from "./Chat"
 import {Table, Button} from 'react-bootstrap'
 
+import {bbddFirebase} from './firebase'
+import {collection, query, getDocs, addDoc, serverTimestamp, deleteDoc, doc, setDoc, orderBy, onSnapshot} from 'firebase/firestore';
+
 const Chatapp = () => {
 
-  const bbdd = (JSON.parse(JSON.stringify(data)));
+  //DOCUMENTO JSON DE DONDE SE COGEN LOS REGISTROS
+  // const bbddJson = (JSON.parse(JSON.stringify(data)));
 
+  //STATES
   const [mensaje, setMensaje] = useState("");
-  const [mensajes, setMensajes] = useState(bbdd.messages);
+  const [mensajes, setMensajes] = useState([]);
   const [modoEdicion, setModoEdicion] = useState(false);
   const [id, setId] = useState('');
   const [error, setError] = useState(null);
-  const [chat, setChat] = useState("");
-  const [chats, setChats] = useState(bbdd.chats);
+  const [chat, setChat] = useState([]);
+  const [chats, setChats] = useState([]);
 
+  //REFERENCIAS A LAS TABLAS DE FIREBASE
+  const messageCollectionRef = collection(bbddFirebase, "Messages");
+  const chatCollectionRef = collection(bbddFirebase, "Chats");
+
+  const q = query(collection(bbddFirebase, "Messages"), orderBy('published', 'asc'));
+
+  //FUNCIONES PARA RECUPERAR LOS REGISTROS DE LAS COLECCIONES
+  const getChats = async () => {
+
+    const datosChats = await getDocs(chatCollectionRef);
+
+    setChats(datosChats.docs.map((valor) => {
+
+      return {...valor.data(), id:valor.id}
+
+    }))
+  }
+
+  useEffect(() => {
+
+    onSnapshot(q, (snapshot) => {
+
+      setMensajes(snapshot.docs.map((valor) => {
+
+        return({...valor.data(), id:valor.id})
+
+      }))
+    })
+
+    getChats();
+
+  }, [])
+  
   const agregarMensaje = e => {
 
     e.preventDefault();
@@ -27,14 +63,19 @@ const Chatapp = () => {
       return;
     }
 
-    setMensajes([...mensajes, {id: nanoid(), message: mensaje, chat_id: chat.id, author_id: 1, published: "22/2/22"}]);
+    addDoc(messageCollectionRef, {
+      message: mensaje,
+      chat_id: "lBKvrl44ZHw1ucuvTQAL",
+      author_id: "2rYhkxRddVQtXgP3LAvK",
+      published: serverTimestamp()
+    })
+
     setMensaje('');
   }
 
   const eliminarMensaje = id => {
 
-    const arrayFiltrado = mensajes.filter(item => item.id !== id)
-    setMensajes(arrayFiltrado);
+    deleteDoc(doc(bbddFirebase, "Messages", id));
   }
 
   const editar = item => {
@@ -54,8 +95,13 @@ const Chatapp = () => {
       return;
     }
 
-    const arrayEditado = mensajes.map(item => item.id === id ? {...item, message: mensaje} : item)
-    setMensajes(arrayEditado);
+    setDoc(doc(bbddFirebase, "Messages", id), {
+
+      message: mensaje,
+      published: serverTimestamp()
+
+    });
+
     setModoEdicion(false);
     setMensaje('');
     setId('');
@@ -82,10 +128,12 @@ const Chatapp = () => {
                     <thead>
 
                     <tr>
+
                       <th>Id</th>
                       <th>Mensaje</th>
-                      <th>Autor</th>
-                      <th>Grupo</th>
+                      {/* <th>Autor</th>
+                      <th>Grupo</th> */}
+                      <th>Opciones</th>
 
                     </tr>
 
@@ -94,21 +142,23 @@ const Chatapp = () => {
                     <tbody>
                     {
                       mensajes.map((element, index) => {
+
                         return <tr key={index}>
                           <td>{element.id}</td>
                           <td>{element.message}</td>
-                          <td><User id={element.author_id}/></td>
-                          <td><Chat id={element.chat_id}/></td>
-                          <td><Button variant = "warning" onClick={() => eliminarMensaje(element.id)}>Eliminar Mensaje</Button>
-                          <Button variant = "danger" onClick={() => editar(element)}>Editar Mensaje</Button></td>
+                          {/* <td><User id={element.author_id}/></td>
+                          <td><Chat id={element.chat_id}/></td> */}
+                          <td><Button variant = "danger" onClick={() => eliminarMensaje(element.id)}>Eliminar Mensaje</Button>
+                          <Button variant = "warning" onClick={() => editar(element)}>Editar Mensaje</Button></td>
                         </tr>
+
                       })
                     }
                     </tbody>
                   </Table>
                   )}
       
-            </div>
+          </div>
 
         <div className="col-4">
           <h4 className="text-center">
@@ -120,7 +170,7 @@ const Chatapp = () => {
             {
               error ? <span className="text-danger">{error}</span> : null
             }
-            <div>
+            {/* <div>
               <p>Escull el xat a on vols enviar el missatge:</p>
               <select onChange={e => setChat(e.target.value)} key="chats">
               
@@ -131,7 +181,7 @@ const Chatapp = () => {
               }
               
               </select>
-            </div>
+            </div> */}
 
             <input 
               type="text" 
