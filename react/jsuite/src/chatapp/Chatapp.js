@@ -17,7 +17,7 @@ const Chatapp = () => {
   const [modoEdicion, setModoEdicion] = useState(false);
   const [id, setId] = useState('');
   const [error, setError] = useState(null);
-  const [chat, setChat] = useState([]);
+  const [chat, setChat] = useState("");
   const [chats, setChats] = useState([]);
 
   //REFERENCIAS A LAS TABLAS DE FIREBASE
@@ -170,7 +170,7 @@ const Chatapp = () => {
             {
               error ? <span className="text-danger">{error}</span> : null
             }
-            {/* <div>
+            <div>
               <p>Escull el xat a on vols enviar el missatge:</p>
               <select onChange={e => setChat(e.target.value)} key="chats">
               
@@ -181,7 +181,7 @@ const Chatapp = () => {
               }
               
               </select>
-            </div> */}
+            </div>
 
             <input 
               type="text" 
