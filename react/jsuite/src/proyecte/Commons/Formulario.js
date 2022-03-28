@@ -5,11 +5,11 @@ import { nanoid} from 'nanoid'
 //Estado propios
 //handler  pasarselo del gestor al fomulario
 
-export default function Formulario({selects,saveTicket}) {
+export default function Formulario({ selects, saveTicket,formData,setFormData, estadoEditar, funcione}) {
+  console.log("estado",estadoEditar)
     
-    const [formData, setFormData] = useState({titulo:"", descripcion:"", asset:"",assignacion:""});
-    
-    const handlerInputTitulo = (valueTitulo) => {
+  
+  const handlerInputTitulo = (valueTitulo) => {
         setFormData({ ...formData, titulo: valueTitulo });
     }
     const handlerInputDescripcion = (valueDescrip) => {
@@ -17,66 +17,71 @@ export default function Formulario({selects,saveTicket}) {
 
     }
     const handlerSelTec = (valueSelecTec) => {
-        setFormData({ ...formData, assignacion: valueSelecTec });
+        setFormData({ ...formData, assignacion_id: valueSelecTec*1 });
 
     }
     const handlerSelAss = (valueSelecAss) => {
-        setFormData({ ...formData, asset: valueSelecAss });
+        setFormData({ ...formData, asset_id: valueSelecAss*1 });
 
-    }
-    //al 
-    const handlerSubmit = (e) => { 
-        e.preventDefault();
-        if (!formData.titulo || !formData.descripcion || !formData.asset || !formData.assignacion) {
-            return 
-        }
-
-        saveTicket({...formData, id:nanoid()});
-        
     }
     
-   
-   
-   
+  const handlerSubmit = (e) => { 
+    e.preventDefault();
+      let value = Object.values(formData).find((t) => {
+        console.log("t",t)
+        if (t === "" || t === null) return true;
+      });
+
+      if (value !== undefined) {
+        return;
+      }
+        console.log("fd",formData)
+        saveTicket(e,formData);
+  }
+
    
    
     return (
     // Hacer un handler para cada linea del formulario de O
     // Hacer un Handler generico
-    <form onSubmit={ handlerSubmit }>
-        <h1>CRUD TICKETS</h1>
-        <div className="row">
+      <form className="center" onSubmit={e=>estadoEditar ? funcione(e,formData.id) : handlerSubmit(e)  }>
+        <h1 className="text-center">CRUD TICKETS</h1>
+        <div className="row ">
           <div className="col-4">
             <h3>Titulo</h3>
-                <input onChange={e => handlerInputTitulo(e.target.value)}></input>
+            <input onChange={e => handlerInputTitulo(e.target.value)} value={ formData.titulo }></input>
           </div>
           <div className="col-4">
             <h3>Descripcion</h3>
-            <input onChange={e => handlerInputDescripcion(e.target.value)}></input>
+            <input onChange={e => handlerInputDescripcion(e.target.value)} value={ formData.descripcion }></input>
           </div>
         </div>
         <div className="row">
           <div className="col-4">
             <h3>Técnicos</h3> 
-            <select name="tec" id='selTecnicos' onChange={e=>handlerSelTec(e.target.value)}>
+            <select name="tec" id='selTecnicos' value={ formData.assignacion} onChange={e=>handlerSelTec(e.target.value)}>
               <option value={-1}>Selecciona un tecnnico</option>
               {
                 selects.tecnicos.map((e, id) => (<option key={"tecnico" + id} value={e.value} >{ e.label}</option>) )
               }
             </select>
-            {/* <input type='date' onChange={e=>setTicket({...ticket,creacion:})}></input> */}
+            {/* <input type='date' onChange={e=>setTicket({...ticket})}></input> */}
           </div>
           <div className='col-4'>
             <h3>Componentes</h3>
-            <select name='Com' id='selCom' onChange={e=>handlerSelAss(e.target.value)}>
+            <select value={ formData.asset} name='Com' id='selCom' onChange={e=>handlerSelAss(e.target.value)}>
               <option value={-1}>Selecciona un componente</option>
               {
-                selects.componentes.map((e, id) => (<option key={"componente" + id} value={id}>{e.label} </option>))
+                selects.componentes.map((e, id) => (<option key={"componente" + id} value={e.value}>{e.label} </option>))
               }
             </select>
           </div>
         </div>
-          <Button className='col-1' variant="success" type='submit'>Enviar</Button>
+        
+        {
+          estadoEditar ? (
+          <button className="btn btn-warning btn-block" type="submit">Editar</button>)   : (<button className="btn btn-dark btn-block" type="submit">Agregar</button>)
+        }
       </form>
   )
 }

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import ListaTickets from './ListaTickets'
 import Formulario from './Formulario'
 import { Button, Table } from 'react-bootstrap'
-import { nanoid} from 'nanoid'
-
+import { nanoid } from 'nanoid'
+import { db } from '../../firebase'
+import { collection, doc, orderBy, query, where, getDocs, addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
 const selects = {
   tecnicos :[
     { value: 0, label: "Armand" },
@@ -22,15 +23,61 @@ const selects = {
 
 function GestorTickets(props) {
   //se lo paso al componente ListaTickets
-  const [listTicket, setListTicket]=useState([])
-  
-  const handlerSave = (ticket) => {
-   
-    setListTicket([...listTicket, ticket]);
-    console.log(listTicket)
-
-  }
+  const [editModo, setEditModo] = useState(false);
+  const [listTicket, setListTicket] = useState([])
+  const [formData, setFormData] = useState({ titulo: "", descripcion: "", asset_id: "", assignacion_id: "" });
+  const ticketsCollection = collection(db, "Tickets")
  
+  
+  const q = query(ticketsCollection, orderBy('titulo', 'asc'));
+
+  useEffect(() => {
+    onSnapshot(q, (snapshot) => {
+      console.log("snap",snapshot)
+      const newDades = snapshot.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
+      console.log("dades", newDades)
+      setListTicket(newDades)
+    })
+
+  }, []);
+
+  
+  
+  
+  
+  
+  const handlerSave = (e,ticket) => {
+    console.log("t",ticket)
+    e.preventDefault();
+    addDoc(ticketsCollection, {
+      ...ticket,
+      creacion:serverTimestamp()
+    })
+
+    console.log(listTicket)
+  }
+  const handlerDelete = (id) => { 
+    console.log("id",id)
+    deleteDoc(doc(db,"Tickets",id))
+  }
+  const handlerEdit = (id) => { 
+    // const ticket = listTicket.filter(tic => tic.id === id)[0];
+    setFormData(listTicket.find(tic => tic.id === id));
+    setEditModo(true);
+    
+    
+  }
+  const editarTicket = (e, id) => { 
+
+    e.preventDefault();
+    setDoc(doc(db, "Tickets", id), {
+      ...formData
+    });
+    setEditModo(false)
+    setFormData({ titulo: "", descripcion: "", asset_id: "", assignacion_id: "" })
+  }
 //Los Tickets se los quede el Gestor
 // const fechaActual = function () { 
   //   fechaActual = now date();
@@ -40,27 +87,10 @@ function GestorTickets(props) {
   // }
   return (
     <div>
-      <Formulario saveTicket={handlerSave} selects={selects}/>
-      <ListaTickets selects={selects} listTicket={listTicket}/>
-      {/* <Table striped bordered hover>
-            {console.log(listTicket)}
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Titulo</th>
-            <th>Descripcion</th>
-            <th>Nombre Asset</th>
-            <th>Assignacion</th>
-        </tr>
-        </thead>
-        <tbody>
-        {listTicket.length ===0 ? (<tr> No hay Ningun ticket</tr>):(listTicket.map((e, index) => {
-        
-            return <tr key={"ticket " + index} ><td>{e.id}</td><td>{e.titulo}</td><td>{e.descripcion}</td><td>{e.label}</td><td>{e.idComponentes}</td><td><Button variant="danger" >Borrar</Button><Button variant="warning" type="submit">Editar</Button></td>
-        </tr>})
-        )}
-        </tbody>
-      </Table> */}
+      {/* <Formulario saveTicket={handlerSave} formData={formData} setFormData={setFormData} funcione={ editarTicket} estadoEditar={editModo}  />
+      <ListaTickets listTicket={listTicket} deleted={handlerDelete} edit={handlerEdit} /> */}
+      <Formulario saveTicket={handlerSave} selects={selects} formData={formData} setFormData={setFormData} funcione={ editarTicket} estadoEditar={editModo}  />
+      <ListaTickets selects={selects} listTicket={listTicket} deleted={handlerDelete} edit={ handlerEdit} />
     </div>
   )
 }
