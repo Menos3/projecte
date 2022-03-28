@@ -39,20 +39,9 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        $validator= Validator::make($request->all(),[
-            'file'=>'required|mimes:jpeg,png,gif|max:2048'
+        $validatedData = $request->validate ([
+            'cargar' => 'required|mimes:gif,jpeg,jpg,png|max:2048'
         ]);
-        
-        if($validator->fails()) {
-            return view('files.create');
-        }else{
-            $path = $request->file('file')->store('public/storage');
-            return view('files.show');
-        }
-
-
-
-        return $path;
     }
 
     /**
