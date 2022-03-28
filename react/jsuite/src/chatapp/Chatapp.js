@@ -5,6 +5,7 @@ import {Table, Button} from 'react-bootstrap'
 
 import {bbddFirebase} from './firebase'
 import {collection, query, getDocs, addDoc, serverTimestamp, deleteDoc, doc, setDoc, orderBy, onSnapshot} from 'firebase/firestore';
+import PropTypes from 'prop-types'
 
 const Chatapp = () => {
 
@@ -131,8 +132,8 @@ const Chatapp = () => {
 
                       <th>Id</th>
                       <th>Mensaje</th>
-                      {/* <th>Autor</th>
-                      <th>Grupo</th> */}
+                      <th>Autor</th>
+                      <th>Grupo</th>
                       <th>Opciones</th>
 
                     </tr>
@@ -146,8 +147,8 @@ const Chatapp = () => {
                         return <tr key={index}>
                           <td>{element.id}</td>
                           <td>{element.message}</td>
-                          {/* <td><User id={element.author_id}/></td>
-                          <td><Chat id={element.chat_id}/></td> */}
+                          <td><User id={element.author_id}/></td>
+                          <td><Chat id={element.chat_id}/></td>
                           <td><Button variant = "danger" onClick={() => eliminarMensaje(element.id)}>Eliminar Mensaje</Button>
                           <Button variant = "warning" onClick={() => editar(element)}>Editar Mensaje</Button></td>
                         </tr>
@@ -157,7 +158,6 @@ const Chatapp = () => {
                     </tbody>
                   </Table>
                   )}
-      
           </div>
 
         <div className="col-4">
@@ -207,4 +207,7 @@ const Chatapp = () => {
   )
 }
 
+Chatapp.propTypes = {
+  mensaje : PropTypes.string
+}
 export default Chatapp

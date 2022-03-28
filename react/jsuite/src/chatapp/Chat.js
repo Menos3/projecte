@@ -1,21 +1,28 @@
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import React from 'react'
-import PropTypes from 'prop-types'
-import * as data from './BaseDatos.json'
+import { bbddFirebase } from './firebase';
 
 const Chat = ({id}) => {
 
-    const chats = (JSON.parse(JSON.stringify(data))).chats;
-    const chat = chats.filter(element => {return element.id === id})[0];
+  const q = query(collection(bbddFirebase, "Chats"), where('id', "==", id));
 
-  return (
-    <p>
-        {chat.name}
-    </p>
-  )
-}
+  const getChat = async () => {
 
-Chat.propTypes = {
-    name : PropTypes.string
+    const resultado = await getDocs(q);
+
+    resultado.forEach((chat) => {
+
+      return (
+        <p>
+            {chat.name}
+        </p>
+      )
+
+    })
+  }
+  
+  getChat();
+ 
 }
 
 export default Chat

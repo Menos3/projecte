@@ -1,16 +1,27 @@
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import React from 'react'
-import * as data from './BaseDatos.json'
+import { bbddFirebase } from './firebase';
 
 const User = ({id}) => {
 
-    const usuarios = (JSON.parse(JSON.stringify(data))).users;
-    const usuario = usuarios.filter(element => {return element.id === id})[0];
+  const q = query(collection(bbddFirebase, "Users"), where('id', "==", id));
 
-  return (
-    <>
-      {usuario.username}
-    </>
-  )
+  const getUser = async () => {
+
+    const resultado = await getDocs(q);
+  
+    resultado.forEach((usuario) => {
+
+    return (
+      <>
+        {usuario.username}
+      </>
+    )
+
+    })
+  }
+  
+  getUser();
 }
 
 export default User
