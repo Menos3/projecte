@@ -1,0 +1,379 @@
+{
+    "statuses":
+    [
+        {
+            "id":0,
+            "name":"Iniciat"
+        },
+        {
+            "id":1,
+            "name":"Pendent"
+        },
+        {
+            "id":2,
+            "name":"En Execució"
+        },
+        {
+            "id":3,
+            "name":"Pendent de Servei Extern"
+        },
+        {
+            "id":4,
+            "name":"Pendent de Compra de Material"
+        },
+        {
+            "id":5,
+            "name":"Desestimada"
+        },
+        {
+            "id":6,
+            "name":"Irresoluble"
+        },
+        {
+            "id":7,
+            "name":"Resolta"
+        }
+
+
+    ],
+
+    "locations":
+    [ {
+      "id": 0,
+      "name": "Servidors",
+      "parent_id": -1
+      },
+      {
+        "id": 1,
+        "name": "Aula 106",
+        "parent_id": -1
+      },
+      {
+        "id": 2,
+        "name": "Aula 110",
+        "parent_id": -1
+      },
+      {
+        "id": 3,
+        "name": "Dept. Informàtica",
+        "parent_id": -1
+      }
+
+    ],
+    "users": 
+    [ {
+      "id" : 0,
+      "username" : "armand",
+      "password" : "maletin",
+      "role_id" : 0
+    }, {
+      "id" : 1,
+      "username" : "pep",
+      "password" : "maletin",
+      "role_id" : 1
+    }, {
+      "id" : 2,
+      "username" : "jordi",
+      "password" : "maletin",
+      "role_id" : 3
+    }, {
+      "id" : 3,
+      "username" : "alicia",
+      "password" : "maletin",
+      "role_id" : 2
+    }, {
+      "id" : 4,
+      "username" : "cristina",
+      "password" : "maletin",
+      "role_id" : 0
+    } ],
+    
+      
+    "assets": [ 
+    {
+        "id" : 0,
+        "model" : "Monitor BENQ GW240",
+        "location" : 0
+       
+      },
+      {
+        "id" : 1,
+        "model" : "Monitor BENQ GW240",
+        "location" : 0
+       
+      },
+      {
+        "id" : 2,
+        "model" : "Teclat Lenovo",
+        "location" : 0
+       
+      },
+      {
+        "id" : 3,
+        "model" : "Monitor BENQ GW240 / 1",
+        "location" : 1
+       
+      },{
+        "id" : 4,
+        "model" : "Monitor BENQ GW240 / 2",
+        "location" : 1
+       
+      },{
+        "id" : 5,
+        "model" : "Impressora Konica Minolta",
+        "location" : 3
+       
+      },{
+        "id" : 6,
+        "model" : "Router Cisco XXXX",
+        "location" : 0
+       
+      },{
+        "id" : 7,
+        "model" : "Projector Optmoa GT670",
+        "location" : 2
+       
+      }
+      ],
+    
+      "tickets": [ 
+        {
+        "id" : 0,
+        "title" : "No funciona projector",
+        "desc" : "El projector ha cascat. Ha fet puff, ha tret fum i adeu",
+        "author_id" : 4,
+        "assigned_id": 1,
+        "status_id":0,
+        "asset_id": 7,
+        "created": "21/01/2022",
+        "updated": "21/01/2022"
+        },
+        {
+        "id" : 1,
+        "title" : "El monitor no tira",
+        "desc" : "No s'encen des de fa dies i ningú em fa cas",
+        "author_id" : 3,
+        "assigned_id": 0,
+        "status_id":1,
+        "asset_id": 3,
+        "created": "22/01/2022",
+        "updated": "22/01/2022"
+        },
+        {
+        "id" : 2,
+        "title" : "El switch ha petat",
+        "desc" : "No va l'internet. Socorrrr",
+        "author_id" : 2,
+        "assigned_id": 1,
+        "status_id":2,
+        "asset_id": 6,
+        "created": "23/01/2022",
+        "updated": "23/01/2022"
+        },
+        {
+        "id" : 3,
+        "title" : "No tinc saldo",
+        "desc" : "La tinta s ha acabao",
+        "author_id" : 1,
+        "assigned_id": 2,
+        "status_id":2,
+        "asset_id": 5,
+        "created": "23/01/2022",
+        "updated": "23/01/2022"
+        }
+      ],
+
+      "comments": [
+        {
+            "id":0,
+            "author_id": 1,
+            "ticket_id": 0,
+            "msg": "El fum era negre. Cridar als bombers si es repeteix",
+            "created": "22/2/22"
+        },
+        {
+            "id":1,
+            "author_id": 2,
+            "ticket_id": 2,
+            "msg": "De vegades, de vgades no ... és confús",
+            "created": "22/2/22"
+        },
+        {
+            "id":2,
+            "author_id": 3,
+            "ticket_id": 3,
+            "msg": "Please, saldo de color cyan i groc també !!!",
+            "created": "22/2/22"
+        }
+      ],
+
+      "messages": [
+            {
+                "id":0,
+                "message": "Bon dia Company!!",
+                "chat_id": 0,
+                "author_id": 1,
+                "published": "22/2/22"
+            },
+            {
+                "id":1,
+                "message": "Avui fa un temps molt bo!!!",
+                "chat_id": 0,
+                "author_id": 2,
+                "published": "22/2/22"
+            },
+            {
+                "id":2,
+                "message": "Estan sonats aquets paios",
+                "chat_id": 0,
+                "author_id": 1,
+                "published": "22/2/22"
+            },
+            {
+                "id":3,
+                "message": "Bon dia Company!!",
+                "chat_id": 1,
+                "author_id": 1,
+                "published": "22/2/22"
+            },
+            {
+                "id":4,
+                "message": "Tinc cotxe nou. Un Jeep blanc i amb gasolina",
+                "chat_id": 1,
+                "author_id": 2,
+                "published": "22/2/22"
+            },
+            {
+                "id":5,
+                "message": "Doncs el meu és un híbrid taronja. No gasta res",
+                "chat_id": 1,
+                "author_id": 3,
+                "published": "22/2/22"
+        }
+      ],
+
+      "chats": [
+
+        {
+            "id":0,
+            "name": "Tutors tècnics",
+            "author_id": 0,
+            "created": "22/2/22"
+        },
+        {
+            "id":1,
+            "name": "Profes col·laboradors",
+            "author_id": 0,
+            "created": "22/2/22"
+        },
+        {
+            "id":2,
+            "name": "Off-topics",
+            "author_id": 0,
+            "created": "22/2/22"
+        }
+      ],
+
+      "user_chats":[
+          {
+            "id": 0,
+            "chat_id": 0
+          },
+          {
+            "id": 1,
+            "chat_id": 0
+          },
+          {
+            "id": 2,
+            "chat_id": 0
+          },
+          {
+            "id": 3,
+            "chat_id": 1
+          },
+          {
+            "id": 4,
+            "chat_id": 1
+          },
+          {
+            "id": 0,
+            "chat_id": 1
+          },
+          {
+            "id": 1,
+            "chat_id": 1
+          }
+      ],
+
+      "tasks": [
+        {
+            "id": 0,
+            "title": "Comprar connector",
+            "data_from": "22/2/22",
+            "date_to": "22/5/22",
+            "ticket_id": 0,
+            "completion_id": 0,
+            "author_id": 0,
+            "created": "22/2/22"
+        },
+        {
+            "id": 1,
+            "title": "Canviar cable audio",
+            "data_from": "22/2/22",
+            "date_to": "22/5/22",
+            "ticket_id": 0,
+            "completion_id": 0,
+            "author_id": 0,
+            "created": "22/2/22"
+        },
+        {
+            "id": 2,
+            "title": "Verificar chromecast",
+            "data_from": "22/2/22",
+            "date_to": "22/5/22",
+            "ticket_id": 0,
+            "completion_id": 1,
+            "author_id": 0,
+            "created": "22/2/22"
+        },
+        {
+            "id": 3,
+            "title": "Comprar switch",
+            "data_from": "22/2/22",
+            "date_to": "22/5/22",
+            "ticket_id": 2,
+            "completion_id": 0,
+            "author_id": 0,
+            "created": "22/2/22"
+        },
+        {
+            "id": 4,
+            "title": "Revisar cablejat",
+            "data_from": "22/2/22",
+            "date_to": "22/5/22",
+            "ticket_id": 2,
+            "completion_id": 1,
+            "author_id": 0,
+            "created": "22/2/22"
+        }
+
+      ],
+      "completion": [
+        {
+            "id":0,
+            "name": "En procés"
+        },
+        {
+            "id":1,
+            "name": "Completat"
+        }
+    ],
+
+    "notes": [
+        {
+            "id": 0,
+            "body": "Comprar en comerç local",
+            "task_id": 0
+        }
+    ]
+    }
