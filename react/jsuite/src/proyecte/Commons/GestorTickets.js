@@ -5,6 +5,7 @@ import { Button, Table } from 'react-bootstrap'
 import { nanoid } from 'nanoid'
 import { db } from '../../firebase'
 import { collection, doc, orderBy, query, where, getDocs, addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
+
 const selects = {
   tecnicos :[
     { value: 0, label: "Armand" },

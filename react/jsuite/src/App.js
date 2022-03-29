@@ -12,7 +12,6 @@ const App = () => {
   return (
     <>
       <Header/>
-      <Body />
       <GestorTickets/>
       <Footer/>
      
