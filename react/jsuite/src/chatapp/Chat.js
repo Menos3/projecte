@@ -1,28 +1,27 @@
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import React from 'react'
+import { getDoc, doc } from 'firebase/firestore';
+import React, { useState } from 'react'
 import { bbddFirebase } from './firebase';
 
 const Chat = ({id}) => {
 
-  const q = query(collection(bbddFirebase, "Chats"), where('id', "==", id));
+  const [chatName, setChatName] = useState("");
 
-  const getChat = async () => {
+  const getChatName = async () => {
 
-    const resultado = await getDocs(q);
+    const docRef = doc(bbddFirebase, "Chats", id);
+    const docSnap = await getDoc(docRef);
 
-    resultado.forEach((chat) => {
-
-      return (
-        <p>
-            {chat.name}
-        </p>
-      )
-
-    })
+    setChatName(docSnap.data().name);
   }
   
-  getChat();
- 
+  getChatName();
+
+  return (
+    <>
+      {chatName}
+    </>
+  )
+  
 }
 
-export default Chat
+export default Chat;

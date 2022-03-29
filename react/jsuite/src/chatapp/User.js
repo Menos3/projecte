@@ -1,27 +1,27 @@
-import { collection, getDocs, query, where } from 'firebase/firestore';
-import React from 'react'
+import { doc, getDoc } from 'firebase/firestore';
+import React, { useState } from 'react'
 import { bbddFirebase } from './firebase';
 
 const User = ({id}) => {
 
-  const q = query(collection(bbddFirebase, "Users"), where('id', "==", id));
+  const [username, setUsername] = useState("");
 
-  const getUser = async () => {
+  const getUsername = async () => {
 
-    const resultado = await getDocs(q);
-  
-    resultado.forEach((usuario) => {
+    const docRef = doc(bbddFirebase, "Users", id);
+    const docSnap = await getDoc(docRef);
 
-    return (
-      <>
-        {usuario.username}
-      </>
-    )
-
-    })
+    setUsername(docSnap.data().username);
   }
+
+  getUsername();
+
+  return (
+    <>
+      {username}
+    </>
+  )
   
-  getUser();
 }
 
-export default User
+export default User;
