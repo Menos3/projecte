@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+
 import { Table, Button } from 'react-bootstrap'
 
 function ListaTickets({ selects, listTicket, deleted, edit }) {
@@ -42,6 +42,6 @@ console.log("sc",selects)
   )
 }
 
-ListaTickets.propTypes = {}
+
 
 export default ListaTickets
