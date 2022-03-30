@@ -15,7 +15,10 @@ function Ticket(props) {
         <td>{updated}</td>
         <td><Asset id={ asset_id} /></td>
         <td><Usser id={author_id} /></td>
-        <td><Usser id={assigned_id }/></td>
+      <td><Usser id={assigned_id} /></td>
+      
+      
+      
       
         
       </tr>
@@ -24,6 +27,13 @@ function Ticket(props) {
 }
 
 Ticket.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  description: PropTypes.string,
+  created: PropTypes.string,
+  updated: PropTypes.string,
+  Asset: PropTypes.object,
+  Usser:PropTypes.object
 
 }
 

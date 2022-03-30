@@ -13,7 +13,9 @@ function Usser({ id}) {
   )
 }
 
-Usser.propTypes = {}
+Usser.propTypes = {
+    username: PropTypes.string
+}
 
 export default Usser
 
