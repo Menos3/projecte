@@ -1,13 +1,11 @@
 import { getDoc, doc } from 'firebase/firestore';
 import React, { useState } from 'react'
-import { bbddFirebase } from './firebase';
+import { bbddFirebase} from '../fireDataBase';
 
 const Chat = ({id}) => {
 
   const [chatName, setChatName] = useState("");
-
   const getChatName = async () => {
-
     const docRef = doc(bbddFirebase, "Chats", id);
     const docSnap = await getDoc(docRef);
 

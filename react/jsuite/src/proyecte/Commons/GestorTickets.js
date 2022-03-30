@@ -1,10 +1,9 @@
 import React, { useState ,useEffect} from 'react'
 import ListaTickets from './ListaTickets'
 import Formulario from './Formulario'
-import { Button, Table } from 'react-bootstrap'
-import { nanoid } from 'nanoid'
-import { db } from '../../firebase'
-import { collection, doc, orderBy, query, where, getDocs, addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
+import { bbddFirebase  } from '../../fireDataBase'
+import { collection, doc, orderBy, query,  addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
+
 
 const selects = {
   tecnicos :[
@@ -27,7 +26,7 @@ function GestorTickets(props) {
   const [editModo, setEditModo] = useState(false);
   const [listTicket, setListTicket] = useState([])
   const [formData, setFormData] = useState({ titulo: "", descripcion: "", asset_id: "", assignacion_id: "" });
-  const ticketsCollection = collection(db, "Tickets")
+  const ticketsCollection = collection(bbddFirebase, "Tickets")
  
   
   const q = query(ticketsCollection, orderBy('titulo', 'asc'));
@@ -61,7 +60,7 @@ function GestorTickets(props) {
   }
   const handlerDelete = (id) => { 
     console.log("id",id)
-    deleteDoc(doc(db,"Tickets",id))
+    deleteDoc(doc(bbddFirebase,"Tickets",id))
   }
   const handlerEdit = (id) => { 
     // const ticket = listTicket.filter(tic => tic.id === id)[0];
@@ -73,7 +72,7 @@ function GestorTickets(props) {
   const editarTicket = (e, id) => { 
 
     e.preventDefault();
-    setDoc(doc(db, "Tickets", id), {
+    setDoc(doc(bbddFirebase, "Tickets", id), {
       ...formData
     });
     setEditModo(false)

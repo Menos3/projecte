@@ -3,7 +3,7 @@ import User from "./User";
 import Chat from "./Chat"
 import {Table, Button} from 'react-bootstrap'
 
-import {bbddFirebase} from './firebase'
+import {bbddFirebase} from '../fireDataBase'
 import {collection, query, getDocs, addDoc, serverTimestamp, deleteDoc, doc, setDoc, orderBy, onSnapshot} from 'firebase/firestore';
 import PropTypes from 'prop-types'
 

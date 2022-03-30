@@ -7,18 +7,9 @@ import Formulario from './Formulario.js'
 const Header = () => {
   return (
     
-
-      <Nav justify variant="tabs" defaultActiveKey="/home">
-        <Nav.Item>
-          <Nav.Link href="/home">Lista de Tickets</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-1">Crear Ticket</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-2">Cambiar de Usuario</Nav.Link>
-        </Nav.Item>
-      </Nav>
+    <>
+      Header
+      </> 
 
       // <img className="menusuperior__img--logo  menusuperior__img--esquerra"  src="./img/logo.png " alt=" d"/>
       // <div className="menusuperior__botonera">

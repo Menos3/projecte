@@ -1,6 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore';
 import React, { useState } from 'react'
-import { bbddFirebase } from './firebase';
+import { bbddFirebase } from '../fireDataBase';
 
 const User = ({id}) => {
 

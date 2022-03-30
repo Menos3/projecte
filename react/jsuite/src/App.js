@@ -1,21 +1,21 @@
 import React from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
-import Body from './proyecte/Commons/Body'
-import Footer from './proyecte/Commons/Footer'
-import Header from './proyecte/Commons/Header'
+import Chatapp from './chatapp/Chatapp'
 import GestorTickets from './proyecte/Commons/GestorTickets'
-
+import { Routes, Route } from "react-router-dom";
+import Home from './Home'
 
 
 const App = () => {
   return (
-    <>
-      <Header/>
-      <GestorTickets/>
-      <Footer/>
-     
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} >
+          <Route path="/" element={<GestorTickets />}/>
+          <Route  path="/tickets" element={<GestorTickets />}/>
+          <Route path="/chatapp" element={<Chatapp />} />
+        
+        </Route>
+      </Routes>
   )
 }
 
