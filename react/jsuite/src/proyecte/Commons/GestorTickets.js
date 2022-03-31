@@ -26,9 +26,12 @@ function GestorTickets(props) {
   const [editModo, setEditModo] = useState(false);
   const [listTicket, setListTicket] = useState([])
   const [formData, setFormData] = useState({ titulo: "", descripcion: "", asset_id: "", assignacion_id: "" });
+  console.log("aaaa")
+
+
   const ticketsCollection = collection(bbddFirebase, "Tickets")
  
-  
+  console.log("aaaa")
   const q = query(ticketsCollection, orderBy('titulo', 'asc'));
 
   useEffect(() => {
