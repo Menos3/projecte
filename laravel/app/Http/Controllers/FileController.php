@@ -59,7 +59,7 @@ class FileController extends Controller
         );
         if(Storage::disk('public')->exists($filePath)){
             Log::debug("Local storage esta todo bien");
-            $fullPath = \Storage::disk('public')->path($filePath);
+            $fullPath = Storage::disk('public')->path($filePath);
             Log::debug("El archivo se ha guardo en {$fullPath}");
             $file=File::create([
                 'filepath'=>$filePath,
@@ -86,9 +86,9 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        if(Storage::disk('public')->exists($file)){
-            $conten = Storage::get($file);
-        }
+        // if(Storage::disk('public')->exists($file)){
+        //     $conten = Storage::get($file);
+        // }
 
         return view("files.show", [
             "file"=>$file
@@ -115,7 +115,40 @@ class FileController extends Controller
      */
     public function update(Request $request, File $file)
     {
-        //
+        $validatedData = $request->validate ([
+            'foto' => 'required|mimes:gif,jpeg,jpg,png|max:2048'
+        ]);
+        $upload =$request->file('foto');
+        $fileName=$upload->getClientOriginalName();
+        $fileSize=$upload->getSize();
+        Log::debug("Upload '{$fileName}' ($fileSize).");
+
+        //Subir el fichero al disco locales
+        $uploadName= time()."_".$fileName;
+        $filePath =$upload->storeAs(
+            'foto',
+            $uploadName,
+            'public'
+        );
+        if(Storage::disk('public')->exists($filePath)){
+            Log::debug("Local storage esta todo bien");
+            $fullPath = Storage::disk('public')->path($filePath);
+            Log::debug("El archivo se ha guardo en {$fullPath}");
+            $file=File::updated([
+                'filepath'=>$filePath,
+                'filesize'=>$fileSize,
+            ]);
+            Log::debug("DB storage funciona");
+
+            return redirect()->route('files.show',$file)
+            ->with ('exito', 'Se ha guardado satisfactoriamente');
+
+
+        }else{
+        Log::debug("Fallo la carga en Localización");
+        return redirect()->route("files.create")
+            ->with('error', 'Error al subir el archivo');
+        }
     }
 
     /**

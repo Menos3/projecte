@@ -25,11 +25,13 @@
                                <td>{{ $file->filesize }}</td>
                                <td>{{ $file->created_at }}</td>
                                <td>{{ $file->updated_at }}</td>
+                               <td><img width="300" height="300" src="{{ asset("storage/{$file->filepath}")}}"/></td>
                            </tr>
                        </tbody>
                    </table>
                    <button>Borrar</button>
-                   <button>Editar</button>
+                   {{-- <button>Editar</button> --}}
+                   <a class="btn btn-primary" href="{{route('files.edit',$file->id)}}" role="button">Editar</a>
                </div>
            </div>
        </div>
