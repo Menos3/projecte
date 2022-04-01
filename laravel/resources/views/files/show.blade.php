@@ -8,6 +8,7 @@
                <div class="card-header">{{ __('Files') }}</div>
                <div class="card-body">
                    <table class="table">
+                       <h2>SHOW FILE</h2>
                        <thead>
                            <tr>
                                <td scope="col">ID</td>
