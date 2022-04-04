@@ -86,13 +86,9 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        // if(Storage::disk('public')->exists($file)){
-        //     $conten = Storage::get($file);
-        // }
-
-        return view("files.show", [
-            "file"=>$file
-        ]);
+            return view("files.show", [
+                "file"=>$file
+            ]);
     }
 
     /**
@@ -134,10 +130,9 @@ class FileController extends Controller
             Log::debug("Local storage esta todo bien");
             $fullPath = Storage::disk('public')->path($filePath);
             Log::debug("El archivo se ha guardo en {$fullPath}");
-            $file=File::updated([
-                'filepath'=>$filePath,
-                'filesize'=>$fileSize,
-            ]);
+            $file->filepath = $filePath;
+            $file->filesize = $fileSize;
+            $file->save();
             Log::debug("DB storage funciona");
 
             return redirect()->route('files.show',$file)
@@ -146,7 +141,7 @@ class FileController extends Controller
 
         }else{
         Log::debug("Fallo la carga en Localización");
-        return redirect()->route("files.create")
+        return redirect()->route("files.edit")
             ->with('error', 'Error al subir el archivo');
         }
     }

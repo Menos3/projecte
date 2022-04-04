@@ -32,6 +32,8 @@
                    <button>Borrar</button>
                    {{-- <button>Editar</button> --}}
                    <a class="btn btn-primary" href="{{route('files.edit',$file->id)}}" role="button">Editar</a>
+                   <a class="btn btn-sencondary" type="reset" role="button">Cancelar</a>
+
                </div>
            </div>
        </div>
