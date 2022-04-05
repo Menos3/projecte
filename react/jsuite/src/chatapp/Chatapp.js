@@ -9,17 +9,13 @@ import PropTypes from 'prop-types'
 
 const Chatapp = () => {
 
-  //DOCUMENTO JSON DE DONDE SE COGEN LOS REGISTROS
-  // const bbddJson = (JSON.parse(JSON.stringify(data)));
-
   //STATES
-  const [mensaje, setMensaje] = useState("");
   const [mensajes, setMensajes] = useState([]);
   const [modoEdicion, setModoEdicion] = useState(false);
   const [id, setId] = useState('');
   const [error, setError] = useState(null);
-  const [chat, setChat] = useState("");
   const [chats, setChats] = useState([]);
+  const [missatge, setMissatge] = useState({});
 
   //REFERENCIAS A LAS TABLAS DE FIREBASE
   const messageCollectionRef = collection(bbddFirebase, "Messages");
@@ -58,20 +54,26 @@ const Chatapp = () => {
 
     e.preventDefault();
 
-    if(!mensaje.trim()) {
+    if(!missatge.mensaje.trim()) {
 
       console.log("Campo vacio");
       return;
     }
 
     addDoc(messageCollectionRef, {
-      message: mensaje,
-      chat_id: "lBKvrl44ZHw1ucuvTQAL",
+
+      message: missatge.mensaje,  
+      chat_id: missatge.chat,
       author_id: "2rYhkxRddVQtXgP3LAvK",
       published: serverTimestamp()
     })
 
-    setMensaje('');
+    setMissatge({
+
+      mensaje: "",
+      chat: ""
+
+    })
   }
 
   const eliminarMensaje = id => {
@@ -82,7 +84,11 @@ const Chatapp = () => {
   const editar = item => {
 
     setModoEdicion(true);
-    setMensaje(item.message);
+
+    setMissatge({
+      mensaje: item.message
+    })
+
     setId(item.id);
   }
 
@@ -90,7 +96,7 @@ const Chatapp = () => {
 
     e.preventDefault();
 
-    if(!mensaje.trim()) {
+    if(!missatge.mensaje.trim()) {
 
       console.log("Campo vacio");
       return;
@@ -98,15 +104,32 @@ const Chatapp = () => {
 
     setDoc(doc(bbddFirebase, "Messages", id), {
 
-      message: mensaje,
+      message: missatge.mensaje,
+      chat_id: missatge.chat,
+      author_id: "2rYhkxRddVQtXgP3LAvK",
       published: serverTimestamp()
 
     });
 
     setModoEdicion(false);
-    setMensaje('');
+
+    setMissatge({
+      mensaje: "",
+      chat: ""
+    })
+
     setId('');
     setError(null)
+  }
+
+  const handleInputChange = ({target}) => {
+
+    setMissatge({
+
+      ...missatge,
+      [target.name]:target.value
+
+    })
   }
 
   return (
@@ -172,8 +195,14 @@ const Chatapp = () => {
             }
             <div>
               <p>Escull el xat a on vols enviar el missatge:</p>
-              <select onChange={e => setChat(e.target.value)} key="chats">
+              <select 
+              name="chat"
+              onChange={handleInputChange} key="chats"
+              value={missatge.chat}>
               
+              {
+                <option key = {0} value = "">Seleccione un chat</option>
+              }
               {
                 chats.map(index => (
                   <option key = {index.id} value = {index.id}>{index.name}</option>
@@ -184,11 +213,12 @@ const Chatapp = () => {
             </div>
 
             <input 
-              type="text" 
+              type="text"
+              name="mensaje" 
               className="form-control mb-2"
               placeholder="Ingrese Mensaje"
-              onChange={e => setMensaje(e.target.value)}
-              value={mensaje}
+              onChange={handleInputChange}
+              value={missatge.mensaje}
             />
 
             {
