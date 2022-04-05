@@ -21,8 +21,6 @@ const App = () => {
           <Route  path="/tickets" element={<GestorTickets estado={ estado} />}/>
           <Route path="/chatapp" element={<Chatapp estado={ estado} />} />
           <Route path="/login" element={<Login estado={ estado}/>} />
-          
-        
         </Route>
       </Routes>
     </UserContext.Provider>

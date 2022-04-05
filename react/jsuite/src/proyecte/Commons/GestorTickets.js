@@ -2,22 +2,20 @@ import React, { useState ,useEffect} from 'react'
 import ListaTickets from './ListaTickets'
 import Formulario from './Formulario'
 import { bbddFirebase  } from '../../fireDataBase'
-import { collection, doc, orderBy, query,  addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
+import { collection,doc, orderBy, query,  addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
+// const selects = {
+//   tecnicos :[
+//     { value: 0, label: "Armand" },
+//     { value: 1, label: "Pep" },
+//     { value: 2, label: "Cristina" }
+//   ],
+//    componentes :[
+  //     { value: 0, label: "Monitos LG" },
+  //     { value: 1, label: "teclado Asus" },
+//     { value: 2, label: "raton omoton" }
+//   ]
 
-
-const selects = {
-  tecnicos :[
-    { value: 0, label: "Armand" },
-    { value: 1, label: "Pep" },
-    { value: 2, label: "Cristina" }
-  ],
-   componentes :[
-    { value: 0, label: "Monitos LG" },
-    { value: 1, label: "teclado Asus" },
-    { value: 2, label: "raton omoton" }
-  ]
-
-}
+// }
 
 //index de la linea con un slice
 
@@ -26,31 +24,60 @@ function GestorTickets(props) {
   const [editModo, setEditModo] = useState(false);
   const [listTicket, setListTicket] = useState([])
   const [formData, setFormData] = useState({ titulo: "", descripcion: "", asset_id: "", assignacion_id: "" });
-  console.log("aaaa")
-
-
-  const ticketsCollection = collection(bbddFirebase, "Tickets")
+  const [listTecnicos, setListTecnicos] = useState([]);
+  const [listAssets, setListAssets] = useState([]);
  
-  console.log("aaaa")
-  const q = query(ticketsCollection, orderBy('titulo', 'asc'));
+  
+  const assetCollection= collection(bbddFirebase, "Assets");
+  
+  const assets=()=>{
+    const queryAssets= query(assetCollection)
+
+    return queryAssets
+  }
+  
+
+  const tecnicosCollection = collection(bbddFirebase, "Tecnicos");
+  // Esto son los tecnicos
+  const tecnicos = () => { 
+    const queryTecnicos = query(tecnicosCollection);
+  
+   
+    return queryTecnicos
+  }
+  
+  const ticketsCollection = collection(bbddFirebase, "Tickets")
+  const tickets=()=>{
+    const q = query(ticketsCollection, orderBy('titulo', 'asc'));
+    return q;
+  
+  }
+
+ 
 
   useEffect(() => {
-    onSnapshot(q, (snapshot) => {
-      console.log("snap",snapshot)
+    onSnapshot(tecnicos(), (snapshot) => {
+      const newTecnicos = snapshot.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
+      setListTecnicos(newTecnicos)
+    })
+    onSnapshot(assets(), (snapshot) => {
+      const newAssets = snapshot.docs.map(doc => {
+        return { ...doc.data(), id: doc.id }
+      })
+      setListAssets(newAssets)
+    })
+    onSnapshot(tickets(), (snapshot) => {
       const newDades = snapshot.docs.map(doc => {
         return { ...doc.data(), id: doc.id }
       })
-      console.log("dades", newDades)
-      setListTicket(newDades)
+      setListTicket([...newDades])
     })
+
 
   }, []);
 
-  
-  
-  
-  
-  
   const handlerSave = (e,ticket) => {
     console.log("t",ticket)
     e.preventDefault();
@@ -62,7 +89,7 @@ function GestorTickets(props) {
     console.log(listTicket)
   }
   const handlerDelete = (id) => { 
-    console.log("id",id)
+
     deleteDoc(doc(bbddFirebase,"Tickets",id))
   }
   const handlerEdit = (id) => { 
@@ -92,8 +119,8 @@ function GestorTickets(props) {
     <div>
       {/* <Formulario saveTicket={handlerSave} formData={formData} setFormData={setFormData} funcione={ editarTicket} estadoEditar={editModo}  />
       <ListaTickets listTicket={listTicket} deleted={handlerDelete} edit={handlerEdit} /> */}
-      <Formulario saveTicket={handlerSave} selects={selects} formData={formData} setFormData={setFormData} funcione={ editarTicket} estadoEditar={editModo}  />
-      <ListaTickets selects={selects} listTicket={listTicket} deleted={handlerDelete} edit={ handlerEdit} />
+      <Formulario saveTicket={handlerSave} tec={listTecnicos} ass={listAssets} formData={formData} setFormData={setFormData} funcione={ editarTicket} estadoEditar={editModo}  />
+      <ListaTickets tec={listTecnicos} ass={listAssets} listTicket={listTicket} deleted={handlerDelete} edit={ handlerEdit} />
     </div>
   )
 }

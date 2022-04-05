@@ -10,7 +10,6 @@ const User = ({id}) => {
 
     const docRef = doc(bbddFirebase, "Users", id);
     const docSnap = await getDoc(docRef);
-
     setUsername(docSnap.data().username);
   }
 

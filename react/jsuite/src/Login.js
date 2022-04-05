@@ -6,12 +6,12 @@ import { UserContext} from './UseContextUser'
 export default function Login() {
   const estado=useContext(UserContext)
   const { usuario, setUsuario } =estado;
-    const [nom, setNom] = useState("");
-    const navigate = useNavigate();
+  const [nom, setNom] = useState("");
+  const navigate = useNavigate();
     
   
     const handlerSubmit = (e) => { 
-        e.preventDefault();
+      e.preventDefault();
       setUsuario(nom)
       setNom("")
         navigate("/")

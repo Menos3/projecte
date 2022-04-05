@@ -5,7 +5,7 @@ import { nanoid} from 'nanoid'
 //Estado propios
 //handler  pasarselo del gestor al fomulario
 
-export default function Formulario({ selects, saveTicket,formData,setFormData, estadoEditar, funcione}) {
+export default function Formulario({ ass, tec, saveTicket,formData,setFormData, estadoEditar, funcione}) {
   console.log("estado",estadoEditar)
     
   
@@ -17,7 +17,7 @@ export default function Formulario({ selects, saveTicket,formData,setFormData, e
 
     }
     const handlerSelTec = (valueSelecTec) => {
-        setFormData({ ...formData, assignacion_id: valueSelecTec*1 });
+        setFormData({ ...formData, assignacion_id: valueSelecTec });
 
     }
     const handlerSelAss = (valueSelecAss) => {
@@ -28,14 +28,14 @@ export default function Formulario({ selects, saveTicket,formData,setFormData, e
   const handlerSubmit = (e) => { 
     e.preventDefault();
       let value = Object.values(formData).find((t) => {
-        console.log("t",t)
+       
         if (t === "" || t === null) return true;
       });
 
       if (value !== undefined) {
         return;
       }
-        console.log("fd",formData)
+      
         saveTicket(e,formData);
   }
 
@@ -62,7 +62,7 @@ export default function Formulario({ selects, saveTicket,formData,setFormData, e
             <select name="tec" id='selTecnicos' value={ formData.assignacion} onChange={e=>handlerSelTec(e.target.value)}>
               <option value={-1}>Selecciona un tecnnico</option>
               {
-                selects.tecnicos.map((e, id) => (<option key={"tecnico" + id} value={e.value} >{ e.label}</option>) )
+                tec.map((e, id) => (<option key={"tecnico" + id} value={e.id} >{ e.name}</option>) )
               }
             </select>
             {/* <input type='date' onChange={e=>setTicket({...ticket})}></input> */}
@@ -72,7 +72,7 @@ export default function Formulario({ selects, saveTicket,formData,setFormData, e
             <select value={ formData.asset} name='Com' id='selCom' onChange={e=>handlerSelAss(e.target.value)}>
               <option value={-1}>Selecciona un componente</option>
               {
-                selects.componentes.map((e, id) => (<option key={"componente" + id} value={e.value}>{e.label} </option>))
+                  ass.map((e, id) => (<option key={"componente" + id} value={e.id}>{e.name} </option>))
               }
             </select>
           </div>
