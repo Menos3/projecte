@@ -29,10 +29,14 @@
                            </tr>
                        </tbody>
                    </table>
-                   <button>Borrar</button>
+
                    {{-- <button>Editar</button> --}}
                    <a class="btn btn-primary" href="{{route('files.edit',$file->id)}}" role="button">Editar</a>
-                   <a class="btn btn-sencondary" type="reset" role="button">Cancelar</a>
+                   <form method="post" action="{{route('files.destroy', $file)}}">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-sencondary" type="submit"  role="button">Borrar</button>
+                   </form>
 
                </div>
            </div>

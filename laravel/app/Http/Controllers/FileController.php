@@ -5,6 +5,7 @@ use App\Models\File;
 use Illuminate\Http\Request;
 use  Illuminate\Support\Facades\Log;
 use  Illuminate\Support\Facades\Storage;
+use  Illuminate\Support\Facades\DB;
 
 // use App\Http\Controller\Validator\Validator;
 use Illuminate\Support\Facades\Validator;
@@ -114,6 +115,8 @@ class FileController extends Controller
         $validatedData = $request->validate ([
             'foto' => 'required|mimes:gif,jpeg,jpg,png|max:2048'
         ]);
+        $oldFilePath = $file->filepath;
+
         $upload =$request->file('foto');
         $fileName=$upload->getClientOriginalName();
         $fileSize=$upload->getSize();
@@ -135,14 +138,18 @@ class FileController extends Controller
             $file->save();
             Log::debug("DB storage funciona");
 
+            Storage::disk('public')->delete($oldFilePath);
             return redirect()->route('files.show',$file)
-            ->with ('exito', 'Se ha guardado satisfactoriamente');
+            ->with ('success', 'Se ha guardado satisfactoriamente');
+
 
 
         }else{
         Log::debug("Fallo la carga en Localización");
         return redirect()->route("files.edit")
             ->with('error', 'Error al subir el archivo');
+
+
         }
     }
 
@@ -154,6 +161,10 @@ class FileController extends Controller
      */
     public function destroy(File $file)
     {
-        //
+       $file->delete();
+       Storage::disk('public')->delete($file->filepath);
+
+       return redirect()->route('files.index')->with('success', "Borrado");
+
     }
 }
