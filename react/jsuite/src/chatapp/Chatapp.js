@@ -64,7 +64,7 @@ const Chatapp = () => {
 
       message: missatge.mensaje,  
       chat_id: missatge.chat,
-      author_id: "2rYhkxRddVQtXgP3LAvK",
+      author_id: "1VKulYecDiMbi2aA5k7L",
       published: serverTimestamp()
     })
 
@@ -106,7 +106,7 @@ const Chatapp = () => {
 
       message: missatge.mensaje,
       chat_id: missatge.chat,
-      author_id: "2rYhkxRddVQtXgP3LAvK",
+      author_id: "1VKulYecDiMbi2aA5k7L",
       published: serverTimestamp()
 
     });

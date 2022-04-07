@@ -8,9 +8,9 @@ const User = ({id}) => {
 
   const getUsername = async () => {
 
-    const docRef = doc(bbddFirebase, "Users", id);
+    const docRef = doc(bbddFirebase, "Tecnicos", id);
     const docSnap = await getDoc(docRef);
-    setUsername(docSnap.data().username);
+    setUsername(docSnap.data().name);
   }
 
   getUsername();
