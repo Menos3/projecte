@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap'
 import { UserContext } from './UseContextUser'
 import { bbddFirebase } from './fireDataBase'
 import Registro from './Registro'
-import { collection,doc, orderBy, query, where, addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
+import { collection, query, where, getDocs} from "firebase/firestore"
 
 function Login() {
   // esto viene de la App
@@ -12,36 +12,42 @@ function Login() {
   //para pasarle el nombre a esta estado
   const { usuario, setUsuario } = estado;
   
-  const [nom, setNom] = useState("");
-  const [email, setEmail] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   const [login, setLogin] = useState(true);
 
   const collectionTecnicos = collection(bbddFirebase, 'Tecnicos');
-  const qu = query(collectionTecnicos, where('email', '==', email));
 
-    
-  const handlerEmail = (e) => { 
+  const handlerSubmit = async (e) => {
+
     e.preventDefault();
 
-    //hay que hacer una query en a la base de datos para ver si email existente
-    //si el email existe hay que comprobar la contraseña este correcta mediante un query a la DB
+    // hacer una query por el campo email
+    const qu = query(collectionTecnicos, where('email', '==', email));
+    const quSnapshot = await getDocs(qu);
 
-  }
-  const handlerSubmit = (e) => {
-    e.preventDefault();
-    console.log(qu.data());
-    // setUsuario(nom)
-    // setNom("")
+    quSnapshot.docs.map((valor) => {
+
+      // de lo que recogemos, se compara el email y la contraseña con los valores de los input
+      // si coincide, se envia a la Home seteando el usuario
+
+      if(valor.data().email === email && valor.data().password === password) {
+
+        setUsuario(valor.data().name);
+
+      } else {
+
+        setLogin(false);
+      }
+      
+    })
+
     navigate("/")
 
   }
-  // hacer una query por el campo email
-  // si existe compruebo password
-  // pasarselo al Context
-  // Hacer un logOut
-    
+  
   return (
     <>
       {
@@ -55,7 +61,7 @@ function Login() {
         
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} value={password} name="password"/>
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" label="Check me out" />
@@ -70,10 +76,8 @@ function Login() {
             <Registro />
           </div>
         )}
-    </>
-      
+    </> 
   )
 }
   
-
 export default Login

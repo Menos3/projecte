@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import { Button} from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import { Link, Outlet } from 'react-router-dom'
-import { UserContext} from './UseContextUser'
+import { UserContext } from './UseContextUser'
 
 export default function Home() {
   const estado = useContext(UserContext)
@@ -14,10 +14,17 @@ export default function Home() {
     
 
         <Button  variant="outline-primary"><Link to="/chatapp" >ChatApp</Link></Button>
+        {!usuario ? (
+          <>
+          <Button variant="outline-primary"><Link to="/login" >Login</Link></Button>
+          <Button variant="outline-primary"><Link to="/registro" >Registro</Link></Button>
+          </>
+        ) : (
+
+          <Button variant="outline-primary"><Link to="/logout">Logout</Link></Button>
+        )}
         
-        <Button variant="outline-primary"><Link to="/login" >Login</Link></Button>
-        <Button variant="outline-primary"><Link to="/registro" >Registro</Link></Button>
-        <Button  variant="outline-primary"><Link to="/" >Home</Link></Button>
+        <Button variant="outline-primary"><Link to="/" >Home</Link></Button>
         
 
         <hr></hr>
