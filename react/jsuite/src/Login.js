@@ -1,42 +1,79 @@
 import React, { useState,useContext } from 'react'
 import { useNavigate} from 'react-router-dom'
 import { Form, Button } from 'react-bootstrap'
-import { UserContext} from './UseContextUser'
+import { UserContext } from './UseContextUser'
+import { bbddFirebase } from './fireDataBase'
+import Registro from './Registro'
+import { collection,doc, orderBy, query, where, addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
 
-export default function Login() {
-  const estado=useContext(UserContext)
-  const { usuario, setUsuario } =estado;
-  const [nom, setNom] = useState("");
-  const navigate = useNavigate();
-    
+function Login() {
+  // esto viene de la App
+  const estado = useContext(UserContext)
+  //para pasarle el nombre a esta estado
+  const { usuario, setUsuario } = estado;
   
-    const handlerSubmit = (e) => { 
-      e.preventDefault();
-      setUsuario(nom)
-      setNom("")
-        navigate("/")
+  const [nom, setNom] = useState("");
+  const [email, setEmail] = useState("")
+  const navigate = useNavigate();
 
-    }
+  const [login, setLogin] = useState(true);
 
+  const collectionTecnicos = collection(bbddFirebase, 'Tecnicos');
+  const qu = query(collectionTecnicos, where('email', '==', email));
+
+    
+  const handlerEmail = (e) => { 
+    e.preventDefault();
+
+    //hay que hacer una query en a la base de datos para ver si email existente
+    //si el email existe hay que comprobar la contraseña este correcta mediante un query a la DB
+
+  }
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    console.log(qu.data());
+    // setUsuario(nom)
+    // setNom("")
+    navigate("/")
+
+  }
+  // hacer una query por el campo email
+  // si existe compruebo password
+  // pasarselo al Context
+  // Hacer un logOut
     
   return (
-
-    <Form>
-    <Form.Group className="mb-3" controlId="formBasicEmail">
-      <Form.Label>Nom</Form.Label>
-              <Form.Control type="nom" placeholder="Introduce tu nombre" onChange={(e) => setNom(e.target.value)} value={nom} name="usuario"/>
-    </Form.Group>
-  
-    <Form.Group className="mb-3" controlId="formBasicPassword">
-      <Form.Label>Password</Form.Label>
-      <Form.Control type="password" placeholder="Password" />
-    </Form.Group>
-    <Form.Group className="mb-3" controlId="formBasicCheckbox">
-      <Form.Check type="checkbox" label="Check me out" />
-    </Form.Group>
-          <Button variant="primary" onClick={handlerSubmit}>
-      Enviar
-    </Button>
-  </Form>
+    <>
+      {
+        login ? (
+          <div>
+            < Form >
+              <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Label>email</Form.Label>
+                <Form.Control type="email" placeholder="Introduce el email" onChange={(e) => setEmail(e.target.value)} value={email} name="email" />
+              </Form.Group>
+        
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="password" placeholder="Password" />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicCheckbox">
+                <Form.Check type="checkbox" label="Check me out" />
+              </Form.Group>
+              <Button variant="primary" onClick={handlerSubmit}>
+                Enviar
+              </Button>
+            </Form >
+          </div>
+        ) : (
+          <div>
+            <Registro />
+          </div>
+        )}
+    </>
+      
   )
 }
+  
+
+export default Login

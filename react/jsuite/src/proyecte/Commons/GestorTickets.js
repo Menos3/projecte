@@ -2,7 +2,7 @@ import React, { useState ,useEffect} from 'react'
 import ListaTickets from './ListaTickets'
 import Formulario from './Formulario'
 import { bbddFirebase  } from '../../fireDataBase'
-import { collection,doc, orderBy, query,  addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
+import { collection,doc, orderBy, query, where,  addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
 // const selects = {
 //   tecnicos :[
 //     { value: 0, label: "Armand" },
@@ -26,6 +26,8 @@ function GestorTickets(props) {
   const [formData, setFormData] = useState({ titulo: "", descripcion: "", asset_id: "", assignacion_id: "" });
   const [listTecnicos, setListTecnicos] = useState([]);
   const [listAssets, setListAssets] = useState([]);
+
+  
  
   
   const assetCollection= collection(bbddFirebase, "Assets");
