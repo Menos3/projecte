@@ -22,7 +22,7 @@ export default function Home() {
           <Button variant="outline-primary"><Link to="/logout">Logout</Link></Button>
         )}
         
-        <Button variant="outline-primary"><Link to="/" >Home</Link></Button>
+        <Button variant="outline-primary"><Link to="/">Home</Link></Button>
         
 
         <hr></hr>

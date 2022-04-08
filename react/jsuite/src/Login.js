@@ -33,7 +33,7 @@ function Login() {
       // de lo que recogemos, se compara el email y la contraseña con los valores de los input
       // si coincide, se envia a la Home seteando el usuario
 
-      if(valor.data().email === email && valor.data().password === password) {
+      if(valor.data().password === password) {
 
         setUsuario(valor.data().name);
 

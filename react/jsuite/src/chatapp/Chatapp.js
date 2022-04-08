@@ -1,10 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import User from "./User";
 import Chat from "./Chat"
 import {Table, Button} from 'react-bootstrap'
+import { UserContext } from '../UseContextUser';
 
 import {bbddFirebase} from '../fireDataBase'
-import {collection, query, getDocs, addDoc, serverTimestamp, deleteDoc, doc, setDoc, orderBy, onSnapshot} from 'firebase/firestore';
+import {collection, query, getDocs, addDoc, serverTimestamp, deleteDoc, doc, setDoc, orderBy, onSnapshot, where} from 'firebase/firestore';
 import PropTypes from 'prop-types'
 
 const Chatapp = () => {
@@ -16,10 +17,26 @@ const Chatapp = () => {
   const [error, setError] = useState(null);
   const [chats, setChats] = useState([]);
   const [missatge, setMissatge] = useState({});
+  const estado = useContext(UserContext);
+  const { usuario, setUsuario } = estado;
+  const [idUsuario, setIdUsuario] = useState("");
 
   //REFERENCIAS A LAS TABLAS DE FIREBASE
   const messageCollectionRef = collection(bbddFirebase, "Messages");
   const chatCollectionRef = collection(bbddFirebase, "Chats");
+  const tecnicoCollectionRef = collection(bbddFirebase, "Tecnicos");
+
+  const getIdFromUser = async () => {
+
+    const queryUser = query(tecnicoCollectionRef, where('name', '==', usuario));
+    const queryUserSnapShot = await getDocs(queryUser);
+
+    queryUserSnapShot.docs.map((valor) => {
+      
+      setIdUsuario(valor.id);
+
+    })
+  }
 
   const q = query(collection(bbddFirebase, "Messages"), orderBy('published', 'asc'));
 
@@ -47,6 +64,7 @@ const Chatapp = () => {
     })
 
     getChats();
+    getIdFromUser();
 
   }, [])
   
@@ -64,7 +82,7 @@ const Chatapp = () => {
 
       message: missatge.mensaje,  
       chat_id: missatge.chat,
-      author_id: "1VKulYecDiMbi2aA5k7L",
+      author_id: idUsuario,
       published: serverTimestamp()
     })
 
@@ -106,7 +124,7 @@ const Chatapp = () => {
 
       message: missatge.mensaje,
       chat_id: missatge.chat,
-      author_id: "1VKulYecDiMbi2aA5k7L",
+      author_id: idUsuario,
       published: serverTimestamp()
 
     });
@@ -167,7 +185,9 @@ const Chatapp = () => {
                     {
                       mensajes.map((element, index) => {
 
-                        return <tr key={index}>
+                        if (element.author_id === idUsuario) {
+
+                          return <tr key={index}>
                           <td>{element.id}</td>
                           <td>{element.message}</td>
                           <td><User id={element.author_id}/></td>
@@ -175,7 +195,7 @@ const Chatapp = () => {
                           <td><Button variant = "danger" onClick={() => eliminarMensaje(element.id)}>Eliminar Mensaje</Button>
                           <Button variant = "warning" onClick={() => editar(element)}>Editar Mensaje</Button></td>
                         </tr>
-
+                        }
                       })
                     }
                     </tbody>
