@@ -24,7 +24,6 @@ const Chatapp = () => {
   //REFERENCIAS A LAS TABLAS DE FIREBASE
   const messageCollectionRef = collection(bbddFirebase, "Messages");
   const chatCollectionRef = collection(bbddFirebase, "Chats");
-  const tecnicoCollectionRef = collection(bbddFirebase, "Tecnicos");
 
   const q = query(collection(bbddFirebase, "Messages"), orderBy('published', 'asc'));
 
