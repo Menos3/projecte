@@ -10,7 +10,7 @@ function Login() {
   // esto viene de la App
   const estado = useContext(UserContext)
   //para pasarle el nombre a esta estado
-  const { usuario, setUsuario } = estado;
+  const {  setUsuario } = estado;
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -33,9 +33,9 @@ function Login() {
       // de lo que recogemos, se compara el email y la contraseña con los valores de los input
       // si coincide, se envia a la Home seteando el usuario
 
-      if(valor.data().password === password) {
-
-        setUsuario(valor.data().name);
+      if(valor.data().email === email && valor.data().password === password) {
+        let userData =  {...valor.data(),id:valor.id}
+        setUsuario(userData)
 
       } else {
 

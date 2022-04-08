@@ -27,7 +27,7 @@ export default function Home() {
 
         <hr></hr>
 
-        <div>{ usuario }</div>
+        <div>{ usuario.name}</div>
         <Outlet/>
       </div>
       <h1>Bienvenidos a nuestra APP</h1>

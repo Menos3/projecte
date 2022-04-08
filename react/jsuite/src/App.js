@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Login from './Login'
 import Chatapp from './chatapp/Chatapp'
@@ -12,13 +12,17 @@ const App = () => {
   const estado = useState("");
   const [usuario, setUsuario] = estado;
 
+  useEffect(() => {
+    console.log("usu",usuario)
+  },[usuario])
+
   return (
-    <UserContext.Provider value={{ usuario: usuario, setUsuario: setUsuario }}>
+    <UserContext.Provider value={{ usuario, setUsuario } }>
       
         <Routes>
-          <Route path="/" element={ usuario ? <Home estado = { estado } /> : <Login estado={estado}/>}>
+          <Route path="/" element={ usuario ? <Home /> : <Login estado={estado}/>}>
             {/* <Route path="/" element={<GestorTickets estado={estado} />} /> */}
-            <Route path="/tickets" element={<GestorTickets estado={estado} />} />
+            <Route path="/tickets" element={<GestorTickets  />} />
             <Route path="/chatapp" element={<Chatapp estado={estado} />} />
             <Route path="/logout" element={<Logout estado = {estado}/>} />
             {/* <Route path="/register" element={<Register estado={estado} />} /> */}

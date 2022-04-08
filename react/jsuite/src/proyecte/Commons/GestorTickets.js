@@ -1,8 +1,10 @@
-import React, { useState ,useEffect} from 'react'
+import React, { useState ,useContext, useEffect} from 'react'
 import ListaTickets from './ListaTickets'
 import Formulario from './Formulario'
-import { bbddFirebase  } from '../../fireDataBase'
+import { bbddFirebase } from '../../fireDataBase'
+
 import { collection,doc, orderBy, query, where,  addDoc, serverTimestamp, deleteDoc, setDoc, onSnapshot} from "firebase/firestore"
+import { UserContext } from '../../UseContextUser'
 // const selects = {
 //   tecnicos :[
 //     { value: 0, label: "Armand" },
@@ -14,7 +16,6 @@ import { collection,doc, orderBy, query, where,  addDoc, serverTimestamp, delete
   //     { value: 1, label: "teclado Asus" },
 //     { value: 2, label: "raton omoton" }
 //   ]
-
 // }
 
 //index de la linea con un slice
@@ -26,7 +27,8 @@ function GestorTickets(props) {
   const [formData, setFormData] = useState({ titulo: "", descripcion: "", asset_id: "", assignacion_id: "" });
   const [listTecnicos, setListTecnicos] = useState([]);
   const [listAssets, setListAssets] = useState([]);
-
+  const {usuario} = useContext(UserContext)
+  console.log("usuariiii",usuario)
   
  
   
@@ -122,7 +124,7 @@ function GestorTickets(props) {
       {/* <Formulario saveTicket={handlerSave} formData={formData} setFormData={setFormData} funcione={ editarTicket} estadoEditar={editModo}  />
       <ListaTickets listTicket={listTicket} deleted={handlerDelete} edit={handlerEdit} /> */}
       <Formulario saveTicket={handlerSave} tec={listTecnicos} ass={listAssets} formData={formData} setFormData={setFormData} funcione={ editarTicket} estadoEditar={editModo}  />
-      <ListaTickets tec={listTecnicos} ass={listAssets} listTicket={listTicket} deleted={handlerDelete} edit={ handlerEdit} />
+      <ListaTickets user={usuario} tec={listTecnicos} ass={listAssets} listTicket={listTicket} deleted={handlerDelete} edit={ handlerEdit} />
     </div>
   )
 }
