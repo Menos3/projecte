@@ -26,18 +26,6 @@ const Chatapp = () => {
   const chatCollectionRef = collection(bbddFirebase, "Chats");
   const tecnicoCollectionRef = collection(bbddFirebase, "Tecnicos");
 
-  const getIdFromUser = async () => {
-
-    const queryUser = query(tecnicoCollectionRef, where('name', '==', usuario));
-    const queryUserSnapShot = await getDocs(queryUser);
-
-    queryUserSnapShot.docs.map((valor) => {
-      
-      setIdUsuario(valor.id);
-
-    })
-  }
-
   const q = query(collection(bbddFirebase, "Messages"), orderBy('published', 'asc'));
 
   //FUNCIONES PARA RECUPERAR LOS REGISTROS DE LAS COLECCIONES
@@ -64,7 +52,6 @@ const Chatapp = () => {
     })
 
     getChats();
-    getIdFromUser();
 
   }, [])
   
@@ -82,7 +69,7 @@ const Chatapp = () => {
 
       message: missatge.mensaje,  
       chat_id: missatge.chat,
-      author_id: idUsuario,
+      author_id: usuario.id,
       published: serverTimestamp()
     })
 
@@ -124,7 +111,7 @@ const Chatapp = () => {
 
       message: missatge.mensaje,
       chat_id: missatge.chat,
-      author_id: idUsuario,
+      author_id: usuario.id,
       published: serverTimestamp()
 
     });
@@ -185,7 +172,7 @@ const Chatapp = () => {
                     {
                       mensajes.map((element, index) => {
 
-                        if (element.author_id === idUsuario) {
+                        if (element.author_id === usuario.id) {
 
                           return <tr key={index}>
                           <td>{element.id}</td>
