@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ModelController;
+use App\Http\Controllers\CategoriesController;
 
 
 /*
@@ -40,6 +42,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('files',FileController::class)->middleware(['auth','role:3']);
 Route::resource('files',FileController::class)->middleware(['guest']);
+
+Route::resource('models', ModelController::class);
+Route::resource('categories', CategoriesController::class);
+
 
 
 
