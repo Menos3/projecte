@@ -37,7 +37,18 @@ class CategoriesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate ([
+            'name' => 'required'
+        ]);
+
+        $category_name = $request->name;
+        $category = Category::create([
+            'name' =>$category_name
+        ]);
+        Log::debug("Categoria guardada correctamente");
+
+        return redirect()->route('categories.show', $category)
+        ->with('success', "La categoria se ha guardad correctamente");
     }
 
     /**
@@ -75,7 +86,19 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $validatedData = $request->validate ([
+            'category' => 'required'
+        ]);
+
+        $category_name = $request->category;
+
+        $category->name = $category_name;
+        $category->save();
+
+        Log:debug("Categoria actualizada correctamente");
+
+        return redirect()->route('categories.show', $category)
+        ->with('success', 'Se ha atualizado la categoria correctamente');
     }
 
     /**
@@ -86,6 +109,6 @@ class CategoriesController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
     }
 }

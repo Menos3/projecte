@@ -86,6 +86,8 @@ class ModelController extends Controller
      */
     public function destroy(Models $model)
     {
-        //
+        $foto = File::find($model->photo_id);
+        Storage::disk('public')->delete($foto->filepath);
+        $model->delete();
     }
 }
