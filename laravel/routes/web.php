@@ -43,8 +43,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('files',FileController::class)->middleware(['auth','role:3']);
 Route::resource('files',FileController::class)->middleware(['guest']);
 
-Route::resource('models', ModelController::class);
-Route::resource('categories', CategoriesController::class);
+Route::resource('models', ModelController::class)->middleware(['auth', 'role:1,4']);
+Route::resource('categories', CategoriesController::class)->middleware(['auth', 'role:1,4']);
 
 
 
