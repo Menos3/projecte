@@ -15,8 +15,8 @@
                                 <td scope="col">Manufacturer</td>
                                 <td scope="col">Model</td>
                                 <td scope="col">Price</td>
-                                <td scope="col">Category_ID</td>
-                                <td scope="col">Photo_ID</td>
+                                <td scope="col">Category</td>
+                                <td scope="col">Photo</td>
                                 <td scope="col">Created</td>
                                 <td scope="col">Updated</td>
                             </tr>
@@ -27,8 +27,8 @@
                                 <td>{{ $model->manufacturer }}</td>
                                 <td>{{ $model->model }}</td>
                                 <td>{{ $model->price }}</td>
-                                <td>{{ $model->category_id }}</td>
-                                <td>{{ $model->photo_id }}</td>
+                                <td>{{ $category->name }}</td>
+                                <td><img width="200" height="200" src="{{ asset("storage/{$file->filepath}")}}"/></td>
                                 <td>{{ $model->created_at }}</td>
                                 <td>{{ $model->updated_at }}</td>
                             </tr>

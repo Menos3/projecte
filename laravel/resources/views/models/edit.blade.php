@@ -13,14 +13,22 @@
                         <div class="form-group">
                             <label for="id">ID</label>
                             <input name="id" readonly value={{$model->id}}/>
-                            <input type="text" name="manufacturer"/>
-                            <input type="text" name="model"/>
-                            <input type="text" name="price"/>
-                        
+                            <input type="text" name="manufacturer" value={{$model->manufacturer}}/>
+                            <input type="text" name="model" value={{$model->model}}/>
+                            <input type="text" name="price" value="{{$model->price}}"/>
+                            <select name="categories" id="categories">
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+
+                                    @foreach ($categories as $item)
+                                        <option value="{{$item->id}}">{{$item->name}}</option>
+                                    @endforeach
+                                    
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label for="file">Selecciona un archivo:</label>
+                            <img width="200px" height="200px" src="{{ asset("storage/{$file->filepath}") }}"/>
                             <input type="file" name="upload"/>
                         </div>
 

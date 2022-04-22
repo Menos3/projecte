@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Models;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ModelController extends Controller
@@ -26,7 +27,9 @@ class ModelController extends Controller
      */
     public function create()
     {
-        return view("models.create");
+        return view("models.create", [
+            "categories"=>Category::all()
+        ]);
     }
 
     /**
@@ -37,7 +40,58 @@ class ModelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+            'manufacturer' => 'required|max:30',
+            'model' => 'required|max:30',
+            'price' => 'required|max:10',
+            'category_id' => 'required',
+            'photo_id' => 'required'
+        ]);
+
+        //Coger los datos de la Photo_id
+        $foto = $request->file('upload');
+        $fileName = $foto->getClientOriginalName();
+        $fileSize = $foto->getSize();
+
+        //Subir la imagen al disco duro
+        $fotoName = time() . '_' . $fileName;
+        $filePath = $foto->storeAs(
+            'uploads',
+            $fotoName,
+            'public'
+        );
+
+        if(Storage::disk('public')->exists($filePath)) {
+
+            $fullPath = Storage::disk('public')->path($filePath);
+
+            //Guardar los datos del archivo a la BBDD
+            $file = File::create([
+
+                'filepath' => $filePath,
+                'filesize' => $fileSize
+            ]);
+
+            $fileId = $file->id;
+
+            $model = Models::create([
+
+                'manufacturer' => $request->manufacturer,
+                'model' => $request->model,
+                'price' => $request->price,
+                'category_id' => $request->categories,
+                'photo_id' => $fileId
+            ]);
+
+            return redirect()->route('models.show', $model)
+            ->with('success', 'Model creado correctamente');
+
+        } else {
+
+            return redirect()->route("models.create")
+            ->with('error', 'ERROR al crear el modelo: el archivo ya existe');
+        }
     }
 
     /**
@@ -49,7 +103,8 @@ class ModelController extends Controller
     public function show(Models $model)
     {
         return view("models.show", [
-            "model"=>$model
+            "model"=>$model,
+            "category"=>Category::find($model->category_id)
         ]);
     }
 
@@ -62,7 +117,11 @@ class ModelController extends Controller
     public function edit(Models $model)
     {
         return view("models.edit", [
-            "model"=>$model
+
+            "model"=>$model,
+            "category"=>Category::find($model->category_id),
+            "categories"=>Category::all(),
+            "file"=>File::find($model->photo_id)
         ]);
     }
 
@@ -75,7 +134,56 @@ class ModelController extends Controller
      */
     public function update(Request $request, Models $model)
     {
-        //
+        $request->validate([
+
+            'manufacturer' => 'required|max:30',
+            'model' => 'required|max:30',
+            'price' => 'required|max:10',
+            'category_id' => 'required',
+            'photo_id' => 'required'
+        ]);
+
+        //Coger los datos de la photo_id
+        $foto = $request->file('upload');
+        $fileName = $foto->getClientOriginalName();
+        $fileSize = $foto->getSize();
+
+        //Subir archivo al disco duro
+        $fotoName = time() . '_' . $fileName;
+        $filePath = $foto->storeAs(
+            'uploads',
+            $fotoName,
+            'public'
+        );
+
+        if(Storage::disk('public')->exists($filePath)) {
+
+            $fullPath = Storage::disk('public')->path($filePath);
+
+            //Guardar datos del archivo en la BBDD
+            $file = File::create([
+                'filepath' => $filePath,
+                'filesize' => $fileSize
+            ]);
+
+            $fileId = $file->id;
+
+            $model->update([
+                'manufacturer' => $request->manufacturer,
+                'model' => $request->model,
+                'price' => $request->price,
+                'category_id' => $request->categories,
+                'photo_id' => $fileId
+            ]);
+
+            return redirect()->route('models.show', $model)
+            ->with('success', 'Model actualizado correctamente');
+
+        } else {
+
+            return redirect()->route('models.edit')
+            ->with('error', 'ERROR actualizando el model: el archivo ya existe');
+        }
     }
 
     /**

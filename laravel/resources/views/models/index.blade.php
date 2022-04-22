@@ -14,8 +14,6 @@
                                 <td scope="col">Manufacturer</td>
                                 <td scope="col">Model</td>
                                 <td scope="col">Price</td>
-                                <td scope="col">Category_ID</td>
-                                <td scope="col">Photo_ID</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,8 +23,6 @@
                                 <td>{{ $model->manufacturer }}</td>
                                 <td>{{ $model->model }}</td>
                                 <td>{{ $model->price }}</td>
-                                <td>{{ $model->category_id }}</td>
-                                <td>{{ $model->photo_id }}</td>
                             </tr>
                             @endforeach
                         </tbody>

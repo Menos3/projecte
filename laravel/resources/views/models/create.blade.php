@@ -17,11 +17,19 @@
                             <input type="text" name="model"/>
                             <label for="price-number">Introduzca el precio:</label>
                             <input type="number" name="price"/>
+
+                            <select name="categories" id="categories">
+
+                                @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach 
+                                
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label for="upload">File:</label>
-                            <input type="file" class= "form-control" name="cargar"/>
+                            <input type="file" class= "form-control" name="upload"/>
                         </div>
 
                         <div class="form-group">
