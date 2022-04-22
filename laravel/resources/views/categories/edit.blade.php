@@ -12,9 +12,9 @@
                         @csrf
                         @method('PUT')
                         <label for='id'>Id</label>
-                        <input name='id' readonly value={{$category->id}}>
+                        <input name='id' readonly value={{$category->id}}/>
                         <label for='name'>Cambie el nombre de la categoria</label>
-                        <input type='text' name='category'>
+                        <input type='text' name='category'/>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                         <button type="reset" class="bt btn-secondary">Reset</button>
                     </form>

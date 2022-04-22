@@ -12,7 +12,9 @@ class Models extends Model
     protected $fillable = [
         'manufacturer',
         'model',
-        'price'
+        'price',
+        'photo_id',
+        'category_id'
     ];
 
     protected $casts = [
