@@ -19,7 +19,7 @@ class CreateFilesTable extends Migration
             $table->string('filepath', 255);
             $table->integer('filesize');
             $table->timestamps();
-            $table->foreign('id')->references('avatar_id')->on("users");
+            // $table->foreign('id')->references('avatar_id')->on("users");
         });
     }
 
@@ -30,14 +30,14 @@ class CreateFilesTable extends Migration
      */
     public function down()
     {
-        Schema::table('files', function(Blueprint $table) {
-            $table->dropForeign(['avatar_id']);
-        });
+        // Schema::table('files', function(Blueprint $table) {
+        //     $table->dropForeign(['avatar_id']);
+        // });
 
         Schema::table('users', function(Blueprint $table){
             Schema::dropColumn('avatar_id');
         });
-        
+
         Schema::dropIfExists('files');
     }
 }

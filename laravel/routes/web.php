@@ -3,9 +3,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
-
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 
 
 /*
@@ -38,8 +39,13 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+
+// Route::resource('roles',RoleController::class)->middleware(['auth','role:3']);
+Route::resource('roles',RoleController::class)->middleware(['guest']);
+
 Route::resource('files',FileController::class)->middleware(['auth','role:3']);
 Route::resource('files',FileController::class)->middleware(['guest']);
+Route::resource('users',UserController::class)->middleware(['guest']);
 
 
 
